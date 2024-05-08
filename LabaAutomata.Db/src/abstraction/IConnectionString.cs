@@ -1,4 +1,4 @@
-﻿namespace LabaAutomata.Db.src {
+﻿namespace LabAutomata.Db.src.abstraction {
     public interface IConnectionString {
         string Get { get; }
     }
