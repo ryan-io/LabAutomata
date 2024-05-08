@@ -1,22 +1,23 @@
-﻿namespace LabAutomata.Library.src.models {
-    public class Test {
-        public int Id { get; set; }
+﻿namespace LabAutomata.Library.models {
+    public class Test : LabModel {
         public string Name { get; set; }
 
-        public static Test CreateInstance (Test test) {
-            return new Test(test);
-        }
+        public int InstanceId { get; set; }
 
-        public static Test CreateInstance (string name) {
-            return new Test(name);
-        }
+        public DateTime Started { get; set; } = DateTime.UtcNow;
 
-        private Test (Test test) {
+        public DateTime Ended { get; set; }
+
+        protected Test (Test test) {
             Name = test.Name;
+            InstanceId = test.InstanceId;
+            Started = test.Started;
+            Ended = test.Ended;
         }
 
-        private Test (string name) {
+        protected Test (string name, int instanceId) {
             Name = name;
+            InstanceId = instanceId;
         }
     }
 }

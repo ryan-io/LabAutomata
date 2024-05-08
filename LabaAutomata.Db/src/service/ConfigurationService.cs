@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace LabAutomata.Db.src.service {
+namespace LabAutomata.Db.service {
     public class ConfigurationService {
         public IConfiguration Create<T> () where T : class {
             var builder = new ConfigurationBuilder()

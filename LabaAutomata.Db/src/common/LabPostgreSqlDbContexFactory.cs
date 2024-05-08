@@ -1,7 +1,7 @@
-﻿using LabAutomata.Db.src.service;
+﻿using LabAutomata.Db.service;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace LabAutomata.Db.src.common {
+namespace LabAutomata.Db.common {
     internal class LabPostgreSqlDbContexFactory : IDesignTimeDbContextFactory<LabPostgreSqlDbContext> {
         public LabPostgreSqlDbContext CreateDbContext (string[] args) {
             var config = new ConfigurationService().Create<LabPostgreSqlDbContexFactory>();

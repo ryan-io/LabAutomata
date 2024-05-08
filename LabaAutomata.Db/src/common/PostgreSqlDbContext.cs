@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace LabAutomata.Db.src.common {
+namespace LabAutomata.Db.common {
     public abstract class PostgreSqlDbContext : DbContext {
         public IConfiguration? Configuration { get; init; }
 
