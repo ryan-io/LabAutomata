@@ -1,9 +1,12 @@
-﻿using LabAutomata.Db.common;
+﻿using LabAutomata.common;
+using LabAutomata.Db.common;
 using LabAutomata.Db.service;
-using LabAutomata.Library.models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using riolog;
 using System.Windows;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace LabAutomata {
     /// <summary>
@@ -14,37 +17,33 @@ namespace LabAutomata {
             var sc = new ServiceCollection();
             ConfigureServices(sc);
             _serviceProvider = sc.BuildServiceProvider();
-            var t = SteadyStateTemperatureTest.New(Random.Shared.Next(00000, 99999));
-            t.Data.Add(new TemperaturePoint() {
-                InstanceId = t.InstanceId,
-                Timestamp = DateTime.UtcNow,
-                Value = 100.2f,
-                Unit = TemperatureUnit.Celcius
-            });
-            var ctx = _serviceProvider.GetService<LabPostgreSqlDbContext>();
-            ctx.SsTempTests.Add(t);
-            ctx.SaveChanges();
         }
 
-        //protected override void OnStartup (StartupEventArgs e) {
-        //    var conf = new ConfigurationBuilder()
-        //        .SetBasePath(Directory.GetCurrentDirectory())
-        //        .AddUserSecrets<App>()
-        //        .Build();
+        protected override void OnStartup (StartupEventArgs e) {
+            base.OnStartup(e);
 
-        //    var dbCtx = new LabDbContext(new LabDatabaseConnection(conf), conf);
-        //}
+            var mw = _serviceProvider.GetService<MainWindow>();
+            mw?.Show();
+        }
 
         void ConfigureServices (IServiceCollection sc) {
+            sc.AddTransient<MainWindow>();
             sc.AddSingleton<IConfiguration>(_ => new ConfigurationService().Create<App>());
             sc.AddSingleton<LabPostgreSqlDbContext>();
+
+            var logPath = AppC.GetRootPath() + @"\logging\log_.txt";
+            sc.AddSingleton<ILogger>(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
         }
 
         private readonly IServiceProvider _serviceProvider;
 
         private void ApplicationClose (object sender, ExitEventArgs e) {
+            var logger = _serviceProvider.GetService<ILogger>();
+            logger?.LogInformation("Application now closing.");
+            logger?.LogInformation("Closing DbContext");
             var ctx = _serviceProvider.GetService<LabPostgreSqlDbContext>();
             ctx?.Dispose();
+            logger?.CloseAndFlush();
         }
     }
 }

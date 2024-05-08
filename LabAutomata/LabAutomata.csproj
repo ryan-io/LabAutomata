@@ -17,15 +17,20 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LabaAutomata.Db\LabAutomata.Db.csproj" />
     <ProjectReference Include="..\LabAutomata.Library\LabAutomata.Library.csproj" />
+    <ProjectReference Include="..\LabAutomata.Wpf.Library\LabAutomata.Wpf.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\" />
+    <Reference Include="rio-logging">
+      <HintPath>..\..\rider-projects\rio-logging\depdency-dlls\rio-logging.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

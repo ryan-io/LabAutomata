@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata", "LabAutomata\LabAutomata.csproj", "{72364EFF-D8C0-487E-830F-8A9934CF80B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata", "LabAutomata\LabAutomata.csproj", "{72364EFF-D8C0-487E-830F-8A9934CF80B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Db", "LabaAutomata.Db\LabAutomata.Db.csproj", "{D543667B-18CC-4ABF-8106-A00FE3D796DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Db", "LabaAutomata.Db\LabAutomata.Db.csproj", "{D543667B-18CC-4ABF-8106-A00FE3D796DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Library", "LabAutomata.Library\LabAutomata.Library.csproj", "{A2654B1E-033C-4B9B-AF4F-CF4ADB882B6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Library", "LabAutomata.Library\LabAutomata.Library.csproj", "{A2654B1E-033C-4B9B-AF4F-CF4ADB882B6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Tests.Unit", "LabAutomata.Tests.Unit\LabAutomata.Tests.Unit.csproj", "{60868319-F885-4D6D-AFC8-DC39A98AAC9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Wpf.Library", "LabAutomata.Wpf.Library\LabAutomata.Wpf.Library.csproj", "{C0714D3E-F18F-435E-B682-5DFEB00E5168}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{A2654B1E-033C-4B9B-AF4F-CF4ADB882B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2654B1E-033C-4B9B-AF4F-CF4ADB882B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2654B1E-033C-4B9B-AF4F-CF4ADB882B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60868319-F885-4D6D-AFC8-DC39A98AAC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60868319-F885-4D6D-AFC8-DC39A98AAC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60868319-F885-4D6D-AFC8-DC39A98AAC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60868319-F885-4D6D-AFC8-DC39A98AAC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
