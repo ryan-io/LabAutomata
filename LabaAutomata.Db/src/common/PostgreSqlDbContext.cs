@@ -1,29 +1,28 @@
-﻿using LabAutomata.Db.src.abstraction;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace LabAutomata.Db.src.common {
     public abstract class PostgreSqlDbContext : DbContext {
         public IConfiguration? Configuration { get; init; }
-        public IConnectionString? ConnectionString { get; init; }
 
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder) {
             //base.OnConfiguring(optionsBuilder);
             // gets connection string from our appsettings.json
 
-            if (Configuration == null || ConnectionString == null)
+            if (Configuration == null)
                 return;
 
-            optionsBuilder.UseNpgsql(Configuration.GetConnectionString(ConnectionString.Get));
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString(LAB_POSTGRES_DATABASE_CONNECTION));
         }
 
         public PostgreSqlDbContext () {
 
         }
 
-        public PostgreSqlDbContext (IConfiguration config, IConnectionString connStr) {
+        public PostgreSqlDbContext (IConfiguration config) {
             Configuration = config;
-            ConnectionString = connStr;
         }
+
+        internal const string LAB_POSTGRES_DATABASE_CONNECTION = "LabDatabase";
     }
 }

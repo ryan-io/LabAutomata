@@ -1,5 +1,4 @@
-﻿using LabAutomata.Db.src.abstraction;
-using LabAutomata.Db.src.common;
+﻿using LabAutomata.Db.src.common;
 using LabAutomata.Db.src.service;
 using LabAutomata.Library.src.models;
 using Microsoft.Extensions.Configuration;
@@ -32,7 +31,6 @@ namespace LabAutomata {
 
         void ConfigureServices (IServiceCollection sc) {
             sc.AddSingleton<IConfiguration>(_ => new ConfigurationService().Create<App>());
-            sc.AddTransient<IConnectionString, LabConnectionString>();
             sc.AddSingleton<LabPostgreSqlDbContext>();
         }
 
