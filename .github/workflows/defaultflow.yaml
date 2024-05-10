@@ -14,11 +14,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          title: ${{github.event.pull_request.title}}
       - name: default push
         run: echo "Testing workflow"
         shell: bash
+        run: echo "Running on ${{ github.respository }}"
 
   Run-echo-command-two-on-windows:
       runs-on: windows-latest
