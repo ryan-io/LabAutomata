@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: default push
         run: echo "Testing workflow"
-        shell: bash
         run: echo "Running on ${{ github.respository }}"
+        shell: bash
 
   Run-echo-command-two-on-windows:
       runs-on: windows-latest
