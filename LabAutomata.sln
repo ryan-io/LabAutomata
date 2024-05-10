@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Db", "LabaAutom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Library", "LabAutomata.Library\LabAutomata.Library.csproj", "{A2654B1E-033C-4B9B-AF4F-CF4ADB882B6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Tests.Unit", "LabAutomata.Tests.Unit\LabAutomata.Tests.Unit.csproj", "{60868319-F885-4D6D-AFC8-DC39A98AAC9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Tests.Unit", "LabAutomata.Tests.Unit\LabAutomata.Tests.Unit.csproj", "{60868319-F885-4D6D-AFC8-DC39A98AAC9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Wpf.Library", "LabAutomata.Wpf.Library\LabAutomata.Wpf.Library.csproj", "{C0714D3E-F18F-435E-B682-5DFEB00E5168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Wpf.Library", "LabAutomata.Wpf.Library\LabAutomata.Wpf.Library.csproj", "{C0714D3E-F18F-435E-B682-5DFEB00E5168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Wpf.Tests.Unit", "LabAutomata.Wpf.Tests.Unit\LabAutomata.Wpf.Tests.Unit.csproj", "{9C7A2E31-4781-4A5B-8FB7-8E32175B0DD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0714D3E-F18F-435E-B682-5DFEB00E5168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7A2E31-4781-4A5B-8FB7-8E32175B0DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7A2E31-4781-4A5B-8FB7-8E32175B0DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7A2E31-4781-4A5B-8FB7-8E32175B0DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7A2E31-4781-4A5B-8FB7-8E32175B0DD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

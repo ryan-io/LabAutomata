@@ -17,12 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LabAutomata.Library\LabAutomata.Library.csproj" />
-    <ProjectReference Include="..\LabAutomata\LabAutomata.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <Folder Include="src\NewFolder\" />
   </ItemGroup>
 
 </Project>
