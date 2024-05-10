@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Text;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace LabAutomata {
     /// <summary>
@@ -15,8 +16,9 @@ namespace LabAutomata {
 
         private async void RunWork (object sender, RoutedEventArgs e) {
             DbgTxtBlk.Text = "Preparing work...";
-
+            _cancellationTokenSource = new CancellationTokenSource();
             await Task.Delay(2000);
+
             await Dispatcher.InvokeAsync(async () => {
                 var counter = 0;
                 using var timer = new PeriodicWork(1);
@@ -24,9 +26,11 @@ namespace LabAutomata {
 
                 await timer.WorkAsync(
                     () => OnWorkCallback(sb, ref counter),
-                    OnExitCondition(counter),
-                    OnCompleteCallback);
-            });
+                    () => OnExitCondition(ref counter),
+                    OnCompleteCallback, _cancellationTokenSource.Token);
+            },
+                DispatcherPriority.Normal,
+                _cancellationTokenSource.Token);
         }
 
         private void OnCompleteCallback () {
@@ -34,8 +38,8 @@ namespace LabAutomata {
             _logger.LogInformation("Period timer is done!");
         }
 
-        private static Func<bool> OnExitCondition (int counter) {
-            return () => counter == 6;
+        private bool OnExitCondition (ref int counter) {
+            return counter == 6;
         }
 
         private void OnWorkCallback (StringBuilder sb, ref int counter) {
@@ -48,5 +52,10 @@ namespace LabAutomata {
         }
 
         readonly ILogger _logger;
+        private CancellationTokenSource _cancellationTokenSource = new();
+
+        private void CancelWork (object sender, RoutedEventArgs e) {
+            _cancellationTokenSource.Cancel();
+        }
     }
 }

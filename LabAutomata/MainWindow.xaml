@@ -3,15 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LabAutomata"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        Background="Transparent"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock  x:Name="DbgTxtBlk" Text="Welcome to our main app!" Grid.Row="0"/>
-        <Button Grid.Row="1" Content="Invoke" Click="RunWork"/>
-    </Grid>
+    <Border Background="#272537"
+            CornerRadius="15">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Foreground="White"
+                       Text="PLACEHOLDER"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="26"/>
+            <TextBlock Grid.Column="1" Foreground="White"
+                       Text="PLACEHOLDER"
+                       FontSize ="50"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="1">
+                <TextBlock x:Name="DbgTxtBlk" 
+                           Text="Welcome to our main app!"
+                           Foreground="AntiqueWhite"/>
+                <RadioButton
+                    Height="50"
+                    FontSize="14"
+                    Content="Invoke" Click="RunWork"/>
+                <RadioButton Content="Stop" Click="CancelWork"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
