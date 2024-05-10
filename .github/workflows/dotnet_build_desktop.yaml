@@ -1,0 +1,57 @@
+name: "Windows build & publish release"
+
+on: 
+  push:
+    tags: 
+      - "lab-automata/v*" # only run this workflow when we push a tag upstream
+                          # the tage should follow the define pattern - this implies a new version of the application
+
+env:
+  lab_automata_sol_path: LabAutomata/LabAutomata.csproj
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    steps: 
+      - name: Output build started
+        run: echo "Running LabAutomata build"
+      
+        # this is required - allows the workflow access to the repositories
+      - name: Checkout v4
+        uses: actions/checkout@v4
+
+        # this is required - need a preinstalled version of .NET Core on a runner
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+
+      - name: Restore dotnet packages at root UI path
+        # i'm not sure -r win-x64 is required when restoring dependencies
+        run: dotnet restore ${{env.lab_automata_sol_path}} -r win-x64
+
+      - name: Output building application
+        shell: bash
+        run: echo "Building application..."
+
+      - name: Output publishing application      
+        shell: bash
+        run: echo "Publishing application..."
+        
+        # this was two steps... there is an issue with splitting build and publish into 2 workflow steps using .NET 8
+      - name: Publish the WPF application
+        # -r win-x64 (or any target architecture) is required here when publishing self contained
+        run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -r win-x64 -p:PublishSingleFile=true
+
+      - name: Create a release action
+        uses: actions/create-release@v1
+        id: release
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: ${{github.ref}}
+          release_name: ${{github.ref}}
+        
+      - uses: csexton/release-asset-action@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          pattern: LabAutomata/bin/Release/net8.0-windows/win-x64/publish/*.exe
+          release-url: ${{steps.release.outputs.upload_url}}

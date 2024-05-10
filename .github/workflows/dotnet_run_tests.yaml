@@ -1,0 +1,93 @@
+name: "Run unit tests"
+
+on:
+  push:
+        # for now, run this workflow on all branches
+    branches: [ '*' ]
+        # this entire job is very standard for building and running tests on dotnet with Actions
+
+env:
+  # these must be defined as lower case
+  wpf_project: LabAutomata/LabAutomata.csproj
+  wpf_library_project: LabAutomata.Wpf.Library/LabAutomata.Wpf.Library.csproj
+  ui_library_project: LabAutomata.Library/LabAutomata.Library.csproj
+
+
+jobs:
+  wpf-ui-tests:
+    runs-on: windows-latest
+    steps:
+      - name: Output tests started
+        env: 
+          ACTOR: ${{ github.actor }}
+        shell: bash
+        run: echo "$ACTOR invoked a unit test workflow"
+
+        # this is required - allows the workflow access to the repositories
+      - name: Checkout v4
+        uses: actions/checkout@v4
+
+        # this is required - need a preinstalled version of .NET Core on a runner
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+
+      - name: Restore package dependencies
+        run: dotnet restore ${{env.wpf_project}}
+
+      - name: Build projects
+        run: dotnet build ${{env.wpf_project}} --no-restore
+
+      - name: Run unit tests
+        run: dotnet test ${{env.wpf_project}} --no-build --verbosity normal
+
+  wpf-library-tests:
+    runs-on: windows-latest
+    steps:
+      - name: Output tests started
+        env: 
+          ACTOR: ${{ github.actor }}
+        shell: bash
+        run: echo "$ACTOR invoked a unit test workflow"
+
+        # this is required - allows the workflow access to the repositories
+      - name: Checkout v4
+        uses: actions/checkout@v4
+
+        # this is required - need a preinstalled version of .NET Core on a runner
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+
+      - name: Restore package dependencies
+        run: dotnet restore ${{env.wpf_library_project}}
+
+      - name: Build projects
+        run: dotnet build ${{env.wpf_library_project}} --no-restore
+
+      - name: Run unit tests
+        run: dotnet test ${{env.wpf_library_project}} --no-build --verbosity normal
+
+  ui-library-tests:
+    runs-on: windows-latest
+    steps:
+      - name: Output tests started
+        env: 
+          ACTOR: ${{ github.actor }}
+        shell: bash
+        run: echo "$ACTOR invoked a unit test workflow"
+
+        # this is required - allows the workflow access to the repositories
+      - name: Checkout v4
+        uses: actions/checkout@v4
+
+        # this is required - need a preinstalled version of .NET Core on a runner
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+
+      - name: Restore package dependencies
+        run: dotnet restore ${{env.ui_library_project}}
+
+      - name: Build projects
+        run: dotnet build ${{env.ui_library_project}} --no-restore
+
+      - name: Run unit tests
+        run: dotnet test ${{env.ui_library_project}} --no-build --verbosity normal
