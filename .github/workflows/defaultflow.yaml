@@ -13,11 +13,10 @@ jobs:
   Run-echo-command-on-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
       - name: default push
-        run: echo "Testing workflow"
-        run: echo "Running on ${{ github.respository }}"
-        shell: bash
+        uses: actions/checkout@v4
+      - run: echo "Testing workflow"
+      - run: echo "Running on ${{ github.respository }}"
 
   Run-echo-command-two-on-windows:
       runs-on: windows-latest
