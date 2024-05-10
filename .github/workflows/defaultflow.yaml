@@ -1,26 +1,19 @@
 name: Default build workflow
 
 on: 
-push:
-  branches:
-    - main
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
   workflow_dispatch:
 
 jobs:
-  Run-echo-on-Windows:
-      runs-on: windows-latest
-      steps: 
-        - uses: actions/checkout@v4
-        - name: default push
-          run: echo "Testing workflow"
-          shell: bash
-
-    Run-tst-command-on-windows
-  runs-on: windows-latest
-  steps:
-    - name: default push 2
-      run: echo "Running one last bash cmd"
-      shell: bash
+  Run-echo-command-on-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: default push
+        run: echo "Testing workflow"
+        shell: bash
