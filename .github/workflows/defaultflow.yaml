@@ -22,5 +22,5 @@ jobs:
       runs-on: windows-latest
       steps:
         - name: default push
-        - run: echo "Testing workflow number two"
+          run: echo "Testing workflow number two"
           shell: bash        
