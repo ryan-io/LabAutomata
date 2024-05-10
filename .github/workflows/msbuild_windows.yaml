@@ -19,15 +19,8 @@ jobs:
   build:
     runs-on: windows-latest
 
-    env:
-      Working_Directory_Proj_File: LabAutomata/LabAutomata/LabAutomata.csproj
-
     steps:
     - uses: actions/checkout@v4
 
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
-
     - name: Echo proj path
-      run: echo "$Working_Directory_Proj_File"
+      run: echo "Workspace directory ${{github.workspace}}"
