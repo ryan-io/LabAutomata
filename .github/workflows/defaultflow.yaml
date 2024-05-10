@@ -10,6 +10,7 @@ on:
     branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
+  workflow_dispatch:
 
 env:
   # Path to the solution file relative to the root of the project.
