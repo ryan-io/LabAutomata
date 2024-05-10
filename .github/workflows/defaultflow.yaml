@@ -17,3 +17,10 @@ jobs:
       - name: default push
         run: echo "Testing workflow"
         shell: bash
+
+  Run-echo-command-two-on-windows:
+      runs-on: windows-latest
+      steps:
+        - name: default push
+        - run: echo "Testing workflow number two"
+          shell: bash        
