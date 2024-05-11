@@ -25,7 +25,23 @@ jobs:
         run: dotnet restore ${{env.lab_automata_sol_path}}
 
       - name: Build the WPF application
-        run: dotnet build ${{env.lab_automata_sol_path}} -c release -no-restore
+        run: echo "Building application..."
+        run: dotnet build ${{env.lab_automata_sol_path}} -c RELEASE --no-restore
       
       - name: Publish the WPF application
-        run: dotnet publish ${{env.lab_automata_sol_path}} -c release --self-container -r win-x64 -p:PublishSingleFile --no-build
+        run: echo "Publishing application..."
+        run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+
+      - name: Create a release action
+        id: release
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: ${{github.ref}}
+          release_name: ${{github.ref}}
+        
+      - uses: csexton/release-asset-actions@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          pattern: LabAutomata\bin\Release\net8.0-windows\win-x64\publish/*.exe
+          release-url: ${{steps.release.outputs.upload_url}}
