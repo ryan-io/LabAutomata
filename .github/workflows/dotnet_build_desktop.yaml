@@ -36,7 +36,7 @@ jobs:
         run: echo "Publishing application..."
         
       - name: Publish the WPF application
-        run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --no-build
+        run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --no-build
 
       - name: Create a release action
         uses: actions/create-release@v1
