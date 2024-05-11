@@ -6,7 +6,7 @@ on:
       - "lab-automata/v*"
 
 env:
-  lab_automata_sol_path: LabAutomata/LabAutomata.csproj
+  lab_automata_sol_path: LabAutomata.csproj
 
 jobs:
   deploy:
