@@ -26,12 +26,14 @@ jobs:
 
       - name: Output building application
         run: echo "Building application..."
-        
+
       - name: Build the WPF application
         run: dotnet build ${{env.lab_automata_sol_path}} -c RELEASE --no-restore
-      
-      - name: Publish the WPF application
+
+      - name: Output publishing application      
         run: echo "Publishing application..."
+        
+      - name: Publish the WPF application
         run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
 
       - name: Create a release action
