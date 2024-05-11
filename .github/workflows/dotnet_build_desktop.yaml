@@ -24,8 +24,10 @@ jobs:
       - name: Restore dotnet packages at root UI path
         run: dotnet restore ${{env.lab_automata_sol_path}}
 
-      - name: Build the WPF application
+      - name: Output building application
         run: echo "Building application..."
+        
+      - name: Build the WPF application
         run: dotnet build ${{env.lab_automata_sol_path}} -c RELEASE --no-restore
       
       - name: Publish the WPF application
