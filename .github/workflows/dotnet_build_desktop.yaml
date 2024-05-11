@@ -6,7 +6,7 @@ on:
       - "lab-automata/v*"
 
 env:
-  lab_automata_sol_path: LabAutomata.csproj
+  lab_automata_sol_path: LabAutomata/LabAutomata.csproj
 
 jobs:
   deploy:
@@ -50,5 +50,5 @@ jobs:
       - uses: csexton/release-asset-action@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          pattern: LabAutomata\bin\Release\net8.0-windows\win-x64\publish/*.exe
+          pattern: LabAutomata/bin/Release/net8.0-windows/win-x64/publish/*.exe
           release-url: ${{steps.release.outputs.upload_url}}
