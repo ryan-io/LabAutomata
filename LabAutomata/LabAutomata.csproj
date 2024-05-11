@@ -9,6 +9,7 @@
     <UserSecretsId>2ae6dc38-26de-4152-bbb1-8b30a3b46c82</UserSecretsId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
