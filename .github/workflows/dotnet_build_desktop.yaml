@@ -9,12 +9,23 @@ env:
   lab_automata_sol_path: LabAutomata/LabAutomata.csproj
 
 jobs:
-  name: "Deploy"
+  deploy:
     runs-on: windows-latest
     steps: 
-      - run: echo "Running LabAutomata build"
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v1
-      - run: dotnet restore ${{env.lab_automata_sol_path}}
-      - run: dotnet build ${{env.lab_automata_sol_path}} -c release -no-restore
-      - run: dotnet publish ${{env.lab_automata_sol_path}} -c release --self-container -r win-x64 -p:PublishSingleFile
+      - name: Outout build started
+        run: echo "Running LabAutomata build"
+      
+      - name: Checkout v4
+        uses: actions/checkout@v4
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+
+      - name: Restore dotnet packages at root UI path
+        run: dotnet restore ${{env.lab_automata_sol_path}}
+
+      - name: Build the WPF application
+        run: dotnet build ${{env.lab_automata_sol_path}} -c release -no-restore
+      
+      - name: Publish the WPF application
+        run: dotnet publish ${{env.lab_automata_sol_path}} -c release --self-container -r win-x64 -p:PublishSingleFile --no-build
