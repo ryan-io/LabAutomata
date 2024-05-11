@@ -28,15 +28,12 @@ jobs:
         shell: bash
         run: echo "Building application..."
 
-      - name: Build the WPF application
-        run: dotnet build ${{env.lab_automata_sol_path}} -c RELEASE -r win-x64 -p:PublishSingleFile=true
-
       - name: Output publishing application      
         shell: bash
         run: echo "Publishing application..."
         
       - name: Publish the WPF application
-        run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+        run: dotnet publish ${{env.lab_automata_sol_path}} -c RELEASE --self-contained -r win-x64 -p:PublishSingleFile=true
 
       - name: Create a release action
         uses: actions/create-release@v1
