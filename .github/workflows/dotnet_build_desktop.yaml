@@ -25,12 +25,14 @@ jobs:
         run: dotnet restore ${{env.lab_automata_sol_path}}
 
       - name: Output building application
+        shell: bash
         run: echo "Building application..."
 
       - name: Build the WPF application
         run: dotnet build ${{env.lab_automata_sol_path}} -c RELEASE --no-restore
 
       - name: Output publishing application      
+        shell: bash
         run: echo "Publishing application..."
         
       - name: Publish the WPF application
