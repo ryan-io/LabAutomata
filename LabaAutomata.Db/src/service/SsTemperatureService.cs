@@ -7,7 +7,7 @@ namespace LabAutomata.Db.service {
             repository.Create(test);
         }
 
-        public SteadyStateTemperatureTest GetSsTempTest (int id) {
+        public SteadyStateTemperatureTest? GetSsTempTest (int id) {
             return repository.Get(id);
         }
 

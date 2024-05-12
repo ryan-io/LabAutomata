@@ -3,8 +3,8 @@
 namespace LabAutomata.Db.repository;
 
 public interface IRepository<T> where T : LabModel {
-    void Create (T entity);
-    T Get (int id);
-    void Update (T entity);
-    void Delete (T entity);
+    Task Create (T entity);
+    T? Get (int id);
+    Task Update (T entity);
+    Task Delete (T entity);
 }

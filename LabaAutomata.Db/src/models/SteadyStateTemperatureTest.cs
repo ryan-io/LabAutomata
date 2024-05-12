@@ -11,6 +11,4 @@ public class SteadyStateTemperatureTest : Test {
         : base("Steady State Temperature", instanceId) {
         Data = new HashSet<TemperaturePoint>();
     }
-
-
 }
