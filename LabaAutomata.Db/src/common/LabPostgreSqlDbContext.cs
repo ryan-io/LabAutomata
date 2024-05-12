@@ -1,4 +1,4 @@
-﻿using LabAutomata.Library.models;
+﻿using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

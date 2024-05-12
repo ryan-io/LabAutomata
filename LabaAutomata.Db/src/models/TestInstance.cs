@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Library.models {
+﻿namespace LabAutomata.Db.models {
     public class TestInstance : LabModel {
         public TestInstance (Test test) {
             Test = test;

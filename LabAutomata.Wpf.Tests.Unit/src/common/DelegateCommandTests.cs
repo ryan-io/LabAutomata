@@ -14,7 +14,7 @@ public class DelegateCommandTests {
 
     [Fact]
     public void CanExecute_ShouldReturnTrue_WhenCanExecuteFuncIsNotNull () {
-        var canExecuteFunc = Substitute.For<Func<object, bool>>();
+        var canExecuteFunc = Substitute.For<Func<object?, bool>>();
         canExecuteFunc.Invoke(Arg.Any<object>()).Returns(true);
 
         var command = new DelegateCommand(null, canExecuteFunc);

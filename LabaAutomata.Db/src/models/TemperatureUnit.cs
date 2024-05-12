@@ -1,3 +1,3 @@
-﻿namespace LabAutomata.Library.models {
+﻿namespace LabAutomata.Db.models {
     public enum TemperatureUnit { Celcius, Farenheit, Kelvin }
 }

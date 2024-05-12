@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Library.models {
+﻿namespace LabAutomata.Db.models {
     public class TemperaturePoint : LabModel {
         public int InstanceId { get; set; }
         public float Value { get; set; }

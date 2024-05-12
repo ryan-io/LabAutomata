@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Library.models {
+﻿namespace LabAutomata.Db.models {
     public class Test : LabModel {
         public string Name { get; set; }
 

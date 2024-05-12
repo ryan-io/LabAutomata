@@ -61,8 +61,40 @@ It is also a learning project - one of my goals is to make to make it all encomp
     <ul>
         <li>.NET 8 & C# 12</li>
     </ul>
+    <li> Solution </li>
+    <ul>
+        <li>LabAutomata</li>
+        <ul><li>The WPF project and entry point of the application</li></ul>
+    </ul>
+     <ul>
+        <li>LabAutomata.Db</li>
+        <ul><li>Contains an API for establishing database connections with Entity Framework Core</li>
+        <li>Models for your application would be defined here</li>
+        </ul>
+    </ul>
+     <ul>
+        <li>LabAutomata.Library</li>
+        <ul><li>Business logic and services are defined here</li></ul>
+    </ul>
+     <ul>
+        <li>LabAutomata.Tests.Unit</li>
+        <ul><li>A testing project for the LabAutomata project</li></ul>
+    </ul>
+     <ul>
+        <li>LabAutomata.Wpf.Library</li>
+        <ul><li>This project contains all view models and commands for use with MVVM</li></ul>
+    </ul>
+     <ul>
+        <li>LabAutomata.Wpf.Tests.Unit</li>
+        <ul><li>A testing project for the LabAutomata.Wpf.Library project</li></ul>
+    </ul>
+     <ul>
+        <li>LabAutomata.Wap</li>
+        <ul><li>Windows Application Packaging project for creating MSIX packages</li></ul>
+    </ul>
     <li> GUI </li>
-        <ul><li>Windows Presentation Foundation (WPF)</li></ul>
+        <ul><li>Windows Presentation Foundation (WPF)</li>
+      </ul>
     <li> Backend </li>
     <ul>
         <li>MVVM architecture</li>
@@ -71,9 +103,29 @@ It is also a learning project - one of my goals is to make to make it all encomp
         <li>ASP.NET Web Api tested and documented with Swagger</li>
         <li>ScottPlot for a wonderful API wrapper for Matplotlib</li>
     </ul>
+      <li> Testing </li>
+        <ul>
+        <li>xUnit</li>
+        <li>NSusbstitute</li>
+        <li>Fluent Assertions</li>
+      </ul>
+    <li>Web API</li>
+    <ul> 
+        <li>ASP.NET Core Web API using MVC</li>
+    </ul>
     <li>Database</li>
     <ul> 
         <li>PostgreSQL along with pgAdmin4 for management</li>
+    </ul>
+    <li>Logging</li>
+    <ul> 
+        <li>My own logging package that is a simple wrapper for SeriLog</li>
+    </ul>
+     <li>CI/CD</li>
+    <ul> 
+        <li>GitHub Actions</li>
+        <li>A workflow for new releases that uses tags to invoke this workflow</li>
+        <li>A workflow for running unit tests on all libraries when a push is made</li>
     </ul>
     <li>Design Patterns</li>
     <ul> 
@@ -93,7 +145,11 @@ It is also a learning project - one of my goals is to make to make it all encomp
     </ul>
 </ul>
 
-
+# Running Notes
+<ul>
+<li>LabAutomata.Library has dependency on LabAutomata.Db</li>
+<li>LabAutomata has dependency on LabAutomata.Library & LabAutomata.Db</li>
+</ul>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

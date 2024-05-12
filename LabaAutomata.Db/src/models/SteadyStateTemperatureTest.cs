@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Library.models;
+﻿namespace LabAutomata.Db.models;
 
 public class SteadyStateTemperatureTest : Test {
     public ICollection<TemperaturePoint> Data { get; set; }
