@@ -1,0 +1,6 @@
+@LabAutomata.WebApi_HostAddress = http://localhost:5258
+
+GET {{LabAutomata.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
