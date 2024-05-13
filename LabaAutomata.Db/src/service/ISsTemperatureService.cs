@@ -1,10 +1,11 @@
-﻿using LabAutomata.Db.models;
+﻿using ErrorOr;
+using LabAutomata.Db.models;
 
 namespace LabAutomata.Db.service;
 
 public interface ISsTemperatureService {
-    void CreateSsTempTest (SteadyStateTemperatureTest test);
-    SteadyStateTemperatureTest? GetSsTempTest (int id);
-    void UpdateSsTempTest (SteadyStateTemperatureTest test);
-    void DeleteSsTempTest (SteadyStateTemperatureTest test);
+    Task<ErrorOr<Created>> CreateSsTempTest (SteadyStateTemperatureTest test, CancellationToken ct = default);
+    Task<ErrorOr<SteadyStateTemperatureTest>> GetSsTempTest (int id);
+    Task<ErrorOr<Updated>> UpsertSsTempTest (SteadyStateTemperatureTest test, CancellationToken ct = default);
+    Task<ErrorOr<Deleted>> DeleteSsTempTest (SteadyStateTemperatureTest test, CancellationToken ct = default);
 }

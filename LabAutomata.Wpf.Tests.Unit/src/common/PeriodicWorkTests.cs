@@ -1,7 +1,7 @@
 using FluentAssertions;
-using LabAutomata.Wpf.Library.src.common;
 using NSubstitute;
 using System.Reflection;
+using LabAutomata.Wpf.Library.common;
 
 namespace LabAutomata.Wpf.Tests.Unit.common;
 

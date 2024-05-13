@@ -1,64 +1,68 @@
 ﻿using LabAutomata.Db.common;
 using LabAutomata.Db.models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.Db.repository {
     /// <summary>
-    /// The SsTemperatureRepository class provides methods for interacting with the SteadyStateTemperatureTest entities in the database.
+    /// Represents a repository for managing SteadyStateTemperatureTest entities in the database.
     /// </summary>
-    /// <remarks>
-    /// This class implements the IRepository interface for the SteadyStateTemperatureTest entity.
-    /// </remarks>
-    public class SsTemperatureRepository (LabPostgreSqlDbContext dbCtx) : IRepository<SteadyStateTemperatureTest> {
+    public class SsTemperatureRepository : IRepository<SteadyStateTemperatureTest> {
+        private readonly LabPostgreSqlDbContext _dbCtx;
+
         /// <summary>
-        /// Asynchronously creates a new SteadyStateTemperatureTest entity in the database.
+        /// Initializes a new instance of the <see cref="SsTemperatureRepository"/> class.
         /// </summary>
-        /// <param name="entity">The SteadyStateTemperatureTest entity to create.</param>
-        /// <returns>A Task representing the asynchronous operation.</returns>
-        /// <remarks>
-        /// This method adds the entity to the SsTempTests DbSet and then saves the changes to the database.
-        /// </remarks>
-        public async Task Create (SteadyStateTemperatureTest entity) {
-            await dbCtx.SsTempTests.AddAsync(entity);
-            await dbCtx.SaveChangesAsync();
+        /// <param name="dbCtx">The database context.</param>
+        public SsTemperatureRepository (LabPostgreSqlDbContext dbCtx) { _dbCtx = dbCtx; }
+
+        /// <summary>
+        /// Creates a new SteadyStateTemperatureTest entity in the database.
+        /// </summary>
+        /// <param name="entity">The entity to create.</param>
+        /// <param name="ct">The cancellation token.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task<bool> Create (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
+            var entry = await _dbCtx.SsTempTests.AddAsync(entity, ct);
+            var saveSuccess = await _dbCtx.SaveChangesAsync(ct) > 0;
+            return entry.State == EntityState.Added && saveSuccess;
         }
 
         /// <summary>
         /// Retrieves a SteadyStateTemperatureTest entity from the database by its ID.
         /// </summary>
-        /// <param name="id">The ID of the SteadyStateTemperatureTest entity to retrieve.</param>
-        /// <returns>The SteadyStateTemperatureTest entity with the specified ID, or null if no such entity exists.</returns>
-        /// <remarks>
-        /// This method uses LINQ to query the SsTempTests DbSet for an entity with the specified ID.
-        /// </remarks>
-        public SteadyStateTemperatureTest? Get (int id) {
-            var output = dbCtx.SsTempTests.FirstOrDefault(t => t.Id == id);
-            return output;
+        /// <param name="id">The ID of the entity to retrieve.</param>
+        /// <param name="ct">The cancellation token.</param>
+        /// <returns>The retrieved entity, or null if not found.</returns>
+        public async Task<SteadyStateTemperatureTest?> Get (int id, CancellationToken ct = default) {
+            return await _dbCtx.SsTempTests.FirstOrDefaultAsync(t => t.Id == id, cancellationToken: ct);
         }
 
         /// <summary>
-        /// Asynchronously updates a SteadyStateTemperatureTest entity in the database.
+        /// Updates or inserts a SteadyStateTemperatureTest entity in the database.
         /// </summary>
-        /// <param name="entity">The SteadyStateTemperatureTest entity to update.</param>
-        /// <returns>A Task representing the asynchronous operation.</returns>
-        /// <remarks>
-        /// This method marks the entity as modified and then saves the changes to the database.
-        /// </remarks>
-        public async Task Update (SteadyStateTemperatureTest entity) {
-            dbCtx.Update(entity);
-            await dbCtx.SaveChangesAsync();
+        /// <param name="entity">The entity to upsert.</param>
+        /// <param name="ct">The cancellation token.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task<bool> Upsert (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
+            var e = await _dbCtx.SsTempTests.FirstOrDefaultAsync(e => entity.Id == e.Id, cancellationToken: ct);
+
+            if (e != null) _dbCtx.Entry(e).CurrentValues.SetValues(entity);
+            else await Create(entity, ct);
+
+            return await _dbCtx.SaveChangesAsync(ct) > 0;
+            //if (result > 0) return new Updated();
+            //return new Error(); // TODO: more precise error?
         }
 
         /// <summary>
-        /// Asynchronously deletes a SteadyStateTemperatureTest entity from the database.
+        /// Deletes a SteadyStateTemperatureTest entity from the database.
         /// </summary>
-        /// <param name="entity">The SteadyStateTemperatureTest entity to delete.</param>
-        /// <returns>A Task representing the asynchronous operation.</returns>
-        /// <remarks>
-        /// This method removes the entity from the SsTempTests DbSet and then saves the changes to the database.
-        /// </remarks>
-        public async Task Delete (SteadyStateTemperatureTest entity) {
-            dbCtx.Remove(entity);
-            await dbCtx.SaveChangesAsync();
+        /// <param name="entity">The entity to delete.</param>
+        /// <param name="ct">The cancellation token.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task<bool> Delete (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
+            _dbCtx.Remove(entity);
+            return await _dbCtx.SaveChangesAsync(ct) > 0;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Wpf.Library.src.common {
+﻿namespace LabAutomata.Wpf.Library.common {
     /// <summary>
     /// Handles an asynchronous unit of work
     /// Use this class along with Dispatcher.InvokeAsync to prevent UI thread blocking

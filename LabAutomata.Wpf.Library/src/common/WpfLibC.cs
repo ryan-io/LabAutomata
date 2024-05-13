@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Wpf.Library.src.common {
+﻿namespace LabAutomata.Wpf.Library.common {
     public static class WpfLibC {
     }
 }

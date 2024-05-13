@@ -112,6 +112,7 @@ It is also a learning project - one of my goals is to make to make it all encomp
     <li>Web API</li>
     <ul> 
         <li>ASP.NET Core Web API using MVC</li>
+        <li>Uses ErrorOr as a fluent discrimanted union package for an error or a result
     </ul>
     <li>Database</li>
     <ul> 
@@ -150,6 +151,11 @@ It is also a learning project - one of my goals is to make to make it all encomp
 <li>LabAutomata.Library has dependency on LabAutomata.Db</li>
 <li>LabAutomata has dependency on LabAutomata.Library & LabAutomata.Db</li>
 </ul>
+
+# Creating entities
+<ol>
+  <li>Query a model factory -> this should return a discriminated union of ErrorOr that validates the entity was successfully created from the factory<li>
+</ol>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

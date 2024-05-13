@@ -1,14 +1,11 @@
 ﻿namespace LabAutomata.Db.models;
 
 public class SteadyStateTemperatureTest : Test {
-    public ICollection<TemperaturePoint> Data { get; set; }
+    public ICollection<TemperaturePoint> Data { get; init; } = new HashSet<TemperaturePoint>();
 
-    public static SteadyStateTemperatureTest New (int instanceId) {
-        return new SteadyStateTemperatureTest(instanceId);
-    }
+    internal SteadyStateTemperatureTest (int instanceId)
+        : base("Steady State Temperature", instanceId) { }
 
-    protected SteadyStateTemperatureTest (int instanceId)
-        : base("Steady State Temperature", instanceId) {
-        Data = new HashSet<TemperaturePoint>();
-    }
+    internal SteadyStateTemperatureTest (int id, int instanceId)
+        : base("Steady State Temperature", instanceId) { Id = id; }
 }

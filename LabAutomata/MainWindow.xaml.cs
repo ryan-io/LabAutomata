@@ -1,8 +1,8 @@
-﻿using LabAutomata.Wpf.Library.src.common;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using LabAutomata.Wpf.Library.common;
 
 namespace LabAutomata {
     /// <summary>
