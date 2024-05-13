@@ -28,11 +28,11 @@ namespace LabAutomata.Db.service {
         /// <summary>
         /// Retrieves a steady state temperature test by its ID.
         /// </summary>
-        /// <param name="id">The ID of the steady state temperature test.</param>
+        /// <param name="instanceId">The ID of the steady state temperature test.</param>
         /// <param name="ct">The cancellation token.</param>
         /// <returns>An error or the retrieved steady state temperature test.</returns>
-        public async Task<ErrorOr<SteadyStateTemperatureTest>> GetSsTempTest (int id, CancellationToken ct = default) {
-            var state = await repository.Get(id, ct);
+        public async Task<ErrorOr<SteadyStateTemperatureTest>> GetSsTempTest (int instanceId, CancellationToken ct = default) {
+            var state = await repository.Get(instanceId, ct);
 
             if (state == null) {
                 return Errors.Db.CouldNotGet(IdCouldNotBeFoundCode, IdCouldNotBeFoundMsg);
@@ -45,29 +45,26 @@ namespace LabAutomata.Db.service {
         /// <summary>
         /// Updates or inserts a steady state temperature test.
         /// </summary>
-        /// <param name="id">The ID of the steady state temperature test.</param>
+        /// <param name="instanceId">The ID of the steady state temperature test.</param>
         /// <param name="test">The steady state temperature test to update or insert.</param>
         /// <param name="ct">The cancellation token.</param>
         /// <returns>An error or the updated result.</returns>
-        public async Task<ErrorOr<Updated>> UpsertSsTempTest (int id, SteadyStateTemperatureTest test, CancellationToken ct = default) {
-            var state = await repository.Upsert(test, ct);
+        public async Task<ErrorOr<Updated>> UpsertSsTempTest (int instanceId, SteadyStateTemperatureTest test, CancellationToken ct = default) {
+            var state = await repository.Upsert(instanceId, test, ct);
 
-            if (state) {
+            if (state)
                 return new Updated();
-            }
-            else {
-                return Errors.Db.CouldNotUpsert(CouldNotUpsertGenericCode, CouldNotUpsertGenericMsg);
-            }
+            return Errors.Db.CouldNotUpsert(CouldNotUpsertGenericCode, CouldNotUpsertGenericMsg);
         }
 
         /// <summary>
         /// Deletes a steady state temperature test.
         /// </summary>
-        /// <param name="test">The steady state temperature test to delete.</param>
+        /// <param name="instanceId">The instance if of the steady state temperature test to delete.</param>
         /// <param name="ct">The cancellation token.</param>
         /// <returns>An error or the deleted result.</returns>
-        public async Task<ErrorOr<Deleted>> DeleteSsTempTest (SteadyStateTemperatureTest test, CancellationToken ct = default) {
-            var state = await repository.Delete(test, ct);
+        public async Task<ErrorOr<Deleted>> DeleteSsTempTest (int instanceId, CancellationToken ct = default) {
+            var state = await repository.Delete(instanceId, ct);
 
             if (state) {
                 return new Deleted();

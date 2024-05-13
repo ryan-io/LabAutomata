@@ -24,7 +24,7 @@ namespace LabAutomata.Db.repository {
         public async Task<bool> Create (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
             var entry = await _dbCtx.SsTempTests.AddAsync(entity, ct);
             var saveSuccess = await _dbCtx.SaveChangesAsync(ct) > 0;
-            return entry.State == EntityState.Added && saveSuccess;
+            return entry.State == EntityState.Unchanged && saveSuccess;
         }
 
         /// <summary>
@@ -40,11 +40,12 @@ namespace LabAutomata.Db.repository {
         /// <summary>
         /// Updates or inserts a SteadyStateTemperatureTest entity in the database.
         /// </summary>
+        /// <param name="id">Id of the entity to make the updates to.</param>
         /// <param name="entity">The entity to upsert.</param>
         /// <param name="ct">The cancellation token.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public async Task<bool> Upsert (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
-            var e = await _dbCtx.SsTempTests.FirstOrDefaultAsync(e => entity.Id == e.Id, cancellationToken: ct);
+        public async Task<bool> Upsert (int id, SteadyStateTemperatureTest entity, CancellationToken ct = default) {
+            var e = await _dbCtx.SsTempTests.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
 
             if (e != null) _dbCtx.Entry(e).CurrentValues.SetValues(entity);
             else await Create(entity, ct);
@@ -57,10 +58,16 @@ namespace LabAutomata.Db.repository {
         /// <summary>
         /// Deletes a SteadyStateTemperatureTest entity from the database.
         /// </summary>
-        /// <param name="entity">The entity to delete. Attaches to the correct DbSet then invokes Remove.</param>
+        /// <param name="instanceId">The entity's instance id to delete. Attaches to the correct DbSet then invokes Remove.</param>
         /// <param name="ct">The cancellation token.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public async Task<bool> Delete (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
+        public async Task<bool> Delete (int instanceId, CancellationToken ct = default) {
+            var entity =
+                await _dbCtx.SsTempTests.FirstOrDefaultAsync(e => instanceId == e.InstanceId, cancellationToken: ct);
+
+            if (entity == null)
+                return false;
+
             _dbCtx.Attach(entity);
             _dbCtx.SsTempTests.Remove(entity);
             return await _dbCtx.SaveChangesAsync(ct) > 0;

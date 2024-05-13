@@ -8,6 +8,10 @@
 
         public DateTime Ended { get; set; }
 
+        protected Test () {
+            Name = "unnamed";
+        }
+
         protected Test (Test test) {
             Name = test.Name;
             InstanceId = test.InstanceId;

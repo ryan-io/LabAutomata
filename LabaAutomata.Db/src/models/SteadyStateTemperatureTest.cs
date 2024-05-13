@@ -3,6 +3,9 @@
 public class SteadyStateTemperatureTest : Test {
     public ICollection<TemperaturePoint> Data { get; init; } = new HashSet<TemperaturePoint>();
 
+    public SteadyStateTemperatureTest () : base() {
+
+    }
     internal SteadyStateTemperatureTest (int instanceId)
         : base(TestName, instanceId) { }
 

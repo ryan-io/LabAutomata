@@ -26,16 +26,17 @@ public interface IRepository<T> where T : LabModel {
     /// <summary>
     /// Upserts an entity.
     /// </summary>
+    /// <param name="id">Id of the entity to make the updates to.</param>
     /// <param name="entity">The entity to upsert.</param>
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    Task<bool> Upsert (T entity, CancellationToken ct = default);
+    Task<bool> Upsert (int id, T entity, CancellationToken ct = default);
 
     /// <summary>
     /// Deletes an entity.
     /// </summary>
-    /// <param name="entity">The entity to delete. Attaches to the correct DbSet then invokes Remove.</param>
+    /// <param name="instanceId">Instance id of the test to delete. Attaches to the correct DbSet then invokes Remove.</param>
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    Task<bool> Delete (T entity, CancellationToken ct = default);
+    Task<bool> Delete (int instanceId, CancellationToken ct = default);
 }

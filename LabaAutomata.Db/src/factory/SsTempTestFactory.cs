@@ -17,9 +17,15 @@ namespace LabAutomata.Db.factory {
         }
 
         public static ErrorOr<SteadyStateTemperatureTest> CreateForDeletion (int id) {
-            return Validate(id);
+            return ValidateDeletion(id);
         }
 
+        /// <summary>
+        /// Clones the provided SteadyStateTemperatureTest instance with a new ID.
+        /// </summary>
+        /// <param name="id">The ID for the cloned SteadyStateTemperatureTest.</param>
+        /// <param name="toClone">The SteadyStateTemperatureTest instance to clone.</param>
+        /// <returns>An ErrorOr object containing either the cloned SteadyStateTemperatureTest instance or a list of errors.</returns>
         public static ErrorOr<SteadyStateTemperatureTest> CloneWithId (int id, SteadyStateTemperatureTest toClone) {
             return ValidateClone(id, toClone);
         }
@@ -43,7 +49,7 @@ namespace LabAutomata.Db.factory {
         /// <param name="clone">'Clone' of the model to upsert</param>
         /// <returns>An ErrorOr object containing either the cloned SteadyStateTemperatureTest instance or a list of errors.</returns>
         static ErrorOr<SteadyStateTemperatureTest> ValidateClone (int id, SteadyStateTemperatureTest clone) {
-            var errors = ValidationLogic(clone.InstanceId);
+            var errors = new List<Error>(); //TODO: actual validation logic for cloning models should be implemented
 
             if (errors.Any()) return errors;
             return new SteadyStateTemperatureTest(id, clone);

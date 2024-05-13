@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LabAutomata.WebApi.controllers {
     public class SsTempTestController (ISsTemperatureService service) : BaseController {
-        // post: api/sstemptest/create
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateSsTempTest (CancellationToken ct = default) {
+        // post: api/sstemptest/create/instanceId
+        [HttpPost("create/{instanceId:int}")]
+        public async Task<IActionResult> CreateSsTempTest ([FromRoute] int instanceId, CancellationToken ct = default) {
             // factory call to get new model
-            var unionCreateModel = SsTempTestFactory.Create(12345);
+            var unionCreateModel = SsTempTestFactory.Create(instanceId);
 
             // check if model creation had any errors
             if (unionCreateModel.IsError)
@@ -41,9 +41,9 @@ namespace LabAutomata.WebApi.controllers {
             return unionGetFromService.Match(_ => Ok(unionGetFromService.Value), ProblemInController);
         }
 
-        [HttpPut("upsert/ {id:int}")]
-        public async Task<IActionResult> UpsertSsTempTest (int id, SteadyStateTemperatureTest test, CancellationToken ct = default) {
-            var unionCreateClone = SsTempTestFactory.CloneWithId(id, test);
+        [HttpPut("upsert/{id:int}")]
+        public async Task<IActionResult> UpsertSsTempTest ([FromRoute] int id, SteadyStateTemperatureTest update, CancellationToken ct = default) {
+            var unionCreateClone = SsTempTestFactory.CloneWithId(id, update);
 
             if (unionCreateClone.IsError)
                 return ProblemInController(unionCreateClone.Errors);
@@ -51,18 +51,18 @@ namespace LabAutomata.WebApi.controllers {
             var unionUpsertToService = await service.UpsertSsTempTest(id, unionCreateClone.Value, ct);
 
             return unionUpsertToService.Match(
-                _ => Ok(unionUpsertToService.Value),
+                _ => Ok(unionCreateClone.Value),
                 ProblemInController);
         }
 
         [HttpDelete("delete/{id:int}")]
-        public async Task<IActionResult> DeleteSsTempTest (int id, CancellationToken ct = default) {
+        public async Task<IActionResult> DeleteSsTempTest ([FromRoute] int id, CancellationToken ct = default) {
             var unionTransferObjCreation = SsTempTestFactory.CreateForDeletion(id);
 
             if (unionTransferObjCreation.IsError)
                 return ProblemInController(unionTransferObjCreation.Errors);
 
-            var unionDeleteFromService = await service.DeleteSsTempTest(unionTransferObjCreation.Value, ct);
+            var unionDeleteFromService = await service.DeleteSsTempTest(id, ct);
 
             return unionDeleteFromService.Match(_ => NoContent(), ProblemInController);
         }
