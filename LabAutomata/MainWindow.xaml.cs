@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using LabAutomata.Wpf.Library.common;
+using Microsoft.Extensions.Logging;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
-using LabAutomata.Wpf.Library.common;
 
 namespace LabAutomata {
     /// <summary>
@@ -16,12 +16,19 @@ namespace LabAutomata {
 
         private async void RunWork (object sender, RoutedEventArgs e) {
             DbgTxtBlk.Text = "Preparing work...";
+
+            CancelWork();
+
             _cancellationTokenSource = new CancellationTokenSource();
-            await Task.Delay(2000);
+            using var timer = new PeriodicWork(1);
+            _cancellationTokenSource.Token.Register(() => timer.Dispose());
+
+            var delayTask = Task.Delay(2000, _cancellationTokenSource.Token);
+            var continueTask = delayTask.ContinueWith(t => { });
+            await continueTask;
 
             await Dispatcher.InvokeAsync(async () => {
                 var counter = 0;
-                using var timer = new PeriodicWork(1);
                 var sb = new StringBuilder();
 
                 await timer.WorkAsync(
@@ -51,11 +58,17 @@ namespace LabAutomata {
             DbgTxtBlk.Text = sb.ToString();
         }
 
+        protected override void OnClosed (EventArgs e) {
+            base.OnClosed(e);
+            CancelWork();
+        }
+
+        void CancelWork () {
+            if (!_cancellationTokenSource.IsCancellationRequested) _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+        }
+
         readonly ILogger _logger;
         private CancellationTokenSource _cancellationTokenSource = new();
-
-        private void CancelWork (object sender, RoutedEventArgs e) {
-            _cancellationTokenSource.Cancel();
-        }
     }
 }

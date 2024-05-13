@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:LabAutomata"
              Exit="ApplicationClose">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="src/resource-dictionaries/ButtonStylesResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

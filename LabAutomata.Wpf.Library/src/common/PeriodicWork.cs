@@ -11,14 +11,16 @@
     /// <param name="period">Time interval to tick</param>
     public class PeriodicWork (int period = 1) : IDisposable {
         public async Task WorkAsync (Action? callback, Func<bool> exitCondition, Action? completeCallback = null, CancellationToken token = default) {
+            if (_isDisposed) return;
+
             var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 
             while (!exitCondition.Invoke()) {
                 await timer.WaitForNextTickAsync(token);
                 callback?.Invoke();
             }
+            _timer.Dispose();
             completeCallback?.Invoke();
-            Dispose();
         }
 
         public void Dispose () {

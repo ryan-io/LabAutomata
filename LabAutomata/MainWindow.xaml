@@ -36,10 +36,25 @@
                            Text="Welcome to our main app!"
                            Foreground="AntiqueWhite"/>
                 <RadioButton
+                    Content="Test"
                     Height="50"
                     FontSize="14"
-                    Content="Invoke" Click="RunWork"/>
-                <RadioButton Content="Stop" Click="CancelWork"/>
+                    Style="{StaticResource MenuBtn}"
+                    Click="RunWork"/>
+
+                <RadioButton
+                    Content="Home"
+                    Height="50"
+                    FontSize="14"
+                    Style="{StaticResource MenuBtn}"
+                    Click="RunWork"/>
+
+                <RadioButton
+                    Content="New Test"
+                    Height="50"
+                    FontSize="14"
+                    Style="{StaticResource MenuBtn}"
+                    Click="RunWork"/>
             </StackPanel>
         </Grid>
     </Border>

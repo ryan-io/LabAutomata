@@ -3,8 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace LabAutomata.Db.common {
-    public class LabPostgreSqlDbContext : PostgreSqlDbContext {
-        public DbSet<SteadyStateTemperatureTest> SsTempTests { get; set; }
+    public interface ILabPostgreSqlDbContext {
+        public DbSet<SteadyStateTemperatureTest> SsTempTests { get; }
+
+        public PostgreSqlDbContext PostgreSqlDb { get; }
+    }
+
+    public class LabPostgreSqlDbContext : PostgreSqlDbContext, ILabPostgreSqlDbContext {
+        public DbSet<SteadyStateTemperatureTest> SsTempTests { get; private set; }
+        public PostgreSqlDbContext PostgreSqlDb => this;
 
         internal LabPostgreSqlDbContext () : base() {
 
