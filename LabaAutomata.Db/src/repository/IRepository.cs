@@ -34,7 +34,7 @@ public interface IRepository<T> where T : LabModel {
     /// <summary>
     /// Deletes an entity.
     /// </summary>
-    /// <param name="entity">The entity to delete.</param>
+    /// <param name="entity">The entity to delete. Attaches to the correct DbSet then invokes Remove.</param>
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task<bool> Delete (T entity, CancellationToken ct = default);

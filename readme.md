@@ -155,6 +155,11 @@ It is also a learning project - one of my goals is to make to make it all encomp
 # Creating entities
 <ol>
   <li>Query a model factory -> this should return a discriminated union of ErrorOr that validates the entity was successfully created from the factory<li>
+  <li>If ErroOr.IsError -> return an IActionResult of type error; let the consumer know there was a problem creating the entity within the controller (factory) call</li>
+  <li>Pass this new entity into the servicer -> the service will depond on a respoitory of the same type; this will add the newly created/validated entity into your database</li>
+  <li>The user service will propogate it's own list of ErrorOr</li>
+  <li>In summary -> the controller needs to check ErrorOr from creating the model and the ErrorOr invoking the sercice to add it to a repostiory</li>
+  <li>There is a documented example currently in the SsTempTestsController class</li>
 </ol>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

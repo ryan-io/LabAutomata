@@ -4,8 +4,17 @@ public class SteadyStateTemperatureTest : Test {
     public ICollection<TemperaturePoint> Data { get; init; } = new HashSet<TemperaturePoint>();
 
     internal SteadyStateTemperatureTest (int instanceId)
-        : base("Steady State Temperature", instanceId) { }
+        : base(TestName, instanceId) { }
 
     internal SteadyStateTemperatureTest (int id, int instanceId)
-        : base("Steady State Temperature", instanceId) { Id = id; }
+        : base(TestName, instanceId) { Id = id; }
+
+    internal SteadyStateTemperatureTest (int cloneId, SteadyStateTemperatureTest clone) : base(TestName, clone.InstanceId) {
+        Id = cloneId;
+        Data = clone.Data;
+        Started = clone.Started;
+        Ended = clone.Ended;
+    }
+
+    private const string TestName = "Steady State Temperature";
 }

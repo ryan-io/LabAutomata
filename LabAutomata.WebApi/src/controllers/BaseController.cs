@@ -2,7 +2,27 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace LabAutomata.WebApi.src.controllers {
+namespace LabAutomata.WebApi.controllers {
+    /*
+     * Post-template:
+     *      Query factory to create a new model
+     *      Check if the factory return a discriminated union (ErrorOr)
+     *          result.IsError
+     *      Invoked user service to create the model and serialize to db context
+     *      Optional: Map the response from the factory method in step 1
+     *      Return the ErrorOr<Created> discriminated union via 'Match' method
+     *      Example:            ** ProblemInController is defined in this base controller
+     *          	var addToRepositoryResult = m_demoService.CreateMockDemoItem(createNewResult.Value);
+       		        var response = MapResponse(createNewResult.Value);
+       		        return addToRepositoryResult.Match(
+       			        item => CreatedAtAction(
+       				        nameof(CreateMockDemoItem),
+       				        new { id = createNewResult.Value.Id },
+       				        response),
+       			        ProblemInController); 
+     */
+    [ApiController]
+    [Route("api/[controller]")]
     public class BaseController : Controller {
         protected IActionResult ProblemInController (List<Error> errors) {
             if (errors.All(e => e.Type == ErrorType.Validation)) {
@@ -18,7 +38,7 @@ namespace LabAutomata.WebApi.src.controllers {
             if (errors.Any(e => e.Type == ErrorType.Unexpected))
                 return Problem();
 
-            int code = StatusCodes.Status500InternalServerError;
+            var code = StatusCodes.Status500InternalServerError;
 
             switch (errors[0].Type) {
                 case ErrorType.Failure:

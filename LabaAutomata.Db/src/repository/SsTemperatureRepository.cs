@@ -57,11 +57,12 @@ namespace LabAutomata.Db.repository {
         /// <summary>
         /// Deletes a SteadyStateTemperatureTest entity from the database.
         /// </summary>
-        /// <param name="entity">The entity to delete.</param>
+        /// <param name="entity">The entity to delete. Attaches to the correct DbSet then invokes Remove.</param>
         /// <param name="ct">The cancellation token.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         public async Task<bool> Delete (SteadyStateTemperatureTest entity, CancellationToken ct = default) {
-            _dbCtx.Remove(entity);
+            _dbCtx.Attach(entity);
+            _dbCtx.SsTempTests.Remove(entity);
             return await _dbCtx.SaveChangesAsync(ct) > 0;
         }
     }
