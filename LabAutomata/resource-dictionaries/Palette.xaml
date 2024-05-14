@@ -16,4 +16,6 @@
                      x:Key="BlueOffset"/>
     <SolidColorBrush Color="#adf7b6 " 
                      x:Key="Green"/>
+    <SolidColorBrush Color="#feffff " 
+                     x:Key="OffWhite"/>
 </ResourceDictionary>
