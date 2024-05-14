@@ -1,4 +1,4 @@
-﻿using LabAutomata.Wpf.Library.common;
+﻿using LabAutomata.Library.common;
 using Microsoft.Extensions.Logging;
 using System.Text;
 using System.Windows;

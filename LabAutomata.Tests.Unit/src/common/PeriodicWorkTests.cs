@@ -1,9 +1,9 @@
 using FluentAssertions;
+using LabAutomata.Library.common;
 using NSubstitute;
 using System.Reflection;
-using LabAutomata.Wpf.Library.common;
 
-namespace LabAutomata.Wpf.Tests.Unit.common;
+namespace LabAutomata.Tests.Unit.common;
 
 public class PeriodicWorkTests {
     [Fact]
