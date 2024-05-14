@@ -6,7 +6,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="src/resource-dictionaries/ButtonStylesResourceDictionary.xaml" />
+                <ResourceDictionary Source="resource-dictionaries/Palette.xaml" />
+                <ResourceDictionary Source="resource-dictionaries/ButtonStyles.xaml" />
+                <ResourceDictionary Source="resource-dictionaries/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="resource-dictionaries/Views.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

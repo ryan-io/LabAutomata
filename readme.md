@@ -52,7 +52,7 @@
 
 This passion project comes as the result of an 8 year professional career within an automotive qualification laboratory. The focus was on executing OEM product validation. During validations, an enormous amount of data is acquired: temperature, humidity, voltage input/output, software logging, and quiescient current to name a few. Any and all parameters needed to be collected and logged as data. The intent of this project is to provide a rather generic application for interfacing with your DAQ systems. 
 
-It is also a learning project - one of my goals is to make to make it all encompasing. That means it has a front end GUI, backend systems, database communication, CI/CD pipelines, a Web API, and version control.
+It is also a project to showcase a large breadth of software concepts - one of my goals is to make to make it all encompasing. Depth-wise, it is a bit shallow in areas. Overall, it has a front end GUI, backend systems, database communication, CI/CD pipelines, a Web API, TCP communication, and version control.
 
 # Tech Stack
 

@@ -8,7 +8,12 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <!-- specify the TargetType so we can accuratley access it's properties-->
-                    <ControlTemplate TargetType="RadioButton"> 
+                    <ControlTemplate TargetType="RadioButton">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource Button}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                         <Grid VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
@@ -19,7 +24,7 @@
 
                             <!-- we can bind to the TargetType's properties - i.e. Content -->
                             <TextBlock Text="{TemplateBinding Content}"
-                                       Foreground="AntiqueWhite"
+                                       Foreground="{StaticResource FontOne}"
                                        Margin="50 0 0 0"
                                        VerticalAlignment="Center"/>
                         </Grid>
@@ -31,7 +36,7 @@
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#22202F"/>
+                <Setter Property="Background" Value="{StaticResource BlueSelection}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
