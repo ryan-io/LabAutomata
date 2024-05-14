@@ -10,89 +10,128 @@
         AllowsTransparency="True"
         Background="Transparent"
         Title="MainWindow" Height="900" Width="800">
-    <Border Background="{StaticResource Bg}"
-            CornerRadius="15">
+    <Window.Resources>
+        <CornerRadius x:Key="CornerRadius">10</CornerRadius>
+    </Window.Resources>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="300"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Margin="10, 10 10 0" 
-                        Background="{StaticResource Fg}">
-                <Image Source="resources/images/lab-automata-logo-transparent.png"/>
-            </StackPanel>
-            <StackPanel Grid.Column="0"
-                        Grid.Row="1"
-                        Margin="10 10 10 0"
-                        Background="{StaticResource  Fg}">
-                <TextBlock x:Name="DbgTxtBlk" 
+
+            <Border Grid.Row="1" 
+                    BorderThickness="0"
+                    CornerRadius="{StaticResource CornerRadius}"
+                    Margin="10"
+                    Background="{StaticResource FgTwo}">
+
+                <StackPanel Margin="10, 10 10 10" 
+                        Background="{StaticResource FgOne}">
+                    <Image Source="resources/images/lab-automata-logo-transparent.png"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="0"
+                    Grid.Row="2"
+                    BorderThickness="0"
+                    CornerRadius="{StaticResource CornerRadius}"
+                    Margin="10"
+                    Background="{StaticResource FgTwo}">
+                <StackPanel 
+                        Margin="10"
+                        Background="{StaticResource  FgOne}">
+                    <TextBlock x:Name="DbgTxtBlk" 
                            Text="Welcome to our main app!"
                            Foreground="AntiqueWhite"/>
-                <RadioButton
-                    Content="Home"
-                    Height="50"
-                    FontSize="28"
-                    Style="{StaticResource MenuBtn}"
-                    Click="RunWork"/>
+                    <RadioButton Content="Home"
+                             Height="40"
+                             FontSize="22"
+                             FontWeight="Bold"
+                             IsChecked="true"
+                             Style="{StaticResource MenuBtn}"/>
+                    <RadioButton Content="Work Requests"
+                             FontWeight="Bold"
+                             Height="40"
+                             FontSize="22"
+                             Style="{StaticResource MenuBtn}"/>
+                    <RadioButton Content="Create Work Request"
+                             Height="40"
+                             FontWeight="Bold"
+                             FontSize="22"
+                             Style="{StaticResource MenuBtn}"/>
+                    <RadioButton Content="Workstations"
+                             Height="40"
+                             FontWeight="Bold"
+                             FontSize="22"
+                             Style="{StaticResource MenuBtn}"/>
+                    <RadioButton Content="Equipment Items"
+                             Height="40"
+                             FontWeight="Bold"
+                             FontSize="22"
+                             Style="{StaticResource MenuBtn}"/>
+                </StackPanel>
+            </Border>
 
-                <RadioButton
-                    Content="Work Requests"
-                    Height="50"
-                    FontSize="28"
-                    Style="{StaticResource MenuBtn}"
-                    Click="RunWork"/>
+            <Border Grid.Row="1" 
+                    BorderThickness="0"
+                    CornerRadius="{StaticResource CornerRadius}"
+                    Grid.Column="1"
+                    Margin="0 10 10 0"
+                    Background="{StaticResource FgTwo}">
 
-                <RadioButton
-                    Content="Create Work Request"
-                    Height="50"
-                    FontSize="28"
-                    Style="{StaticResource MenuBtn}"
-                    Click="RunWork"/>
-            </StackPanel>
-
-            <StackPanel Grid.Row="0" 
-                        Grid.Column="1"
-                        Margin="0 10 10 0"
-                        Background="{StaticResource Fg}">
-                <TextBox 
+                <StackPanel >
+                    <TextBox 
                      Height="50"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Stretch"
                      Margin="5" 
-                     Style="{StaticResource TxtBoxDefault}"/>
-            </StackPanel>
+                     Style="{StaticResource TxtBoxDefault}">
+                    </TextBox>
+                </StackPanel>
+            </Border>
 
-            <StackPanel Grid.Row="1" 
-                        Grid.Column="1"
-                        Background="{StaticResource Fg}"
+            <Border Grid.Row="2" 
+                    Grid.Column="1"
+                    BorderThickness="0"
+                    CornerRadius="{StaticResource CornerRadius}"
+                    Margin="10"
+                    Background="{StaticResource FgTwo}">
+                <StackPanel 
+                        Background="{StaticResource FgTwo}"
                         Margin="0 10 10 0">
-                <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10">
-                    <v:HomeView/>
-                </ContentControl>
+                    <ContentControl Margin="10">
+                        <v:HomeView/>
+                    </ContentControl>
+                </StackPanel>
+            </Border>
 
-            </StackPanel>
-            <StackPanel Grid.Row="2" 
-                        Grid.Column="0"
+            <Border  Grid.Row="3" 
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     BorderThickness="0"
+                     CornerRadius="{StaticResource CornerRadius}"
+                     Margin="10"
+                     Background="{StaticResource FgTwo}">
+                <StackPanel
                             Grid.ColumnSpan="2" 
                             Margin="10"
-                            Background="{StaticResource Fg}"></StackPanel>
+                            Background="LightSlateGray"></StackPanel>
+            </Border>
 
             <StackPanel Grid.Column="0"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Grid.ColumnSpan="2"
-                        Background="{StaticResource OffWhite}">
-                <TextBlock Foreground="{StaticResource FontTwo}" 
+                        Background="{StaticResource FgOne}">
+                <TextBlock Foreground="{StaticResource FontOne}" 
                            HorizontalAlignment="Right"
                            Text=" Copyright 2024 Ryan IO. All rights reserved."/>
             </StackPanel>
         </Grid>
-    </Border>
 </Window>

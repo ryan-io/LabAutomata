@@ -1,6 +1,7 @@
 ﻿using LabAutomata.common;
 using LabAutomata.Db.common;
 using LabAutomata.Db.service;
+using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,10 @@ namespace LabAutomata {
             sc.AddTransient<MainWindow>();
             sc.AddSingleton<IConfiguration>(_ => new ConfigurationService().Create<App>());
             sc.AddSingleton<LabPostgreSqlDbContext>();
+            sc.AddTransient<IPrimaryVm, PrimaryVm>();
+            sc.AddTransient<IWorkRequestVm, WorkRequestVm>();
+            sc.AddTransient<IHomeVm, HomeVm>();
+            sc.AddTransient<ICreateWorkRequestVm, CreateWorkRequestVm>();
 
             var logPath = AppC.GetRootPath() + @"\logging\log_.txt";
             sc.AddSingleton<ILogger>(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());

@@ -36,7 +36,7 @@
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource BlueSelection}"/>
+                <Setter Property="Background" Value="{StaticResource RedSelection}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
