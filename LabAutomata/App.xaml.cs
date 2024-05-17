@@ -31,7 +31,8 @@ namespace LabAutomata {
             sc.AddTransient<MainWindow>();
             sc.AddSingleton<IConfiguration>(_ => new ConfigurationService().Create<App>());
             sc.AddSingleton<LabPostgreSqlDbContext>();
-            sc.AddTransient<IPrimaryVm, PrimaryVm>();
+
+            //sc.AddTransient<IPrimaryVm, MainWindowVm>();
             sc.AddTransient<IWorkRequestVm, WorkRequestVm>();
             sc.AddTransient<IHomeVm, HomeVm>();
             sc.AddTransient<ICreateWorkRequestVm, CreateWorkRequestVm>();

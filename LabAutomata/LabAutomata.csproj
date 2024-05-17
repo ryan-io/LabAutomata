@@ -39,6 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="rio-command-pipeline">
+      <HintPath>..\..\rider-projects\rio-command-pipeline\rio-command-pipeline\bin\Release\net7.0\rio-command-pipeline.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="resources\images\lab-automata-logo-transparent.png" />
   </ItemGroup>
 
