@@ -34,10 +34,8 @@
 
                 <StackPanel Margin="10, 10 10 10" 
                         Background="{StaticResource FgOne}">
-                <Image Source="resources/images/lab-automata-logo-transparent.png">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding DragWindow}"/>
-                    </Image.InputBindings>
+                <Image Source="resources/images/lab-automata-logo-transparent.png" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
+                  
                 </Image>
                 </StackPanel>
             </Border>

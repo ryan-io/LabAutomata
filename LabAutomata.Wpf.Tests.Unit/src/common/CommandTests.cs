@@ -4,10 +4,10 @@ using NSubstitute;
 
 namespace LabAutomata.Wpf.Tests.Unit.common;
 
-public class DelegateCommandTests {
+public class CommandTests {
     [Fact]
     public void CanExecute_ShouldReturnTrue_WhenCanExecuteFuncIsNull () {
-        var command = new DelegateCommand(null, null);
+        var command = new Command(null, null);
 
         command.CanExecute(null).Should().BeTrue();
     }
@@ -17,7 +17,7 @@ public class DelegateCommandTests {
         var canExecuteFunc = Substitute.For<Func<object?, bool>>();
         canExecuteFunc.Invoke(Arg.Any<object>()).Returns(true);
 
-        var command = new DelegateCommand(null, canExecuteFunc);
+        var command = new Command(null, canExecuteFunc);
 
         command.CanExecute(null).Should().BeTrue();
 
@@ -27,7 +27,7 @@ public class DelegateCommandTests {
     [Fact]
     public void Execute_ShouldInvokeActionContext_WhenContextProvided () {
         var wasExecuted = false;
-        var command = new DelegateCommand(_ => wasExecuted = true);
+        var command = new Command(_ => wasExecuted = true);
 
         command.Execute(null);
 
@@ -37,7 +37,7 @@ public class DelegateCommandTests {
     [Fact]
     public void Execute_ShouldInvokeOnExecutedCallback_WhenAndExecutedCallbackProvided () {
         var wasCallbackInvoked = false;
-        var command = new DelegateCommand(null, null);
+        var command = new Command(null, null);
         command.OnExecutedCallback += () => wasCallbackInvoked = true;
 
         command.Execute(null);
@@ -47,7 +47,7 @@ public class DelegateCommandTests {
 
     [Fact]
     public void CanExecuteChanged_ShouldNotBeNotInvoked_WhenNotSubscribed () {
-        var command = new DelegateCommand(null, null);
+        var command = new Command(null, null);
 
         Action act = () => command.RaiseCanExecuteChanged();
 

@@ -1,30 +1,25 @@
 ﻿using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using System.Windows;
+using System.Windows.Input;
 
 namespace LabAutomata {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        public MainWindow (ILogger logger, MainWindowVm vm) {
+        public MainWindow (MainWindowVm vm) {
             InitializeComponent();
-            _logger = logger;
+            _vm = vm;
         }
 
-        protected override void OnClosed (EventArgs e) {
-            base.OnClosed(e);
-            CancelWork();
-        }
-
-        public void CancelWork () {
-            if (!_cancellationTokenSource.IsCancellationRequested) _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-
-        }
-
-        readonly ILogger _logger;
         private readonly MainWindowVm _vm;
-        private CancellationTokenSource _cancellationTokenSource = new();
+
+        // no reason to move this logic into a view model... 
+        // DragMove() is strictly a Window action (UI only)
+        private void UIElement_OnMouseLeftButtonDown (object sender, MouseButtonEventArgs e) {
+            DragMove();
+            _vm.Logger?.LogInformation("Testing log from mainwindow");
+        }
     }
 }

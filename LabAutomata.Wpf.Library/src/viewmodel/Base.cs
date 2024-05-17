@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -15,6 +17,9 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
         public bool HasLoaded { get; set; }
+
+        public ILogger? Logger => ServiceProvider.GetService<ILogger>();
+
 
         /// <summary>
         ///  If instance should notify about errors, will check if errors collection contains any elements
@@ -146,12 +151,17 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 return false;
             }
 
+
             error = _errors[propertyName];
 
             return true;
         }
 
-        protected Base () {
+        // services registered through DI in the application
+        protected IServiceProvider ServiceProvider { get; }
+
+        protected Base (IServiceProvider sp) {
+            ServiceProvider = sp;
             _shouldNotifyErrors = true;
         }
 

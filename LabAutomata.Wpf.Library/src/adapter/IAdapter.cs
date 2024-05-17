@@ -2,4 +2,8 @@
     public interface IAdapter {
         void Get ();
     }
+
+    public interface IAdapter<out T> {
+        T Get ();
+    }
 }

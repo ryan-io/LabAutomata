@@ -1,12 +1,13 @@
 ﻿using LabAutomata.common;
 using LabAutomata.Db.common;
 using LabAutomata.Db.service;
+using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.viewmodel;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using riolog;
 using System.Windows;
+using System.Windows.Threading;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace LabAutomata {
@@ -28,17 +29,19 @@ namespace LabAutomata {
         }
 
         void ConfigureServices (IServiceCollection sc) {
-            sc.AddTransient<MainWindow>();
-            sc.AddSingleton<IConfiguration>(_ => new ConfigurationService().Create<App>());
+            sc.AddSingleton(_ => new ConfigurationService().Create<App>());
             sc.AddSingleton<LabPostgreSqlDbContext>();
+            sc.AddSingleton(sp => sp);    // little trick to simply return a singleton to our Sp instance
 
-            //sc.AddTransient<IPrimaryVm, MainWindowVm>();
+            sc.AddTransient<MainWindow>();
+            sc.AddTransient<MainWindowVm>();
             sc.AddTransient<IWorkRequestVm, WorkRequestVm>();
             sc.AddTransient<IHomeVm, HomeVm>();
             sc.AddTransient<ICreateWorkRequestVm, CreateWorkRequestVm>();
+            sc.AddSingleton<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
 
-            var logPath = AppC.GetRootPath() + @"\logging\log_.txt";
-            sc.AddSingleton<ILogger>(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
+            var logPath = AppC.GetRootPath() + @"\logging\log_.txt";    //TODO - change where the log path points to?
+            sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
         }
 
         private readonly IServiceProvider _serviceProvider;

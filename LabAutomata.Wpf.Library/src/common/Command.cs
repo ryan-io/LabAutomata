@@ -6,7 +6,7 @@ namespace LabAutomata.Wpf.Library.common {
     ///  CanExecute is dependent on a Func<object?, bool>, specified in ctor
     ///  Execute is dependent on a Action<object?>, specified in ctor
     /// </summary>
-    public class DelegateCommand : ICommand {
+    public class Command : ICommand {
         /// <summary>
         ///  Wrapper for application commands
         ///  CanExecute is dependent on a Func<object?, bool>, specified in ctor
@@ -51,7 +51,7 @@ namespace LabAutomata.Wpf.Library.common {
             OnExecutedCallback?.Invoke();
         }
 
-        public DelegateCommand (Action<object?>? context, Func<object?, bool>? canExecute = null) {
+        public Command (Action<object?>? context, Func<object?, bool>? canExecute = null) {
             ContextAction = context;
             CanExecuteFunc = canExecute;
         }
