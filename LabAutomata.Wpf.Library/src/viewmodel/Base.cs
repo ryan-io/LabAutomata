@@ -46,7 +46,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         ///     This will be member 'Source' in all instances
         /// </summary>
         /// <param name="property">Name of property that changed</param>
-        protected virtual void RaisePropertyChanged ([CallerMemberName] string? property = default) {
+        protected virtual void NotifyPropertyChanged ([CallerMemberName] string? property = default) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
@@ -100,7 +100,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
             _errors[propertyName].Add(error);
             OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
-            RaisePropertyChanged(nameof(HasErrors));    // in case a element in the UI databinds to this property
+            NotifyPropertyChanged(nameof(HasErrors));    // in case a element in the UI databinds to this property
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
             if (success) {
                 OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
-                RaisePropertyChanged(nameof(HasErrors)); // in case a element in the UI databinds to this property
+                NotifyPropertyChanged(nameof(HasErrors)); // in case a element in the UI databinds to this property
             }
         }
 
@@ -135,7 +135,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
             error.Clear();
             OnErrorsChanged(new DataErrorsChangedEventArgs(propertyName));
-            RaisePropertyChanged(nameof(HasErrors));
+            NotifyPropertyChanged(nameof(HasErrors));
         }
 
         /// <summary>

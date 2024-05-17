@@ -29,19 +29,22 @@ namespace LabAutomata {
         }
 
         void ConfigureServices (IServiceCollection sc) {
+
+
             sc.AddSingleton(_ => new ConfigurationService().Create<App>());
             sc.AddSingleton<LabPostgreSqlDbContext>();
             sc.AddSingleton(sp => sp);    // little trick to simply return a singleton to our Sp instance
 
-            sc.AddTransient<MainWindow>();
-            sc.AddTransient<MainWindowVm>();
-            sc.AddTransient<IWorkRequestVm, WorkRequestVm>();
-            sc.AddTransient<IHomeVm, HomeVm>();
-            sc.AddTransient<ICreateWorkRequestVm, CreateWorkRequestVm>();
+            sc.AddSingleton<MainWindow>();
+            sc.AddSingleton<MainWindowVm>();
+            sc.AddSingleton<IWorkRequestVm, WorkRequestVm>();
+            sc.AddSingleton<IHomeVm, HomeVm>();
+            sc.AddSingleton<ICreateWorkRequestVm, CreateWorkRequestVm>();
             sc.AddSingleton<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
 
             var logPath = AppC.GetRootPath() + @"\logging\log_.txt";    //TODO - change where the log path points to?
             sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
+
         }
 
         private readonly IServiceProvider _serviceProvider;

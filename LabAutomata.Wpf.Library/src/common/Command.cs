@@ -25,6 +25,11 @@ namespace LabAutomata.Wpf.Library.common {
         /// </summary>
         public event Action? OnExecutedCallback;
 
+        /// <summary>
+        ///  This method should be invoked every time a dependency property is changed in a viewmodel
+        ///  This method is key resetting the state of uielements that depends on using the CanExecute method
+        ///  to check whether this command can be invoked again or not
+        /// </summary>
         public void RaiseCanExecuteChanged () {
             CommandManager.InvalidateRequerySuggested();
         }

@@ -8,9 +8,11 @@ namespace LabAutomata {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
         public MainWindow (MainWindowVm vm) {
             InitializeComponent();
             _vm = vm;
+            DataContext = _vm;
         }
 
         private readonly MainWindowVm _vm;
