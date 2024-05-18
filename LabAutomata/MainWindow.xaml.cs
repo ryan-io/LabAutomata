@@ -23,5 +23,15 @@ namespace LabAutomata {
             DragMove();
             _vm.Logger?.LogInformation("Testing log from mainwindow");
         }
+
+        private async void OnLoaded (object sender, RoutedEventArgs e) {
+            try {
+                await _vm.LoadAsync();
+            }
+            catch (Exception exception) {
+                _vm.Logger?.LogError(exception.Message);
+                throw;
+            }
+        }
     }
 }

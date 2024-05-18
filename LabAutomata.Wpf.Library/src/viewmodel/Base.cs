@@ -20,7 +20,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         public ILogger? Logger => ServiceProvider.GetService<ILogger>();
 
-
         /// <summary>
         ///  If instance should notify about errors, will check if errors collection contains any elements
         ///  else, returns false
@@ -34,6 +33,9 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             }
         }
         public virtual Task LoadAsync () => Task.CompletedTask;
+
+        public virtual void Load () {
+        }
 
         /// <summary>
         ///  Resets the instance to an initial state
