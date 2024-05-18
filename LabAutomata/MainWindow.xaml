@@ -41,7 +41,6 @@
                 </Image>
             </StackPanel>
         </Border>
-
         <Border Grid.Row="1" 
                 BorderThickness="0"
                 CornerRadius="{StaticResource CornerRadius}"
@@ -58,8 +57,11 @@
                 </TextBox>
             </StackPanel>
         </Border>
-        <v:Navigation Grid.Column="0"
-                      Grid.Row="2"/>
+
+        <ContentControl Grid.Row="2" 
+                        Grid.Column="0" 
+                        Content="{Binding NavVm}"/>
+
         <Border Grid.Row="2" 
                 Grid.Column="1"
                 BorderThickness="0"

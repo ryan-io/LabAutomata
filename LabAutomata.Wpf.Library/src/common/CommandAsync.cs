@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.common {
@@ -52,10 +51,8 @@ namespace LabAutomata.Wpf.Library.common {
         public async void Execute (object? parameter) {
             await _dispatcher.InvokeAsync(async () => {
                 IsRunning = true;
-                _logger.LogInformation("Starting async command");
                 await _context.Invoke(parameter);
                 IsRunning = false;
-                _logger.LogInformation("Ending async command");
 
                 CanExecute();
             }, cancellationToken: _cancellationTokenSource.Token,
@@ -69,17 +66,15 @@ namespace LabAutomata.Wpf.Library.common {
             }
         }
 
-        public CommandAsync (Dispatcher dispatcher, ILogger logger, Func<object?, Task> context, Func<object?, bool>? canExecute = null) {
+        public CommandAsync (Dispatcher dispatcher, Func<object?, Task> context, Func<object?, bool>? canExecute = null) {
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(dispatcher);
-            _logger = logger;
             _context = context;
             _canExecute = canExecute;
             _dispatcher = dispatcher;
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        readonly ILogger _logger;
         private readonly Func<object?, Task> _context;
         private readonly Func<object?, bool>? _canExecute;
         private readonly Dispatcher _dispatcher;

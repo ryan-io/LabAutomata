@@ -2,6 +2,7 @@
 using LabAutomata.Db.common;
 using LabAutomata.Db.service;
 using LabAutomata.Wpf.Library.adapter;
+using LabAutomata.Wpf.Library.data_structures;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,7 @@ namespace LabAutomata {
             sc.AddSingleton<LabPostgreSqlDbContext>();
             sc.AddSingleton(sp => sp);    // little trick to simply return a singleton to our Sp instance
 
-            sc.AddSingleton<MainWindow>();
+            sc.AddTransient<MainWindow>();
             sc.AddSingleton<MainWindowVm>();
 
             // take care -> Singletons that have managed lifetime will NOT be able to have their
@@ -43,11 +44,13 @@ namespace LabAutomata {
             sc.AddTransient<HomeVm>();
             sc.AddTransient<CreateWorkRequestVm>();
             sc.AddTransient<WorkRequestVm>();
+            sc.AddTransient<NavigationVm>();
+            sc.AddTransient<ViewModelCollection>();
             sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
 
             var logPath = AppC.GetRootPath() + @"\logging\log_.txt";    //TODO - change where the log path points to?
             sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
-
+            //    sc.AddSingleton<ViewModelCollection>();
         }
 
         private readonly IServiceProvider _serviceProvider;
