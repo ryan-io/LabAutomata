@@ -1,6 +1,6 @@
 ﻿namespace LabAutomata.Wpf.Library.viewmodel;
 
-public class BaseAsync : Base {
+public abstract class BaseAsync : Base {
     public void Dispose () {
         if (IsDisposed)
             return;

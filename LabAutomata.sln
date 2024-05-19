@@ -17,9 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Wpf.Tests.Unit"
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "LabAutomota.Wap", "LabAutomota.Wap\LabAutomota.Wap.wapproj", "{09AF5053-3696-41F0-A37F-53083F56F3A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Db.Tests.Unit", "LabAutomata.Db.Tests.Unit\LabAutomata.Db.Tests.Unit.csproj", "{9D41119B-FD56-49BB-B895-EE0885784A47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Db.Tests.Unit", "LabAutomata.Db.Tests.Unit\LabAutomata.Db.Tests.Unit.csproj", "{9D41119B-FD56-49BB-B895-EE0885784A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.WebApi", "LabAutomata.WebApi\LabAutomata.WebApi.csproj", "{6D1C4D96-2F19-46BA-93F5-2E467616F2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.WebApi", "LabAutomata.WebApi\LabAutomata.WebApi.csproj", "{6D1C4D96-2F19-46BA-93F5-2E467616F2B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B788DAF-335C-4CC9-B2D9-139496E7625B}"
+	ProjectSection(SolutionItems) = preProject
+		notes.md = notes.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

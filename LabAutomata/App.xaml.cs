@@ -2,6 +2,7 @@
 using LabAutomata.Db.common;
 using LabAutomata.Db.service;
 using LabAutomata.Wpf.Library.adapter;
+using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +19,9 @@ namespace LabAutomata {
     public partial class App : Application {
         public App () {
             var sc = new ServiceCollection();
-            ConfigureServices(sc);
+            var vmTypes = ConfigureServices(sc);
             _serviceProvider = sc.BuildServiceProvider();
+            BuildVmc(vmTypes);
         }
 
         protected override void OnStartup (StartupEventArgs e) {
@@ -29,31 +31,33 @@ namespace LabAutomata {
             mw?.Show();
         }
 
-        void ConfigureServices (IServiceCollection sc) {
+        List<Type> ConfigureServices (IServiceCollection sc) {
             sc.AddSingleton(_ => new ConfigurationService().Create<App>());
             sc.AddSingleton<LabPostgreSqlDbContext>();
             sc.AddSingleton(sp => sp);    // little trick to simply return a singleton to our Sp instance
-
             sc.AddTransient<MainWindow>();
-            sc.AddSingleton<MainWindowVm>();
 
-            // take care -> Singletons that have managed lifetime will NOT be able to have their
-            // service located during constructor
-            // the follow view models should be transient
-            sc.AddTransient<WorkRequestVm>();
-            sc.AddTransient<HomeVm>();
-            sc.AddTransient<CreateWorkRequestVm>();
-            sc.AddTransient<WorkRequestVm>();
-            sc.AddTransient<NavigationVm>();
-            sc.AddTransient<ViewModelCollection>();
+            // reflection to get all classes in deriving from the Base view model class within the LabAutomata.Wpf.Library asm
+            var asmViewModels = typeof(Base).Assembly.GetSubclassOf<Base>().ToList();
+
+            foreach (var vmType in asmViewModels) {
+                sc.AddSingleton(vmType);
+            }
+
             sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
 
             var logPath = AppC.GetRootPath() + @"\logging\log_.txt";    //TODO - change where the log path points to?
             sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
-            //    sc.AddSingleton<ViewModelCollection>();
+            return asmViewModels;
         }
 
-        private readonly IServiceProvider _serviceProvider;
+        //static bool IsTypeBaseVm (Type type) => type.IsOfBase(typeof(Base));
+
+        private void BuildVmc (List<Type> vmTypes) {
+            foreach (var vmType in vmTypes) {
+                Vmc.Instance.Add(vmType.Name, (_serviceProvider.GetService(vmType) as Base)!);
+            }
+        }
 
         private void ApplicationClose (object sender, ExitEventArgs e) {
             var logger = _serviceProvider.GetService<ILogger>();
@@ -63,5 +67,7 @@ namespace LabAutomata {
             ctx?.Dispose();
             logger?.CloseAndFlush();
         }
+
+        private readonly IServiceProvider _serviceProvider;
     }
 }

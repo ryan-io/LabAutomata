@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-    public class Base : INotifyPropertyChanged, INotifyDataErrorInfo {
+    public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo {
         /// <summary>
         ///  Raised when a property for this instance is changed
         /// </summary>
@@ -32,7 +32,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 return _errors.Any();
             }
         }
-        public virtual Task LoadAsync () => Task.CompletedTask;
+        public virtual Task LoadAsync (CancellationToken token = default) => Task.CompletedTask;
 
         public virtual void Load () {
         }

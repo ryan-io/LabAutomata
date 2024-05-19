@@ -1,8 +1,6 @@
-﻿using LabAutomata.Wpf.Library.adapter;
-using LabAutomata.Wpf.Library.common;
+﻿using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
-using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Threading;
+using System.Text;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
     /// <summary>
@@ -10,16 +8,22 @@ namespace LabAutomata.Wpf.Library.viewmodel {
     /// </summary>
     public class NavigationVm : Base {
         /// <summary>
-        /// Gets the command ID for the work request view model.
-        /// </summary>
-        public string CmdIdWorkRequest { get; } = nameof(WorkRequestVm);
-
-        /// <summary>
         /// Gets the command for changing the current view model.
         /// </summary>
-        public CommandAsync ChangeVm { get; }
+        public Command? ChangeVm {
+            get => _changeVm;
+            private set {
+                _changeVm = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Base? SubCurrentVm { get; set; }
 
         private Base? _currentVm;
+        private Command? _changeVm;
+
+        //TODO: this can just as easily be made a string
 
         /// <summary>
         /// Gets or sets the current view model.
@@ -29,7 +33,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             set {
                 _currentVm = value;
                 NotifyPropertyChanged();
-                ChangeVm.RaiseCanExecuteChanged();
+                ChangeVm?.RaiseCanExecuteChanged();
             }
         }
 
@@ -38,24 +42,28 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// </summary>
         /// <param name="sp">The service provider.</param>
         /// <param name="vmc">The view model collection.</param>
-        public NavigationVm (IServiceProvider sp, ViewModelCollection vmc) : base(sp) {
-            _vmc = vmc;
-            var da = sp.GetService<IAdapter<Dispatcher>>();
+        public NavigationVm (IServiceProvider sp) : base(sp) { }
 
-            if (da == null)
-                throw new NullReferenceException(DispatcherNull);
-
+        public override void Load () {
             // TODO: could refactor this into its own class
-            ChangeVm = new CommandAsync(da.Get(), async vmIdObj => {
+            ChangeVm = new Command(vmIdObj => {
                 if (vmIdObj == null || vmIdObj is not string)
                     return;
 
-                await Task.Delay(3000);
-                CurrentVm = _vmc[(string)vmIdObj];
+                _sb.Clear();
+                var vmId = (string)vmIdObj;
+
+                _sb.Append(vmId.Remove(vmId.Length - 2));
+                _sb.Append(SubVmSuffix);
+
+                CurrentVm = Vmc.Instance[vmId];
+                SubCurrentVm = Vmc.Instance[_sb.ToString()];
             });
+
+            CurrentVm = Vmc.Instance[nameof(HomeVm)];
         }
 
-        private readonly ViewModelCollection _vmc;
-        private const string DispatcherNull = "Dispatcher adapter was null.";
+        private const string SubVmSuffix = "ContentVm";
+        private readonly StringBuilder _sb = new();
     }
 }

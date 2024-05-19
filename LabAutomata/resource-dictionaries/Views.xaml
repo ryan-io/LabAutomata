@@ -8,4 +8,32 @@
     <DataTemplate DataType="{x:Type vm:NavigationVm}">
         <v:Navigation/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:WorkRequestVm}">
+        <v:WorkRequestsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CreateWorkRequestVm}">
+        <v:CreateWorkRequestView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:WorkstationsVm}">
+        <v:Workstations/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EquipmentItemsVm}">
+        <v:EquipmentItems/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:HomeContentVm}">
+        <v:HomeContent/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:WorkRequestContentVm}">
+        <v:WorkRequestContent/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CreateWorkRequestContentVm}">
+        <v:CreateWorkRequestContent/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:WorkstationsContentVm}">
+        <v:WorkstationsContent/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EquipmentItemsContentVm}">
+        <v:EquipmentItemContent/>
+    </DataTemplate>
 </ResourceDictionary>

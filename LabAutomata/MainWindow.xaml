@@ -9,7 +9,7 @@
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         Background="Transparent"
-        Title="MainWindow" Height="900" Width="800" 
+        Title="Lab Automata" Height="900" Width="800" 
         Loaded="OnLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,13 +24,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Height ="50" 
-                   Width =" 100" 
-                   Text="{Binding MyName}"/>
         <Border Grid.Row="1" 
                 Grid.Column="0"
                 BorderThickness="0"
-                CornerRadius="{Binding Radius}"
+                CornerRadius="{StaticResource CornerRadius}"
                 Margin="10"
                 Background="{StaticResource FgTwo}">
 
@@ -70,9 +67,8 @@
                 Background="{StaticResource FgTwo}">
             <StackPanel Background="{StaticResource FgTwo}"
                         Margin="0 10 10 0">
-                <ContentControl Margin="10">
-                    <v:HomeView/>
-                </ContentControl>
+                <ContentControl Margin="10"
+                                Content="{Binding FocusedVm}"/>
             </StackPanel>
         </Border>
 
@@ -84,7 +80,10 @@
                  Margin="10"
                  Background="{StaticResource FgTwo}">
             <StackPanel Margin="10"
-                        Background="LightSlateGray"></StackPanel>
+                        Background="LightSlateGray">
+                <ContentControl Margin="10"
+                                Content="{Binding SubFocusVm}"/>
+            </StackPanel>
         </Border>
 
         <StackPanel Grid.Column="0"
