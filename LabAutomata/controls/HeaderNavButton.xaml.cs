@@ -1,11 +1,35 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LabAutomata.controls {
     /// <summary>
     /// Interaction logic for HeaderNavButton.xaml
     /// </summary>
     public partial class HeaderNavButton : UserControl {
+        public ICommand Click {
+            get => (ICommand)GetValue(MyPropertyProperty);
+            set => SetValue(MyPropertyProperty, value);
+        }
+
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register(nameof(Click),
+                typeof(ICommand),
+                typeof(HeaderNavButton),
+                new PropertyMetadata(default));
+
+        public string ClickParameter {
+            get => (string)GetValue(ClickParameterProperty);
+            set => SetValue(ClickParameterProperty, value);
+        }
+
+        public static readonly DependencyProperty ClickParameterProperty =
+            DependencyProperty.Register(nameof(ClickParameter),
+                typeof(string),
+                typeof(HeaderNavButton),
+                new PropertyMetadata(string.Empty));
+
         public string ButtonId {
             get => (string)GetValue(ButtonIdProperty);
             set => SetValue(ButtonIdProperty, value);
@@ -15,18 +39,18 @@ namespace LabAutomata.controls {
             DependencyProperty.Register(nameof(ButtonId),
                 typeof(string),
                 typeof(HeaderNavButton),
-                new PropertyMetadata("Button"));
+                new PropertyMetadata(string.Empty));
 
-        public string Source {
-            get => (string)GetValue(SourceProperty);
+        public ImageSource Source {
+            get => (ImageSource)GetValue(SourceProperty);
             set => SetValue(SourceProperty, value);
         }
 
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(nameof(Source),
-                typeof(string),
+                typeof(ImageSource),
                 typeof(HeaderNavButton),
-                new PropertyMetadata("Button"));
+                new PropertyMetadata(default));
 
         public HeaderNavButton () {
             InitializeComponent();

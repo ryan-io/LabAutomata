@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LabAutomata.controls"
-             xmlns:common="clr-namespace:LabAutomata.common"
              mc:Ignorable="d" 
              x:Name="MainWindow"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -19,8 +17,8 @@
                Height="128" Width="128">
             <Image.InputBindings>
                 <MouseBinding Gesture="LeftClick"
-                              Command="{Binding ChangeVm}"
-                              CommandParameter="{Binding Source={x:Static common:AppC.WrVm}}"/>
+                              Command="{Binding ElementName=MainWindow, Path=Click}"
+                              CommandParameter="{Binding ElementName=MainWindow, Path=ClickParameter}"/>
             </Image.InputBindings>
         </Image>
     </StackPanel>

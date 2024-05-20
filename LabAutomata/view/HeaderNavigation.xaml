@@ -7,7 +7,7 @@
              xmlns:common="clr-namespace:LabAutomata.common"
              xmlns:controls="clr-namespace:LabAutomata.controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1200">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -34,104 +34,41 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Home" 
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource FontOne}"/>
-                    <Image Source="/resources/images/home.png" 
-                       Margin="10"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Height="128" Width="128">
-                       <Image.InputBindings>
-                           <MouseBinding Gesture="LeftClick"
-                                         Command="{Binding ChangeVm}"
-                                         CommandParameter="{Binding Source={x:Static common:AppC.HomeVm}}"/>
-                       </Image.InputBindings>
-                    </Image>
-                </StackPanel>
+                <controls:HeaderNavButton ButtonId="Home" 
+                                          Source="/resources/images/home.png" 
+                                          Click="{Binding ChangeVm}"
+                                          ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
+                                          Grid.Column="0"/>
 
+                <controls:HeaderNavButton ButtonId="Work Requests" 
+                                              Source="/resources/images/work-requests.png" 
+                                              Click="{Binding ChangeVm}"
+                                              ClickParameter="{Binding Source={x:Static common:AppC.WrVm}}"
+                                              Grid.Column="1"/>
 
-                <StackPanel Grid.Column="1" 
-                        Orientation="Vertical">
-                    <controls:HeaderNavButton ButtonId="Home" Source="/resources/images/home.png" Grid.Column="0"></controls:HeaderNavButton>
-                    <TextBlock Text="Work Requests"
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource FontOne}"/>
-                    <Image Source="/resources/images/work-requests.png" 
-                       Margin="10"
-                       Cursor="Hand"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Height="128" Width="128">
-                        <Image.InputBindings>
-                            <MouseBinding Gesture="LeftClick"
-                                          Command="{Binding ChangeVm}"
-                                          CommandParameter="{Binding Source={x:Static common:AppC.WrVm}}"/>
-                        </Image.InputBindings>
-                    </Image>
-                </StackPanel>
+                <controls:HeaderNavButton ButtonId="Create Request" 
+                                          Source="/resources/images/create-work-request.png" 
+                                          Click="{Binding ChangeVm}"
+                                          ClickParameter="{Binding Source={x:Static common:AppC.CwrVm}}"
+                                          Grid.Column="2"/>
 
-                <StackPanel Grid.Column="2"
-                        Orientation="Vertical">
-                    <TextBlock Text="Create Request"
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource FontOne}"/>
-                    <Image Source="/resources/images/create-work-request.png" 
-                       Margin="10"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Height="128" Width="128">
-                        <Image.InputBindings>
-                            <MouseBinding Gesture="LeftClick"
-                                          Command="{Binding ChangeVm}"
-                                          CommandParameter="{Binding Source={x:Static common:AppC.CwrVm}}"/>
-                        </Image.InputBindings>
-                    </Image>
-                </StackPanel>
+                <controls:HeaderNavButton ButtonId="Workstations" 
+                                          Source="/resources/images/workstations.png" 
+                                          Click="{Binding ChangeVm}"
+                                          ClickParameter="{Binding Source={x:Static common:AppC.WsVm}}"
+                                          Grid.Column="3"/>
 
-                <StackPanel Grid.Column="3" 
-                        Orientation="Vertical">
-                    <TextBlock Text="Workstations"
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource FontOne}"/>
-                    <Image Source="/resources/images/workstations.png" 
-                       Margin="10"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Height="128" Width="128">
-                        <Image.InputBindings>
-                            <MouseBinding Gesture="LeftClick"
-                                          Command="{Binding ChangeVm}"
-                                          CommandParameter="{Binding Source={x:Static common:AppC.WsVm}}"/>
-                        </Image.InputBindings>
-                    </Image>
-                </StackPanel>
+                <controls:HeaderNavButton ButtonId="Equipment" 
+                                          Source="/resources/images/equipment-items.png" 
+                                          Click="{Binding ChangeVm}"
+                                          ClickParameter="{Binding Source={x:Static common:AppC.EiVm}}"
+                                          Grid.Column="4"/>
 
-                <StackPanel Grid.Column="4" 
-                        Orientation="Vertical">
-                    <TextBlock Text="Equipment"
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource FontOne}"/>
-                    <Image Source="/resources/images/equipment-items.png" 
-                       Margin="10"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Height="128" Width="128">
-                        <Image.InputBindings>
-                            <MouseBinding Gesture="LeftClick"
-                                          Command="{Binding ChangeVm}"
-                                          CommandParameter="{Binding Source={x:Static common:AppC.EiVm}}"/>
-                        </Image.InputBindings>
-                    </Image>
-                </StackPanel>
-
-                <StackPanel Grid.Column="5" 
-                        Orientation="Vertical">
-                    <TextBlock Text="About"
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource FontOne}"/>
-                    <Image Source="/resources/images/help-about.png" 
-                       Margin="10"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Height="128" Width="128"/>
-                </StackPanel>
-
+                <controls:HeaderNavButton ButtonId="Equipment" 
+                                          Source="/resources/images/help-about.png" 
+                                          Click="{Binding ChangeVm}"
+                                          ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
+                                          Grid.Column="5"/>
             </Grid>
         </Border>
     </Grid>
