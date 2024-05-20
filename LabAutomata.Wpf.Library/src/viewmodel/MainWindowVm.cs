@@ -20,21 +20,30 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             }
         }
 
+        public Base? MainNavVm {
+            get => _headerNavVm;
+            set {
+                _headerNavVm = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public Base? SubFocusedVm { get; set; }
 
         public override void Load () {
             FocusedVm = Vmc.Instance[nameof(HomeVm)];
             NavVm = Vmc.Instance[nameof(NavigationVm)];
+            MainNavVm = Vmc.Instance[nameof(HeaderNavVm)];
 
-            if (NavVm == null) throw new NullReferenceException(NullMwVm);
+            if (MainNavVm == null) throw new NullReferenceException(NullMwVm);
 
             // sender in this instance is assumed to be the NavigationVm
-            NavVm.PropertyChanged += (sender, args) => {
-                if (sender is not NavigationVm navVm)
+            MainNavVm.PropertyChanged += (sender, args) => {
+                if (sender is not HeaderNavVm mainVm)
                     return;
 
-                FocusedVm = navVm.CurrentVm;
-                SubFocusedVm = navVm.SubCurrentVm;
+                FocusedVm = mainVm.CurrentVm;
+                SubFocusedVm = mainVm.SubCurrentVm;
             };
         }
 
@@ -46,6 +55,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         private Base? _focusedVm;
         private Base? _navVm;
+        private Base? _headerNavVm;
 
         private const string NullMwVm = "Main window viemwodel cannot be null.";
 
