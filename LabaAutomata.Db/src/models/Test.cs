@@ -1,8 +1,13 @@
-﻿namespace LabAutomata.Db.models {
+﻿using LabAutomata.Db.common;
+using System.ComponentModel.DataAnnotations;
+
+namespace LabAutomata.Db.models {
     public class Test : LabModel {
-        public string Name { get; set; }
+        [Required, MaxLength(20)] public string? Name { get; set; }
 
         public int InstanceId { get; set; }
+
+        public TestType Type { get; set; }
 
         public DateTime Started { get; set; } = DateTime.UtcNow;
 
