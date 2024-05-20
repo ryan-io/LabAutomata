@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Margin="10"
+            CornerRadius="{StaticResource CornerRadius}"
             Background="{StaticResource FgTwo}">
         <StackPanel
             Margin="10"

@@ -30,7 +30,6 @@
                 CornerRadius="{StaticResource CornerRadius}"
                 Margin="10"
                 Background="{StaticResource FgTwo}">
-
             <StackPanel Margin="10, 10 10 10" 
                         Background="{StaticResource FgOne}">
                 <Image Source="resources/images/lab-automata-logo-transparent.png" 
@@ -42,17 +41,103 @@
                 BorderThickness="0"
                 CornerRadius="{StaticResource CornerRadius}"
                 Grid.Column="1"
-                Margin="0 10 10 0"
+                Margin="10 10 10 10"
                 Background="{StaticResource FgTwo}">
 
-            <StackPanel >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
                 <TextBox Height="50"
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Stretch"
-                         Margin="5" 
+                         VerticalContentAlignment="Top"
+                         Margin="10 10 10 10" 
                          Style="{StaticResource TxtBoxDefault}">
                 </TextBox>
-            </StackPanel>
+                <Border Grid.Row="2"
+                        x:Name="NavBorder"
+                        CornerRadius="{StaticResource CornerRadius}"
+                        Margin="10"
+                        Background="{StaticResource FgOne}">
+                    <Grid MinWidth="1000"
+                          Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Home" 
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource FontOne}"/>
+                            <Image Source="resources/images/home.png" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Height="128" Width="128"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" 
+                                    Orientation="Vertical">
+                            <TextBlock Text="Work Requests"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource FontOne}"/>
+                            <Image Source="resources/images/work-requests.png" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Height="128" Width="128"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Vertical">
+                            <TextBlock Text="Create Request"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource FontOne}"/>
+                            <Image Source="resources/images/create-work-request.png" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Height="128" Width="128"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" 
+                                    Orientation="Vertical">
+                            <TextBlock Text="Workstations"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource FontOne}"/>
+                            <Image Source="resources/images/workstations.png" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Height="128" Width="128"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4" 
+                                    Orientation="Vertical">
+                            <TextBlock Text="Equipment"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource FontOne}"/>
+                            <Image Source="resources/images/equipment-items.png" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Height="128" Width="128"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="5" 
+                                    Orientation="Vertical">
+                            <TextBlock Text="About"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource FontOne}"/>
+                            <Image Source="resources/images/help-about.png" 
+                                   Margin="10"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Height="128" Width="128"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </Grid>
         </Border>
 
         <ContentControl Grid.Row="2" 
@@ -66,7 +151,7 @@
                 Margin="10"
                 Background="{StaticResource FgTwo}">
             <StackPanel Background="{StaticResource FgTwo}"
-                        Margin="0 10 10 0">
+                        Margin="10 10 10 0">
                 <ContentControl Margin="10"
                                 Content="{Binding FocusedVm}"/>
             </StackPanel>
@@ -82,7 +167,7 @@
             <StackPanel Margin="10"
                         Background="LightSlateGray">
                 <ContentControl Margin="10"
-                                Content="{Binding SubFocusVm}"/>
+                                Content="{Binding SubFocusedVm}"/>
             </StackPanel>
         </Border>
 

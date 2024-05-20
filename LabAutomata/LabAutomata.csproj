@@ -16,7 +16,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\images\create-work-request.png" />
+    <None Remove="resources\images\equipment-items.png" />
+    <None Remove="resources\images\help-about.png" />
+    <None Remove="resources\images\home.png" />
     <None Remove="resources\images\lab-automata-logo-transparent.png" />
+    <None Remove="resources\images\work-requests.png" />
+    <None Remove="resources\images\workstations.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +52,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="resources\images\create-work-request.png" />
+    <Resource Include="resources\images\equipment-items.png" />
+    <Resource Include="resources\images\help-about.png" />
+    <Resource Include="resources\images\home.png" />
     <Resource Include="resources\images\lab-automata-logo-transparent.png" />
+    <Resource Include="resources\images\work-requests.png" />
+    <Resource Include="resources\images\workstations.png" />
   </ItemGroup>
 
 </Project>
