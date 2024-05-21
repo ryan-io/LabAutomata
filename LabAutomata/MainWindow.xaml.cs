@@ -10,9 +10,10 @@ namespace LabAutomata {
     /// </summary>
     public partial class MainWindow : Window {
 
-        public MainWindow (MainWindowVm vm) {
+        public MainWindow (MainWindowVm vm, ILogger? logger = default) {
             InitializeComponent();
             _vm = vm;
+            _logger = logger;
             DataContext = _vm;
         }
 
@@ -24,6 +25,7 @@ namespace LabAutomata {
 
         private async void OnLoaded (object sender, RoutedEventArgs e) {
             try {
+                _logger?.LogInformation("Application has been loaded.");
                 HashSet<Task> tasks = new HashSet<Task>();
 
                 foreach (var vm in Vmc.Instance.Values) {
@@ -40,12 +42,10 @@ namespace LabAutomata {
             }
         }
 
-        protected override void OnClosed (EventArgs e) {
-            base.OnClosed(e);
-            _cancellation.Cancel();
-        }
-
         private readonly MainWindowVm _vm;
         private readonly CancellationTokenSource _cancellation = new();
+        private readonly ILogger? _logger;
+
+
     }
 }

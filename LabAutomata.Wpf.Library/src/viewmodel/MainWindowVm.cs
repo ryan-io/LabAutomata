@@ -32,6 +32,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         public override void Load () {
             FocusedVm = Vmc.Instance[nameof(HomeVm)];
+            SubFocusedVm = Vmc.Instance[nameof(HomeContentVm)];
             NavVm = Vmc.Instance[nameof(NavigationVm)];
             MainNavVm = Vmc.Instance[nameof(HeaderNavVm)];
 
@@ -58,7 +59,5 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         private Base? _headerNavVm;
 
         private const string NullMwVm = "Main window viemwodel cannot be null.";
-
-
     }
 }

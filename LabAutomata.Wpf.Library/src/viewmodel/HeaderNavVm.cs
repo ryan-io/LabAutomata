@@ -22,7 +22,13 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// <summary>
         /// Gets or sets the sub current view model.
         /// </summary>
-        public Base? SubCurrentVm { get; set; }
+        public Base? SubCurrentVm {
+            get => _subCurrentVm;
+            set {
+                _subCurrentVm = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private Base? _currentVm;
         private Command? _changeVm;
@@ -36,6 +42,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 _currentVm = value;
                 NotifyPropertyChanged();
                 ChangeVm?.RaiseCanExecuteChanged();
+                NotifyPropertyChanged(nameof(SubCurrentVm));
             }
         }
 
@@ -54,8 +61,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 _sb.Append(vmId.Remove(vmId.Length - 2));
                 _sb.Append(SubVmSuffix);
 
+                SubCurrentVm = Vmc.Instance[_sb.ToString()];    // set SubCurrentVm first -> 
                 CurrentVm = Vmc.Instance[vmId];
-                SubCurrentVm = Vmc.Instance[_sb.ToString()];
             });
 
             CurrentVm = Vmc.Instance[nameof(HomeVm)];
@@ -63,6 +70,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         private const string SubVmSuffix = "ContentVm";
         private readonly StringBuilder _sb = new();
+        private Base? _subCurrentVm;
 
 
         /// <summary>

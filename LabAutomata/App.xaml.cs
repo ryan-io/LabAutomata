@@ -26,14 +26,24 @@ namespace LabAutomata {
 
         protected override void OnStartup (StartupEventArgs e) {
             base.OnStartup(e);
-
+            //TODO: research what really happens during an unexpected shutdown of the application
+            DispatcherUnhandledException += Application_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += UnhandledShutdown;
             var mw = _serviceProvider.GetService<MainWindow>();
             mw?.Show();
         }
 
+        private void Application_DispatcherUnhandledException (object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
+            e.Handled = true;
+        }
+
+        private void UnhandledShutdown (object sender, UnhandledExceptionEventArgs e) {
+            MessageBox.Show($"Is Terminating: {e.IsTerminating}\r\n{e.ExceptionObject}");
+        }
+
         List<Type> ConfigureServices (IServiceCollection sc) {
             sc.AddSingleton(_ => new ConfigurationService().Create<App>());
-            sc.AddSingleton<LabPostgreSqlDbContext>();
+            sc.AddDbContext<LabPostgreSqlDbContext>();
             sc.AddSingleton(sp => sp);    // little trick to simply return a singleton to our Sp instance
             sc.AddTransient<MainWindow>();
 
@@ -50,8 +60,6 @@ namespace LabAutomata {
             sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
             return asmViewModels;
         }
-
-        //static bool IsTypeBaseVm (Type type) => type.IsOfBase(typeof(Base));
 
         private void BuildVmc (List<Type> vmTypes) {
             foreach (var vmType in vmTypes) {

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LabAutomata.view"
              xmlns:common="clr-namespace:LabAutomata.common"
              xmlns:controls="clr-namespace:LabAutomata.controls"
              mc:Ignorable="d" 
@@ -36,36 +35,42 @@
                 </Grid.ColumnDefinitions>
                 <controls:HeaderNavButton ButtonId="Home" 
                                           Source="/resources/images/home.png" 
+                                          ToolTip="Home"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
                                           Grid.Column="0"/>
 
                 <controls:HeaderNavButton ButtonId="Work Requests" 
-                                              Source="/resources/images/work-requests.png" 
-                                              Click="{Binding ChangeVm}"
-                                              ClickParameter="{Binding Source={x:Static common:AppC.WrVm}}"
-                                              Grid.Column="1"/>
+                                          Source="/resources/images/work-requests.png" 
+                                          ToolTip="Work Requests"
+                                          Click="{Binding ChangeVm}"
+                                          ClickParameter="{Binding Source={x:Static common:AppC.WrVm}}"
+                                          Grid.Column="1"/>
 
                 <controls:HeaderNavButton ButtonId="Create Request" 
                                           Source="/resources/images/create-work-request.png" 
+                                          ToolTip="Create Request"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.CwrVm}}"
                                           Grid.Column="2"/>
 
                 <controls:HeaderNavButton ButtonId="Workstations" 
                                           Source="/resources/images/workstations.png" 
+                                          ToolTip="Workstations"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.WsVm}}"
                                           Grid.Column="3"/>
 
                 <controls:HeaderNavButton ButtonId="Equipment" 
                                           Source="/resources/images/equipment-items.png" 
+                                          ToolTip="Equipment"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.EiVm}}"
                                           Grid.Column="4"/>
 
-                <controls:HeaderNavButton ButtonId="Equipment" 
+                <controls:HeaderNavButton ButtonId="About" 
                                           Source="/resources/images/help-about.png" 
+                                          ToolTip="About"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
                                           Grid.Column="5"/>

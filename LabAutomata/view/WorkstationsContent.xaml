@@ -2,9 +2,23 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:LabAutomata.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <TextBlock FontSize="48" Text="PLACHOLDER" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <controls:FocusedViewHeader HeaderText="Workstations List" />
+        <Border Grid.Row="1"
+                Margin="5 0 5 0"
+                Background="{StaticResource FgTwo}">
+            <TextBlock >
+                fhdsfhas
+                this is out cont
+            </TextBlock>
+        </Border>
+    </Grid>
 </UserControl>

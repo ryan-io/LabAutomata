@@ -9,11 +9,11 @@ namespace LabAutomata.controls {
     /// </summary>
     public partial class HeaderNavButton : UserControl {
         public ICommand Click {
-            get => (ICommand)GetValue(MyPropertyProperty);
-            set => SetValue(MyPropertyProperty, value);
+            get => (ICommand)GetValue(ClickProperty);
+            set => SetValue(ClickProperty, value);
         }
 
-        public static readonly DependencyProperty MyPropertyProperty =
+        public static readonly DependencyProperty ClickProperty =
             DependencyProperty.Register(nameof(Click),
                 typeof(ICommand),
                 typeof(HeaderNavButton),

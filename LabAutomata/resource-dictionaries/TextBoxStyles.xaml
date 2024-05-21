@@ -18,16 +18,17 @@
                                      BorderThickness="0"
                                      VerticalContentAlignment="Center"
                                      Padding="5"
-                                     Foreground="#CFCFCF"
+                                     CaretBrush="{StaticResource FgTwo}"
+                                     Foreground="{StaticResource FontOne}"
                                      x:Name="SearchBox"/>
                                 <!-- IsHitTestVisible="False" allows us to click through the textblock-->
                                 <TextBlock IsHitTestVisible="False"
-                                           Text="Search Test Instance Id"
+                                           Text="Enter your input"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
                                            Margin="10 0 0 0"
-                                           FontSize="11"
-                                           Foreground="{StaticResource FontOne}"
+                                           FontSize="18"
+                                           Foreground="#CFCFCF"
                                            Grid.Row="0">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">

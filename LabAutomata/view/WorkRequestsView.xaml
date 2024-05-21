@@ -4,14 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LabAutomata.view"
+             xmlns:controls="clr-namespace:LabAutomata.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <TextBlock Text="Work Requests"
-                   Foreground="{StaticResource FontTwo}"
-                   FontSize="28"
-                   HorizontalAlignment="Left"
-                   Margin="0 0 0 20"/>
+        <controls:FocusedViewHeader HeaderText="Work Requests"/>
+
         <StackPanel Orientation="Horizontal">
             <Border Width="400"
                     Height="200">

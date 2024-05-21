@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+         <!-- Top-left logo; click to drag window-->
         <Border Grid.Row="1" 
                 Grid.Column="0"
                 BorderThickness="0"
@@ -37,6 +38,8 @@
                 </Image>
             </StackPanel>
         </Border>
+
+        <!-- Primary navigation-->
         <Border Grid.Row="1" 
                 BorderThickness="0"
                 CornerRadius="{StaticResource CornerRadius}"
@@ -46,10 +49,12 @@
             <ContentControl Content="{Binding MainNavVm}"/>
         </Border>
 
+         <!-- Secondary navigation-->
         <ContentControl Grid.Row="2" 
                         Grid.Column="0" 
                         Content="{Binding NavVm}"/>
-
+        
+         <!-- Primary content-->
         <Border Grid.Row="2" 
                 Grid.Column="1"
                 BorderThickness="0"
@@ -58,11 +63,12 @@
                 Background="{StaticResource FgTwo}">
             <StackPanel Background="{StaticResource FgTwo}"
                         Margin="10 10 10 0">
-                <ContentControl Margin="10"
-                                Content="{Binding FocusedVm}"/>
+                <ContentControl Content="{Binding FocusedVm}" 
+                                Margin="0 0 0 10"/>
             </StackPanel>
         </Border>
 
+         <!-- Secondary content-->
         <Border  Grid.Row="3" 
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
@@ -77,13 +83,10 @@
             </StackPanel>
         </Border>
 
-        <StackPanel Grid.Column="0"
-                        Grid.Row="4"
-                        Grid.ColumnSpan="2"
-                        Background="{StaticResource FgOne}">
-            <TextBlock Foreground="{StaticResource FontOne}" 
-                           HorizontalAlignment="Right"
-                           Text=" Copyright 2024 Ryan IO. All rights reserved."/>
-        </StackPanel>
+         <!-- Copyright/footer-->
+        <v:Footer  Grid.Column="0"
+                   Grid.Row="4"
+                   Grid.ColumnSpan="2"
+                   FooterText="Copyright 2024 Ryan IO. All rights reserved."/>
     </Grid>
 </Window>
