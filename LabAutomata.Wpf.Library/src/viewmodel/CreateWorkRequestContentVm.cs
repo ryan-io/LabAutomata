@@ -1,10 +1,8 @@
 ﻿using LabAutomata.Db.models;
-using LabAutomata.Wpf.Library.common;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-    public class CreateWorkRequestContentVm : Base {
+    public class CreateWorkRequestContentVm (IServiceProvider sp) : Base(sp) {
         public string? Name {
             get => _name;
             set {
@@ -39,7 +37,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         public ObservableCollection<Test> Tests { get; set; } = new();
 
-        public ICommand TstCmd { get; set; }
 
         public void Reset () {
             Name = string.Empty;
@@ -53,12 +50,5 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         private string? _program = string.Empty;
         private string? _description = string.Empty;
         private DateTime? _startDate;
-
-        public CreateWorkRequestContentVm (IServiceProvider sp) : base(sp) {
-            TstCmd = new Command(o => {
-                var tn = Name;
-                var tp = Program;
-            });
-        }
     }
 }

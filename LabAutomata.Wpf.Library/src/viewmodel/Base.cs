@@ -16,7 +16,16 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        public bool HasLoaded { get; set; }
+        /// <summary>
+        /// Notifies any listeners that this instance has completed its load process
+        /// </summary>
+        public bool HasLoaded {
+            get => _hasLoaded;
+            set {
+                _hasLoaded = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public ILogger? Logger => ServiceProvider.GetService<ILogger>();
 
@@ -169,5 +178,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         readonly bool _shouldNotifyErrors;
         readonly Dictionary<string, List<string>> _errors = new();
+        private bool _hasLoaded;
     }
 }
