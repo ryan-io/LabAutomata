@@ -1,8 +1,5 @@
 ﻿namespace LabAutomata.Wpf.Library.viewmodel {
-    public interface ICreateWorkRequestVm {
+    public class CreateWorkRequestVm (IServiceProvider sp) : Base(sp) {
 
-    }
-
-    public class CreateWorkRequestVm : Base, ICreateWorkRequestVm {
     }
 }

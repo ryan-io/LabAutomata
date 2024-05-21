@@ -13,7 +13,8 @@
                             <Grid>
                                 <Rectangle StrokeThickness="1"/>
                                 <TextBox Margin="1"
-                                     Text="{TemplateBinding Property=Text}"
+                                     Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="{TemplateBinding Property=FontSize}"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      VerticalContentAlignment="Center"

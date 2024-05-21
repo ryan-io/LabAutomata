@@ -16,7 +16,6 @@
         <Border Grid.Row="1"
                 Margin="5 0 5 0"
                 Background="{StaticResource FgTwo}">
-           <controls:NewWorkRequestForm/>
         </Border>
     </Grid>
 </UserControl>

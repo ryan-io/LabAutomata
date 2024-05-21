@@ -40,8 +40,4 @@
     <DataTemplate DataType="{x:Type vm:EquipmentItemsContentVm}">
         <v:EquipmentItemContent/>
     </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:NewWorkRequestFormVm}">
-        <controls:NewWorkRequestForm/>
-    </DataTemplate>
 </ResourceDictionary>

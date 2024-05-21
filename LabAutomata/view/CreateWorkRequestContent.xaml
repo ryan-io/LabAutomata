@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LabAutomata.view"
+             d:DataContext="{d:DesignInstance viewmodel:CreateWorkRequestContentVm}"
              xmlns:controls="clr-namespace:LabAutomata.controls"
+             xmlns:viewmodel="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -17,10 +18,65 @@
         <Border Grid.Row="1"
                 Margin="5 0 5 0"
                 Background="{StaticResource FgTwo}">
-            <TextBlock >
-                fhdsfhas
-                this is out cont
-            </TextBlock>
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox Text="{Binding Name}" Width="100"></TextBox>
+                    <controls:FormLabel Label="Request Name:"/>
+                    <controls:FormTextInput Grid.Row="0" Grid.Column="1"
+                                            Margin="5"
+                                            InputTxt="{Binding Name, Mode=TwoWay}"/>
+                    <controls:FormLabel Grid.Row="1" Grid.Column="0"
+                                        Label="Program:"/>
+                    <controls:FormTextInput Grid.Row="1" Grid.Column="1"
+                                            FontSize="22"
+                                            Margin="5"/>
+
+                    <controls:FormLabel Grid.Row="2" Grid.Column="0"
+                                        Label="DescriptionName:"/>
+                    <controls:FormTextInput Grid.Row="2" Grid.Column="1"
+                                            Margin="5"
+                                            InputTxt="InputTxt description of this work requests."/>
+
+                    <controls:FormLabel Grid.Row="3" Grid.Column="0"
+                                        Label="Start Date:"/>
+                    <controls:FormTextInput Grid.Row="3" Grid.Column="1"
+                                            Margin="5"
+                                            InputTxt="InputTxt description of this work requests."/>
+
+                    <controls:FormLabel Grid.Row="4" Grid.Column="0"
+                                        Label="Tests:"/>
+                    <controls:FormTextInput Grid.Row="4" Grid.Column="1"
+                                            Margin="5"
+                                            InputTxt="InputTxt description of this work requests."/>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <RadioButton Content="Submit"
+                                 FontWeight="Bold"
+                                 Height="40"
+                                 FontSize="22"
+                                 Style="{StaticResource MenuBtn}"/>
+                    <RadioButton Content="Reset"
+                                 FontWeight="Bold"
+                                 Height="40"
+                                 FontSize="22"
+                                 Style="{StaticResource MenuBtn}"/>
+                </StackPanel>
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>
