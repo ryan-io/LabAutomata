@@ -24,7 +24,7 @@
                                      x:Name="SearchBox"/>
                                 <!-- IsHitTestVisible="False" allows us to click through the textblock-->
                                 <TextBlock IsHitTestVisible="False"
-                                           Text="Enter your input"
+                                           Text="Input your text"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
                                            Margin="10 0 0 0"

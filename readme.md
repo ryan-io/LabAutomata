@@ -14,13 +14,15 @@
 <p align="center">
 <img width="300" height="125" src="https://i.imgur.com/w5hcUtR.png">
 </p>
-
+<blockquote>
+au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a function according to a predetermined set of coded instructions, especially one capable of a range of programmed responses to different circumstances
+</blockquote>
 <div align="center">
 
 <h3 align="center">Lab Automata</h3>
 
   <p align="center">
-    A complete .NET laboratory DAQ application.
+    A .NET application to automate laboratory data acquisiton (DAQ) and processing.
     <br />
     <br />
     <a href="https://github.com//ryan-io/CommandPipeline/issues">Report Bug</a>

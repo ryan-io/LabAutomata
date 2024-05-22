@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:control="clr-namespace:LabAutomata.Wpf.Library.control;assembly=LabAutomata.Wpf.Library"
+             xmlns:controls="clr-namespace:LabAutomata.controls"
              mc:Ignorable="d" 
-             x:Name="FormInput"
              d:DesignHeight="450" d:DesignWidth="800">
-    <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=InputTxt, UpdateSourceTrigger=PropertyChanged}"
+    <controls:TextBoxTwoText 
+             Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=InputTxt, UpdateSourceTrigger=PropertyChanged}"
+             BoxEmptyText="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=BoxEmptyTxt, UpdateSourceTrigger=PropertyChanged}"
              HorizontalContentAlignment="Stretch"
              Margin="5"
              Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}"
-             Style="{StaticResource TxtBoxDefault}"
+             Style="{StaticResource TxtBoxTwoTextStyle}"
              VerticalAlignment="Center"
              FontSize="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FontSize}"/>
 </UserControl>

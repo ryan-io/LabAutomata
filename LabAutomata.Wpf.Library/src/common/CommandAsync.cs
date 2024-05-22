@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using LabAutomata.Wpf.Library.adapter;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.common {
@@ -51,7 +52,7 @@ namespace LabAutomata.Wpf.Library.common {
         public async void Execute (object? parameter) {
             await _dispatcher.InvokeAsync(async () => {
                 IsRunning = true;
-                await _context.Invoke(parameter);
+                await Context.Invoke(parameter);
                 IsRunning = false;
 
                 CanExecute();
@@ -66,16 +67,35 @@ namespace LabAutomata.Wpf.Library.common {
             }
         }
 
-        public CommandAsync (Dispatcher dispatcher, Func<object?, Task> context, Func<object?, bool>? canExecute = null) {
+        /// <summary>
+        /// Creates a new WPF asynchronous command
+        /// Requires the Execute method to be awaited, followed by an invocation of RaiseCanExecuteChanged
+        /// </summary>
+        /// <param name="dA">An adapter with a dispatcher; typically the applicaton's current</param>
+        /// <param name="context">Logic to run in the Execute method</param>
+        /// <param name="canExecute">Optional delegate logic to determine if this command can execute or now</param>
+        public CommandAsync (IAdapter<Dispatcher> dA, Func<object?, Task> context, Func<object?, bool>? canExecute = null) {
             ArgumentNullException.ThrowIfNull(context);
-            ArgumentNullException.ThrowIfNull(dispatcher);
-            _context = context;
+            ArgumentNullException.ThrowIfNull(dA);
+            Context = context;
             _canExecute = canExecute;
-            _dispatcher = dispatcher;
+            _dispatcher = dA.Get();
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        private readonly Func<object?, Task> _context;
+        /// <summary>
+        /// A protected constructor for setting the context from a class deriving from CommandAsync
+        /// Calling this constructor assumes you set the Context in the deriving constructor
+        /// </summary>
+        /// <param name="dA">An adapter with a dispatcher; typically the applicaton's current</param>
+        /// <param name="canExecute">Optional delegate logic to determine if this command can execute or now</param>
+        protected CommandAsync (IAdapter<Dispatcher> dA, Func<object?, bool>? canExecute = default) {
+            _dispatcher = dA.Get();
+            _canExecute = canExecute;
+            _cancellationTokenSource = new CancellationTokenSource();
+        }
+
+        protected Func<object?, Task> Context = null!;
         private readonly Func<object?, bool>? _canExecute;
         private readonly Dispatcher _dispatcher;
         private readonly CancellationTokenSource _cancellationTokenSource;

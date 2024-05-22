@@ -8,6 +8,7 @@
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
+        SizeToContent="WidthAndHeight"
         Background="Transparent"
         Title="Lab Automata" Height="900" Width="800" 
         Loaded="OnLoaded">

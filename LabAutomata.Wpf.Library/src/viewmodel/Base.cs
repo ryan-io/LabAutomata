@@ -76,8 +76,10 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="serviceProvider">Service provider for the application; singleton</param>
         /// <param name="shouldNotifyErrors">Default yes, will not add, remove, clear, or propogate events that pertain to errors</param>
-        public Base (bool shouldNotifyErrors = false) {
+        public Base (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) {
+            ServiceProvider = serviceProvider;
             _shouldNotifyErrors = shouldNotifyErrors;
             _errors = new Dictionary<string, List<string>>();
         }
@@ -171,7 +173,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         // services registered through DI in the application
         protected IServiceProvider ServiceProvider { get; }
 
-        protected Base (IServiceProvider sp) {
+        protected Base (IServiceProvider sp, IServiceProvider serviceProvider) {
             ServiceProvider = sp;
             _shouldNotifyErrors = true;
         }

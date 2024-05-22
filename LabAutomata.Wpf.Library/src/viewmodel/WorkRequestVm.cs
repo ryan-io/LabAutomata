@@ -1,8 +1,9 @@
 ﻿namespace LabAutomata.Wpf.Library.viewmodel {
-    public interface IWorkRequestVm {
+    public class WorkRequestVm : Base {
+        public WorkRequestVm (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) : base(serviceProvider, shouldNotifyErrors) {
+        }
 
-    }
-
-    public class WorkRequestVm : Base, IWorkRequestVm {
+        public WorkRequestVm (IServiceProvider sp, IServiceProvider serviceProvider) : base(sp, serviceProvider) {
+        }
     }
 }

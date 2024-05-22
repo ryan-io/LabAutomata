@@ -39,4 +39,10 @@ public abstract class BaseAsync : Base {
     }
 
     bool IsDisposed { get; set; }
+
+    protected BaseAsync (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) : base(serviceProvider, shouldNotifyErrors) {
+    }
+
+    protected BaseAsync (IServiceProvider sp, IServiceProvider serviceProvider) : base(sp, serviceProvider) {
+    }
 }

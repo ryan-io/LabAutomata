@@ -6,7 +6,7 @@ namespace LabAutomata.common {
     /// <summary>
     /// Static clr objects used throughout the application
     /// </summary>
-    internal static class AppC {
+    internal class AppC {
         public static string NavVm = nameof(NavigationVm);
         public static string HomeVm = nameof(Wpf.Library.viewmodel.HomeVm);
         public static string WrVm = nameof(WorkRequestVm);

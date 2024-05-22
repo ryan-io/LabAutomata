@@ -33,48 +33,57 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBox Text="{Binding Name}" Width="100"></TextBox>
+
                     <controls:FormLabel Label="Request Name:"/>
                     <controls:FormTextInput Grid.Row="0" Grid.Column="1"
                                             Margin="5"
-                                            InputTxt="{Binding Name, Mode=TwoWay}"/>
+                                            BoxEmptyTxt="{Binding NameEmptyBox, Mode=TwoWay}"
+                                            InputTxt="{Binding Model.Name, Mode=TwoWay}"/>
                     <controls:FormLabel Grid.Row="1" Grid.Column="0"
                                         Label="Program:"/>
                     <controls:FormTextInput Grid.Row="1" Grid.Column="1"
                                             FontSize="22"
-                                            Margin="5"/>
+                                            Margin="5"
+                                            InputTxt="{Binding Model.Program, Mode=TwoWay}"
+                                            BoxEmptyTxt="{Binding ProgramEmptyBox}"/>
 
                     <controls:FormLabel Grid.Row="2" Grid.Column="0"
                                         Label="DescriptionName:"/>
                     <controls:FormTextInput Grid.Row="2" Grid.Column="1"
                                             Margin="5"
-                                            InputTxt="InputTxt description of this work requests."/>
+                                            InputTxt="{Binding Model.Description, Mode=TwoWay}"
+                                            BoxEmptyTxt="{Binding DescEmptyBox}"/>
 
                     <controls:FormLabel Grid.Row="3" Grid.Column="0"
                                         Label="Start Date:"/>
                     <controls:FormTextInput Grid.Row="3" Grid.Column="1"
                                             Margin="5"
-                                            InputTxt="InputTxt description of this work requests."/>
+                                            BoxEmptyTxt="{Binding StartEmptyBox}"/>
 
                     <controls:FormLabel Grid.Row="4" Grid.Column="0"
                                         Label="Tests:"/>
                     <controls:FormTextInput Grid.Row="4" Grid.Column="1"
                                             Margin="5"
-                                            InputTxt="InputTxt description of this work requests."/>
+                                            BoxEmptyTxt="Date/calendar will go here"/>
                 </Grid>
-
                 <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                    <RadioButton Content="Submit"
-                                 FontWeight="Bold"
-                                 Height="40"
-                                 FontSize="22"
-                                 Style="{StaticResource MenuBtn}"/>
-                    <RadioButton Content="Reset"
-                                 FontWeight="Bold"
-                                 Height="40"
-                                 FontSize="22"
-                                 Style="{StaticResource MenuBtn}"/>
+                            HorizontalAlignment="Center"
+                            Background="{StaticResource FgOne}"
+                            Margin="10">
+                    <Button Content="Submit"
+                             FontWeight="Bold"
+                             Height="40"
+                             Background="{StaticResource FgTwo}"
+                             FontSize="22"
+                             Margin="10"
+                             Command="{Binding CreateDbModelCmd}"
+                             CommandParameter="{Binding Model}"/>
+                    <Button Content="Reset"
+                            FontWeight="Bold"
+                            Height="40"
+                            Margin="10"
+                            FontSize="22"
+                            Command="{Binding ResetDbModel}"/>
                 </StackPanel>
             </StackPanel>
         </Border>

@@ -1,54 +1,63 @@
 ﻿using LabAutomata.Db.models;
-using System.Collections.ObjectModel;
+using LabAutomata.Wpf.Library.adapter;
+using LabAutomata.Wpf.Library.commands;
+using LabAutomata.Wpf.Library.common;
+using LabAutomata.Wpf.Library.models;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-    public class CreateWorkRequestContentVm (IServiceProvider sp) : Base(sp) {
-        public string? Name {
-            get => _name;
+    public class CreateWorkRequestContentVm : Base {
+        public ICommand CreateDbModelCmd { get; }
+
+        public ICommand ResetDbModel { get; }
+
+        public WorkRequestDomainModel Model {
+            get => _model;
             set {
-                _name = value;
+                _model = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public string? Program {
-            get => _program;
-            set {
-                _program = value;
-                NotifyPropertyChanged();
-            }
+        /// <summary>
+        /// Resets the properties of the CreateWorkRequestContentVm to their default values.
+        /// </summary>
+        public override void Reset (object? sender) {
+            Model.Reset();
+            NotifyPropertyChanged(nameof(Model));
         }
 
-        public string? Description {
-            get => _description;
-            set {
-                _description = value;
-                NotifyPropertyChanged();
-            }
+        public string NameEmptyBox {
+            get => _nameEmptyBox;
+            set { _nameEmptyBox = value; NotifyPropertyChanged(); }
         }
 
-        public DateTime? StartDate {
-            get => _startDate;
-            set {
-                _startDate = value;
-                NotifyPropertyChanged();
-            }
+        public string ProgramEmptyBox {
+            get => _programEmptyBox;
+            set { _programEmptyBox = value; NotifyPropertyChanged(); }
         }
 
-        public ObservableCollection<Test> Tests { get; set; } = new();
-
-
-        public void Reset () {
-            Name = string.Empty;
-            Description = string.Empty;
-            Program = string.Empty;
-            StartDate = default;
-            Tests.Clear();
+        public string DescEmptyBox {
+            get => _descEmptyBox;
+            set { _descEmptyBox = value; NotifyPropertyChanged(); }
         }
 
-        private string? _name = string.Empty;
-        private string? _program = string.Empty;
-        private string? _description = string.Empty;
-        private DateTime? _startDate;
+        public string StartEmptyBox {
+            get => _startEmptyBox;
+            set { _startEmptyBox = value; NotifyPropertyChanged(); }
+        }
+
+
+        public CreateWorkRequestContentVm (IServiceProvider sp, IAdapter<Dispatcher> dA) : base(sp) {
+            CreateDbModelCmd = new CreateWrDbModelCmd(dA, null);
+            ResetDbModel = new Command(Reset);
+        }
+
+        private string _nameEmptyBox = "Enter a name";
+        private string _programEmptyBox = "Enter a program";
+        private string _descEmptyBox = "Enter a description for the work request";
+        private string _startEmptyBox = "Enter a start on date";
+        private WorkRequestDomainModel _model = new() { Tests = new HashSet<Test>() };
     }
 }

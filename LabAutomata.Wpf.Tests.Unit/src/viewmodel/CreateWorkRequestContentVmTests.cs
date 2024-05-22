@@ -1,11 +1,14 @@
 using FluentAssertions;
 using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.viewmodel;
-using NSubstitute;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class CreateWorkRequestContentVmTests {
-        private readonly CreateWorkRequestContentVm _sut = new(Substitute.For<IServiceProvider>());
+        private readonly CreateWorkRequestContentVm _sut; //= new(Substitute.For<IServiceProvider>());
+
+        public CreateWorkRequestContentVmTests () {
+            _sut.Model.Tests = new List<Test>();
+        }
 
         [Fact]
         public void PropertyChanged_ShouldFire_WhenNamePropertyChanged () {
@@ -13,10 +16,10 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             var monitor = _sut.Monitor();
 
             // act
-            _sut.Name = "New Name";
+            _sut.Model.Name = "New Name";
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Name);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.Name);
         }
 
         [Fact]
@@ -25,10 +28,10 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             var monitor = _sut.Monitor();
 
             // act
-            _sut.Program = "New Program";
+            _sut.Model.Program = "New Program";
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Program);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.Program);
         }
 
         [Fact]
@@ -38,10 +41,10 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             var monitor = _sut.Monitor();
 
             // act
-            _sut.Description = "New Description";
+            _sut.Model.Description = "New Description";
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Description);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.Description);
         }
 
         [Fact]
@@ -50,16 +53,16 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             var monitor = _sut.Monitor();
 
             // act
-            _sut.StartDate = DateTime.Now;
+            _sut.Model.StartDate = DateTime.Now;
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.StartDate);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.StartDate);
         }
 
         [Fact]
         public void Tests_ShouldNotBeNull_OnNewInstanceCreation () {
-            _sut.Tests.Should().NotBeNull();
-            _sut.Tests.Should().BeEmpty();
+            _sut.Model.Tests.Should().NotBeNull();
+            _sut.Model.Tests.Should().BeEmpty();
         }
 
         [Theory]
@@ -69,13 +72,13 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
         public void Tests_CountShouldBe_WhenTestsAreAdded (int count) {
             // arrange
             for (int i = 0; i < count; i++) {
-                _sut.Tests.Add(new SteadyStateTemperatureTest());
+                _sut.Model.Tests!.Add(new SteadyStateTemperatureTest());
             }
 
             // act
 
             // assert
-            _sut.Tests.Count.Should().Be(count);
+            _sut.Model.Tests!.Count.Should().Be(count);
         }
     }
 }
