@@ -51,11 +51,17 @@ namespace LabAutomata.Wpf.Library.common {
         /// <param name="parameter">object to pass to action _context</param>
         public async void Execute (object? parameter) {
             await _dispatcher.InvokeAsync(async () => {
-                IsRunning = true;
-                await Context.Invoke(parameter);
-                IsRunning = false;
+                try {
+                    IsRunning = true;
+                    await Context.Invoke(parameter);
+                    IsRunning = false;
 
-                CanExecute();
+                    CanExecute();
+                }
+                catch (Exception e) {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }, cancellationToken: _cancellationTokenSource.Token,
                 priority: DispatcherPriority.DataBind); // ConfigureAwait(false)?
         }
