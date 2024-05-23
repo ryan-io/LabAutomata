@@ -5,6 +5,7 @@ using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.models;
 using System.Windows.Input;
 using System.Windows.Threading;
+using LabAutomata.Db.repository;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
     public class CreateWorkRequestContentVm : Base {
@@ -49,8 +50,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         }
 
 
-        public CreateWorkRequestContentVm (IServiceProvider sp, IAdapter<Dispatcher> dA) : base(sp) {
-            CreateDbModelCmd = new CreateWrDbModelCmd(dA, null);
+        public CreateWorkRequestContentVm (IServiceProvider sp, IRepository<WorkRequest> repo, IAdapter<Dispatcher> dA) : base(sp) {
+            CreateDbModelCmd = new CreateWrDbModelCmd(dA, repo);
             ResetDbModel = new Command(Reset);
         }
 

@@ -24,7 +24,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
+        <StackPanel Grid.Column="1">
+            <Button Content="X"
+                    Command="{Binding CloseCmd}"/>
+        </StackPanel>
          <!-- Top-left logo; click to drag window-->
         <Border Grid.Row="1" 
                 Grid.Column="0"

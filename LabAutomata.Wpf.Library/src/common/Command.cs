@@ -61,7 +61,15 @@ namespace LabAutomata.Wpf.Library.common {
             CanExecuteFunc = canExecute;
         }
 
-        protected readonly Action<object?>? ContextAction;
+        /// <summary>
+        /// Protected command for derived classes to explicitly set the Context field
+        /// </summary>
+        /// <param name="canExecute">Delegate that is invoked before calling Execute to determine if Execute can run</param>
+        protected Command (Func<object?, bool>? canExecute = null) {
+	        CanExecuteFunc = canExecute;
+        }
+
+		protected Action<object?>? ContextAction;
         protected readonly Func<object?, bool>? CanExecuteFunc;
     }
 }

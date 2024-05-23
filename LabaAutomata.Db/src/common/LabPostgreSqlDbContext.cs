@@ -1,5 +1,6 @@
 ﻿using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.Extensions.Configuration;
 
 namespace LabAutomata.Db.common {
@@ -16,13 +17,7 @@ namespace LabAutomata.Db.common {
         public DbSet<Personnel> Personnels { get; set; }
         public PostgreSqlDbContext PostgreSqlDb => this;
 
-        internal LabPostgreSqlDbContext () : base() {
-
-        }
-
-        public LabPostgreSqlDbContext (IConfiguration config) : base(config) {
-
-        }
+        public LabPostgreSqlDbContext (IConfiguration config) : base(config) { }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);

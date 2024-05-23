@@ -6,7 +6,7 @@ namespace LabAutomata.Db.common {
         public LabPostgreSqlDbContext CreateDbContext (string[] args) {
             var config = new ConfigurationService().Create<LabPostgreSqlDbContexFactory>();
 
-            var ctx = new LabPostgreSqlDbContext() { Configuration = config };
+            var ctx = new LabPostgreSqlDbContext(config);
             return ctx;
 
         }

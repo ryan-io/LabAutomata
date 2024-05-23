@@ -1,9 +1,13 @@
-﻿using LabAutomata.Wpf.Library.data_structures;
+﻿using System.Windows.Input;
+using LabAutomata.Wpf.Library.commands;
+using LabAutomata.Wpf.Library.data_structures;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
     public class MainWindowVm : Base {
-        public Base? NavVm {
+	    public ICommand CloseCmd { get; set; }
+
+	    public Base? NavVm {
             get => _navVm;
             private set {
                 _navVm = value;
@@ -14,7 +18,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         public Base? FocusedVm {
             get => _focusedVm;
             set {
-                _focusedVm = value;
+                _focusedVm = value; 
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(SubFocusedVm));
             }
@@ -52,6 +56,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             NavVm = sp.GetService<NavigationVm>();
             FocusedVm = sp.GetService<HomeVm>();
             SubFocusedVm = sp.GetService<HomeContentVm>();
+            CloseCmd = new CloseAppCmd();
         }
 
         private Base? _focusedVm;
