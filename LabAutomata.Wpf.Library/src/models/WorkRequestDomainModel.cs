@@ -55,14 +55,13 @@ namespace LabAutomata.Wpf.Library.models {
             set {
                 _name = value;
 
-                NotifyPropertyChanged();
-
                 if (string.IsNullOrWhiteSpace(_name))
                     AddError(WpfLibC.Msg.WrDomainNameIsNull);
                 else
                     RemoveErrorsFor();
 
                 ObsGetErrors = GetErrorsList();
+                NotifyPropertyChanged();
             }
         }
 
@@ -73,7 +72,6 @@ namespace LabAutomata.Wpf.Library.models {
             get => _program;
             set {
                 _program = value;
-                NotifyPropertyChanged();
 
                 if (string.IsNullOrWhiteSpace(_program))
                     AddError(WpfLibC.Msg.WrDomainProgramIsNull);
@@ -81,6 +79,7 @@ namespace LabAutomata.Wpf.Library.models {
                     RemoveErrorsFor();
 
                 ObsGetErrors = GetErrorsList();
+                NotifyPropertyChanged();
             }
         }
 

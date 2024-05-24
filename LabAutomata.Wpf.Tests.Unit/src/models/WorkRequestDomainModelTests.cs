@@ -75,5 +75,21 @@ namespace LabAutomata.Wpf.Tests.Unit.models {
             _sut.StartDate.Should().Be(startDate);
             propertyName.Should().Be(nameof(_sut.StartDate));
         }
+
+        [Fact]
+        public void ObsGetErrors_Setter_Should_SetValueAndNotifyPropertyChanged () {
+            // Arrange
+            var propertyName = string.Empty;
+            var sut = new WorkRequestDomainModel();
+            sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+
+            // Act
+            var errors = new List<string> { "Error 1", "Error 2" };
+            sut.ObsGetErrors = errors;
+
+            // Assert
+            sut.ObsGetErrors.Should().BeEquivalentTo(errors);
+            propertyName.Should().Be(nameof(sut.ObsGetErrors));
+        }
     }
 }
