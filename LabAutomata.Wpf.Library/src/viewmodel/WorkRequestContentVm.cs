@@ -6,8 +6,11 @@ using LabAutomata.Wpf.Library.models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LabAutomata.Wpf.Library.viewmodel;
+public interface IWorkRequestContentVm {
+    ObservableCollection<WorkRequestDomainModel> WorkRequests { get; set; }
+}
 
-public class WorkRequestContentVm : Base {
+public class WorkRequestContentVm : Base, IWorkRequestContentVm {
     public ObservableCollection<WorkRequestDomainModel> WorkRequests { get; set; } = new();
 
     public override async Task LoadAsync (CancellationToken token = default) {
