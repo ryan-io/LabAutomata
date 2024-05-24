@@ -26,17 +26,17 @@ namespace LabAutomata.Wpf.Library.models
 			return Create();
 		}
 
-		/// <summary>
-		/// Allows the user to define mapping for creating a database model from a domain model
-		/// </summary>
-		/// <returns>A new instance of the db model</returns>
-		protected abstract T Create();
+        /// <summary>
+        /// Allows the user to define mapping for creating a database model from a domain model
+        /// </summary>
+        /// <returns>A new instance of the db model</returns>
+        public abstract T Create();
 
 		/// <summary>
 		/// Provide validation logic of the domain to database models
 		/// This method is expected to throw exceptions
 		/// </summary>
-		protected abstract void Validate();
+		public abstract void Validate();
 
 		protected void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
 			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -156,7 +156,7 @@ namespace LabAutomata.Wpf.Library.models
 
 			return true;
 		}
-
-		readonly Dictionary<string, List<string>> _errors = new();
+		
+        readonly Dictionary<string, List<string>> _errors = new();
 	}
 }

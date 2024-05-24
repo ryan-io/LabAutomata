@@ -15,7 +15,6 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
         {
 	        _sut = new CreateWorkRequestContentVm(
 		        Substitute.For<IServiceProvider>(),
-		        Substitute.For<IRepository<WorkRequest>>(),
 		        Substitute.For<IAdapter<Dispatcher>>());
         }
 

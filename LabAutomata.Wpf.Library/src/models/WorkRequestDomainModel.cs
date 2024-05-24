@@ -126,7 +126,7 @@ namespace LabAutomata.Wpf.Library.models {
         /// Creates a new instance of the <see cref="WorkRequest"/> class based on the properties of the work request domain model.
         /// </summary>
         /// <returns>A new instance of the <see cref="WorkRequest"/> class.</returns>
-        protected override WorkRequest Create () {
+        public override WorkRequest Create () {
             return new WorkRequest {
                 Name = this.Name,
                 Program = this.Program,
@@ -139,7 +139,7 @@ namespace LabAutomata.Wpf.Library.models {
         /// <summary>
         /// Validates the properties of the work request domain model.
         /// </summary>
-        protected override void Validate () {
+        public override void Validate () {
             if (string.IsNullOrWhiteSpace(Name))
                 throw new ArgumentNullException(Name);
 

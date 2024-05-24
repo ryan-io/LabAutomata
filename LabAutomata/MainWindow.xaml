@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:v="clr-namespace:LabAutomata.view"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
@@ -25,10 +26,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1">
-            <Button Content="X"
-                    Command="{Binding CloseCmd}"/>
+            <ui:Button Content="X"
+                       HorizontalAlignment="Right"
+                       Command="{Binding CloseCmd}"/>
         </StackPanel>
-         <!-- Top-left logo; click to drag window-->
+        <!-- Top-left logo; click to drag window-->
         <Border Grid.Row="1" 
                 Grid.Column="0"
                 BorderThickness="0"
@@ -53,12 +55,12 @@
             <ContentControl Content="{Binding MainNavVm}"/>
         </Border>
 
-         <!-- Secondary navigation-->
+        <!-- Secondary navigation-->
         <ContentControl Grid.Row="2" 
                         Grid.Column="0" 
                         Content="{Binding NavVm}"/>
-        
-         <!-- Primary content-->
+
+        <!-- Primary content-->
         <Border Grid.Row="2" 
                 Grid.Column="1"
                 BorderThickness="0"
@@ -72,7 +74,7 @@
             </StackPanel>
         </Border>
 
-         <!-- Secondary content-->
+        <!-- Secondary content-->
         <Border  Grid.Row="3" 
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
@@ -87,7 +89,7 @@
             </StackPanel>
         </Border>
 
-         <!-- Copyright/footer-->
+        <!-- Copyright/footer-->
         <v:Footer  Grid.Column="0"
                    Grid.Row="4"
                    Grid.ColumnSpan="2"

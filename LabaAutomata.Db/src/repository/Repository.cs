@@ -45,6 +45,16 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     }
 
     /// <summary>
+    /// Retrieves all entities.
+    /// </summary>
+    /// <param name="ct">The cancellation token (optional).</param>
+    /// <returns>A task representing the asynchronous operation. The task result is a collection of all retrieved entities.</returns>
+    public async Task<List<T>> GetAll(CancellationToken ct = default)
+    {
+       return await _set.ToListAsync(ct);
+    }
+
+    /// <summary>
     /// Updates or inserts an entity in the database.
     /// </summary>
     /// <param name="id">The ID of the entity to update or insert.</param>

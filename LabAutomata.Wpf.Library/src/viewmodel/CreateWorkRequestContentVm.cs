@@ -6,6 +6,7 @@ using LabAutomata.Wpf.Library.models;
 using System.Windows.Input;
 using System.Windows.Threading;
 using LabAutomata.Db.repository;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
@@ -44,9 +45,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             set { _startEmptyBox = value; NotifyPropertyChanged(); }
         }
 
-
-        public CreateWorkRequestContentVm (IServiceProvider sp, IRepository<WorkRequest> repo, IAdapter<Dispatcher> dA, ILogger? logger = default ) : base(sp) {
-            CreateDbModelCmd = new CreateWrDbModelCmd(dA, repo, logger);
+        public CreateWorkRequestContentVm (IServiceProvider sp, IAdapter<Dispatcher> dA, ILogger? logger = default ) : base(sp) {
+            CreateDbModelCmd = new CreateWrDbModelCmd(dA, sp.GetRequiredService<IRepository<WorkRequest>>(), logger);
             ResetDbModel = new Command(Reset);
         }
 

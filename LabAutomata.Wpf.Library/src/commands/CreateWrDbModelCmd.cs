@@ -9,7 +9,7 @@ namespace LabAutomata.Wpf.Library.commands;
 
 public class CreateWrDbModelCmd(
 	IAdapter<Dispatcher> dA,
-	IRepository<WorkRequest> repository,
+	IRepository<WorkRequest>? repository,
 	ILogger? logger = default,
 	Func<object?, bool>? canExecute = default)
 	: CreateDbModelCmd<WorkRequestDomainModel, WorkRequest>(dA, repository, logger, canExecute);

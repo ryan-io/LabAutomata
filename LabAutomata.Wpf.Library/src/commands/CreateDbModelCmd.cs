@@ -26,6 +26,7 @@ namespace LabAutomata.Wpf.Library.commands {
         /// <param name="canExecute">The optional function to determine if the command can be executed.</param>
         protected CreateDbModelCmd (IAdapter<Dispatcher> dA, IRepository<TModel> repository,  ILogger? logger = default, Func<object?, bool>? canExecute = null)
             : base(dA, logger, canExecute) {
+            ArgumentNullException.ThrowIfNull(repository, "Repository cannot be null - {repo}");
             _repository = repository;
             Context = Create;
         }

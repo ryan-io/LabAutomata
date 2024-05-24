@@ -23,6 +23,14 @@ public interface IRepository<T> where T : LabModel {
     /// <returns>A task representing the asynchronous operation. The task result is the retrieved entity, or null if the entity was not found.</returns>
     Task<T?> Get (int id, CancellationToken ct = default);
 
+
+    /// <summary>
+    /// Retrieves all entities.
+    /// </summary>
+    /// <param name="ct">The cancellation token (optional).</param>
+    /// <returns>A task representing the asynchronous operation. The task result is a collection of all retrieved entities.</returns>
+    Task<List<T>> GetAll (CancellationToken ct = default);
+
     /// <summary>
     /// Upserts an entity.
     /// </summary>
