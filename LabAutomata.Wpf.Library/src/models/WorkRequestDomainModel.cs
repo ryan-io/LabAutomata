@@ -1,13 +1,17 @@
-﻿using LabAutomata.Db.models;
+﻿using System.Collections.ObjectModel;
+using LabAutomata.Db.models;
+using LabAutomata.Wpf.Library.common;
 
 namespace LabAutomata.Wpf.Library.models {
     /// <summary>
     /// Represents a domain model for a work request.
     /// </summary>
     public class WorkRequestDomainModel : DomainModel<WorkRequest> {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WorkRequestDomainModel"/> class.
-        /// </summary>
+        private string? _name;
+        private string? _program;
+        private string? _description;
+        private DateTime? _startDate;
+
         public WorkRequestDomainModel () {
 
         }
@@ -24,12 +28,11 @@ namespace LabAutomata.Wpf.Library.models {
             string? program,
             string? description,
             DateTime? startDate,
-            ICollection<Test>? tests) {
+            ICollection<Test>? tests) : base() {
             Name = name;
             Program = program;
             Description = description;
             StartDate = startDate;
-            Tests = tests;
         }
 
         /// <summary>
@@ -46,27 +49,61 @@ namespace LabAutomata.Wpf.Library.models {
         /// <summary>
         /// Gets or sets the name of the work request.
         /// </summary>
-        public string? Name { get; set; }
+        public string? Name {
+            get => _name;
+            set {
+                _name = value;
+                NotifyPropertyChanged();
+
+                if (string.IsNullOrWhiteSpace(_name))
+                    AddError(WpfLibC.Msg.WrDomainNameIsNull);
+                else
+                    RemoveErrorsFor();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the program associated with the work request.
         /// </summary>
-        public string? Program { get; set; }
+        public string? Program {
+            get => _program;
+            set {
+                _program = value;
+                NotifyPropertyChanged();
+
+                if (string.IsNullOrWhiteSpace(_program))
+                    AddError(WpfLibC.Msg.WrDomainProgramIsNull);
+                else
+                    RemoveErrorsFor();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the description of the work request.
         /// </summary>
-        public string? Description { get; set; }
+        public string? Description {
+            get => _description;
+            set {
+                _description = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the start date of the work request.
         /// </summary>
-        public DateTime? StartDate { get; set; }
+        public DateTime? StartDate {
+            get => _startDate;
+            set {
+                _startDate = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the collection of tests associated with the work request.
         /// </summary>
-        public ICollection<Test>? Tests { get; set; }
+        public ObservableCollection<Test>? Tests { get; set; } = new();
 
         /// <summary>
         /// Creates a new instance of the <see cref="WorkRequest"/> class based on the properties of the work request domain model.

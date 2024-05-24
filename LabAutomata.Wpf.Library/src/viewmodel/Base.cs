@@ -105,7 +105,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 return;
 
             if (!_errors.ContainsKey(propertyName)) {
-                _errors.Add(propertyName, new List<string>());
+                _errors.Add(propertyName, []);
             }
 
             if (_errors[propertyName].Contains(error))
@@ -120,7 +120,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         ///  Removes a specific error from _errors for propertyName
         /// </summary>
         /// <param name="propertyName">Property to remove the error from</param>
-        protected void RemoveErrorsForProperty ([CallerMemberName] string? propertyName = default) {
+        protected void RemoveErrorsFor ([CallerMemberName] string? propertyName = default) {
             if (!_shouldNotifyErrors || string.IsNullOrWhiteSpace(propertyName))
                 return;
 

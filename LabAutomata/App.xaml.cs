@@ -53,6 +53,12 @@ namespace LabAutomata
 			MessageBox.Show($"Is Terminating: {e.IsTerminating}\r\n{e.ExceptionObject}");
 		}
 
+		// For DbContext: define user secrets for "LabDatabase"
+		//	Get assembly from App.xaml.xs
+		//	Create a new configuration builder
+		//  Invoke AddUserSecrets on the builder
+		//	Call c.Builder and register it as a service
+
 		List<Type> ConfigureServices(IServiceCollection sc)
 		{
 			var asm = Assembly.GetCallingAssembly();

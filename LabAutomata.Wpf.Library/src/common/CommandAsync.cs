@@ -1,6 +1,8 @@
-﻿using LabAutomata.Wpf.Library.adapter;
+﻿using System.Windows;
+using LabAutomata.Wpf.Library.adapter;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.common
 {
@@ -64,14 +66,17 @@ namespace LabAutomata.Wpf.Library.common
 					{
 						IsRunning = true;
 						await Context.Invoke(parameter);
-						IsRunning = false;
-
-						CanExecute();
 					}
 					catch (Exception e)
 					{
-						Console.WriteLine(e);
+						Logger?.LogError("Exception caught from async command: {error} - {inst}", e.Message, this);
+						MessageBox.Show($"{e.Message}");
 						throw;
+					}
+					finally
+					{
+						IsRunning = false;
+						RaiseCanExecuteChanged();
 					}
 				}, cancellationToken: _cancellationTokenSource.Token,
 				priority: DispatcherPriority.DataBind); // ConfigureAwait(false)?
@@ -90,7 +95,9 @@ namespace LabAutomata.Wpf.Library.common
 		/// <param name="dA">An adapter with a dispatcher; typically the applicaton's current</param>
 		/// <param name="context">Logic to run in the Execute method</param>
 		/// <param name="canExecute">Optional delegate logic to determine if this command can execute or now</param>
-		public CommandAsync(IAdapter<Dispatcher> dA, Func<object?, Task> context,
+		/// <param name="msgBox">Optional wrapper for singleton message box</param>
+		/// <param name="logger">Optional logger</param>
+		public CommandAsync (IAdapter<Dispatcher> dA, Func<object?, Task> context, ILogger? logger = default,
 			Func<object?, bool>? canExecute = null)
 		{
 			ArgumentNullException.ThrowIfNull(context);
@@ -106,15 +113,18 @@ namespace LabAutomata.Wpf.Library.common
 		/// Calling this constructor assumes you set the Context in the deriving constructor
 		/// </summary>
 		/// <param name="dA">An adapter with a dispatcher; typically the applicaton's current</param>
+		/// <param name="logger">Optional logger</param>
 		/// <param name="canExecute">Optional delegate logic to determine if this command can execute or now</param>
-		protected CommandAsync(IAdapter<Dispatcher> dA, Func<object?, bool>? canExecute = default)
+		protected CommandAsync (IAdapter<Dispatcher> dA, ILogger? logger = default, Func<object?, bool>? canExecute = default)
 		{
 			_dispatcher = dA.Get();
 			_canExecute = canExecute;
+			Logger = logger;
 			_cancellationTokenSource = new CancellationTokenSource();
 		}
 
 		protected Func<object?, Task> Context = null!;
+		protected readonly ILogger? Logger;
 		private readonly Func<object?, bool>? _canExecute;
 		private readonly Dispatcher _dispatcher;
 		private readonly CancellationTokenSource _cancellationTokenSource;

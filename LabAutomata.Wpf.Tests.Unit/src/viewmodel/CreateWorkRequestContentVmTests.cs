@@ -1,62 +1,71 @@
+using System.Windows.Threading;
 using FluentAssertions;
 using LabAutomata.Db.models;
+using LabAutomata.Db.repository;
+using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.viewmodel;
+using Microsoft.Extensions.Logging;
+using NSubstitute;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class CreateWorkRequestContentVmTests {
         private readonly CreateWorkRequestContentVm _sut; //= new(Substitute.For<IServiceProvider>());
 
-        public CreateWorkRequestContentVmTests () {
-            _sut.Model.Tests = new List<Test>();
+        public CreateWorkRequestContentVmTests ()
+        {
+	        _sut = new CreateWorkRequestContentVm(
+		        Substitute.For<IServiceProvider>(),
+		        Substitute.For<IRepository<WorkRequest>>(),
+		        Substitute.For<IAdapter<Dispatcher>>());
         }
 
         [Fact]
         public void PropertyChanged_ShouldFire_WhenNamePropertyChanged () {
             // arrange
-            var monitor = _sut.Monitor();
+            var monitor = _sut.Model.Monitor();
 
             // act
             _sut.Model.Name = "New Name";
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.Name);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Name);
         }
 
         [Fact]
         public void PropertyChanged_ShouldFire_WhenProgramPropertyChanged () {
             // arrange
-            var monitor = _sut.Monitor();
+            var monitor = _sut.Model.Monitor();
 
-            // act
-            _sut.Model.Program = "New Program";
+			// act
+			_sut.Model.Program = "New Program";
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.Program);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Program);
         }
 
         [Fact]
         public void PropertyChanged_ShouldFire_WhenDescriptionPropertyChanged () {
             // arrange
 
-            var monitor = _sut.Monitor();
+            var monitor = _sut.Model.Monitor();
 
-            // act
-            _sut.Model.Description = "New Description";
+			// act
+			_sut.Model.Description = "New Description";
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.Description);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.Description);
         }
 
         [Fact]
         public void PropertyChanged_ShouldFire_WhenStartDatePropertyChanged () {
             // arrange
-            var monitor = _sut.Monitor();
+            var monitor = _sut.Model.Monitor();
 
-            // act
-            _sut.Model.StartDate = DateTime.Now;
+			// act
+			_sut.Model.StartDate = DateTime.Now;
 
             // assert
-            monitor.Should().RaisePropertyChangeFor(vm => vm.Model.StartDate);
+            monitor.Should().RaisePropertyChangeFor(vm => vm.StartDate);
         }
 
         [Fact]

@@ -6,6 +6,7 @@ using LabAutomata.Wpf.Library.models;
 using System.Windows.Input;
 using System.Windows.Threading;
 using LabAutomata.Db.repository;
+using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
     public class CreateWorkRequestContentVm : Base {
@@ -13,13 +14,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         public ICommand ResetDbModel { get; }
 
-        public WorkRequestDomainModel Model {
-            get => _model;
-            set {
-                _model = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public WorkRequestDomainModel Model { get; set; } = new();
 
         /// <summary>
         /// Resets the properties of the CreateWorkRequestContentVm to their default values.
@@ -50,8 +45,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         }
 
 
-        public CreateWorkRequestContentVm (IServiceProvider sp, IRepository<WorkRequest> repo, IAdapter<Dispatcher> dA) : base(sp) {
-            CreateDbModelCmd = new CreateWrDbModelCmd(dA, repo);
+        public CreateWorkRequestContentVm (IServiceProvider sp, IRepository<WorkRequest> repo, IAdapter<Dispatcher> dA, ILogger? logger = default ) : base(sp) {
+            CreateDbModelCmd = new CreateWrDbModelCmd(dA, repo, logger);
             ResetDbModel = new Command(Reset);
         }
 
@@ -59,6 +54,5 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         private string _programEmptyBox = "Enter a program";
         private string _descEmptyBox = "Enter a description for the work request";
         private string _startEmptyBox = "Enter a start on date";
-        private WorkRequestDomainModel _model = new() { Tests = new HashSet<Test>() };
     }
 }

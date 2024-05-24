@@ -10,9 +10,9 @@ public abstract class BaseAsync : Base {
         IsDisposed = true;
     }
 
-    protected CancellationTokenSource Cancellation { get; set; } = new();
+    public CancellationTokenSource Cancellation { get; set; } = new();
 
-    protected virtual CancellationToken? CombineToken (CancellationToken? token) {
+    public virtual CancellationToken? CombineToken (CancellationToken? token) {
         ValidateCancellation();
 
         if (token == null)

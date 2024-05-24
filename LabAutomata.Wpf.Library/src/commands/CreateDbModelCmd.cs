@@ -4,6 +4,7 @@ using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.models;
 using System.Windows.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.commands {
     /// <summary>
@@ -21,9 +22,10 @@ namespace LabAutomata.Wpf.Library.commands {
         /// </summary>
         /// <param name="dA">The adapter for the dispatcher.</param>
         /// <param name="repository">The repository for the database model.</param>
+        /// <param name="logger">Optional logger</param>
         /// <param name="canExecute">The optional function to determine if the command can be executed.</param>
-        protected CreateDbModelCmd (IAdapter<Dispatcher> dA, IRepository<TModel> repository, Func<object?, bool>? canExecute = null)
-            : base(dA, canExecute) {
+        protected CreateDbModelCmd (IAdapter<Dispatcher> dA, IRepository<TModel> repository,  ILogger? logger = default, Func<object?, bool>? canExecute = null)
+            : base(dA, logger, canExecute) {
             _repository = repository;
             Context = Create;
         }
@@ -34,7 +36,9 @@ namespace LabAutomata.Wpf.Library.commands {
         /// <param name="obj">The object to create the database model from.</param>
         public async Task Create (object? obj) {
             if (obj is not TDomain dM) return;
-            await _repository.Create(dM.ToDbModel());
+
+			var status =  await _repository.Create(dM.ToDbModel());
+            Logger?.LogError("Creating DbModel status: {status} - {dM}", status, dM);
         }
     }
 }
