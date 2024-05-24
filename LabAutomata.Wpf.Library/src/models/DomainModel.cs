@@ -58,6 +58,21 @@ namespace LabAutomata.Wpf.Library.models
 			return _errors[propertyName];
 		}
 
+		/// <summary>
+		/// Gets an unordered list of all errors, independent of property
+		/// </summary>
+		/// <returns>A list containing all current errors</returns>
+		public List<string> GetErrorsList () {
+			List<string> errors = new();
+
+            foreach (var errorsValue in _errors.Values)
+            {
+                errors.AddRange(errorsValue);
+            }
+
+            return errors;
+        }
+
 		public bool HasErrors => _errors.Any();
 
 		/// <summary>
@@ -141,7 +156,6 @@ namespace LabAutomata.Wpf.Library.models
 
 			return true;
 		}
-
 
 		readonly Dictionary<string, List<string>> _errors = new();
 	}

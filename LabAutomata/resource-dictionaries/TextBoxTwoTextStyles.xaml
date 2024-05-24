@@ -14,15 +14,16 @@
                             <Grid>
                                 <Rectangle StrokeThickness="1"/>
                                 <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource AncestorType=controls:TextBoxTwoText}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="{TemplateBinding Property=FontSize}"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 VerticalContentAlignment="Center"
-                                 Padding="5"
-                                 CaretBrush="{StaticResource FgTwo}"
-                                 Foreground="{StaticResource FontOne}"
-                                 x:Name="SearchBox"/>
+                                     Text="{Binding RelativeSource={RelativeSource AncestorType=controls:TextBoxTwoText}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="{TemplateBinding Property=FontSize}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Center"
+                                     Padding="5"
+                                     CaretBrush="{StaticResource FgTwo}"
+                                     Foreground="{StaticResource FontOne}"
+                                     x:Name="SearchBox">
+                                </TextBox>
                                 <!-- IsHitTestVisible="False" allows us to click through the textblock-->
                                 <TextBlock IsHitTestVisible="False"
                                        Text="{Binding RelativeSource={RelativeSource AncestorType=controls:TextBoxTwoText}, Path=BoxEmptyText, UpdateSourceTrigger=PropertyChanged}"

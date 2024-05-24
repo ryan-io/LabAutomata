@@ -11,6 +11,7 @@ namespace LabAutomata.Wpf.Library.models {
         private string? _program;
         private string? _description;
         private DateTime? _startDate;
+        private List<string> _obsGetErrors;
 
         public WorkRequestDomainModel () {
 
@@ -53,12 +54,15 @@ namespace LabAutomata.Wpf.Library.models {
             get => _name;
             set {
                 _name = value;
+
                 NotifyPropertyChanged();
 
                 if (string.IsNullOrWhiteSpace(_name))
                     AddError(WpfLibC.Msg.WrDomainNameIsNull);
                 else
                     RemoveErrorsFor();
+
+                ObsGetErrors = GetErrorsList();
             }
         }
 
@@ -75,6 +79,8 @@ namespace LabAutomata.Wpf.Library.models {
                     AddError(WpfLibC.Msg.WrDomainProgramIsNull);
                 else
                     RemoveErrorsFor();
+
+                ObsGetErrors = GetErrorsList();
             }
         }
 
@@ -104,6 +110,18 @@ namespace LabAutomata.Wpf.Library.models {
         /// Gets or sets the collection of tests associated with the work request.
         /// </summary>
         public ObservableCollection<Test>? Tests { get; set; } = new();
+
+        /// <summary>
+        ///  Gets a list of errors
+        /// </summary>
+        /// <returns>A list of errors...</returns>
+        public List<string> ObsGetErrors {
+            get => _obsGetErrors;
+            set {
+                _obsGetErrors = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Creates a new instance of the <see cref="WorkRequest"/> class based on the properties of the work request domain model.

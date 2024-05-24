@@ -14,6 +14,8 @@
                      x:Key="BlueSelection"/>
     <SolidColorBrush Color="#ef98ae  " 
                      x:Key="RedSelection"/>
+    <SolidColorBrush Color="#ff383f"
+                     x:Key="ErrorBg"/>
     <SolidColorBrush Color="#252c3b  " 
                      x:Key="Button"/>
     <SolidColorBrush Color="#a0ced9  " 
