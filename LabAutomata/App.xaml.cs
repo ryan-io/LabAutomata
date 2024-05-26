@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.CodeDom;
+using System.Configuration;
 using System.Reflection;
 using LabAutomata.common;
 using LabAutomata.Db.common;
@@ -82,6 +83,7 @@ namespace LabAutomata
 
 			sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
 			sc.AddTransient<IRepository<WorkRequest>, WorkRequestRepository>();
+			sc.AddTransient<IRepository<Workstation>, WorkstationRepository>();
 
 			var logPath = AppC.GetRootPath() + @"\logging\log_.txt"; //TODO - change where the log path points to?
 			sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());

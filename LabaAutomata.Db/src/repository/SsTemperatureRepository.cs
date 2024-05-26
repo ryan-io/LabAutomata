@@ -14,4 +14,10 @@ namespace LabAutomata.Db.repository {
     /// </summary>
     public class SsTemperatureRepository (ILabPostgreSqlDbContext dbCtx)
         : Repository<SteadyStateTemperatureTest>(dbCtx, dbCtx.SsTempTests);
+
+    /// <summary>
+    /// Represents a repository for managing Work Request entities in the database.
+    /// </summary>
+    public class WorkstationRepository (ILabPostgreSqlDbContext dbCtx)
+        : Repository<Workstation>(dbCtx, dbCtx.Workstations);
 }

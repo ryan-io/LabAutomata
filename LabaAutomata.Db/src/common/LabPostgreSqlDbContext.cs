@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 namespace LabAutomata.Db.common {
     public interface ILabPostgreSqlDbContext {
         DbSet<WorkRequest> WorkRequests { get; }
+        DbSet<Workstation> Workstations { get; }
         DbSet<Personnel> Personnels { get; }
         DbSet<SteadyStateTemperatureTest> SsTempTests { get; }
         PostgreSqlDbContext PostgreSqlDb { get; }
@@ -13,6 +14,7 @@ namespace LabAutomata.Db.common {
 
     public class LabPostgreSqlDbContext : PostgreSqlDbContext, ILabPostgreSqlDbContext {
         public DbSet<WorkRequest> WorkRequests { get; set; }
+        public DbSet<Workstation> Workstations { get; set; }
         public DbSet<SteadyStateTemperatureTest> SsTempTests { get; set; }
         public DbSet<Personnel> Personnels { get; set; }
         public PostgreSqlDbContext PostgreSqlDb => this;

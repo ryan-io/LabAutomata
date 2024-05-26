@@ -7,9 +7,13 @@ using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.commands;
 
-public class CreateWrDbModelCmd(
-	IAdapter<Dispatcher> dA,
-	IRepository<WorkRequest>? repository,
-	ILogger? logger = default,
-	Func<object?, bool>? canExecute = default)
-	: CreateDbModelCmd<WorkRequestDomainModel, WorkRequest>(dA, repository, logger, canExecute);
+public class CreateWrDbModelCmd : CreateDbModelCmd<WorkRequestDomainModel, WorkRequest>
+{
+    public CreateWrDbModelCmd(IAdapter<Dispatcher> dA,
+        IRepository<WorkRequest>? repository,
+        Action? callback =default,
+        ILogger? logger = default,
+        Func<object?, bool>? canExecute = default) : base(dA, repository, callback, logger, canExecute)
+    {
+    }
+}

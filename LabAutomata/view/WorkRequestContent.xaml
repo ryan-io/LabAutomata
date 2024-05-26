@@ -3,23 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:LabAutomata.controls"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:viewmodel="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:controls="clr-namespace:LabAutomata.controls"
              x:Class="LabAutomata.view.WorkRequestContent"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewmodel:WorkRequestContentVm}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <controls:FocusedViewHeader HeaderText="Work Requests List"/>
-        <Border Grid.Row="1"
-                Margin="5 0 5 0"
-                Background="{StaticResource FgTwo}">
-            <ui:DataGrid ItemsSource="{Binding WorkRequests,Mode=TwoWay}"/>
-        </Border>
-    </Grid>
+    <StackPanel Orientation="Vertical" Margin="0 0 0 0">
+        <controls:TextBoxTwoText Height="30"
+                                 VerticalContentAlignment="Top"
+                                 Margin="0 0 0 10"
+                                 FontSize="16"
+                                 Style="{StaticResource TxtBoxTwoTextStyle}"
+                                 BoxEmptyText="Search for a work request"/>
+            <ItemsControl ItemsSource="{Binding WorkRequests, Mode=OneWay}"
+                          Focusable="False">
+                <!-- only affects the items that are currently visible -->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ui:Card  Padding="0"
+                          Margin="15 2 15 0"
+                          BorderBrush="{StaticResource FgOne}"
+                          BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="WR ID"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Margin="10 0 10 0"
+                                       VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1"  
+                                            FontSize="18"
+                                            Margin="0 0 10 0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="{StaticResource MahApps.Fonts.Family.Button}"
+                                            Text="{Binding Name}"/>
+                                <TextBlock  Grid.Column="2"
+                                        FontFamily="{StaticResource MahApps.Fonts.Family.Control}"
+                                        FontSize="18"
+                                        VerticalAlignment="Center"
+                                        FontStyle="Italic"
+                                        Text="{Binding Program}"/>
+                                <TextBlock  Grid.Column="3"
+                                        FontFamily="{StaticResource MahApps.Fonts.Family.Control}"
+                                        FontSize="18"
+                                        VerticalAlignment="Center"
+                                        FontStyle="Italic"
+                                        Text="{Binding Description}"/>
+                                <TextBlock  Grid.Column="4"
+                                        FontFamily="{StaticResource MahApps.Fonts.Family.Control}"
+                                        FontSize="18"
+                                        Margin="0 0 10 0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FontStyle="Italic"
+                                        Text="14 Tests"/>
+                            </Grid>
+                        </ui:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+    </StackPanel>
 </UserControl>

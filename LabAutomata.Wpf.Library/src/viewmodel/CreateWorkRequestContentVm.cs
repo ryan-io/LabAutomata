@@ -46,7 +46,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         }
 
         public CreateWorkRequestContentVm (IServiceProvider sp, IAdapter<Dispatcher> dA, ILogger? logger = default ) : base(sp) {
-            CreateDbModelCmd = new CreateWrDbModelCmd(dA, sp.GetRequiredService<IRepository<WorkRequest>>(), logger);
+            CreateDbModelCmd = new CreateWrDbModelCmd(dA, sp.GetRequiredService<IRepository<WorkRequest>>(), () => Reset(CreateDbModelCmd), logger);
             ResetDbModel = new Command(Reset);
         }
 

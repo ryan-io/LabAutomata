@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="300"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height= "400"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1">
@@ -74,6 +74,7 @@
             </StackPanel>
         </Border>
 
+
         <!-- Secondary content-->
         <Border  Grid.Row="3" 
                  Grid.Column="0"
@@ -82,11 +83,14 @@
                  CornerRadius="{StaticResource CornerRadius}"
                  Margin="10"
                  Background="{StaticResource FgTwo}">
-            <StackPanel Margin="10"
+            <ScrollViewer>
+                <StackPanel Margin="10"
                         Background="LightSlateGray">
-                <ContentControl Margin="10"
+                    <ContentControl Margin="10"
                                 Content="{Binding SubFocusedVm}"/>
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
         </Border>
 
         <!-- Copyright/footer-->

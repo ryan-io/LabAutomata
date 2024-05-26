@@ -29,8 +29,10 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was created successfully, false otherwise.</returns>
     public async Task<bool> Create (T entity, CancellationToken ct = default) {
+
         var entry = await _set.AddAsync(entity, ct);
         var saveSuccess = await _dbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
+
         return entry.State == EntityState.Unchanged && saveSuccess;
     }
 
@@ -49,9 +51,8 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// </summary>
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation. The task result is a collection of all retrieved entities.</returns>
-    public async Task<List<T>> GetAll(CancellationToken ct = default)
-    {
-       return await _set.ToListAsync(ct);
+    public async Task<List<T>> GetAll (CancellationToken ct = default) {
+        return await _set.ToListAsync(ct);
     }
 
     /// <summary>
