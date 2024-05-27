@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.Db.repository;
 
+
 /// <summary>
 /// Represents a generic repository for managing entities in the database.
 /// </summary>

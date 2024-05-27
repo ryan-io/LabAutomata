@@ -6,7 +6,13 @@ namespace LabAutomata.Db.repository;
 /// Represents a generic repository interface for CRUD operations on entities of type T.
 /// </summary>
 /// <typeparam name="T">The type of entity.</typeparam>
-public interface IRepository<T> where T : LabModel {
+public interface IRepository<T> : IRepositoryCreate<T>,
+                                  IRepositoryGet<T>,
+                                  IRepositoryUpsert<T>,
+                                  IRepositoryDelete<T> where T : LabModel {
+}
+
+public interface IRepositoryCreate<T> where T : LabModel {
     /// <summary>
     /// Creates a new entity.
     /// </summary>
@@ -14,7 +20,9 @@ public interface IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation. The task result is true if the entity was created successfully, false otherwise.</returns>
     Task<bool> Create (T entity, CancellationToken ct = default);
+}
 
+public interface IRepositoryGet<T> where T : LabModel {
     /// <summary>
     /// Retrieves an entity by its ID.
     /// </summary>
@@ -30,7 +38,9 @@ public interface IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation. The task result is a collection of all retrieved entities.</returns>
     Task<List<T>> GetAll (CancellationToken ct = default);
+}
 
+public interface IRepositoryUpsert<T> where T : LabModel {
     /// <summary>
     /// Upserts an entity.
     /// </summary>
@@ -39,7 +49,9 @@ public interface IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task<bool> Upsert (int id, T entity, CancellationToken ct = default);
+}
 
+public interface IRepositoryDelete<T> where T : LabModel {
     /// <summary>
     /// Deletes an entity.
     /// </summary>

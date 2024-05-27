@@ -9,6 +9,7 @@ namespace LabAutomata.Db.common {
         DbSet<Workstation> Workstations { get; }
         DbSet<Personnel> Personnels { get; }
         DbSet<SteadyStateTemperatureTest> SsTempTests { get; }
+        DbSet<SeedJson> SeedJson { get; }
         PostgreSqlDbContext PostgreSqlDb { get; }
     }
 
@@ -17,6 +18,7 @@ namespace LabAutomata.Db.common {
         public DbSet<Workstation> Workstations { get; set; }
         public DbSet<SteadyStateTemperatureTest> SsTempTests { get; set; }
         public DbSet<Personnel> Personnels { get; set; }
+        public DbSet<SeedJson> SeedJson { get; set; }
         public PostgreSqlDbContext PostgreSqlDb => this;
 
         public LabPostgreSqlDbContext (IConfiguration config) : base(config) { }
@@ -25,7 +27,8 @@ namespace LabAutomata.Db.common {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<SteadyStateTemperatureTest>(
-                e => {
+                e =>
+                {
                     e.HasMany(t => t.Data);
                 });
         }

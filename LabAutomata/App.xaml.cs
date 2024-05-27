@@ -84,6 +84,10 @@ namespace LabAutomata
 			sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
 			sc.AddTransient<IRepository<WorkRequest>, WorkRequestRepository>();
 			sc.AddTransient<IRepository<Workstation>, WorkstationRepository>();
+            sc.AddSingleton<IRepository<SeedJson>, SeedDataRepository>();
+
+			sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
+			sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 
 			var logPath = AppC.GetRootPath() + @"\logging\log_.txt"; //TODO - change where the log path points to?
 			sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
