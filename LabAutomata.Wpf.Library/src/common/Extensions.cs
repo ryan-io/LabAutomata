@@ -6,8 +6,8 @@ namespace LabAutomata.Wpf.Library.common {
             Type t = type;
 
             while (true) {
-                t = t.BaseType;
-                if (t == null) break;
+                t = t.BaseType!;
+                if (t == null!) break;
                 yield return t;
             }
         }

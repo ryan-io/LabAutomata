@@ -1,6 +1,5 @@
 ﻿using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.Extensions.Configuration;
 
 namespace LabAutomata.Db.common {
@@ -27,10 +26,16 @@ namespace LabAutomata.Db.common {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<SteadyStateTemperatureTest>(
-                e =>
-                {
+                e => {
                     e.HasMany(t => t.Data);
                 });
+
+            modelBuilder.Entity<Manufacturer>(etb => {
+                etb.HasMany(e => e.WorkRequests)
+                    .WithOne(e => e.Manufacturer)
+                    .HasForeignKey(e => e.ManufacturerId)
+                    .HasPrincipalKey(e => e.Id);
+            });
         }
     }
 }

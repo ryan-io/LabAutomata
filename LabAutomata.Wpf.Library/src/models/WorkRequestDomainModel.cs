@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using LabAutomata.Db.models;
+﻿using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.common;
+using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Library.models {
     /// <summary>
@@ -11,7 +11,7 @@ namespace LabAutomata.Wpf.Library.models {
         private string? _program;
         private string? _description;
         private DateTime? _startDate;
-        private List<string> _obsGetErrors;
+        private List<string> _obsGetErrors = new();
 
         public WorkRequestDomainModel () {
 
@@ -24,12 +24,10 @@ namespace LabAutomata.Wpf.Library.models {
         /// <param name="program">The program associated with the work request.</param>
         /// <param name="description">The description of the work request.</param>
         /// <param name="startDate">The start date of the work request.</param>
-        /// <param name="tests">The collection of tests associated with the work request.</param>
         public WorkRequestDomainModel (string? name,
             string? program,
             string? description,
-            DateTime? startDate,
-            ICollection<Test>? tests) : base() {
+            DateTime? startDate) : base() {
             Name = name;
             Program = program;
             Description = description;
@@ -108,7 +106,7 @@ namespace LabAutomata.Wpf.Library.models {
         /// <summary>
         /// Gets or sets the collection of tests associated with the work request.
         /// </summary>
-        public ObservableCollection<Test>? Tests { get; set; } = new();
+        public ObservableCollection<Test>? Tests { get; set; } = [];
 
         /// <summary>
         ///  Gets a list of errors

@@ -1,10 +1,10 @@
-using System.Collections.ObjectModel;
 using FluentAssertions;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.models;
 using LabAutomata.Wpf.Library.viewmodel;
 using NSubstitute;
+using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class WorkRequestContentVmTests {
@@ -30,7 +30,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             List<WorkRequestDomainModel> models = new();
 
             foreach (var wr in workRequests) {
-                var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.Tests);
+                var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started);
                 models.Add(wrdm);
             }
 
@@ -40,7 +40,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             // assert
             _sut.WorkRequests.Should().HaveCount(workRequests.Count);
             for (int i = 0; i < workRequests.Count; i++) {
-                var expected = new WorkRequestDomainModel(workRequests[i].Name, workRequests[i].Program, workRequests[i].Description, workRequests[i].Started, workRequests[i].Tests);
+                var expected = new WorkRequestDomainModel(workRequests[i].Name, workRequests[i].Program, workRequests[i].Description, workRequests[i].Started);
                 _sut.WorkRequests[i].Should().BeEquivalentTo(expected);
             }
         }
