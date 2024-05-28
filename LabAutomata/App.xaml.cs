@@ -74,6 +74,9 @@ namespace LabAutomata {
             sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
             sc.AddTransient<IRepository<WorkRequest>, WorkRequestRepository>();
             sc.AddTransient<IRepository<Workstation>, WorkstationRepository>();
+            sc.AddTransient<IRepository<Personnel>, PersonnelRepository>();
+            sc.AddTransient<IRepository<Location>, LocationRepository>();
+            sc.AddTransient<IRepository<TestType>, TestTypeRepository>();
             sc.AddSingleton<IRepository<SeedJson>, SeedDataRepository>();
             sc.AddSingleton<IRepository<Test>, TestRepository>();
             sc.AddSingleton<IRepository<Manufacturer>, ManufacturerRepository>();

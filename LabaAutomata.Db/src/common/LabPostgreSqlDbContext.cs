@@ -10,6 +10,8 @@ namespace LabAutomata.Db.common {
         DbSet<Test> Test { get; }
         DbSet<Manufacturer> Manufacturers { get; }
         DbSet<SeedJson> SeedJson { get; }
+        DbSet<TestType> TestType { get; }
+        DbSet<Location> Location { get; }
         PostgreSqlDbContext PostgreSqlDb { get; }
     }
 
@@ -18,6 +20,8 @@ namespace LabAutomata.Db.common {
         public DbSet<Workstation> Workstations { get; set; }
         public DbSet<Test> Test { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<TestType> TestType { get; set; }
+        public DbSet<Location> Location { get; set; }
         public DbSet<Personnel> Personnels { get; set; }
         public DbSet<SeedJson> SeedJson { get; set; }
         public PostgreSqlDbContext PostgreSqlDb => this;
@@ -29,6 +33,17 @@ namespace LabAutomata.Db.common {
 
             modelBuilder.Entity<Test>(etb => {
                 etb.HasIndex(e => e.InstanceId).IsUnique();
+                etb.HasMany(e => e.Workstations)
+                    .WithMany(e => e.Tests);
+                etb.HasOne(e => e.Location)
+                    .WithMany()
+                    .HasForeignKey(e => e.LocationId);
+                etb.HasOne(e => e.Type)
+                    .WithMany()
+                    .HasForeignKey(e => e.TypeId);
+                etb.HasOne(e => e.Operator)
+                    .WithMany()
+                    .HasForeignKey(e => e.OperatorId);
             });
 
             modelBuilder.Entity<Manufacturer>(etb => {
@@ -37,6 +52,10 @@ namespace LabAutomata.Db.common {
                     .HasForeignKey(e => e.ManufacturerId)
                     .HasPrincipalKey(e => e.Id)
                     .IsRequired();
+
+                etb.HasOne(e => e.Location)
+                    .WithMany()
+                    .HasForeignKey(e => e.LocationId);
             });
 
             modelBuilder.Entity<WorkRequest>(etb => {
@@ -47,7 +66,21 @@ namespace LabAutomata.Db.common {
             });
 
             modelBuilder.Entity<TemperaturePoint>(etb => {
-                etb.HasOne<SteadyStateTemperatureTest>().WithMany().HasForeignKey(e => e.InstanceId);
+                etb.HasOne<SteadyStateTemperatureTest>()
+                    .WithMany()
+                    .HasForeignKey(e => e.InstanceId);
+            });
+
+            modelBuilder.Entity<Workstation>(etb => {
+                etb.HasOne(e => e.Location)
+                    .WithMany()
+                    .HasForeignKey(e => e.LocationId);
+            });
+
+            modelBuilder.Entity<Personnel>(etb => {
+                etb.HasOne(e => e.Location)
+                    .WithMany()
+                    .HasForeignKey(e => e.LocationId);
             });
         }
     }

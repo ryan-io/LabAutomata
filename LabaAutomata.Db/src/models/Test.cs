@@ -1,5 +1,4 @@
-﻿using LabAutomata.Db.common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LabAutomata.Db.models {
     public class Test : LabModel {
@@ -10,10 +9,23 @@ namespace LabAutomata.Db.models {
 
         public WorkRequest WorkRequest { get; set; }
 
+        public ICollection<Workstation> Workstations { get; set; }
+
         [Required]
         public int InstanceId { get; set; }
 
+        [Required]
+        public int TypeId { get; set; }
+
         public TestType Type { get; set; }
+        [Required]
+        public int LocationId { get; set; }
+
+        public int OperatorId { get; set; }
+
+        public Personnel Operator { get; set; }
+
+        public Location Location { get; set; }
 
         public DateTime? Started { get; set; } = DateTime.UtcNow;
 
