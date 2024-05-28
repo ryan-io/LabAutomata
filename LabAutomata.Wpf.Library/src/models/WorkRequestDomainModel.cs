@@ -11,6 +11,7 @@ namespace LabAutomata.Wpf.Library.models {
         private string? _program;
         private string? _description;
         private DateTime? _startDate;
+        private int _testCount;
         private List<string> _obsGetErrors = new();
 
         public WorkRequestDomainModel () {
@@ -24,14 +25,17 @@ namespace LabAutomata.Wpf.Library.models {
         /// <param name="program">The program associated with the work request.</param>
         /// <param name="description">The description of the work request.</param>
         /// <param name="startDate">The start date of the work request.</param>
+        /// <param name="testCount">Number of tests in the work request</param>
         public WorkRequestDomainModel (string? name,
             string? program,
             string? description,
-            DateTime? startDate) : base() {
+            DateTime? startDate,
+            int testCount = 0) : base() {
             Name = name;
             Program = program;
             Description = description;
             StartDate = startDate;
+            TestCount = testCount;
         }
 
         /// <summary>
@@ -99,6 +103,18 @@ namespace LabAutomata.Wpf.Library.models {
             get => _startDate;
             set {
                 _startDate = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        /// <summary>
+        /// Gets or sets the test count of the work request.
+        /// </summary>
+        public int TestCount {
+            get => _testCount;
+            set {
+                _testCount = value;
                 NotifyPropertyChanged();
             }
         }

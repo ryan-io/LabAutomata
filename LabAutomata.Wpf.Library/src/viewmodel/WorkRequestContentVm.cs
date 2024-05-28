@@ -17,7 +17,7 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
         List<WorkRequestDomainModel> models = new();
 
         foreach (var wr in wrs) {
-            var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started);
+            var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.Tests.Count);
             models.Add(wrdm);
         }
 

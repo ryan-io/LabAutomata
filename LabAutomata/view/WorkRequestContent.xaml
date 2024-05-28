@@ -17,6 +17,7 @@
                                  FontSize="16"
                                  Style="{StaticResource TxtBoxTwoTextStyle}"
                                  BoxEmptyText="Search for a work request"/>
+        
             <ItemsControl ItemsSource="{Binding WorkRequests, Mode=OneWay}"
                           Focusable="False">
                 <!-- only affects the items that are currently visible -->
@@ -31,7 +32,7 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="500"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="WR ID"
@@ -41,7 +42,6 @@
                                        VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1"  
                                             FontSize="18"
-                                            Margin="0 0 10 0"
                                             VerticalAlignment="Center"
                                             FontFamily="{StaticResource MahApps.Fonts.Family.Button}"
                                             Text="{Binding Name}"/>
@@ -64,7 +64,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontStyle="Italic"
-                                        Text="14 Tests"/>
+                                        Text="{Binding TestCount}"/>
                             </Grid>
                         </ui:Card>
                     </DataTemplate>

@@ -3,15 +3,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LabAutomata.Db.models {
     public class Test : LabModel {
-        [Required, MaxLength(20)] public string? Name { get; set; }
+        [Required, MaxLength(100)] public string? Name { get; set; }
 
+        [Required]
+        public int WrId { get; set; }
+
+        public WorkRequest WorkRequest { get; set; }
+
+        [Required]
         public int InstanceId { get; set; }
 
         public TestType Type { get; set; }
 
-        public DateTime Started { get; set; } = DateTime.UtcNow;
+        public DateTime? Started { get; set; } = DateTime.UtcNow;
 
-        public DateTime Ended { get; set; }
+        public DateTime? Ended { get; set; }
 
         protected Test () {
             Name = "unnamed";

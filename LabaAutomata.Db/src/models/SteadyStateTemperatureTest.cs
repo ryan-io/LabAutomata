@@ -6,6 +6,7 @@ public class SteadyStateTemperatureTest : Test {
     public SteadyStateTemperatureTest () : base() {
 
     }
+
     internal SteadyStateTemperatureTest (int instanceId)
         : base(TestName, instanceId) { }
 

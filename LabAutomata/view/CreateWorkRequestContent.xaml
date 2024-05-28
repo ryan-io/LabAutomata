@@ -61,7 +61,7 @@
                                             BoxEmptyTxt="{Binding StartEmptyBox}"/>
 
                     <controls:FormLabel Grid.Row="4" Grid.Column="0"
-                                        Label="Tests:"/>
+                                        Label="Test:"/>
                     <controls:FormTextInput Grid.Row="4" Grid.Column="1"
                                             Margin="5"
                                             BoxEmptyTxt="Date/calendar will go here"/>

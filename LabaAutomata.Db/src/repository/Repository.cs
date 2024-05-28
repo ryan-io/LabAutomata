@@ -10,8 +10,8 @@ namespace LabAutomata.Db.repository;
 /// </summary>
 /// <typeparam name="T">The type of entity.</typeparam>
 public abstract class Repository<T> : IRepository<T> where T : LabModel {
-    private readonly DbSet<T> _set;
-    private readonly ILabPostgreSqlDbContext _dbCtx;
+    protected readonly DbSet<T> Set;
+    protected readonly ILabPostgreSqlDbContext DbCtx;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Repository{T}"/> class.
@@ -19,8 +19,8 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="dbCtx">The database context.</param>
     /// <param name="set">The DbSet for the entity type.</param>
     public Repository (ILabPostgreSqlDbContext dbCtx, DbSet<T> set) {
-        _dbCtx = dbCtx;
-        _set = set;
+        DbCtx = dbCtx;
+        Set = set;
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was created successfully, false otherwise.</returns>
     public async Task<bool> Create (T entity, CancellationToken ct = default) {
 
-        var entry = await _set.AddAsync(entity, ct);
-        var saveSuccess = await _dbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
+        var entry = await Set.AddAsync(entity, ct);
+        var saveSuccess = await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
 
         return entry.State == EntityState.Unchanged && saveSuccess;
     }
@@ -44,7 +44,7 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token.</param>
     /// <returns>The retrieved entity, or null if not found.</returns>
     public async Task<T?> Get (int id, CancellationToken ct = default) {
-        return await _set.FirstOrDefaultAsync(t => t.Id == id, cancellationToken: ct);
+        return await Set.FirstOrDefaultAsync(t => t.Id == id, cancellationToken: ct);
     }
 
     /// <summary>
@@ -52,8 +52,8 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// </summary>
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation. The task result is a collection of all retrieved entities.</returns>
-    public async Task<List<T>> GetAll (CancellationToken ct = default) {
-        return await _set.ToListAsync(ct);
+    public virtual async Task<List<T>> GetAll (CancellationToken ct = default) {
+        return await Set.ToListAsync(ct);
     }
 
     /// <summary>
@@ -64,16 +64,16 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was updated or inserted successfully, false otherwise.</returns>
     public async Task<bool> Upsert (int id, T entity, CancellationToken ct = default) {
-        var e = await _set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
+        var e = await Set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
 
         if (e != null) {
-            _dbCtx.PostgreSqlDb.Entry(e).CurrentValues.SetValues(entity);
+            DbCtx.PostgreSqlDb.Entry(e).CurrentValues.SetValues(entity);
         }
         else {
             await Create(entity, ct);
         }
 
-        return await _dbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
+        return await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
     }
 
     /// <summary>
@@ -83,14 +83,14 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was deleted successfully, false otherwise.</returns>
     public async Task<bool> Delete (int id, CancellationToken ct = default) {
-        var entity = await _set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
+        var entity = await Set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
 
         if (entity == null) {
             return false;
         }
 
-        _dbCtx.PostgreSqlDb.Attach(entity);
-        _set.Remove(entity);
-        return await _dbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
+        DbCtx.PostgreSqlDb.Attach(entity);
+        Set.Remove(entity);
+        return await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
     }
 }

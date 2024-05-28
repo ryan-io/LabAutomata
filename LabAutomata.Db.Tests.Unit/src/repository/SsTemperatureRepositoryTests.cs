@@ -5,7 +5,7 @@ using LabAutomata.Db.repository;
 using NSubstitute;
 
 namespace LabAutomata.Db.Tests.Unit.repository {
-    public class SsTemperatureRepositoryTests {
+    public class TestRepositoryTests {
         private readonly ILabPostgreSqlDbContext _dbContext = Substitute.For<ILabPostgreSqlDbContext>();
         private readonly IRepository<SteadyStateTemperatureTest> _repository = Substitute.For<IRepository<SteadyStateTemperatureTest>>();
 
