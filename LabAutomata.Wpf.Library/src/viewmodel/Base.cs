@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -27,7 +26,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             }
         }
 
-        public ILogger? Logger => ServiceProvider.GetService<ILogger>();
+        public ILogger? Logger { get; }
 
         /// <summary>
         ///  If instance should notify about errors, will check if errors collection contains any elements
@@ -76,10 +75,9 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="serviceProvider">Service provider for the application; singleton</param>
+        /// <param name="logger">Optional logger</param>
         /// <param name="shouldNotifyErrors">Default yes, will not add, remove, clear, or propogate events that pertain to errors</param>
-        public Base (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) {
-            ServiceProvider = serviceProvider;
+        public Base (ILogger? logger = default, bool shouldNotifyErrors = false) {
             _shouldNotifyErrors = shouldNotifyErrors;
             _errors = new Dictionary<string, List<string>>();
         }
@@ -170,16 +168,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             return true;
         }
 
-        // services registered through DI in the application
-        protected IServiceProvider ServiceProvider { get; }
-
-        protected Base (IServiceProvider sp, IServiceProvider serviceProvider) {
-            ServiceProvider = sp;
-            _shouldNotifyErrors = true;
-        }
-
         readonly bool _shouldNotifyErrors;
-        readonly Dictionary<string, List<string>> _errors = new();
+        readonly Dictionary<string, List<string>> _errors;
         private bool _hasLoaded;
     }
 }

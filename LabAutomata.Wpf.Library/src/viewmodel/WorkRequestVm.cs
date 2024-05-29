@@ -1,9 +1,8 @@
-﻿namespace LabAutomata.Wpf.Library.viewmodel {
-    public class WorkRequestVm : Base {
-        public WorkRequestVm (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) : base(serviceProvider, shouldNotifyErrors) {
-        }
+﻿using Microsoft.Extensions.Logging;
 
-        public WorkRequestVm (IServiceProvider sp, IServiceProvider serviceProvider) : base(sp, serviceProvider) {
+namespace LabAutomata.Wpf.Library.viewmodel {
+    public class WorkRequestVm : Base {
+        public WorkRequestVm (ILogger? logger = default, bool shouldNotifyErrors = false) : base(logger, shouldNotifyErrors) {
         }
     }
 }

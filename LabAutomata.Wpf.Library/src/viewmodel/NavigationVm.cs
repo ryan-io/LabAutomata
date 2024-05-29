@@ -1,5 +1,6 @@
 ﻿using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
+using Microsoft.Extensions.Logging;
 using System.Text;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
@@ -40,9 +41,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// <summary>
         /// Initializes a new instance of the <see cref="NavigationVm"/> class.
         /// </summary>
-        /// <param name="sp">The service provider.</param>
-        /// <param name="vmc">The view model collection.</param>
-        public NavigationVm (IServiceProvider sp) : base(sp) { }
+        /// <param name="logger">Optional logger.</param>
+        public NavigationVm (ILogger? logger = default) : base(logger, true) { }
 
         public override void Load () {
             // TODO: could refactor this into its own class

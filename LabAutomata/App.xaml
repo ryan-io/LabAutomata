@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="resource-dictionaries/Views.xaml"/>
                 <ResourceDictionary Source="resource-dictionaries/StaticResources.xaml"/>
                 <ResourceDictionary Source="resource-dictionaries/TextBoxTwoTextStyles.xaml"/>
+                <ResourceDictionary Source="resource-dictionaries/ScaleElementMouseOver.xaml"/>
 
                 <!-- WinUI -->
                 <ui:ThemesDictionary Theme="Light" />

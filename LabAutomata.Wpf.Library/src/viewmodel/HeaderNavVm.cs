@@ -1,5 +1,6 @@
 ﻿using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
+using Microsoft.Extensions.Logging;
 using System.Text;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
@@ -76,8 +77,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// <summary>
         /// Initializes a new instance of the <see cref="HeaderNavVm"/> class.
         /// </summary>
-        /// <param name="sp">The service provider.</param>
-        public HeaderNavVm (IServiceProvider sp) : base(sp) {
+        /// <param name="logger">Optional logger.</param>
+        public HeaderNavVm (ILogger? logger = default) : base(logger, true) {
 
         }
     }

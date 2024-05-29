@@ -1,10 +1,16 @@
 ﻿using FluentAssertions;
 using LabAutomata.Wpf.Library.viewmodel;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class HeaderNavVmTests {
-        private readonly HeaderNavVm _sut = new(Substitute.For<IServiceProvider>());
+        private readonly HeaderNavVm _sut;
+        private readonly ILogger _logger = Substitute.For<ILogger>();
+
+        public HeaderNavVmTests () {
+            _sut = new HeaderNavVm(_logger);
+        }
 
         [Fact]
         public void PropertyChanged_ShouldFire_WhenSubCurrentVmPropertyChanged () {
@@ -12,7 +18,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             var monitor = _sut.Monitor();
 
             // act
-            _sut.SubCurrentVm = new HomeVm(Substitute.For<IServiceProvider>());
+            _sut.SubCurrentVm = new HomeVm(_logger);
 
             // assert
             monitor.Should().RaisePropertyChangeFor(vm => vm.SubCurrentVm);
@@ -24,7 +30,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             var monitor = _sut.Monitor();
 
             // act
-            _sut.CurrentVm = new HomeVm(Substitute.For<IServiceProvider>());
+            _sut.CurrentVm = new HomeVm(_logger);
 
             // assert
             monitor.Should().RaisePropertyChangeFor(vm => vm.CurrentVm);

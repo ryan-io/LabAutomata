@@ -1,7 +1,7 @@
 ﻿using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.models;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Library.viewmodel;
@@ -9,9 +9,20 @@ public interface IWorkRequestContentVm {
     ObservableCollection<WorkRequestDomainModel> WorkRequests { get; set; }
 }
 
+/// <summary>
+/// Represents a view model for the work request content.
+/// </summary>
 public class WorkRequestContentVm : Base, IWorkRequestContentVm {
+    /// <summary>
+    /// Gets or sets the collection of work requests.
+    /// </summary>
     public ObservableCollection<WorkRequestDomainModel> WorkRequests { get; set; } = new();
 
+    /// <summary>
+    /// Loads the work requests asynchronously.
+    /// </summary>
+    /// <param name="token">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public override async Task LoadAsync (CancellationToken token = default) {
         var wrs = await _repository.GetAll(token);
         List<WorkRequestDomainModel> models = new();
@@ -25,9 +36,13 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
         WorkRequests = new ObservableCollection<WorkRequestDomainModel>(models);
     }
 
-    public WorkRequestContentVm (IServiceProvider serviceProvider, bool shouldNotifyErrors = false)
-        : base(serviceProvider, shouldNotifyErrors) {
-        _repository = serviceProvider.GetRequiredService<IRepository<WorkRequest>>();
+    /// <summary>
+    /// Initializes a new instance of the <see cref="WorkRequestContentVm"/> class.
+    /// </summary>
+    /// <param name="repository">The repository for work requests.</param>
+    /// <param name="logger">The logger.</param>
+    public WorkRequestContentVm (IRepository<WorkRequest> repository, ILogger? logger = default) : base(logger, true) {
+        _repository = repository;
     }
 
     private readonly IRepository<WorkRequest> _repository;

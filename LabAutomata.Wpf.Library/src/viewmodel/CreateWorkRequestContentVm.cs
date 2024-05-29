@@ -1,16 +1,30 @@
 ﻿using LabAutomata.Db.models;
+using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.commands;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.models;
+using Microsoft.Extensions.Logging;
 using System.Windows.Input;
 using System.Windows.Threading;
-using LabAutomata.Db.repository;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-    public class CreateWorkRequestContentVm : Base {
+    public interface ICreateWorkRequestContentVm {
+        ICommand CreateDbModelCmd { get; }
+        ICommand ResetDbModel { get; }
+        WorkRequestDomainModel Model { get; set; }
+        string NameEmptyBox { get; set; }
+        string ProgramEmptyBox { get; set; }
+        string DescEmptyBox { get; set; }
+        string StartEmptyBox { get; set; }
+
+        /// <summary>
+        /// Resets the properties of the CreateWorkRequestContentVm to their default values.
+        /// </summary>
+        void Reset (object? sender);
+    }
+
+    public class CreateWorkRequestContentVm : Base, ICreateWorkRequestContentVm {
         public ICommand CreateDbModelCmd { get; }
 
         public ICommand ResetDbModel { get; }
@@ -45,8 +59,9 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             set { _startEmptyBox = value; NotifyPropertyChanged(); }
         }
 
-        public CreateWorkRequestContentVm (IServiceProvider sp, IAdapter<Dispatcher> dA, ILogger? logger = default ) : base(sp) {
-            CreateDbModelCmd = new CreateWrDbModelCmd(dA, sp.GetRequiredService<IRepository<WorkRequest>>(), () => Reset(CreateDbModelCmd), logger);
+        /// There is a dependence on the actual repository
+        public CreateWorkRequestContentVm (IRepository<WorkRequest> repository, IAdapter<Dispatcher> dA, ILogger? logger = default) : base(logger) {
+            CreateDbModelCmd = new CreateWrDbModelCmd(dA, repository, () => Reset(CreateDbModelCmd), logger);
             ResetDbModel = new Command(Reset);
         }
 

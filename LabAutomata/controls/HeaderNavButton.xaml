@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:common="clr-namespace:LabAutomata.common"
              mc:Ignorable="d" 
              x:Name="MainWindow"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -11,16 +10,19 @@
         <TextBlock Text="{Binding ElementName=MainWindow, Path=ButtonId}"
                    HorizontalAlignment="Center"
                    Foreground="{StaticResource FontOne}"/>
-        <Image Source="{Binding ElementName=MainWindow, Path=Source}" 
-               Margin="10"
+
+        <StackPanel Style="{StaticResource ScaleEleMouseOver}">
+            <Image Source="{Binding ElementName=MainWindow, Path=Source}" 
+               Margin="10 10 10 30"
                Cursor="Hand"
                RenderOptions.BitmapScalingMode="Fant"
                Height="128" Width="128">
-            <Image.InputBindings>
-                <MouseBinding Gesture="LeftClick"
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick"
                               Command="{Binding ElementName=MainWindow, Path=Click}"
                               CommandParameter="{Binding ElementName=MainWindow, Path=ClickParameter}"/>
-            </Image.InputBindings>
-        </Image>
+                </Image.InputBindings>
+            </Image>
+        </StackPanel>
     </StackPanel>
 </UserControl>

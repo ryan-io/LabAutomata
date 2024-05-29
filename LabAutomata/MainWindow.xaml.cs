@@ -3,6 +3,8 @@ using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using System.Windows;
 using System.Windows.Input;
+using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 
 namespace LabAutomata {
     /// <summary>
@@ -25,6 +27,8 @@ namespace LabAutomata {
 
         private async void OnLoaded (object sender, RoutedEventArgs e) {
             try {
+                ApplicationThemeManager.Apply(ApplicationTheme.Dark, WindowBackdropType.Auto);
+
                 _logger?.LogInformation("Application has been loaded.");
                 HashSet<Task> tasks = new HashSet<Task>();
 

@@ -1,4 +1,3 @@
-using System.Windows.Threading;
 using FluentAssertions;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
@@ -6,16 +5,17 @@ using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class CreateWorkRequestContentVmTests {
-        private readonly CreateWorkRequestContentVm _sut; //= new(Substitute.For<IServiceProvider>());
+        private readonly CreateWorkRequestContentVm _sut;
+        private readonly ILogger _logger = Substitute.For<ILogger>();
+        private readonly IRepository<WorkRequest> _repository = Substitute.For<IRepository<WorkRequest>>();
+        private readonly IAdapter<Dispatcher> _adapter = Substitute.For<IAdapter<Dispatcher>>();
 
-        public CreateWorkRequestContentVmTests ()
-        {
-	        _sut = new CreateWorkRequestContentVm(
-		        Substitute.For<IServiceProvider>(),
-		        Substitute.For<IAdapter<Dispatcher>>());
+        public CreateWorkRequestContentVmTests () {
+            _sut = new CreateWorkRequestContentVm(_repository, _adapter, _logger);
         }
 
         [Fact]
@@ -35,8 +35,8 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             // arrange
             var monitor = _sut.Model.Monitor();
 
-			// act
-			_sut.Model.Program = "New Program";
+            // act
+            _sut.Model.Program = "New Program";
 
             // assert
             monitor.Should().RaisePropertyChangeFor(vm => vm.Program);
@@ -48,8 +48,8 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 
             var monitor = _sut.Model.Monitor();
 
-			// act
-			_sut.Model.Description = "New Description";
+            // act
+            _sut.Model.Description = "New Description";
 
             // assert
             monitor.Should().RaisePropertyChangeFor(vm => vm.Description);
@@ -60,8 +60,8 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             // arrange
             var monitor = _sut.Model.Monitor();
 
-			// act
-			_sut.Model.StartDate = DateTime.Now;
+            // act
+            _sut.Model.StartDate = DateTime.Now;
 
             // assert
             monitor.Should().RaisePropertyChangeFor(vm => vm.StartDate);

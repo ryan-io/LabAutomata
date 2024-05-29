@@ -1,9 +1,8 @@
-﻿namespace LabAutomata.Wpf.Library.viewmodel;
+﻿using Microsoft.Extensions.Logging;
+
+namespace LabAutomata.Wpf.Library.viewmodel;
 
 public class EquipmentItemsVm : Base {
-    public EquipmentItemsVm (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) : base(serviceProvider, shouldNotifyErrors) {
-    }
-
-    public EquipmentItemsVm (IServiceProvider sp, IServiceProvider serviceProvider) : base(sp, serviceProvider) {
+    public EquipmentItemsVm (ILogger? logger = default) : base(logger, true) {
     }
 }

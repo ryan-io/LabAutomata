@@ -1,4 +1,6 @@
-﻿namespace LabAutomata.Wpf.Library.viewmodel;
+﻿using Microsoft.Extensions.Logging;
+
+namespace LabAutomata.Wpf.Library.viewmodel;
 
 public abstract class BaseAsync : Base {
     public void Dispose () {
@@ -40,9 +42,6 @@ public abstract class BaseAsync : Base {
 
     bool IsDisposed { get; set; }
 
-    protected BaseAsync (IServiceProvider serviceProvider, bool shouldNotifyErrors = false) : base(serviceProvider, shouldNotifyErrors) {
-    }
-
-    protected BaseAsync (IServiceProvider sp, IServiceProvider serviceProvider) : base(sp, serviceProvider) {
+    protected BaseAsync (ILogger? logger = default, bool shouldNotifyErrors = false) : base(logger, shouldNotifyErrors) {
     }
 }
