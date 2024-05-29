@@ -9,20 +9,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-    public interface ICreateWorkRequestContentVm {
-        ICommand CreateDbModelCmd { get; }
-        ICommand ResetDbModel { get; }
-        WorkRequestDomainModel Model { get; set; }
-        string NameEmptyBox { get; set; }
-        string ProgramEmptyBox { get; set; }
-        string DescEmptyBox { get; set; }
-        string StartEmptyBox { get; set; }
-
-        /// <summary>
-        /// Resets the properties of the CreateWorkRequestContentVm to their default values.
-        /// </summary>
-        void Reset (object? sender);
-    }
 
     public class CreateWorkRequestContentVm : Base, ICreateWorkRequestContentVm {
         public ICommand CreateDbModelCmd { get; }
@@ -69,5 +55,24 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         private string _programEmptyBox = "Enter a program";
         private string _descEmptyBox = "Enter a description for the work request";
         private string _startEmptyBox = "Enter a start on date";
+    }
+
+    #region ABSTRACTION
+
+    public interface ICreateWorkRequestContentVm {
+        ICommand CreateDbModelCmd { get; }
+        ICommand ResetDbModel { get; }
+        WorkRequestDomainModel Model { get; set; }
+        string NameEmptyBox { get; set; }
+        string ProgramEmptyBox { get; set; }
+        string DescEmptyBox { get; set; }
+        string StartEmptyBox { get; set; }
+
+        /// <summary>
+        /// Resets the properties of the CreateWorkRequestContentVm to their default values.
+        /// </summary>
+        void Reset (object? sender);
+
+        #endregion
     }
 }
