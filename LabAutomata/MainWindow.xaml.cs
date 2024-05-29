@@ -12,11 +12,12 @@ namespace LabAutomata {
     /// </summary>
     public partial class MainWindow : Window {
 
-        public MainWindow (MainWindowVm vm, ILogger? logger = default) {
+        public MainWindow (MainWindowVm vm, IVmc vmc, ILogger? logger = default) {
             InitializeComponent();
             _vm = vm;
             _logger = logger;
             DataContext = _vm;
+            _vmc = vmc;
         }
 
         // no reason to move this logic into a view model... 
@@ -32,7 +33,8 @@ namespace LabAutomata {
                 _logger?.LogInformation("Application has been loaded.");
                 HashSet<Task> tasks = new HashSet<Task>();
 
-                foreach (var vm in Vmc.Instance.Values) {
+                foreach (var vm in _vmc.GetValues()) {
+                    await vm.LoadAsync();
                     vm.Load();
                     tasks.Add(vm.LoadAsync(_cancellation.Token));
                 }
@@ -49,6 +51,7 @@ namespace LabAutomata {
         private readonly MainWindowVm _vm;
         private readonly CancellationTokenSource _cancellation = new();
         private readonly ILogger? _logger;
+        private readonly IVmc _vmc;
 
 
     }

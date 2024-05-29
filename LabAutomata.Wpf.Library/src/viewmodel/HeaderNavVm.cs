@@ -62,11 +62,11 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 _sb.Append(vmId.Remove(vmId.Length - 2));
                 _sb.Append(SubVmSuffix);
 
-                SubCurrentVm = Vmc.Instance[_sb.ToString()];    // set SubCurrentVm first -> 
-                CurrentVm = Vmc.Instance[vmId];
+                SubCurrentVm = _vmc.Get(_sb.ToString());    // set SubCurrentVm first -> 
+                CurrentVm = _vmc.Get(vmId);
             });
 
-            CurrentVm = Vmc.Instance[nameof(HomeVm)];
+            CurrentVm = _vmc.Get(nameof(HomeVm));
         }
 
         private const string SubVmSuffix = "ContentVm";
@@ -78,8 +78,10 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// Initializes a new instance of the <see cref="HeaderNavVm"/> class.
         /// </summary>
         /// <param name="logger">Optional logger.</param>
-        public HeaderNavVm (ILogger? logger = default) : base(logger, true) {
-
+        public HeaderNavVm (IVmc vmc, ILogger? logger = default) : base(logger, true) {
+            _vmc = vmc;
         }
+
+        private readonly IVmc _vmc;
     }
 }

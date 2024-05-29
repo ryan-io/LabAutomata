@@ -35,10 +35,10 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         public Base? SubFocusedVm { get; set; }
 
         public override void Load () {
-            FocusedVm = Vmc.Instance[nameof(HomeVm)];
-            SubFocusedVm = Vmc.Instance[nameof(HomeContentVm)];
-            NavVm = Vmc.Instance[nameof(NavigationVm)];
-            MainNavVm = Vmc.Instance[nameof(HeaderNavVm)];
+            FocusedVm = _vmc.Get(nameof(HomeVm));
+            SubFocusedVm = _vmc.Get(nameof(HomeContentVm));
+            NavVm = _vmc.Get(nameof(NavigationVm));
+            MainNavVm = _vmc.Get(nameof(HeaderNavVm));
 
             if (MainNavVm == null) throw new NullReferenceException(NullMwVm);
 
@@ -52,12 +52,13 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             };
         }
 
-        public MainWindowVm (NavigationVm nvm, HomeVm hvm, HomeContentVm hcvm,
+        public MainWindowVm (IVmc vmc, NavigationVm nvm, HomeVm hvm, HomeContentVm hcvm,
             ILogger? logger = default) : base(logger, true) {
             NavVm = nvm;
             FocusedVm = hvm;
             SubFocusedVm = hcvm;
             CloseCmd = new CloseAppCmd();
+            _vmc = vmc;
         }
 
         private Base? _focusedVm;
@@ -65,5 +66,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         private Base? _headerNavVm;
 
         private const string NullMwVm = "Main window viemwodel cannot be null.";
+        private readonly IVmc _vmc;
     }
 }

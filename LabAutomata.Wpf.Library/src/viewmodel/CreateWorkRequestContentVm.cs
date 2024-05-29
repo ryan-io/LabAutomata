@@ -9,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-
     public class CreateWorkRequestContentVm : Base, ICreateWorkRequestContentVm {
         public ICommand CreateDbModelCmd { get; }
 

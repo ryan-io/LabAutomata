@@ -71,6 +71,7 @@ namespace LabAutomata {
                 sc.AddSingleton(vmType);
             }
 
+            sc.AddSingleton<IVmc, Vmc>();
             sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(Current));
             sc.AddTransient<IRepository<WorkRequest>, WorkRequestRepository>();
             sc.AddTransient<IRepository<Workstation>, WorkstationRepository>();
@@ -90,8 +91,10 @@ namespace LabAutomata {
         }
 
         private void BuildVmc (List<Type> vmTypes) {
+            var vmc = _serviceProvider.GetRequiredService<IVmc>();
+
             foreach (var vmType in vmTypes) {
-                Vmc.Instance.Add(vmType.Name, (_serviceProvider.GetService(vmType) as Base)!);
+                vmc.Set(vmType.Name, (_serviceProvider.GetService(vmType) as Base)!);
             }
         }
 

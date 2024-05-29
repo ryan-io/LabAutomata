@@ -41,8 +41,11 @@ namespace LabAutomata.Wpf.Library.viewmodel {
         /// <summary>
         /// Initializes a new instance of the <see cref="NavigationVm"/> class.
         /// </summary>
+        /// <param name="vmc">A key-value collection containing all viewmodels in the application</param>
         /// <param name="logger">Optional logger.</param>
-        public NavigationVm (ILogger? logger = default) : base(logger, true) { }
+        public NavigationVm (IVmc vmc, ILogger? logger = default) : base(logger, true) {
+            _vmc = vmc;
+        }
 
         public override void Load () {
             // TODO: could refactor this into its own class
@@ -56,14 +59,15 @@ namespace LabAutomata.Wpf.Library.viewmodel {
                 _sb.Append(vmId.Remove(vmId.Length - 2));
                 _sb.Append(SubVmSuffix);
 
-                CurrentVm = Vmc.Instance[vmId];
-                SubCurrentVm = Vmc.Instance[_sb.ToString()];
+                CurrentVm = _vmc.Get(vmId);
+                SubCurrentVm = _vmc.Get(_sb.ToString());
             });
 
-            CurrentVm = Vmc.Instance[nameof(HomeVm)];
+            CurrentVm = _vmc.Get(nameof(HomeVm));
         }
 
         private const string SubVmSuffix = "ContentVm";
         private readonly StringBuilder _sb = new();
+        private readonly IVmc _vmc;
     }
 }

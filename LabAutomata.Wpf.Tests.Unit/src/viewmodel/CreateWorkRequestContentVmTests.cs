@@ -2,6 +2,7 @@ using FluentAssertions;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
+using LabAutomata.Wpf.Library.data_structures;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -13,6 +14,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
         private readonly ILogger _logger = Substitute.For<ILogger>();
         private readonly IRepository<WorkRequest> _repository = Substitute.For<IRepository<WorkRequest>>();
         private readonly IAdapter<Dispatcher> _adapter = Substitute.For<IAdapter<Dispatcher>>();
+        private readonly IVmc _vmc = Substitute.For<IVmc>();
 
         public CreateWorkRequestContentVmTests () {
             _sut = new CreateWorkRequestContentVm(_repository, _adapter, _logger);
