@@ -1,8 +1,8 @@
-﻿using LabAutomata.Db.models;
+﻿using System.Collections.ObjectModel;
+using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.common;
-using System.Collections.ObjectModel;
 
-namespace LabAutomata.Wpf.Library.models {
+namespace LabAutomata.Wpf.Library.domain_models {
     /// <summary>
     /// Represents a domain model for a work request.
     /// </summary>

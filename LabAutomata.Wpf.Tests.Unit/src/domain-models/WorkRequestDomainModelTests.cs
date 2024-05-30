@@ -1,10 +1,11 @@
 ﻿using FluentAssertions;
+using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.common;
-using LabAutomata.Wpf.Library.models;
+using LabAutomata.Wpf.Library.domain_models;
+using System.Collections.ObjectModel;
 
-namespace LabAutomata.Wpf.Tests.Unit.models {
-    public class WorkRequestDomainModelTests
-    {
+namespace LabAutomata.Wpf.Tests.Unit.domain_models {
+    public class WorkRequestDomainModelTests {
         private readonly WorkRequestDomainModel _sut = new();
 
         [Fact]
@@ -90,6 +91,59 @@ namespace LabAutomata.Wpf.Tests.Unit.models {
             // Assert
             sut.ObsGetErrors.Should().BeEquivalentTo(errors);
             propertyName.Should().Be(nameof(sut.ObsGetErrors));
+        }
+
+        [Fact]
+        public void Reset_ShouldResetPropertiesToDefaultValues_WhenCalled () {
+            // Arrange
+            _sut.Name = "Test Name";
+            _sut.Program = "Test Program";
+            _sut.Description = "Test Description";
+            _sut.StartDate = DateTime.Now;
+            _sut.Tests = new ObservableCollection<Test> { new Test() };
+
+            // Act
+            _sut.Reset();
+
+            // Assert
+            _sut.Name.Should().BeEmpty();
+            _sut.Program.Should().BeEmpty();
+            _sut.Description.Should().BeEmpty();
+            _sut.StartDate.Should().BeNull();
+            _sut.Tests.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Create_ShouldReturnNewWorkRequestWithSameProperties_WhenCalled () {
+            // Arrange
+            _sut.Name = "Test Name";
+            _sut.Program = "Test Program";
+            _sut.Description = "Test Description";
+            _sut.StartDate = DateTime.Now;
+            _sut.Tests = new ObservableCollection<Test> { new Test() };
+
+            // Act
+            var workRequest = _sut.Create();
+
+            // Assert
+            workRequest.Name.Should().Be(_sut.Name);
+            workRequest.Program.Should().Be(_sut.Program);
+            workRequest.Description.Should().Be(_sut.Description);
+            workRequest.Started.Should().Be(_sut.StartDate);
+            workRequest.Tests.Should().BeEquivalentTo(_sut.Tests);
+        }
+
+        [Fact]
+        public void Validate_ShouldThrowArgumentNullException_WhenNameOrProgramAreNullOrWhiteSpace () {
+            // Arrange
+            _sut.Name = null;
+            _sut.Program = null;
+
+            // Act
+            Action act = () => _sut.Validate();
+
+            // Assert
+            act.Should().Throw<ArgumentNullException>();
         }
     }
 }

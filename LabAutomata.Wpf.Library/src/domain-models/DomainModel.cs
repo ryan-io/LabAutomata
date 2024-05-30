@@ -3,7 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabAutomata.Wpf.Library.models {
+namespace LabAutomata.Wpf.Library.domain_models {
     /// <summary>
     /// Represents an abstract base class for domain models.
     /// </summary>

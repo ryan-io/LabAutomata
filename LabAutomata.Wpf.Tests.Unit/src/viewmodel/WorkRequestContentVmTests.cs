@@ -1,10 +1,10 @@
 using FluentAssertions;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
-using LabAutomata.Wpf.Library.models;
 using LabAutomata.Wpf.Library.viewmodel;
 using NSubstitute;
 using System.Collections.ObjectModel;
+using LabAutomata.Wpf.Library.domain_models;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class WorkRequestContentVmTests {

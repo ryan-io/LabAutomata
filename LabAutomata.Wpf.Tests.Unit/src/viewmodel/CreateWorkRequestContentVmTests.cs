@@ -7,6 +7,7 @@ using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using System.Windows.Threading;
+using SteadyStateTemperatureTest = LabAutomata.Db.models.SteadyStateTemperatureTest;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class CreateWorkRequestContentVmTests {

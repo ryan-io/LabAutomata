@@ -1,5 +1,5 @@
 ﻿using LabAutomata.Db.models;
-using LabAutomata.Wpf.Library.models;
+using LabAutomata.Wpf.Library.domain_models;
 
 namespace LabAutomata.Wpf.Library.common {
     public static class ModelConvert {

@@ -7,9 +7,9 @@ namespace LabAutomata.Db.models {
         [Required]
         public int WrId { get; set; }
 
-        public WorkRequest WorkRequest { get; set; }
+        public WorkRequest? WorkRequest { get; set; }
 
-        public ICollection<Workstation> Workstations { get; set; }
+        public ICollection<Workstation>? Workstations { get; set; }
 
         [Required]
         public int InstanceId { get; set; }
@@ -17,32 +17,34 @@ namespace LabAutomata.Db.models {
         [Required]
         public int TypeId { get; set; }
 
-        public TestType Type { get; set; }
+        [Required]
+        public TestType? Type { get; set; }
+
         [Required]
         public int LocationId { get; set; }
 
         public int OperatorId { get; set; }
 
-        public Personnel Operator { get; set; }
+        public Personnel? Operator { get; set; }
 
-        public Location Location { get; set; }
+        public Location? Location { get; set; }
 
         public DateTime? Started { get; set; } = DateTime.UtcNow;
 
         public DateTime? Ended { get; set; }
 
-        protected Test () {
+        public Test () {
             Name = "unnamed";
         }
 
-        protected Test (Test test) {
+        public Test (Test test) {
             Name = test.Name;
             InstanceId = test.InstanceId;
             Started = test.Started;
             Ended = test.Ended;
         }
 
-        protected Test (string name, int instanceId) {
+        public Test (string name, int instanceId) {
             Name = name;
             InstanceId = instanceId;
         }

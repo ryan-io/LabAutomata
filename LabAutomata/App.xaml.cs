@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
+using SteadyStateTemperatureTest = LabAutomata.Db.repository.SteadyStateTemperatureTest;
 
 namespace LabAutomata {
     /// <summary>
@@ -79,7 +80,7 @@ namespace LabAutomata {
             sc.AddTransient<IRepository<Location>, LocationRepository>();
             sc.AddTransient<IRepository<TestType>, TestTypeRepository>();
             sc.AddSingleton<IRepository<SeedJson>, SeedDataRepository>();
-            sc.AddSingleton<IRepository<Test>, TestRepository>();
+            sc.AddSingleton<IRepository<Test>, SteadyStateTemperatureTest>();
             sc.AddSingleton<IRepository<Manufacturer>, ManufacturerRepository>();
 
             sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());

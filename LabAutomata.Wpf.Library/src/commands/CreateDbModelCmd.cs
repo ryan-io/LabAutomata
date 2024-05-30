@@ -2,8 +2,8 @@
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.common;
-using LabAutomata.Wpf.Library.models;
 using System.Windows.Threading;
+using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
 
 namespace LabAutomata.Wpf.Library.commands {

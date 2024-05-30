@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using LabAutomata.Db.common;
-using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
+using SteadyStateTemperatureTest = LabAutomata.Db.models.SteadyStateTemperatureTest;
 
 namespace LabAutomata.Db.service {
     /// <summary>

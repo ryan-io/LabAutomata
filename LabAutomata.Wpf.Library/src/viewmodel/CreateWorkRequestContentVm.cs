@@ -3,10 +3,10 @@ using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.commands;
 using LabAutomata.Wpf.Library.common;
-using LabAutomata.Wpf.Library.models;
 using Microsoft.Extensions.Logging;
 using System.Windows.Input;
 using System.Windows.Threading;
+using LabAutomata.Wpf.Library.domain_models;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
     public class CreateWorkRequestContentVm : Base, ICreateWorkRequestContentVm {

@@ -27,7 +27,7 @@
                                       Margin="15 0 15 2"
                                       Background="{StaticResource FgOne}"
                                       BorderThickness="1">
-                        <StackPanel Background="{StaticResource FgTwo}">
+                        <StackPanel Background="{StaticResource fgt}">
                             <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>

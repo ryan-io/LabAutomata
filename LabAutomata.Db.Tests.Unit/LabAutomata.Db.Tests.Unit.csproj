@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LabaAutomata.Db\LabAutomata.Db.csproj" />
   </ItemGroup>
 
