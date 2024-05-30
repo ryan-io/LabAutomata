@@ -29,7 +29,7 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="entity">The entity to create.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was created successfully, false otherwise.</returns>
-    public async Task<bool> Create (T entity, CancellationToken ct = default) {
+    public virtual async Task<bool> Create (T entity, CancellationToken ct = default) {
 
         var entry = await Set.AddAsync(entity, ct);
         var saveSuccess = await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
@@ -43,7 +43,7 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="id">The ID of the entity to retrieve.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>The retrieved entity, or null if not found.</returns>
-    public async Task<T?> Get (int id, CancellationToken ct = default) {
+    public virtual async Task<T?> Get (int id, CancellationToken ct = default) {
         return await Set.FirstOrDefaultAsync(t => t.Id == id, cancellationToken: ct);
     }
 
@@ -63,7 +63,7 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="entity">The entity to upsert.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was updated or inserted successfully, false otherwise.</returns>
-    public async Task<bool> Upsert (int id, T entity, CancellationToken ct = default) {
+    public virtual async Task<bool> Upsert (int id, T entity, CancellationToken ct = default) {
         var e = await Set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
 
         if (e != null) {
@@ -82,7 +82,7 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="id">The ID of the entity to delete.</param>
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was deleted successfully, false otherwise.</returns>
-    public async Task<bool> Delete (int id, CancellationToken ct = default) {
+    public virtual async Task<bool> Delete (int id, CancellationToken ct = default) {
         var entity = await Set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
 
         if (entity == null) {

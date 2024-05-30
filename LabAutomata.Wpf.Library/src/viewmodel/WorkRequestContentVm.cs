@@ -1,8 +1,8 @@
 ﻿using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
+using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
-using LabAutomata.Wpf.Library.domain_models;
 
 namespace LabAutomata.Wpf.Library.viewmodel;
 public interface IWorkRequestContentVm {
@@ -29,7 +29,7 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 
         foreach (var wr in wrs) {
             var count = wr.Tests?.Count ?? 0;
-            var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.WrId, count);
+            var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.WrId, wr.Manufacturer, count);
             models.Add(wrdm);
         }
 

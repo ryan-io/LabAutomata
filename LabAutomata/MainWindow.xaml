@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height= "400"/>
+            <RowDefinition Height= "Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!-- Top-left logo; click to drag window-->
@@ -76,14 +76,11 @@
                  CornerRadius="{StaticResource CornerRadius}"
                  Margin="10"
                  Background="{StaticResource FgTwo}">
-            <ScrollViewer>
                 <StackPanel Margin="10"
                         Background="LightSlateGray">
                     <ContentControl Margin="10"
                                 Content="{Binding SubFocusedVm}"/>
                 </StackPanel>
-            </ScrollViewer>
-
         </Border>
 
         <!-- Copyright/footer-->

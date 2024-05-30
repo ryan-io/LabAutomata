@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using LabAutomata.Db.models;
+﻿using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.common;
+using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Library.domain_models {
     /// <summary>
@@ -12,6 +12,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
         private string? _description;
         private DateTime? _startDate;
         private int _testCount;
+        private Manufacturer _manufacturer;
         private List<string> _obsGetErrors = new();
         private int _wrId;
 
@@ -33,6 +34,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
             string? description,
             DateTime? startDate,
             int wrId,
+            Manufacturer manufacturer,
             int testCount = 0) : base() {
             Name = name;
             Program = program;
@@ -40,6 +42,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
             StartDate = startDate;
             TestCount = testCount;
             WrId = wrId;
+            Manufacturer = manufacturer;
         }
 
         /// <summary>
@@ -108,6 +111,14 @@ namespace LabAutomata.Wpf.Library.domain_models {
         public int WrId {
             get => _wrId;
             set => _wrId = value;
+        }
+
+        public Manufacturer Manufacturer {
+            get => _manufacturer;
+            set {
+                _manufacturer = value;
+                NotifyPropertyChanged();
+            }
         }
 
 

@@ -10,76 +10,67 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewmodel:WorkRequestContentVm}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Orientation="Vertical" Margin="0 0 0 0">
-        <controls:TextBoxTwoText Height="30"
-                                 VerticalContentAlignment="Top"
-                                 Margin="0 0 0 10"
-                                 FontSize="16"
-                                 Style="{StaticResource TxtBoxTwoTextStyle}"
-                                 BoxEmptyText="Search for a work request"/>
+    <StackPanel Height="400" HorizontalAlignment="Center">
+        <ui:Card Padding="0"
+                 Margin="15 0 15 2"
+                 Foreground="{StaticResource FgOne}"
+                 Background="{StaticResource FgOne}"
+                 BorderBrush="{StaticResource FgOne}" 
+                 BorderThickness="1">
+            <ListView ItemsSource="{Binding WorkRequests}" 
+                  Height="400"
+                  Focusable="True" 
+                  Background="Transparent"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="FontSize" Value="19"/>
+                        <Setter Property="Background" Value="{StaticResource FgTwo}"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                            <controls:DataGridHeader Text="{TemplateBinding Content}"
+                                                                 Background="{StaticResource FgOne}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="WR ID"
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding WrId}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name"
+                                Width="200"
+                                DisplayMemberBinding="{Binding Name}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Manufacturer"
+                                Width="200"
+                                DisplayMemberBinding="{Binding Manufacturer.Name}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Program"
+                                Width="200"
+                                DisplayMemberBinding="{Binding Program}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Description"
+                                DisplayMemberBinding="{Binding Description}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Test Count"
+                                Width="Auto"
+                                DisplayMemberBinding="{Binding TestCount}">
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ui:Card>
 
-        <ItemsControl ItemsSource="{Binding WorkRequests, Mode=OneWay}"
-                          Focusable="False" >
-            <!-- only affects the items that are currently visible -->
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ui:CardExpander Padding="0"
-                                      Margin="15 0 15 2"
-                                      Background="{StaticResource FgOne}"
-                                      BorderThickness="1">
-                        <StackPanel Background="{StaticResource fgt}">
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="500"/>
-                                    <ColumnDefinition Width="50"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="55"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Text="{Binding WrId }"
-                                       FontSize="18"
-                                       Foreground="{StaticResource FgOne}"
-                                       FontWeight="SemiBold"
-                                       Margin="10 0 10 0"
-                                       VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="1"  
-                                            FontSize="18"
-                                            Foreground="{StaticResource FgOne}"
-                                            VerticalAlignment="Center"
-                                            FontFamily="{StaticResource MahApps.Fonts.Family.Button}"
-                                            Text="{Binding Name}"/>
-                                <TextBlock  Grid.Column="2"
-                                        FontFamily="{StaticResource MahApps.Fonts.Family.Control}"
-                                        FontSize="18"
-                                        Foreground="{StaticResource FgOne}"
-                                        VerticalAlignment="Center"
-                                        FontStyle="Italic"
-                                        Text="{Binding Program}"/>
-                                <TextBlock  Grid.Column="3"
-                                        FontFamily="{StaticResource MahApps.Fonts.Family.Control}"
-                                        FontSize="18"
-                                        Foreground="{StaticResource FgOne}"
-                                        VerticalAlignment="Center"
-                                        FontStyle="Italic"
-                                        Text="{Binding Description}"/>
-                                <TextBlock  Grid.Column="4"
-                                        FontFamily="{StaticResource MahApps.Fonts.Family.Control}"
-                                        FontSize="18"
-                                        Foreground="{StaticResource FgOne}"
-                                        Margin="0 0 10 0"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        FontStyle="Italic"
-                                        Text="{Binding TestCount}"/>
-                            </Grid>
-                        </StackPanel>
-                    </ui:CardExpander>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
     </StackPanel>
 </UserControl>
