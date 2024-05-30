@@ -11,13 +11,29 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <controls:FocusedViewHeader HeaderText="Welcome to Lab Automata!" />
-        <Border Grid.Row="1"
-                Margin="5 0 5 0"
-                Background="{StaticResource FgTwo}">
-            <TextBlock FontSize="24" >
-                Here we can define our data layout for how each primary view looks.
-            </TextBlock>
-        </Border>
+        <controls:FocusedViewHeader HeaderText="News" />
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <controls:ContentCard 
+                Margin="5 0 5 10">
+                <controls:ContentCard.CardContent>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="24" >
+                    Congratulations on OEM Program 1 on a successful validation of work request WorkRequest1!
+                        </TextBlock>
+                    </StackPanel>
+                </controls:ContentCard.CardContent>
+            </controls:ContentCard>
+
+            <controls:ContentCard 
+                Margin="5 0 5 0">
+                <controls:ContentCard.CardContent>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="24" >
+                            We can add another message to the home screen here.
+                        </TextBlock>
+                    </StackPanel>
+                </controls:ContentCard.CardContent>
+            </controls:ContentCard>
+        </StackPanel>
     </Grid>
 </UserControl>

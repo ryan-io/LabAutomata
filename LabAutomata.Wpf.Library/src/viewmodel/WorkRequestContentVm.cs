@@ -29,7 +29,7 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 
         foreach (var wr in wrs) {
             var count = wr.Tests?.Count ?? 0;
-            var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, count);
+            var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.WrId, count);
             models.Add(wrdm);
         }
 

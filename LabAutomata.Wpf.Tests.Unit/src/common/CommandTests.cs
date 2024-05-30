@@ -35,14 +35,14 @@ public class CommandTests {
     }
 
     [Fact]
-    public void Execute_ShouldInvokeOnExecutedCallback_WhenAndExecutedCallbackProvided () {
+    public void Execute_ShouldNotInvokeOnExecutedCallback_WhenNoContextProvided () {
         var wasCallbackInvoked = false;
-        var command = new Command(null, null);
+        var command = new Command(null);
         command.OnExecutedCallback += () => wasCallbackInvoked = true;
 
         command.Execute(null);
 
-        wasCallbackInvoked.Should().BeTrue();
+        wasCallbackInvoked.Should().BeFalse();
     }
 
     [Fact]
@@ -52,6 +52,31 @@ public class CommandTests {
         Action act = () => command.RaiseCanExecuteChanged();
 
         act.Should().NotThrow();
+    }
+
+
+    [Fact]
+    public void CanExecute_ShouldReturnFalse_WhenCanExecuteFuncReturnsFalse () {
+        var canExecuteFunc = Substitute.For<Func<object?, bool>>();
+        canExecuteFunc.Invoke(Arg.Any<object>()).Returns(false);
+
+        var command = new Command(null, canExecuteFunc);
+
+        command.CanExecute(null).Should().BeFalse();
+
+        canExecuteFunc.Received(1).Invoke(Arg.Any<object>());
+    }
+
+
+    [Fact]
+    public void Execute_ShouldNotInvokeOnExecutedCallback_WhenCanExecuteReturnsFalse () {
+        var wasCallbackInvoked = false;
+        var command = new Command(null, _ => false);
+        command.OnExecutedCallback += () => wasCallbackInvoked = true;
+
+        command.Execute(null);
+
+        wasCallbackInvoked.Should().BeFalse();
     }
 
 }

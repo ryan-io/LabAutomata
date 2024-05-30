@@ -9,7 +9,8 @@
     <StackPanel>
         <controls:FocusedViewHeader HeaderText="Home"/>
         <StackPanel Orientation="Horizontal">
-            <Border Width="400"
+            <StackPanel Style="{StaticResource ScaleEleMouseOver}">
+            <Border Width="250"
                     Height="200">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
@@ -22,31 +23,56 @@
                 <Border.Clip>
                     <RectangleGeometry RadiusX="10" 
                                        RadiusY="10"
-                                       Rect="0,0,400,200">
+                                       Rect="0,0,250,200">
 
                     </RectangleGeometry>
                 </Border.Clip>
                 <Grid>
                     <StackPanel>
-                        <TextBlock Text="Placerholder text&#x0a;with line break"
+                        <TextBlock Text="News"
+                                   FontFamily="{StaticResource MahApps.Fonts.Family.Window.Title}"
                                    Foreground="Black"
                                    FontSize="28"
                                    Margin="20,10,10,0"/>
-                        <TextBlock Text="Placerholder2 text&#x0a;with another line break"
+                        <TextBlock Text="News item highlight 1 &#x0a;News item highlight 2"
+                                   FontFamily="{StaticResource MahApps.Fonts.Family.Header}"
                                    Foreground="Black"
                                    FontSize="18"
                                    Margin="20,10,10,0"/>
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Width="200" 
+            </StackPanel>
+
+<Border Width="250" 
                     Height="200" 
                     Margin="30 0 0 0"
                     CornerRadius="10">
+                <TextBlock Text="Upcoming Tests"
+                           FontFamily="{StaticResource MahApps.Fonts.Family.Window.Title}"
+                           FontSize="28"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                         <GradientStop Color="DarkOrange" Offset="0.1"/>
                         <GradientStop Color="OrangeRed" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Width="250" 
+                    Height="200" 
+                    Margin="30 0 0 0"
+                    CornerRadius="10">
+                <TextBlock Text="Calibrations"
+                           FontFamily="{StaticResource MahApps.Fonts.Family.Window.Title}"
+                           FontSize="28"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="LimeGreen" Offset="0.3"/>
+                        <GradientStop Color="LightSeaGreen" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>

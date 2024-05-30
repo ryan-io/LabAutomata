@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models {
     public class WorkRequest : LabModel {
-        [Required, MinLength(4), MaxLength(4)]
+        [Required]
         public int WrId { get; set; }
 
         [Required, MaxLength(100)]

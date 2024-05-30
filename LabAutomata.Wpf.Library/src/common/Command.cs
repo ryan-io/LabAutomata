@@ -52,6 +52,7 @@ namespace LabAutomata.Wpf.Library.common {
         /// </summary>
         /// <param name="parameter">object to pass to action _context</param>
         public virtual void Execute (object? parameter) {
+            if (ContextAction == null) return;
             ContextAction?.Invoke(parameter);
             OnExecutedCallback?.Invoke();
         }
@@ -66,10 +67,10 @@ namespace LabAutomata.Wpf.Library.common {
         /// </summary>
         /// <param name="canExecute">Delegate that is invoked before calling Execute to determine if Execute can run</param>
         protected Command (Func<object?, bool>? canExecute = null) {
-	        CanExecuteFunc = canExecute;
+            CanExecuteFunc = canExecute;
         }
 
-		protected Action<object?>? ContextAction;
+        protected Action<object?>? ContextAction;
         protected readonly Func<object?, bool>? CanExecuteFunc;
     }
 }

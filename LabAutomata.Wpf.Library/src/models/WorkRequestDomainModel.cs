@@ -13,6 +13,7 @@ namespace LabAutomata.Wpf.Library.models {
         private DateTime? _startDate;
         private int _testCount;
         private List<string> _obsGetErrors = new();
+        private int _wrId;
 
         public WorkRequestDomainModel () {
 
@@ -25,17 +26,20 @@ namespace LabAutomata.Wpf.Library.models {
         /// <param name="program">The program associated with the work request.</param>
         /// <param name="description">The description of the work request.</param>
         /// <param name="startDate">The start date of the work request.</param>
+        /// <param name="wrId">Id of the work request</param>
         /// <param name="testCount">Number of tests in the work request</param>
         public WorkRequestDomainModel (string? name,
             string? program,
             string? description,
             DateTime? startDate,
+            int wrId,
             int testCount = 0) : base() {
             Name = name;
             Program = program;
             Description = description;
             StartDate = startDate;
             TestCount = testCount;
+            WrId = wrId;
         }
 
         /// <summary>
@@ -47,6 +51,7 @@ namespace LabAutomata.Wpf.Library.models {
             Program = string.Empty;
             StartDate = default;
             Tests?.Clear();
+            ClearAllErrors();
         }
 
         /// <summary>
@@ -95,6 +100,16 @@ namespace LabAutomata.Wpf.Library.models {
                 NotifyPropertyChanged();
             }
         }
+
+
+        /// <summary>
+        /// Gets or sets the WrId.
+        /// </summary>
+        public int WrId {
+            get => _wrId;
+            set => _wrId = value;
+        }
+
 
         /// <summary>
         /// Gets or sets the start date of the work request.
