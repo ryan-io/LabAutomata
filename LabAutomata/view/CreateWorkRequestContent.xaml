@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              d:DataContext="{d:DesignInstance viewmodel:CreateWorkRequestContentVm}"
              xmlns:controls="clr-namespace:LabAutomata.controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:viewmodel="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -65,6 +66,31 @@
                     <controls:FormTextInput Grid.Row="4" Grid.Column="1"
                                             Margin="5"
                                             BoxEmptyTxt="Date/calendar will go here"/>
+                    <controls:FormLabel Grid.Row="5" Grid.Column="0"
+                                        VerticalAlignment="Top"
+                                        Label="Manufacturer:"/>
+                    <ListView Grid.Row="5" Grid.Column="1"
+                              Width="200"
+                              Margin="5"
+                              HorizontalAlignment="Left"
+                              Background="{StaticResource FgOne}"
+                             ItemsSource="{Binding Manufacturers}"
+                             SelectedItem="{Binding Model.Manufacturer}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="2"
+                                    Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"
+                                    Background="{StaticResource Button}">
+                                    <TextBlock
+                                    Foreground="#CFCFCF"
+                                    FontSize="18"
+                                    Text="{Binding Name}">
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                     <ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"
                               FontSize="22"
                               HorizontalAlignment="Center"

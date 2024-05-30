@@ -8,9 +8,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type controls:TextBoxTwoText}">
                         <Border CornerRadius="8"
-                        Background="{StaticResource Button}"
-                        Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}">
+                            Background="{StaticResource Button}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}">
                             <Grid>
                                 <Rectangle StrokeThickness="1"/>
                                 <TextBox Margin="1"

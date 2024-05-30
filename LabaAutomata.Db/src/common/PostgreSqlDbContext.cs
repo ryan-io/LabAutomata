@@ -22,7 +22,8 @@ namespace LabAutomata.Db.common {
             if (!optionsBuilder.IsConfigured) {
                 // Gets the connection string from the appsettings.json/secrets.json file
                 optionsBuilder.UseNpgsql(Configuration.GetConnectionString(LAB_POSTGRES_DATABASE_CONNECTION))
-                    .UseSnakeCaseNamingConvention();
+                    .UseSnakeCaseNamingConvention()
+                    .EnableDetailedErrors();
             }
         }
 

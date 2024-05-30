@@ -9,7 +9,18 @@ namespace LabAutomata.Wpf.Library.domain_models {
         private ICollection<Test> _tests;
         private string _description;
 
+        // this constructor is intended for data binding
         public WorkstationDomainModel () {
+
+        }
+
+        public WorkstationDomainModel (Workstation ws) {
+            _name = ws.Name;
+            _stationNumber = ws.StationNumber;
+            _locationId = ws.LocationId;
+            _location = ws.Location;
+            _tests = ws.Tests;
+            _description = ws.Description;
         }
 
         public WorkstationDomainModel (string name, int stationNumber, int locationId, Location location, ICollection<Test> tests, string description) {

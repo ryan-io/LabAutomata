@@ -16,9 +16,10 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
         private readonly IRepository<WorkRequest> _repository = Substitute.For<IRepository<WorkRequest>>();
         private readonly IAdapter<Dispatcher> _adapter = Substitute.For<IAdapter<Dispatcher>>();
         private readonly IVmc _vmc = Substitute.For<IVmc>();
+        private readonly IRepository<Manufacturer> _manufacturerRepository = Substitute.For<IRepository<Manufacturer>>();
 
         public CreateWorkRequestContentVmTests () {
-            _sut = new CreateWorkRequestContentVm(_repository, _adapter, _logger);
+            _sut = new CreateWorkRequestContentVm(_repository, _manufacturerRepository, _adapter, _logger);
         }
 
         [Fact]

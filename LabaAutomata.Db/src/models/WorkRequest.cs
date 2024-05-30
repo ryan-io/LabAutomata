@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LabAutomata.Db.models {
+    [Table("work_requests")]
     public class WorkRequest : LabModel {
-        [Required]
         public int WrId { get; set; }
 
         [Required, MaxLength(100)]
@@ -13,7 +14,6 @@ namespace LabAutomata.Db.models {
         [MaxLength(1000)]
         public string? Description { get; set; } = string.Empty;
 
-        [Required]
         public Manufacturer Manufacturer { get; set; }
 
         public int ManufacturerId { get; set; }

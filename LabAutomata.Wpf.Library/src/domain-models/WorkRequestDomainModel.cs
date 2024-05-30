@@ -28,6 +28,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
         /// <param name="description">The description of the work request.</param>
         /// <param name="startDate">The start date of the work request.</param>
         /// <param name="wrId">Id of the work request</param>
+        /// <param name="manufacturer">Manufacturer the work request is for</param>
         /// <param name="testCount">Number of tests in the work request</param>
         public WorkRequestDomainModel (string? name,
             string? program,
@@ -172,7 +173,9 @@ namespace LabAutomata.Wpf.Library.domain_models {
                 Program = this.Program,
                 Description = this.Description,
                 Started = this.StartDate,
-                Tests = this.Tests
+                Tests = this.Tests,
+                WrId = 1003,
+                ManufacturerId = this.Manufacturer.Id,
             };
         }
 

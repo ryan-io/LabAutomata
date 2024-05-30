@@ -10,67 +10,80 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewmodel:WorkRequestContentVm}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Height="400" HorizontalAlignment="Center">
-        <ui:Card Padding="0"
+    <StackPanel>
+        <controls:FocusedViewHeader HeaderText="Work Requests" />
+        <StackPanel Height="400" 
+                    HorizontalAlignment="Center" 
+                    Orientation="Vertical">
+            <controls:TextBoxTwoText Height="30"
+                                 HorizontalAlignment="Right"
+                                 VerticalContentAlignment="Top"
+                                 Width="300"
+                                 Margin="0 0 15 10"
+                                 FontSize="16"
+                                 Style="{StaticResource TxtBoxTwoTextStyle}"
+                                 BoxEmptyText="Search for a work request"/>
+
+            <ui:Card Padding="0"
                  Margin="15 0 15 2"
                  Foreground="{StaticResource FgOne}"
                  Background="{StaticResource FgOne}"
                  BorderBrush="{StaticResource FgOne}" 
                  BorderThickness="1">
-            <ListView ItemsSource="{Binding WorkRequests}" 
+                <ListView ItemsSource="{Binding WorkRequests}" 
                   Height="400"
                   Focusable="True" 
                   Background="Transparent"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="FontSize" Value="19"/>
-                        <Setter Property="Background" Value="{StaticResource FgTwo}"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <GridView.ColumnHeaderContainerStyle>
-                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                                            <controls:DataGridHeader Text="{TemplateBinding Content}"
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="FontSize" Value="19"/>
+                            <Setter Property="Background" Value="{StaticResource FgTwo}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                <controls:DataGridHeader Text="{TemplateBinding Content}"
                                                                  Background="{StaticResource FgOne}"/>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </GridView.ColumnHeaderContainerStyle>
-                        <GridViewColumn Header="WR ID"
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="WR ID"
                                     Width="200"
                                     DisplayMemberBinding="{Binding WrId}">
-                        </GridViewColumn>
-                        <GridViewColumn Header="Name"
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name"
                                 Width="200"
                                 DisplayMemberBinding="{Binding Name}">
-                        </GridViewColumn>
-                        <GridViewColumn Header="Manufacturer"
+                            </GridViewColumn>
+                            <GridViewColumn Header="Manufacturer"
                                 Width="200"
                                 DisplayMemberBinding="{Binding Manufacturer.Name}">
-                        </GridViewColumn>
-                        <GridViewColumn Header="Program"
+                            </GridViewColumn>
+                            <GridViewColumn Header="Program"
                                 Width="200"
                                 DisplayMemberBinding="{Binding Program}">
-                        </GridViewColumn>
-                        <GridViewColumn Header="Description"
+                            </GridViewColumn>
+                            <GridViewColumn Header="Description"
                                 DisplayMemberBinding="{Binding Description}">
-                        </GridViewColumn>
-                        <GridViewColumn Header="Test Count"
+                            </GridViewColumn>
+                            <GridViewColumn Header="Test Count"
                                 Width="Auto"
                                 DisplayMemberBinding="{Binding TestCount}">
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ui:Card>
-
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ui:Card>
+        </StackPanel>
     </StackPanel>
 </UserControl>

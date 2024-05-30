@@ -2,9 +2,9 @@
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.common;
-using System.Windows.Threading;
 using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
+using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.commands {
     /// <summary>
@@ -26,7 +26,7 @@ namespace LabAutomata.Wpf.Library.commands {
         /// <param name="callback">Optional callback for when the command completes</param>
         /// <param name="logger">Optional logger</param>
         /// <param name="canExecute">The optional function to determine if the command can be executed.</param>
-        protected CreateDbModelCmd (IAdapter<Dispatcher> dA, IRepository<TModel> repository, Action? callback =default, ILogger? logger = default, Func<object?, bool>? canExecute = null)
+        protected CreateDbModelCmd (IAdapter<Dispatcher> dA, IRepository<TModel> repository, Action? callback = default, ILogger? logger = default, Func<object?, bool>? canExecute = null)
             : base(dA, logger, canExecute) {
             ArgumentNullException.ThrowIfNull(repository, "Repository cannot be null - {repo}");
             _repository = repository;
@@ -47,7 +47,7 @@ namespace LabAutomata.Wpf.Library.commands {
                 Logger?.LogInformation("Creating DbModel status: - {dM}", dM);
             }
             catch (Exception e) {
-                Logger?.LogError("An error occurred: {name} - {msg}", nameof(Create), e.Message);
+                Logger?.LogError("An error occurred: {name} - {msg}", nameof(Create), e.InnerException);
                 throw;
             }
         }

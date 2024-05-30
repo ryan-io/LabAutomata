@@ -39,7 +39,7 @@ namespace LabAutomata {
         }
 
         private void Application_DispatcherUnhandledException (object sender,
-            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
+            DispatcherUnhandledExceptionEventArgs e) {
             e.Handled = true;
         }
 
@@ -61,7 +61,7 @@ namespace LabAutomata {
             c.AddUserSecrets(asm);
             sc.AddSingleton<IConfiguration>(sp => c.Build());
             sc.AddSingleton(_ => new ConfigurationService().Create<App>());
-            sc.AddDbContext<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
+            sc.AddTransient<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
             sc.AddSingleton(sp => sp); // little trick to simply return a singleton to our Sp instance
             sc.AddTransient<MainWindow>();
 

@@ -30,7 +30,6 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was created successfully, false otherwise.</returns>
     public virtual async Task<bool> Create (T entity, CancellationToken ct = default) {
-
         var entry = await Set.AddAsync(entity, ct);
         var saveSuccess = await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
 
