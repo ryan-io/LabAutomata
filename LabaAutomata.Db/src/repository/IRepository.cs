@@ -49,6 +49,14 @@ public interface IRepositoryUpsert<T> where T : LabModel {
     /// <param name="ct">The cancellation token (optional).</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task<bool> Upsert (int id, T entity, CancellationToken ct = default);
+
+    /// <summary>
+    /// Upserts an entity. This overload requires the entity to have an ID assigned
+    /// </summary>
+    /// <param name="entity">The entity to upsert.</param>
+    /// <param name="ct">The cancellation token (optional).</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    Task<bool> Upsert (T entity, CancellationToken ct = default);
 }
 
 public interface IRepositoryDelete<T> where T : LabModel {

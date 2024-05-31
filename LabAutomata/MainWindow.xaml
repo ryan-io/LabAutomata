@@ -4,13 +4,21 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:v="clr-namespace:LabAutomata.view"
-                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:viewmodel="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
+                 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                  mc:Ignorable="d"
                  WindowStyle="ThreeDBorderWindow"
                  ResizeMode="CanResizeWithGrip"
                  SizeToContent="WidthAndHeight"
-                 Title="Lab Automata" Height="900" Width="800" 
-                 Loaded="OnLoaded">
+                 Background="Transparent"
+                 d:DataContext="{d:DesignInstance viewmodel:MainWindowVm}"
+                 Title="Lab Automata" Height="900" Width="800">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCmd}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>

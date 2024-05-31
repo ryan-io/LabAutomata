@@ -76,6 +76,18 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     }
 
     /// <summary>
+    /// Updates or inserts an entity in the database. This overload assumes an Id is assigned to the entity.
+    /// It will check against the database for this Id.
+    /// </summary>
+    /// <param name="entity">The entity to upsert.</param>
+    /// <param name="ct">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation. Returns true if the entity was updated or inserted successfully, false otherwise.</returns>
+    public async Task<bool> Upsert (T entity, CancellationToken ct = default) {
+        ArgumentOutOfRangeException.ThrowIfLessThan(entity.Id, 0, NoIdAssigned);
+        return await Upsert(entity.Id, entity, ct);
+    }
+
+    /// <summary>
     /// Deletes an entity from the database.
     /// </summary>
     /// <param name="id">The ID of the entity to delete.</param>
@@ -92,4 +104,6 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
         Set.Remove(entity);
         return await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
     }
+
+    private const string NoIdAssigned = "An id must be assigned to use this overload.";
 }

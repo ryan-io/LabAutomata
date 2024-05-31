@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:LabAutomata.view"
                     xmlns:vm="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
-                    xmlns:controls="clr-namespace:LabAutomata.controls">
+                    xmlns:controls="clr-namespace:LabAutomata.controls"
+                    xmlns:labAutomata="clr-namespace:LabAutomata">
     <DataTemplate DataType="{x:Type vm:HomeVm}">
         <v:HomeView/>
     </DataTemplate>

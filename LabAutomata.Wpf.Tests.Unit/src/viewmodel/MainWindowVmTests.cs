@@ -1,15 +1,18 @@
 using FluentAssertions;
+using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.data_structures;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
+using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class MainWindowVmTests {
         private readonly MainWindowVm _sut;
         private readonly IVmc _vmc = Substitute.For<IVmc>();
         private readonly ILogger _logger = Substitute.For<ILogger>();
+        private readonly IAdapter<Dispatcher> _adapter = Substitute.For<IAdapter<Dispatcher>>();
         private readonly HomeVm _homeVm;
         private readonly HomeContentVm _homeContentVm;
         private readonly NavigationVm _navigationVm;
@@ -20,7 +23,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             _homeContentVm = new HomeContentVm(_logger);
             _navigationVm = new NavigationVm(_vmc, _logger);
             _headerNavVm = new HeaderNavVm(_vmc, _logger);
-            _sut = new MainWindowVm(_vmc, _navigationVm, _homeVm, _homeContentVm, _logger);
+            _sut = new MainWindowVm(_vmc, _adapter, _navigationVm, _homeVm, _homeContentVm, _logger);
             _vmc.Get(nameof(HomeVm)).Returns(_homeVm);
             _vmc.Get(nameof(HomeContentVm)).Returns(_homeContentVm);
             _vmc.Get(nameof(NavigationVm)).Returns(_navigationVm);

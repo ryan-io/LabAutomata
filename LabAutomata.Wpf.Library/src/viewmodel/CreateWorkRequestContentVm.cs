@@ -17,7 +17,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
         public WorkRequestDomainModel Model { get; set; } = new();
 
-        public ObservableCollection<Manufacturer> Manufacturers { get; set; }
+        public ObservableCollection<Manufacturer> Manufacturers { get; set; } = null!;
 
         /// <summary>
         /// Resets the properties of the CreateWorkRequestContentVm to their default values.

@@ -1,11 +1,14 @@
-﻿using LabAutomata.Wpf.Library.commands;
+﻿using LabAutomata.Wpf.Library.adapter;
+using LabAutomata.Wpf.Library.commands;
 using LabAutomata.Wpf.Library.data_structures;
 using Microsoft.Extensions.Logging;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
     public class MainWindowVm : Base {
         public ICommand CloseCmd { get; set; }
+        public ICommand LoadedCmd { get; set; }
 
         public Base? NavVm {
             get => _navVm;
@@ -52,12 +55,13 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             };
         }
 
-        public MainWindowVm (IVmc vmc, NavigationVm nvm, HomeVm hvm, HomeContentVm hcvm,
+        public MainWindowVm (IVmc vmc, IAdapter<Dispatcher> da, NavigationVm nvm, HomeVm hvm, HomeContentVm hcvm,
             ILogger? logger = default) : base(logger, true) {
             NavVm = nvm;
             FocusedVm = hvm;
             SubFocusedVm = hcvm;
             CloseCmd = new CloseAppCmd();
+            LoadedCmd = new ApplicationEntryCommand(vmc, da, logger);
             _vmc = vmc;
         }
 

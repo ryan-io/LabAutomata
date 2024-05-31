@@ -79,9 +79,9 @@ namespace LabAutomata {
             sc.AddTransient<IRepository<Personnel>, PersonnelRepository>();
             sc.AddTransient<IRepository<Location>, LocationRepository>();
             sc.AddTransient<IRepository<TestType>, TestTypeRepository>();
-            sc.AddSingleton<IRepository<SeedJson>, SeedDataRepository>();
-            sc.AddSingleton<IRepository<Test>, SteadyStateTemperatureTest>();
-            sc.AddSingleton<IRepository<Manufacturer>, ManufacturerRepository>();
+            sc.AddTransient<IRepository<SeedJson>, SeedDataRepository>();
+            sc.AddTransient<IRepository<Test>, SteadyStateTemperatureTest>();
+            sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
 
             sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
             sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
