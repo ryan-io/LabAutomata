@@ -32,7 +32,6 @@ namespace LabAutomata.Wpf.Library.domain_models {
         public override TestType Create () {
             return new TestType {
                 Name = this.Name,
-                BitId = this.BitId
             };
         }
 

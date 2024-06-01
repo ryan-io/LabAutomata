@@ -12,7 +12,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
         private string? _description;
         private DateTime? _startDate;
         private int _testCount;
-        private Manufacturer _manufacturer;
+        private Manufacturer? _manufacturer;
         private List<string> _obsGetErrors = new();
         private int _wrId;
 
@@ -169,13 +169,14 @@ namespace LabAutomata.Wpf.Library.domain_models {
         /// <returns>A new instance of the <see cref="WorkRequest"/> class.</returns>
         public override WorkRequest Create () {
             return new WorkRequest {
-                Name = this.Name,
-                Program = this.Program,
-                Description = this.Description,
-                Started = this.StartDate,
-                Tests = this.Tests,
-                WrId = 1003,
-                ManufacturerId = this.Manufacturer.Id,
+                Name = Name,
+                Program = Program,
+                Description = Description,
+                Started = StartDate,
+                Tests = Tests,
+                WrId = WrId,
+                Manufacturer = Manufacturer,
+                ManufacturerId = Manufacturer == null ? -1 : Manufacturer.Id,
             };
         }
 

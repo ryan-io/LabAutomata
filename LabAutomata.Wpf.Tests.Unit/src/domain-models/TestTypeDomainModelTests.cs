@@ -44,7 +44,6 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 
             // Assert
             testType.Name.Should().Be(_sut.Name);
-            testType.BitId.Should().Be(_sut.BitId);
         }
 
         [Fact]

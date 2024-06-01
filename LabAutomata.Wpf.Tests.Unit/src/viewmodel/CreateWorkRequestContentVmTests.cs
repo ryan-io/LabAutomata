@@ -1,4 +1,5 @@
 using FluentAssertions;
+using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
@@ -7,7 +8,6 @@ using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using System.Windows.Threading;
-using SteadyStateTemperatureTest = LabAutomata.Db.models.SteadyStateTemperatureTest;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
     public class CreateWorkRequestContentVmTests {
@@ -84,7 +84,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
         public void Tests_CountShouldBe_WhenTestsAreAdded (int count) {
             // arrange
             for (int i = 0; i < count; i++) {
-                _sut.Model.Tests!.Add(new SteadyStateTemperatureTest());
+                _sut.Model.Tests!.Add(TestFactory.CreateMechanicalShockTest("50G mechanical shock", 12345));
             }
 
             // act

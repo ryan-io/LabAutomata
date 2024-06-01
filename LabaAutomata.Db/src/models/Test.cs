@@ -42,6 +42,16 @@ namespace LabAutomata.Db.models {
             InstanceId = test.InstanceId;
             Started = test.Started;
             Ended = test.Ended;
+            Type = test.Type;
+        }
+
+        public Test (int id, Test test) {
+            Id = id;
+            Name = test.Name;
+            InstanceId = test.InstanceId;
+            Started = test.Started;
+            Ended = test.Ended;
+            Type = test.Type;
         }
 
         public Test (string name, int instanceId) {

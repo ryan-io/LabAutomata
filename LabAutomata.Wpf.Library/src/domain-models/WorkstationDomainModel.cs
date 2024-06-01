@@ -8,6 +8,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
         private Location _location;
         private ICollection<Test> _tests;
         private string _description;
+        private int _testCount;
 
         // this constructor is intended for data binding
         public WorkstationDomainModel () {
@@ -15,12 +16,13 @@ namespace LabAutomata.Wpf.Library.domain_models {
         }
 
         public WorkstationDomainModel (Workstation ws) {
-            _name = ws.Name;
-            _stationNumber = ws.StationNumber;
-            _locationId = ws.LocationId;
-            _location = ws.Location;
-            _tests = ws.Tests;
-            _description = ws.Description;
+            Name = ws.Name;
+            StationNumber = ws.StationNumber;
+            LocationId = ws.LocationId;
+            Location = ws.Location;
+            Tests = ws.Tests;
+            Description = ws.Description;
+            TestCount = ws.Tests.Count;
         }
 
         public WorkstationDomainModel (string name, int stationNumber, int locationId, Location location, ICollection<Test> tests, string description) {
@@ -79,6 +81,15 @@ namespace LabAutomata.Wpf.Library.domain_models {
                 NotifyPropertyChanged();
             }
         }
+
+        public int TestCount {
+            get => _testCount;
+            set {
+                _testCount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public override Workstation Create () {
             return new Workstation {

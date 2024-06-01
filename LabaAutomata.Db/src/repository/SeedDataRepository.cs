@@ -1,4 +1,5 @@
 ﻿using LabAutomata.Db.common;
+using LabAutomata.Db.models;
 
 namespace LabAutomata.Db.repository;
 

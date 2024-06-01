@@ -49,19 +49,19 @@
                                     </Setter>
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
-                            <GridViewColumn Header="WR ID"
+                            <GridViewColumn Header="Station Number"
                                  Width="200"
-                                 DisplayMemberBinding="{Binding WrId}">
+                                 DisplayMemberBinding="{Binding StationNumber}">
                             </GridViewColumn>
                             <GridViewColumn Header="Name"
                              Width="200"
                              DisplayMemberBinding="{Binding Name}">
                             </GridViewColumn>
-                            <GridViewColumn Header="Manufacturer"
+                            <GridViewColumn Header="Location"
                              Width="200"
-                             DisplayMemberBinding="{Binding Manufacturer.Name}">
+                             DisplayMemberBinding="{Binding Location.Name }">
                             </GridViewColumn>
-                            <GridViewColumn Header="Program"
+                            <GridViewColumn Header="Station Types"
                              Width="200"
                              DisplayMemberBinding="{Binding Program}">
                             </GridViewColumn>

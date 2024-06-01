@@ -17,7 +17,8 @@ using System.Windows.Threading;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 using SteadyStateTemperatureTest = LabAutomata.Db.repository.SteadyStateTemperatureTest;
 
-namespace LabAutomata {
+namespace LabAutomata
+{
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

@@ -1,7 +1,9 @@
-﻿using LabAutomata.Db.repository;
+﻿using LabAutomata.Db.models;
+using LabAutomata.Db.repository;
 using Newtonsoft.Json;
 
-namespace LabAutomata.Db.common {
+namespace LabAutomata.Db.common
+{
     public class WrIdGenerator {
         public async Task<int> GetNext (CancellationToken token = default) {
             var json = await _repository.Get(DbId, token);

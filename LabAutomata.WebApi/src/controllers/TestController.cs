@@ -1,22 +1,23 @@
-﻿using LabAutomata.Db.factory;
+﻿using LabAutomata.Db.common;
+using LabAutomata.Db.factory;
 using LabAutomata.Db.models;
 using LabAutomata.Db.service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAutomata.WebApi.controllers {
-    public class SsTempTestController (ISsTemperatureService service) : BaseController {
+    public class TestController (TestService service) : BaseController {
         // post: api/sstemptest/create/instanceId
         [HttpPost("create/{instanceId:int}")]
         public async Task<IActionResult> CreateSsTempTest ([FromRoute] int instanceId, CancellationToken ct = default) {
             // factory call to get new model
-            var unionCreateModel = SsTempTestFactory.Create(instanceId);
+            var unionCreateModel = SsTempTestFactory.Create(instanceId, TestTypeFactory.PowerTemperatureCycling());
 
             // check if model creation had any errors
             if (unionCreateModel.IsError)
                 return ProblemInController(unionCreateModel.Errors);
 
             // invoke service to save to db
-            var unionSaveToService = await service.CreateSsTempTest(unionCreateModel.Value, ct);
+            var unionSaveToService = await service.Create(unionCreateModel.Value, ct);
 
             // optional mapping
 
@@ -32,7 +33,7 @@ namespace LabAutomata.WebApi.controllers {
         [HttpGet("get/{id:int}")]
         public async Task<IActionResult> GetSsTempTest (int id, CancellationToken ct = default) {
             // query service to get the test
-            var unionGetFromService = await service.GetSsTempTest(id, ct);
+            var unionGetFromService = await service.Get(id, ct);
 
             // optional mapping:
             //      would be used to map the value from unionGetFromService.Value to a response
@@ -42,13 +43,13 @@ namespace LabAutomata.WebApi.controllers {
         }
 
         [HttpPut("upsert/{id:int}")]
-        public async Task<IActionResult> UpsertSsTempTest ([FromRoute] int id, SteadyStateTemperatureTest update, CancellationToken ct = default) {
+        public async Task<IActionResult> UpsertSsTempTest ([FromRoute] int id, Test update, CancellationToken ct = default) {
             var unionCreateClone = SsTempTestFactory.CloneWithId(id, update);
 
             if (unionCreateClone.IsError)
                 return ProblemInController(unionCreateClone.Errors);
 
-            var unionUpsertToService = await service.UpsertSsTempTest(id, unionCreateClone.Value, ct);
+            var unionUpsertToService = await service.Upsert(id, unionCreateClone.Value, ct);
 
             return unionUpsertToService.Match(
                 _ => Ok(unionCreateClone.Value),
@@ -62,7 +63,7 @@ namespace LabAutomata.WebApi.controllers {
             if (unionTransferObjCreation.IsError)
                 return ProblemInController(unionTransferObjCreation.Errors);
 
-            var unionDeleteFromService = await service.DeleteSsTempTest(id, ct);
+            var unionDeleteFromService = await service.Delete(id, ct);
 
             return unionDeleteFromService.Match(_ => NoContent(), ProblemInController);
         }

@@ -11,6 +11,7 @@ namespace LabAutomata.Db.common {
         DbSet<Manufacturer> Manufacturers { get; }
         DbSet<SeedJson> SeedJson { get; }
         DbSet<TestType> TestType { get; }
+        DbSet<WorkstationType> WorkstationTypesType { get; }
         DbSet<Location> Location { get; }
         PostgreSqlDbContext PostgreSqlDb { get; }
     }
@@ -21,6 +22,7 @@ namespace LabAutomata.Db.common {
         public DbSet<Test> Test { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<TestType> TestType { get; set; }
+        public DbSet<WorkstationType> WorkstationTypesType { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<Personnel> Personnels { get; set; }
         public DbSet<SeedJson> SeedJson { get; set; }
@@ -65,16 +67,13 @@ namespace LabAutomata.Db.common {
                     .HasPrincipalKey(e => e.WrId);
             });
 
-            modelBuilder.Entity<TemperaturePoint>(etb => {
-                etb.HasOne<SteadyStateTemperatureTest>()
-                    .WithMany()
-                    .HasForeignKey(e => e.InstanceId);
-            });
-
             modelBuilder.Entity<Workstation>(etb => {
                 etb.HasOne(e => e.Location)
                     .WithMany()
                     .HasForeignKey(e => e.LocationId);
+
+                etb.HasMany(e => e.Types)
+                    .WithMany();
             });
 
             modelBuilder.Entity<Personnel>(etb => {

@@ -11,6 +11,8 @@ namespace LabAutomata.Db.models {
 
         public Location Location { get; set; }
 
+        public ICollection<WorkstationType> Types { get; set; }
+
         public ICollection<Test> Tests { get; set; }
 
         [MaxLength(500)]

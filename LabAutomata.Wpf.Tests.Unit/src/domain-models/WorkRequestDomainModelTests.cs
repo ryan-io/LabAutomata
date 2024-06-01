@@ -120,16 +120,18 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
             _sut.Program = "Test Program";
             _sut.Description = "Test Description";
             _sut.StartDate = DateTime.Now;
-            _sut.Tests = new ObservableCollection<Test> { new Test() };
+            _sut.Manufacturer = new Manufacturer();
+            _sut.Tests = new ObservableCollection<Test>();
 
             // Act
             var workRequest = _sut.Create();
 
             // Assert
-            workRequest.Name.Should().Be(_sut.Name);
-            workRequest.Program.Should().Be(_sut.Program);
-            workRequest.Description.Should().Be(_sut.Description);
+            workRequest.Name.Should().BeEquivalentTo(_sut.Name);
+            workRequest.Program.Should().BeEquivalentTo(_sut.Program);
+            workRequest.Description.Should().BeEquivalentTo(_sut.Description);
             workRequest.Started.Should().Be(_sut.StartDate);
+            workRequest.Manufacturer.Should().NotBeNull();
             workRequest.Tests.Should().BeEquivalentTo(_sut.Tests);
         }
 

@@ -61,7 +61,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
             FocusedVm = hvm;
             SubFocusedVm = hcvm;
             CloseCmd = new CloseAppCmd();
-            LoadedCmd = new ApplicationEntryCommand(vmc, da, logger);
+            LoadedCmd = new ApplicationEntryCommand(vmc);
             _vmc = vmc;
         }
 

@@ -5,7 +5,7 @@
     ///  Can be accessed from anywhere using MyClass.Instance
     ///  to riot-bcl.
     /// </summary>
-    /// <typeparam name="T">Type instance create a Singleton for</typeparam>
+    /// <typeparam name="T">Types instance create a Singleton for</typeparam>
     public class Singleton<T> where T : class, new() {
         public static T Instance {
             get {
