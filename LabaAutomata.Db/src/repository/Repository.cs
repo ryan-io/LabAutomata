@@ -1,7 +1,6 @@
 ﻿using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
-
 namespace LabAutomata.Db.repository;
 
 /// <summary>
@@ -31,7 +30,6 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     public virtual async Task<bool> Create (T entity, CancellationToken ct = default) {
         var entry = await Set.AddAsync(entity, ct);
         var saveSuccess = await DbCtx.PostgreSqlDb.SaveChangesAsync(ct) > 0;
-
         return entry.State == EntityState.Unchanged && saveSuccess;
     }
 
@@ -62,10 +60,9 @@ public abstract class Repository<T> : IRepository<T> where T : LabModel {
     /// <param name="ct">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation. Returns true if the entity was updated or inserted successfully, false otherwise.</returns>
     public virtual async Task<bool> Upsert (int id, T entity, CancellationToken ct = default) {
-        var e = await Set.FirstOrDefaultAsync(e => id == e.Id, cancellationToken: ct);
-
-        if (e != null) {
-            DbCtx.PostgreSqlDb.Entry(e).CurrentValues.SetValues(entity);
+        if (Set.Any(model => model.Id == id)) {
+            Set.Update(entity);
+            //DbCtx.PostgreSqlDb.Entry().CurrentValues.SetValues(entity);
         }
         else {
             await Create(entity, ct);

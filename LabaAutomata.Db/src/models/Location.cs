@@ -3,13 +3,13 @@
 namespace LabAutomata.Db.models {
     public class Location : LabModel {
         [Required, MaxLength(150)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        [Required] public string Address { get; set; }
+        [Required] public string Address { get; init; }
 
-        [Required] public string City { get; set; }
+        [Required] public string City { get; init; }
 
-        [Required] public string State { get; set; }
-        [Required] public string Country { get; set; }
+        [Required] public string State { get; init; }
+        [Required] public string Country { get; init; }
     }
 }

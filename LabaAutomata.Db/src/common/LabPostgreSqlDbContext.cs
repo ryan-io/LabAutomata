@@ -33,6 +33,7 @@ namespace LabAutomata.Db.common {
         protected override void OnModelCreating (ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
 
+<<<<<<< HEAD
             modelBuilder.Entity<Test>(etb => {
                 etb.HasIndex(e => e.InstanceId).IsUnique();
                 etb.HasMany(e => e.Workstations)
@@ -81,6 +82,9 @@ namespace LabAutomata.Db.common {
                     .WithMany()
                     .HasForeignKey(e => e.LocationId);
             });
+=======
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(LabPostgreSqlDbContext).Assembly);
+>>>>>>> 28bfd48 (added services for the remaining db models. fixed fixed domain models that were failing unit tests. created factory methods for tests and test types. removed a task.run from the application's entry point command.)
         }
     }
 }

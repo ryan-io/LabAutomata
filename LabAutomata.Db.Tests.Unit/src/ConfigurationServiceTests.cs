@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using LabAutomata.Db.service;
+using LabAutomata.Db.common;
 
 namespace LabAutomata.Db.Tests.Unit {
     public class ConfigurationServiceTests {

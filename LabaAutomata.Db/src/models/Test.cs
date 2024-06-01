@@ -2,36 +2,36 @@
 
 namespace LabAutomata.Db.models {
     public class Test : LabModel {
-        [Required, MaxLength(100)] public string? Name { get; set; }
+        [Required, MaxLength(100)] public string? Name { get; init; }
 
         [Required]
-        public int WrId { get; set; }
+        public int WrId { get; init; }
 
-        public WorkRequest? WorkRequest { get; set; }
+        public WorkRequest? WorkRequest { get; init; }
 
         public ICollection<Workstation>? Workstations { get; set; }
 
         [Required]
-        public int InstanceId { get; set; }
+        public int InstanceId { get; init; }
 
         [Required]
-        public int TypeId { get; set; }
+        public int TypeId { get; init; }
 
         [Required]
-        public TestType? Type { get; set; }
+        public TestType? Type { get; init; }
 
         [Required]
-        public int LocationId { get; set; }
+        public int LocationId { get; init; }
 
-        public int OperatorId { get; set; }
+        public int OperatorId { get; init; }
 
-        public Personnel? Operator { get; set; }
+        public Personnel? Operator { get; init; }
 
-        public Location? Location { get; set; }
+        public Location? Location { get; init; }
 
-        public DateTime? Started { get; set; } = DateTime.UtcNow;
+        public DateTime? Started { get; init; } = DateTime.UtcNow;
 
-        public DateTime? Ended { get; set; }
+        public DateTime? Ended { get; init; }
 
         public Test () {
             Name = "unnamed";

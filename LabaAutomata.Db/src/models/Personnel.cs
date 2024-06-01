@@ -3,16 +3,16 @@
 namespace LabAutomata.Db.models {
     public class Personnel : LabModel {
         [Required]
-        public string FirstName { get; set; } = string.Empty;
+        public string FirstName { get; init; } = string.Empty;
 
         [Required]
-        public string LastName { get; set; } = string.Empty;
+        public string LastName { get; init; } = string.Empty;
 
         [EmailAddress]
-        public string? Email { get; set; }
+        public string? Email { get; init; }
 
-        public int LocationId { get; set; }
+        public int LocationId { get; init; }
 
-        public Location Location { get; set; }
+        public Location Location { get; init; }
     }
 }

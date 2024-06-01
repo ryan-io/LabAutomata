@@ -4,11 +4,11 @@ namespace LabAutomata.Db.models;
 
 public class Manufacturer : LabModel {
     [Required, MaxLength(100)]
-    public string? Name { get; set; } = string.Empty;
+    public string? Name { get; init; } = string.Empty;
 
-    public int LocationId { get; set; }
+    public int LocationId { get; init; }
 
-    public Location Location { get; set; }
+    public Location Location { get; init; }
 
-    public ICollection<WorkRequest> WorkRequests { get; set; }
+    public ICollection<WorkRequest> WorkRequests { get; init; }
 }

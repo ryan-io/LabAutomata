@@ -61,9 +61,9 @@
                                           ClickParameter="{Binding Source={x:Static common:AppC.WsVm}}"
                                           Grid.Column="3"/>
 
-                <controls:HeaderNavButton ButtonId="Equipment" 
+                <controls:HeaderNavButton ButtonId="Equipments" 
                                           Source="/resources/images/equipment-items.png" 
-                                          ToolTip="Equipment"
+                                          ToolTip="Equipments"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.EiVm}}"
                                           Grid.Column="4"/>

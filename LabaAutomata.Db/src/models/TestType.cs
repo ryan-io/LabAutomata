@@ -3,7 +3,7 @@
 namespace LabAutomata.Db.models {
     public class TestType : LabModel {
         [Required, MaxLength(50)]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         internal const int SteadyStateTemperature = 1 << 0;
         internal const int SteadyStateHumidity = 1 << 1;

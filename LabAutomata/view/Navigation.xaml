@@ -41,7 +41,7 @@
                          Command="{Binding ChangeVm}"
                          CommandParameter="{Binding Source={x:Static common:AppC.WsVm}}"
                          Style="{StaticResource MenuBtn}"/>
-            <RadioButton Content="Equipment Items"
+            <RadioButton Content="Equipments Items"
                          Height="40"
                          FontWeight="Bold"
                          FontSize="22"

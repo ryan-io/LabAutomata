@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <controls:FocusedViewHeader HeaderText="Test Equipment Items List" />
+        <controls:FocusedViewHeader HeaderText="Test Equipments Items List" />
         <Border Grid.Row="1"
                 Margin="5 0 5 0"
                 Background="{StaticResource FgTwo}">
