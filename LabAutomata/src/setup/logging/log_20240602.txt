@@ -1,0 +1,4 @@
+2024-06-02 08:19:00.532 -05:00 [INF] ------ Logging started ----- 08:19:00
+2024-06-02 08:19:04.979 -05:00 [INF] Application now closing.
+2024-06-02 08:19:04.982 -05:00 [INF] Closing DbContext
+2024-06-02 08:19:04.984 -05:00 [INF] Flushing logger... =====LOG END
