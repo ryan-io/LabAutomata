@@ -2,3 +2,12 @@
 2024-06-02 08:19:04.979 -05:00 [INF] Application now closing.
 2024-06-02 08:19:04.982 -05:00 [INF] Closing DbContext
 2024-06-02 08:19:04.984 -05:00 [INF] Flushing logger... =====LOG END
+2024-06-02 17:49:25.209 -05:00 [INF] ------ Logging started ----- 17:49:25
+2024-06-02 17:51:14.450 -05:00 [INF] ------ Logging started ----- 17:51:14
+2024-06-02 17:52:25.180 -05:00 [INF] ------ Logging started ----- 17:52:25
+2024-06-02 17:53:25.221 -05:00 [INF] ------ Logging started ----- 17:53:25
+2024-06-02 17:58:28.722 -05:00 [INF] ------ Logging started ----- 17:58:28
+2024-06-02 18:00:46.968 -05:00 [INF] ------ Logging started ----- 18:00:46
+2024-06-02 18:01:08.618 -05:00 [INF] Application now closing.
+2024-06-02 18:01:08.620 -05:00 [INF] Closing DbContext
+2024-06-02 18:01:08.622 -05:00 [INF] Flushing logger... =====LOG END

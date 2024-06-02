@@ -22,20 +22,19 @@
                                  Margin="0 0 15 10"
                                  FontSize="16"
                                  Style="{StaticResource TxtBoxTwoTextStyle}"
-                                 BoxEmptyText="Search for a work request"/>
-
+                                 BoxEmptyText="Search for equipment"/>
             <ui:Card Padding="0"
-                 Margin="15 0 15 2"
-                 Foreground="{StaticResource FgOne}"
-                 Background="{StaticResource FgOne}"
-                 BorderBrush="{StaticResource FgOne}" 
-                 BorderThickness="1">
+   Margin="15 0 15 2"
+   Foreground="{StaticResource FgOne}"
+   Background="{StaticResource FgOne}"
+   BorderBrush="{StaticResource FgOne}" 
+   BorderThickness="1">
                 <ListView ItemsSource="{Binding WorkRequests}" 
-                  Height="400"
-                  Focusable="True" 
-                  Background="Transparent"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top">
+    Height="400"
+    Focusable="True" 
+    Background="Transparent"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="FontSize" Value="19"/>
@@ -51,39 +50,40 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                                                 <controls:DataGridHeader Text="{TemplateBinding Content}"
-                                                                 Background="{StaticResource FgOne}"/>
+                                                   Background="{StaticResource FgOne}"/>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn Header="WR ID"
-                                    Width="200"
-                                    DisplayMemberBinding="{Binding WrId}">
+                      Width="200"
+                      DisplayMemberBinding="{Binding WrId}">
                             </GridViewColumn>
                             <GridViewColumn Header="Name"
-                                Width="200"
-                                DisplayMemberBinding="{Binding Name}">
+                  Width="200"
+                  DisplayMemberBinding="{Binding Name}">
                             </GridViewColumn>
                             <GridViewColumn Header="Manufacturer"
-                                Width="200"
-                                DisplayMemberBinding="{Binding Manufacturer.Name}">
+                  Width="200"
+                  DisplayMemberBinding="{Binding Manufacturer.Name}">
                             </GridViewColumn>
                             <GridViewColumn Header="Program"
-                                Width="200"
-                                DisplayMemberBinding="{Binding Program}">
+                  Width="200"
+                  DisplayMemberBinding="{Binding Program}">
                             </GridViewColumn>
                             <GridViewColumn Header="Description"
-                                DisplayMemberBinding="{Binding Description}">
+                  DisplayMemberBinding="{Binding Description}">
                             </GridViewColumn>
                             <GridViewColumn Header="Test Count"
-                                Width="Auto"
-                                DisplayMemberBinding="{Binding TestCount}">
+                  Width="Auto"
+                  DisplayMemberBinding="{Binding TestCount}">
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </ui:Card>
+
         </StackPanel>
     </StackPanel>
 </UserControl>

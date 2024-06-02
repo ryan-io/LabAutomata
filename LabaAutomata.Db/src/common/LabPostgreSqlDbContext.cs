@@ -7,6 +7,7 @@ namespace LabAutomata.Db.common {
 		DbSet<WorkRequest> WorkRequests { get; }
 		DbSet<Workstation> Workstations { get; }
 		DbSet<Personnel> Personnels { get; }
+		DbSet<Equipment> Equipment { get; }
 		DbSet<Test> Test { get; }
 		DbSet<Manufacturer> Manufacturers { get; }
 		DbSet<SeedJson> SeedJson { get; }
@@ -19,6 +20,7 @@ namespace LabAutomata.Db.common {
 	public class LabPostgreSqlDbContext : PostgreSqlDbContext, ILabPostgreSqlDbContext {
 		public DbSet<WorkRequest> WorkRequests { get; set; }
 		public DbSet<Workstation> Workstations { get; set; }
+		public DbSet<Equipment> Equipment { get; set; }
 		public DbSet<Test> Test { get; set; }
 		public DbSet<Manufacturer> Manufacturers { get; set; }
 		public DbSet<TestType> TestType { get; set; }

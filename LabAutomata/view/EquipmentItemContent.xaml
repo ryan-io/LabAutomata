@@ -5,22 +5,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LabAutomata.view"
              xmlns:controls="clr-namespace:LabAutomata.controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <controls:FocusedViewHeader HeaderText="Test Equipments Items List" />
-        <Border Grid.Row="1"
-                Margin="5 0 5 0"
-                Background="{StaticResource FgTwo}">
-            <TextBlock >
-                fhdsfhas
-                this is out cont
-            </TextBlock>
-        </Border>
-    </Grid>
+    <StackPanel>
+        <controls:FocusedViewHeader HeaderText="Work Requests" />
+        <StackPanel Height="400" 
+                 HorizontalAlignment="Center" 
+                 Orientation="Vertical">
+            <controls:TextBoxTwoText Height="30"
+                              HorizontalAlignment="Right"
+                              VerticalContentAlignment="Top"
+                              Width="300"
+                              Margin="0 0 15 10"
+                              FontSize="16"
+                              Style="{StaticResource TxtBoxTwoTextStyle}"
+                              BoxEmptyText="Search for a work request"/>
+
+            <ui:Card Padding="0"
+     Margin="15 0 15 2"
+     Foreground="{StaticResource FgOne}"
+     Background="{StaticResource FgOne}"
+     BorderBrush="{StaticResource FgOne}" 
+     BorderThickness="1">
+                <ListView ItemsSource="{Binding }" 
+      Height="400"
+      Focusable="True" 
+      Background="Transparent"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="FontSize" Value="19"/>
+                            <Setter Property="Background" Value="{StaticResource FgTwo}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                <controls:DataGridHeader Text="{TemplateBinding Content}"
+                                                     Background="{StaticResource FgOne}"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="Name"
+                        Width="200"
+                        DisplayMemberBinding="{Binding Name}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Manufacturer"
+                    Width="200"
+                    DisplayMemberBinding="{Binding Manufacturer.Name}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Calibration Date"
+                    Width="200"
+                    DisplayMemberBinding="{Binding CalibrationDate}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Calibration Due Date"
+                    Width="200"
+                    DisplayMemberBinding="{Binding CalibrationDueDate}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Purchase Date"
+                    DisplayMemberBinding="{Binding PurchaseDate}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Workstations"
+                    Width="Auto"
+                    DisplayMemberBinding="{Binding Name}">
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ui:Card>
+        </StackPanel>
+    </StackPanel>
 
 </UserControl>

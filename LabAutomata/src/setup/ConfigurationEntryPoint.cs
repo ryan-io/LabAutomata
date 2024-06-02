@@ -56,6 +56,7 @@ internal sealed class ConfigurationEntryPoint {
 		sc.AddTransient<IRepository<TestType>, TestTypeRepository>();
 		sc.AddTransient<IRepository<SeedJson>, SeedDataRepository>();
 		sc.AddTransient<IRepository<Test>, SteadyStateTemperatureTest>();
+		sc.AddTransient<IRepository<Equipment>, EquipmentRepository>();
 		sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
 
 		sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
