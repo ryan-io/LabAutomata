@@ -445,3 +445,4 @@ notes.md
 # credentials for connecting to Blynk
 [Ll]abAutomata/[Ll]abAutomata.Arduino/[Ll]ibraries/credentials.h
 LabAutomata.Arduino/libraries/credentials.h
+LabAutomata.Arduino/libraries/credentials/credentials.h

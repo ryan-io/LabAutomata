@@ -1,0 +1,2 @@
+the blynk libraries are provided graciously with an MIT license at the following repo:
+https://github.com/blynkkk/blynk-library
