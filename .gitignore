@@ -441,3 +441,6 @@ LabAutomata.WebApi/program.cs
 notes.md
 [Ll]abaAutomata.[Bb]enchmark/
 [Ll]abAutomata.[Bb]enchmark
+
+# credentials for connecting to Blynk
+[Ll]abAutomata/[Ll]abAutomata.Arduino/[Ll]ibraries/credentials.h
