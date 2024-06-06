@@ -2,6 +2,7 @@
 using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
+using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
@@ -20,7 +21,6 @@ internal sealed class ConfigurationEntryPoint {
 		var sc = new ServiceCollection();
 		var vms = ConfigureServices(sc);
 		var sp = sc.BuildServiceProvider();
-
 		var vmc = sp.GetRequiredService<IVmc>();
 
 		foreach (var vmType in vms) {
@@ -41,13 +41,17 @@ internal sealed class ConfigurationEntryPoint {
 		//	Create a new configuration builder
 		//  Invoke AddUserSecrets on the builder
 		//	Call c.Builder and register it as a service
+		// scoped
 		c.AddUserSecrets(asm);
-		sc.AddSingleton<IConfiguration>(sp => c.Build());
-		sc.AddSingleton(_ => new ConfigurationService().Create<App>());
-		sc.AddTransient<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
-		sc.AddSingleton(sp => sp); // little trick to simply return a singleton to our Sp instance
+		sc.AddScoped(_ => c.Build());
+		sc.AddScoped(_ => new ConfigurationService().Create<App>());
+		sc.AddScoped(sp => sp); // little trick to simply return a singleton to our Sp instance
+		sc.AddScoped<IBlynkMqttClient, BlynkMqttClient>();
+		sc.AddScoped<IVmc, Vmc>();
+
+		// transient
 		sc.AddTransient<MainWindow>();
-		sc.AddSingleton<IVmc, Vmc>();
+		sc.AddTransient<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
 		sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(_application));
 		sc.AddTransient<IRepository<WorkRequest>, WorkRequestRepository>();
 		sc.AddTransient<IRepository<Workstation>, WorkstationRepository>();
@@ -58,18 +62,17 @@ internal sealed class ConfigurationEntryPoint {
 		sc.AddTransient<IRepository<Test>, SteadyStateTemperatureTest>();
 		sc.AddTransient<IRepository<Equipment>, EquipmentRepository>();
 		sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
-
 		sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 		sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 
 		var logPath = AppC.GetRootPath() + @"\logging\log_.txt"; //TODO - change where the log path points to?
-		sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
+		sc.AddScoped(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
 
 		// reflection to get all classes in deriving from the Base view model class within the LabAutomata.Wpf.Library asm
 		var asmViewModels = typeof(Base).Assembly.GetSubclassOf<Base>().ToList();
 
 		foreach (var vmType in asmViewModels) {
-			sc.AddSingleton(vmType);
+			sc.AddScoped(vmType);
 		}
 
 		return asmViewModels;

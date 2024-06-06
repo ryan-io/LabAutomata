@@ -1,7 +1,10 @@
-﻿using LabAutomata.Db.common;
+﻿using LabAutomata.common;
+using LabAutomata.Db.common;
+using LabAutomata.IoT;
 using LabAutomata.setup;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using rio_command_pipeline;
 using riolog;
 using System.Windows;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
@@ -14,6 +17,9 @@ namespace LabAutomata {
 		public App () {
 			ConfigurationEntryPoint entry = new(Current);
 			_serviceProvider = entry.Configure();
+
+			var broker = new CommandPipelineBroker(AppEvent.CLOSED);
+			broker.SignalAsync(AppEvent.CLOSED);
 		}
 
 		protected override void OnStartup (StartupEventArgs e) {
@@ -23,7 +29,9 @@ namespace LabAutomata {
 			entry.Startup();
 		}
 
-		private void ApplicationClose (object sender, ExitEventArgs e) {
+		private async void ApplicationClose (object sender, ExitEventArgs e) {
+			var client = _serviceProvider.GetRequiredService<IBlynkMqttClient>();
+			await client.Disconnect();
 			var logger = _serviceProvider.GetService<ILogger>();
 			logger?.LogInformation("Application now closing.");
 			logger?.LogInformation("Closing DbContext");

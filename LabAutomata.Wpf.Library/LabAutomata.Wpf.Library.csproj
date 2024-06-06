@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LabAutomata.IoT\LabAutomata.IoT.csproj" />
     <ProjectReference Include="..\LabAutomata.Library\LabAutomata.Library.csproj" />
   </ItemGroup>
 

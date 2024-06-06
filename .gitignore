@@ -446,3 +446,4 @@ notes.md
 [Ll]abAutomata/[Ll]abAutomata.Arduino/[Ll]ibraries/credentials.h
 LabAutomata.Arduino/libraries/credentials.h
 LabAutomata.Arduino/libraries/credentials/credentials.h
+LabAutomata/src/setup/logging/*
