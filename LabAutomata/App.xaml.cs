@@ -8,7 +8,7 @@ namespace LabAutomata {
 	public partial class App : Application {
 		public App () {
 			ConfigurationEntryPoint entry = new(Current);
-			_serviceProvider = entry.Configure(this);
+			_serviceProvider = entry.Configure();
 		}
 
 		/// <summary>
