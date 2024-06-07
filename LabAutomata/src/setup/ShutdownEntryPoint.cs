@@ -32,6 +32,7 @@ namespace LabAutomata.setup {
 
 			var client = _sp.GetRequiredService<IBlynkMqttClient>();
 			await client.Disconnect();
+
 			var logger = _sp.GetService<ILogger>();
 			logger?.LogInformation("Application now closing.");
 			logger?.LogInformation("Closing DbContext");

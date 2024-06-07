@@ -7,9 +7,10 @@ public interface IBlynkMqttClient {
 	/// <summary>
 	/// Connects to the Blynk broker.
 	/// </summary>
+	/// <param name="subscription">Topics to subscribe to</param>
 	/// <param name="token">Cancellation token to cancel the connection process.</param>
 	/// <returns>A task that represents the asynchronous connection operation. The task result contains a boolean value indicating whether the connection was successful.</returns>
-	Task<bool> Connect (CancellationToken token = default);
+	Task<bool> Connect (MqttSubcription subscription = (MqttSubcription.Uplink & MqttSubcription.Downlink), CancellationToken token = default);
 
 	/// <summary>
 	/// Disconnects from the Blynk broker.

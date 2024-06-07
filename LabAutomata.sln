@@ -30,7 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Db.Tests.Integr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.Benchmark", "LabAutomata.Benchmark\LabAutomata.Benchmark.csproj", "{F01C5020-7751-4C33-9886-E4B6724756D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.IoT", "LabAutomata.IoT\LabAutomata.IoT.csproj", "{47C9131F-0F62-41EF-A717-4C0EB7BD2E90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabAutomata.IoT", "LabAutomata.IoT\LabAutomata.IoT.csproj", "{47C9131F-0F62-41EF-A717-4C0EB7BD2E90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAutomata.Iot.Tests.Unit", "LabAutomata.Iot.Tests.Unit\LabAutomata.Iot.Tests.Unit.csproj", "{B27FBC96-3B81-40B6-909E-13DEF10A58D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -296,6 +298,26 @@ Global
 		{47C9131F-0F62-41EF-A717-4C0EB7BD2E90}.Release|x64.Build.0 = Release|Any CPU
 		{47C9131F-0F62-41EF-A717-4C0EB7BD2E90}.Release|x86.ActiveCfg = Release|Any CPU
 		{47C9131F-0F62-41EF-A717-4C0EB7BD2E90}.Release|x86.Build.0 = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|x64.Build.0 = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Debug|x86.Build.0 = Debug|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|ARM.Build.0 = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|ARM64.Build.0 = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|x64.Build.0 = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{B27FBC96-3B81-40B6-909E-13DEF10A58D1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

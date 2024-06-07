@@ -9,6 +9,7 @@ on:
 env:
   # these must be defined as lower case
   wpf_project: LabAutomata/LabAutomata.csproj
+  iot_project: LabAutomata.IoT/LabAutomata.IoT.csproj
   wpf_library_project: LabAutomata.Wpf.Library/LabAutomata.Wpf.Library.csproj
   ui_library_project: LabAutomata.Library/LabAutomata.Library.csproj
   db_project: LabaAutomata.Db/LabAutomata.Db.csproj
@@ -118,3 +119,29 @@ jobs:
 
       - name: Run unit tests
         run: dotnet test ${{env.db_project}} --no-build --verbosity normal
+
+ iot-tests:
+    runs-on: windows-latest
+    steps:
+      - name: Output tests started
+        env: 
+          ACTOR: ${{ github.actor }}
+        shell: bash
+        run: echo "$ACTOR invoked a unit test workflow"
+
+        # this is required - allows the workflow access to the repositories
+      - name: Checkout v4
+        uses: actions/checkout@v4
+
+        # this is required - need a preinstalled version of .NET Core on a runner
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+
+      - name: Restore package dependencies
+        run: dotnet restore ${{env.iot_project}}
+
+      - name: Build projects
+        run: dotnet build ${{env.iot_project}} --no-restore
+
+      - name: Run unit tests
+        run: dotnet test ${{env.iot_project}} --no-build --verbosity normal

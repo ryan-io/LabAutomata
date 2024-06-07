@@ -1,5 +1,7 @@
 ﻿using LabAutomata.common;
+using LabAutomata.IoT;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using rio_command_pipeline;
 using System.Windows;
 using System.Windows.Threading;
@@ -18,6 +20,11 @@ namespace LabAutomata.setup {
 			var mw = _sp.GetService<MainWindow>();
 			mw?.Show();
 
+			var mqttClient = _sp.GetRequiredService<IBlynkMqttClient>();
+			var clientState = await mqttClient.Connect(MqttSubcription.Downlink | MqttSubcription.Uplink, token);
+
+			_logger.LogInformation("State return from MQTT client connection: {state}", clientState);
+
 			var broker = _sp.GetRequiredService<CommandPipelineBroker>();
 			await broker.SignalAsync(AppEvent.STARTED, token: token);
 		}
@@ -30,6 +37,7 @@ namespace LabAutomata.setup {
 		internal StartupEntryPoint (App app, IServiceProvider sp) {
 			_app = app;
 			_sp = sp;
+			_logger = sp.GetRequiredService<ILogger>();
 		}
 
 		/// <summary>
@@ -52,6 +60,7 @@ namespace LabAutomata.setup {
 
 		private readonly App _app;
 		private readonly IServiceProvider _sp;
+		private readonly ILogger _logger;
 	}
 
 	/// <summary>

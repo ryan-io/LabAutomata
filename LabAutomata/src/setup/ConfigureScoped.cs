@@ -4,6 +4,7 @@ using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MQTTnet;
 using riolog;
 
 namespace LabAutomata.setup;
@@ -22,8 +23,13 @@ internal sealed class ConfigureScoped {
 			_sc.AddScoped(vmType);
 		}
 
+		_sc.AddScoped(_ => {
+			var factory = new MqttFactory();
+			return factory.CreateMqttClient();
+		});
+
 		// scoped
-		_sc.AddScoped(sp => {
+		_sc.AddScoped<IBlynkMqttClientConfig>(sp => {
 			var config = sp.GetRequiredService<IConfigurationRoot>();
 
 			ArgumentNullException.ThrowIfNull(config, CouldNotExtractConfigFromServiceProvider);
