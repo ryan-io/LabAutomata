@@ -1,5 +1,4 @@
-﻿using MQTTnet;
-using MQTTnet.Client;
+﻿using MQTTnet.Client;
 
 namespace LabAutomata.IoT;
 
@@ -20,13 +19,9 @@ public class BlynkMqttPoll {
 	/// <summary>
 	/// Sends a signal to the MQTT client.
 	/// </summary>
+	/// <param name="msgPayload">Interface for retrieving an appropriate message payload</param>
 	/// <param name="token">The cancellation token.</param>
-	public async Task Signal (CancellationToken token = default) {
-		var applicationMessage = new MqttApplicationMessageBuilder()
-			.WithTopic("get/ds")
-			.WithPayload("temperature_sys_2")
-			.Build();
-
-		await _client.PublishAsync(applicationMessage, token);
+	public async Task Signal (IMqttMsg msgPayload, CancellationToken token = default) {
+		await _client.PublishAsync(msgPayload.Get(), token);
 	}
 }

@@ -6,84 +6,82 @@ using System.Reflection;
 namespace LabAutomata.Tests.Unit.common;
 
 public class PeriodicWorkTests : IDisposable {
-    // modify Period to adjust tick rate
-    private const int Period = 1;
+	// modify Period to adjust tick rate
+	private const int Period = 1;
 
-    // system under test
-    private readonly PeriodicWork _sut = new(Period);
+	// system under test
+	private readonly PeriodicWork _sut;
 
-    public PeriodicWorkTests () {
+	readonly CaptureInt _ci = new();
 
-    }
+	public PeriodicWorkTests () {
+		_sut = new PeriodicWork(() => { _ci.Get()++; return Task.CompletedTask; });
 
-    [Fact]
-    public async Task WorkAsync_ShouldInvokeCallback_UntilExitConditionIsTrue () {
-        var callback = Substitute.For<Action>();
-        var exitCondition = Substitute.For<Func<bool>>();
-        exitCondition.Invoke().Returns(false, false, true); // exit after 2 invocations
+	}
 
-        await _sut.WorkAsync(callback, exitCondition);
+	[Fact]
+	public async Task WorkAsync_ShouldInvokeCallback_UntilExitConditionIsTrue () {
+		var callback = Substitute.For<Action>();    // single callback once work complete
+		var exitCondition = Substitute.For<Func<bool>>();
+		exitCondition.Invoke().Returns(false, false, true); // exit after 2 invocations
 
-        callback.Received(2).Invoke();
-        exitCondition.Received(3).Invoke();
-    }
+		await _sut.WorkAsync(exitCondition, callback);
 
-    [Fact]
-    public async Task WorkAsync_ShouldInvokeCompleteCallback_WhenExitConditionIsTrue () {
-        var completeCallback = Substitute.For<Action>();
-        var exitCondition = Substitute.For<Func<bool>>();
-        exitCondition.Invoke().Returns(true); // exit immediately
+		callback.Received(1).Invoke();
+		exitCondition.Received(3).Invoke();
+	}
 
-        await _sut.WorkAsync(null, exitCondition, completeCallback);
+	[Fact]
+	public async Task WorkAsync_ShouldInvokeCompleteCallback_WhenExitConditionIsTrue () {
+		var completeCallback = Substitute.For<Action>();
+		var exitCondition = Substitute.For<Func<bool>>();
+		exitCondition.Invoke().Returns(true); // exit immediately
 
-        completeCallback.Received(1).Invoke();
-    }
+		await _sut.WorkAsync(exitCondition, completeCallback);
 
-    [Fact]
-    public void Dispose_ShouldDisposeTimer_WhenDisposeIsInvoked () {
-        _sut.Dispose();
+		completeCallback.Received(1).Invoke();
+	}
 
-        // assert that _isDisposed is true
-        // this requires reflection as _isDisposed is private
-        var isDisposed = (bool)typeof(PeriodicWork).
-            GetField("_isDisposed", BindingFlags.NonPublic | BindingFlags.Instance)
-            ?.GetValue(_sut)!;
+	[Fact]
+	public void Dispose_ShouldDisposeTimer_WhenDisposeIsInvoked () {
+		_sut.Dispose();
 
-        isDisposed.Should().BeTrue();
-    }
+		// assert that _isDisposed is true
+		// this requires reflection as _isDisposed is private
+		var isDisposed = (bool)typeof(PeriodicWork).
+			GetField("_isDisposed", BindingFlags.NonPublic | BindingFlags.Instance)
+			?.GetValue(_sut)!;
 
-    [Fact]
-    public async Task WorkAsync_ShouldTickTwiceThenComplete_WhenValidCallbacksProvided () {
-        // arrange
-        // simulates 'ticking' twice
-        _sut.SetPeriod(2);  // changes the period to 3 seconds; work has not begun yet
+		isDisposed.Should().BeTrue();
+	}
 
-        // capturing a modifiable integer on the heap
-        CaptureInt ci = new CaptureInt();
+	[Fact]
+	public async Task WorkAsync_ShouldTickTwiceThenComplete_WhenValidCallbacksProvided () {
+		// arrange
+		// simulates 'ticking' twice
+		_sut.SetPeriod(2);  // changes the period to 3 seconds; work has not begun yet
 
-        Action cb = () => ci.Get()++;
+		Func<bool> ecb = Substitute.For<Func<bool>>();
+		ecb.Invoke().Returns(_ => _ci.Get() >= 2);
 
-        Func<bool> ecb = Substitute.For<Func<bool>>();
-        ecb.Invoke().Returns(_ => ci.Get() >= 2);
+		// act
+		await _sut.WorkAsync(ecb);
 
-        // act
-        await _sut.WorkAsync(cb, ecb);
+		// assert
+		// received 3 calls, false -> false -> true
+		ecb.Received(3).Invoke();
 
-        // assert
-        // received 3 calls, false -> false -> true
-        ecb.Received(3).Invoke();
+		// assumption is Get() should be 2 if cb is invoked twice
+		_ci.Get().Should().Be(2);
+	}
 
-        // assumption is Get() should be 2 if cb is invoked twice
-        ci.Get().Should().Be(2);
-    }
+	public void Dispose () {
+		_sut.Dispose();
+	}
 
-    public void Dispose () {
-        _sut.Dispose();
-    }
+	class CaptureInt {
+		public ref int Get () => ref i;
 
-    class CaptureInt {
-        public ref int Get () => ref i;
-
-        int i = 0;
-    }
+		int i = 0;
+	}
 }

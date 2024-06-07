@@ -37,12 +37,8 @@ namespace LabAutomata.IoT {
 		/// <param name="token">The cancellation token.</param>
 		/// <returns>A task representing the connection result.</returns>
 		public async Task<bool> Connect (MqttSubcription subscription = (MqttSubcription.Uplink | MqttSubcription.Downlink), CancellationToken token = default) {
-			var mqttClientOptions = new MqttClientOptionsBuilder()
-				.WithTcpServer(_config.Broker, _config.Port)
-				.WithCredentials(_config.Id, _config.Password)
-				.WithKeepAlivePeriod(TimeSpan.FromSeconds(45))
-				.WithCleanSession()
-				.Build();
+			var optionsBuilder = new BlynkMqttOptionsBuilder();
+			var mqttClientOptions = optionsBuilder.BuildOptions(_config);
 
 			if (_logger != null) {
 				_client.ConnectedAsync += _ => {
@@ -66,12 +62,9 @@ namespace LabAutomata.IoT {
 			var topicSubscriber = new MqttTopicSubscriber(_logger);
 
 			await _client.SubscribeAsync(topicSubscriber.Subscribe(subscription), token);
-			var applicationMessage = new MqttApplicationMessageBuilder()
-				.WithTopic("get/ds")
-				.WithPayload("temperature_sys_2")
-				.Build();
 
-			await _client.PublishAsync(applicationMessage, token);
+
+
 			return result.IsSessionPresent;
 		}
 

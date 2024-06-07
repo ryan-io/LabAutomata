@@ -45,7 +45,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		public virtual void Load () {
 		}
 
-		public virtual void OnClose () { }
+		public void OnClose () { }
 
 		/// <summary>
 		///  Resets the instance to an initial state

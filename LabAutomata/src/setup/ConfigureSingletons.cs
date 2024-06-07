@@ -4,6 +4,7 @@ using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.data_structures;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MQTTnet;
 using rio_command_pipeline;
 
 namespace LabAutomata.setup;
@@ -16,6 +17,13 @@ internal sealed class ConfigureSingletons {
 		_sc.AddSingleton(sp => sp); // little trick to simply return a singleton to our Sp instance
 		_sc.AddSingleton<IBlynkMqttClient, BlynkMqttClient>();
 		_sc.AddSingleton<IVmc, Vmc>();
+
+		_sc.AddSingleton(_ => {
+			var factory = new MqttFactory();
+			return factory.CreateMqttClient();
+		});
+
+		_sc.AddSingleton<BlynkMqttPoll>();
 	}
 
 	public ConfigureSingletons (IServiceCollection sc, IConfigurationBuilder cb) {

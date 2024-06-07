@@ -1,55 +1,79 @@
 ﻿namespace LabAutomata.Library.common {
-    /// <summary>
-    /// Handles an asynchronous unit of work
-    /// Use this class along with Dispatcher.InvokeAsync to prevent UI thread blocking
-    /// Invokes callBack after every tick
-    /// Checks exitCondition on when to exit the loop
-    /// Invokes completeCallback when exitCondition is true
-    /// invoke WorkAsync with 'using'
-    ///     WorkAsync does invoke Dispose() on successful work completed
-    /// </summary>
-    /// <param name="period">Time interval to tick</param>
-    public class PeriodicWork (int period = 1) : IDisposable {
-        public async Task WorkAsync (Action? callback, Func<bool> exitCondition, Action? completeCallback = null, CancellationToken token = default) {
-            if (_isDisposed || _isRunning) return;
+	/// <summary>
+	/// Handles an asynchronous unit of work
+	/// Use this class along with Dispatcher.InvokeAsync to prevent UI thread blocking
+	/// Invokes callBack after every tick
+	/// Checks exitCondition on when to exit the loop
+	/// Invokes completeCallback when exitCondition is true
+	/// invoke WorkAsync with 'using'
+	///     WorkAsync does invoke Dispose() on successful work completed
+	/// </summary>
+	public class PeriodicWork : IDisposable {
+		public async Task WorkAsync (Func<bool> exitCondition, Action? completeCallback = null, CancellationToken token = default) {
+			if (_isDisposed || _isRunning) return;
 
-            _isRunning = true;
-            var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+			_isRunning = true;
+			var timer = new PeriodicTimer(TimeSpan.FromSeconds(_period));
 
-            while (!exitCondition.Invoke()) {
-                await timer.WaitForNextTickAsync(token);
-                callback?.Invoke();
-            }
-            _timer.Dispose();
-            completeCallback?.Invoke();
-            _isRunning = false;
-        }
+			try {
+				while (!exitCondition.Invoke()) {
+					await timer.WaitForNextTickAsync(token);
+					await _callback.Invoke();
+				}
+			}
+			catch (Exception) {
+				_timer.Dispose();
+				completeCallback?.Invoke();
+				_isRunning = false;
+			}
 
-        public void Dispose () {
-            if (_isDisposed)
-                return;
+		}
 
-            _timer.Dispose();
-            _isDisposed = true;
-        }
+		public void Dispose () {
+			if (_isDisposed)
+				return;
 
-        /// <summary>
-        /// Modifies the period to a new value.
-        /// Care should be taken when change the period. If the work has begun, this method will have no effect
-        /// </summary>
-        /// <param name="newPeriod">New period value</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if newPeriod is less than or equal to '0'</exception>
-        public void SetPeriod (int newPeriod) {
-            if (newPeriod <= 0)
-                throw new ArgumentOutOfRangeException(nameof(newPeriod));
+			_timer.Dispose();
+			_isDisposed = true;
+		}
 
-            period = newPeriod;
-        }
+		/// <summary>
+		/// Modifies the period to a new value.
+		/// Care should be taken when change the period. If the work has begun, this method will have no effect
+		/// </summary>
+		/// <param name="newPeriod">New period value</param>
+		/// <exception cref="ArgumentOutOfRangeException">Thrown if newPeriod is less than or equal to '0'</exception>
+		public void SetPeriod (int newPeriod) {
+			if (newPeriod <= 0)
+				throw new ArgumentOutOfRangeException(nameof(newPeriod));
 
-        private bool _isDisposed;
-        private bool _isRunning;
-        private readonly PeriodicTimer _timer = new(TimeSpan.FromSeconds(period));
-    }
+			_period = newPeriod;
+		}
+
+		private bool _isDisposed;
+		private bool _isRunning;
+		private readonly PeriodicTimer _timer;
+		private int _period;
+
+		/// <summary>
+		/// Handles an asynchronous unit of work
+		/// Use this class along with Dispatcher.InvokeAsync to prevent UI thread blocking
+		/// Invokes callBack after every tick
+		/// Checks exitCondition on when to exit the loop
+		/// Invokes completeCallback when exitCondition is true
+		/// invoke WorkAsync with 'using'
+		///     WorkAsync does invoke Dispose() on successful work completed
+		/// </summary>
+		/// <param name="callback">Callback to invoke after period</param>
+		/// <param name="period">Time interval to tick</param>
+		public PeriodicWork (Func<Task> callback, int period = 1) {
+			_callback = callback;
+			_period = period;
+			_timer = new(TimeSpan.FromSeconds(period));
+		}
+
+		readonly Func<Task> _callback;
+	}
 }
 
 /* example

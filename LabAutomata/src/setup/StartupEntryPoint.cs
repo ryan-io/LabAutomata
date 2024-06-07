@@ -25,6 +25,9 @@ namespace LabAutomata.setup {
 
 			_logger.LogInformation("State return from MQTT client connection: {state}", clientState);
 
+			var mqttPoll = _sp.GetRequiredService<BlynkMqttPoll>();
+			// need a polling system for the background here
+
 			var broker = _sp.GetRequiredService<CommandPipelineBroker>();
 			await broker.SignalAsync(AppEvent.STARTED, token: token);
 		}
