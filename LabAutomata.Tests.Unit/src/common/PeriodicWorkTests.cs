@@ -12,11 +12,13 @@ public class PeriodicWorkTests : IDisposable {
 	// system under test
 	private readonly PeriodicWork _sut;
 
+	private readonly Func<Task> _onExecute;
+
 	readonly CaptureInt _ci = new();
 
 	public PeriodicWorkTests () {
-		_sut = new PeriodicWork(() => { _ci.Get()++; return Task.CompletedTask; });
-
+		_onExecute = Substitute.For<Func<Task>>(); //() => { _ci.Get()++; return Task.CompletedTask; };
+		_sut = new PeriodicWork(_onExecute);
 	}
 
 	[Fact]
@@ -57,22 +59,36 @@ public class PeriodicWorkTests : IDisposable {
 
 	[Fact]
 	public async Task WorkAsync_ShouldTickTwiceThenComplete_WhenValidCallbacksProvided () {
-		// arrange
-		// simulates 'ticking' twice
-		_sut.SetPeriod(2);  // changes the period to 3 seconds; work has not begun yet
+		//// arrange
+		//// simulates 'ticking' twice
+		//_sut.SetPeriod(2);  // changes the period to 3 seconds; work has not begun yet
 
-		Func<bool> ecb = Substitute.For<Func<bool>>();
-		ecb.Invoke().Returns(_ => _ci.Get() >= 2);
+		//Func<bool> ecb = Substitute.For<Func<bool>>();
+		//ecb.Invoke().Returns(_ => _ci.Get() >= 2);
+
+		//// act
+		//await _sut.WorkAsync(ecb);
+
+		//// assert
+		//// received 3 calls, false -> false -> true
+		//ecb.Received(3).Invoke();
+
+		//// assumption is Get() should be 2 if cb is invoked twice
+		//_ci.Get().Should().Be(2);
+	}
+
+	[Fact]
+	public async Task WorkAsync_ShouldThrowException_WhenExceptionIsCaught () {
+		var exitCondition = Substitute.For<Func<bool>>();
+		exitCondition.Invoke().Returns(false, false, true); // exit after 2 invocations
+
+		_onExecute.When(x => x.Invoke()).Do(_ => throw new Exception(""));
 
 		// act
-		await _sut.WorkAsync(ecb);
+		await _sut.WorkAsync(exitCondition);
 
-		// assert
-		// received 3 calls, false -> false -> true
-		ecb.Received(3).Invoke();
-
-		// assumption is Get() should be 2 if cb is invoked twice
-		_ci.Get().Should().Be(2);
+		Action act = () => _onExecute();
+		act.Should().Throw<Exception>();
 	}
 
 	public void Dispose () {

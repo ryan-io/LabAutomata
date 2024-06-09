@@ -2,6 +2,7 @@
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
+using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Threading;
@@ -26,6 +27,7 @@ internal sealed class ConfigureTransient {
 		_sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
 		_sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 		_sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
+		_sc.AddTransient<PlotViewModel>();
 	}
 
 	public ConfigureTransient (IServiceCollection sc, Application app) {

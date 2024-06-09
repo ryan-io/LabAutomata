@@ -9,6 +9,9 @@
 #include <BlynkSimpleShieldEsp8266.h>
 #include <SoftwareSerial.h>
 #include <PubSubClient.h>
+#include <NTPCLient.h>
+#include <ESP8266WiFi.h>
+#include <WiFiUdp.h>
 
 // library for DHT11 & DHT22, non-blocking
 #include "DHT.h"
@@ -82,10 +85,10 @@ void write() {
   float humidity3 = m_dhtSys3.getHumidity();
   float temperature3 = m_dhtSys3.getTemperature();
 
-  print("Sensor 1", temperature1, humidity1);
-  print("Sensor 2", temperature2, humidity2);
-  print("Sensor 3", temperature3, humidity3);
-  Serial.println("~~~~~~~~~~~~~~~~~~~~");
+  // print("Sensor 1", temperature1, humidity1);
+  // print("Sensor 2", temperature2, humidity2);
+  // print("Sensor 3", temperature3, humidity3);
+  // Serial.println("~~~~~~~~~~~~~~~~~~~~");
 
   Blynk.beginGroup();
   Blynk.virtualWrite(SYS1_TEMP_VPIN, temperature1);
@@ -98,14 +101,14 @@ void write() {
 }
 
 // serial print 
-void print(char*name, float t, float h) {
-  Serial.print(name);
-  Serial.print(":  Temperature: ");
-  Serial.print(t);
-  Serial.print(" -- Humidity: ");
-  Serial.print(h);
-  Serial.print('\n');
-}
+// void print(char*name, float t, float h) {
+//   Serial.print(name);
+//   Serial.print(":  Temperature: ");
+//   Serial.print(t);
+//   Serial.print(" -- Humidity: ");
+//   Serial.print(h);
+//   Serial.print('\n');
+// }
 
 void setup()
 {
@@ -115,9 +118,8 @@ void setup()
   m_esp8266Serial.begin(ESP8266_BAUD);
 
   delay(10);  // allows the serial connection to stabilize
-
+  
   m_timerDhtSampleRate.setInterval(DhtSampleRate, write);
-
   //m_mqttClient.setClient();
   m_dhtSys1.setup(DhtSys1Pin);
   m_dhtSys2.setup(DhtSys2Pin);

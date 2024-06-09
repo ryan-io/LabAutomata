@@ -25,7 +25,8 @@ namespace LabAutomata.Iot.Tests.Unit.src {
 			var result = _sut.Interpret(eventArgs);
 
 			// Assert
-			result.Should().Be(1.23f);
+			result.Should().Be(result);
+			result.ResponseObject.Should().Be(1.23f);
 		}
 	}
 }

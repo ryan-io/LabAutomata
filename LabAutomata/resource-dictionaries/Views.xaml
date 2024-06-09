@@ -4,6 +4,9 @@
                     xmlns:vm="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
                     xmlns:controls="clr-namespace:LabAutomata.controls"
                     xmlns:labAutomata="clr-namespace:LabAutomata">
+    <DataTemplate DataType="{x:Type vm:PlotViewModel}">
+        <controls:Plot/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:HomeVm}">
         <v:HomeView/>
     </DataTemplate>

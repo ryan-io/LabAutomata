@@ -12,6 +12,11 @@ namespace LabAutomata.IoT {
 		private readonly IBlynkMqttClientConfig _config;
 
 		/// <summary>
+		/// Event for subscribing to any available MQTT message types
+		/// </summary>
+		public event Action<MqttApplicationMessageReceivedEventArgs>? MessageReceived;
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="BlynkMqttClient"/> class.
 		/// </summary>
 		/// <param name="client">The MQTT client.</param>
@@ -52,18 +57,29 @@ namespace LabAutomata.IoT {
 				};
 			}
 
-			var interpreter = new BlynkMqttInterpreter(_logger);
-			_client.ApplicationMessageReceivedAsync += e => {
-				interpreter.Interpret(new Utf8MqttInterpretation(), e);
-				return Task.CompletedTask;
+			// the '-1' is due to a dedicated background worker thread already polling for MQTT messages
+			var semaphore = new SemaphoreSlim(Environment.ProcessorCount - 1);
+			_client.ApplicationMessageReceivedAsync += async e => {
+				await semaphore.WaitAsync(_cancellation.Token).ConfigureAwait(false);
+
+				Task LocalProcess () {
+					try {
+						MessageReceived?.Invoke(e);
+					}
+					finally {
+						semaphore.Release();
+					}
+
+					return Task.CompletedTask;
+				}
+
+				await Task.Run(LocalProcess, _cancellation.Token);
 			};
 
 			var result = await _client.ConnectAsync(mqttClientOptions, token);
 			var topicSubscriber = new MqttTopicSubscriber(_logger);
 
 			await _client.SubscribeAsync(topicSubscriber.Subscribe(subscription), token);
-
-
 
 			return result.IsSessionPresent;
 		}
@@ -82,6 +98,9 @@ namespace LabAutomata.IoT {
 		/// </summary>
 		public void Dispose () {
 			if (IsDisposed) return;
+			_cancellation.Cancel();
+			_cancellation.Dispose();
+			MessageReceived = default;
 			IsDisposed = true;
 			_client.Dispose();
 		}
@@ -90,5 +109,7 @@ namespace LabAutomata.IoT {
 		/// Gets or sets a value indicating whether the MQTT client is disposed.
 		/// </summary>
 		bool IsDisposed { get; set; }
+
+		readonly CancellationTokenSource _cancellation = new();
 	}
 }

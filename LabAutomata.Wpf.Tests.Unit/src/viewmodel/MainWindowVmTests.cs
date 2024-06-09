@@ -17,10 +17,11 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 		private readonly HomeContentVm _homeContentVm;
 		private readonly NavigationVm _navigationVm;
 		private readonly HeaderNavVm _headerNavVm;
+		private readonly PlotViewModel _plotViewModel;
 
 		public MainWindowVmTests () {
 			_homeVm = new HomeVm(_logger);
-			_homeContentVm = new HomeContentVm(_logger);
+			_homeContentVm = new HomeContentVm(_plotViewModel, _logger);
 			_navigationVm = new NavigationVm(_vmc, _logger);
 			_headerNavVm = new HeaderNavVm(_vmc, _logger);
 			_sut = new MainWindowVm(_vmc, _navigationVm, _homeVm, _homeContentVm, _logger);
@@ -28,6 +29,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 			_vmc.Get(nameof(HomeContentVm)).Returns(_homeContentVm);
 			_vmc.Get(nameof(NavigationVm)).Returns(_navigationVm);
 			_vmc.Get(nameof(HeaderNavVm)).Returns(_headerNavVm);
+			_vmc.Get(nameof(PlotViewModel)).Returns(_plotViewModel);
 		}
 
 		[Fact]

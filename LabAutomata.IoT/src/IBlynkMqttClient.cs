@@ -1,9 +1,16 @@
-﻿namespace LabAutomata.IoT;
+﻿using MQTTnet.Client;
+
+namespace LabAutomata.IoT;
 
 /// <summary>
 /// Represents an interface for an MQTT client that connects to the Blynk broker.
 /// </summary>
 public interface IBlynkMqttClient {
+	/// <summary>
+	/// Event for subscribing to any available MQTT message types
+	/// </summary>
+	event Action<MqttApplicationMessageReceivedEventArgs>? MessageReceived;
+
 	/// <summary>
 	/// Connects to the Blynk broker.
 	/// </summary>

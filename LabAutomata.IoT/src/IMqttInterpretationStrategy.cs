@@ -1,4 +1,5 @@
 ﻿using MQTTnet.Client;
+using static LabAutomata.IoT.Utf8MqttInterpretation;
 
 namespace LabAutomata.IoT;
 
@@ -15,7 +16,7 @@ namespace LabAutomata.IoT;
         // Perform any necessary calculations or transformations on the message data
         // Return the interpreted value as a float
 
-        // For example, let's say the MQTT message payload contains a temperature value in Celsius
+        // For example, let's say the MQTT message payload contains a Temperature value in Celsius
         // and we want to convert it to Fahrenheit
         var celsius = float.Parse(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
         var fahrenheit = (celsius * 9 / 5) + 32;
@@ -25,6 +26,6 @@ namespace LabAutomata.IoT;
 }
  */
 
-public interface IMqttInterpretationStrategy {
-	float Interpret (MqttApplicationMessageReceivedEventArgs e);
+public interface IMqttInterpretationStrategy<T> {
+	MqttStrategyResponse<T> Interpret (MqttApplicationMessageReceivedEventArgs e);
 }

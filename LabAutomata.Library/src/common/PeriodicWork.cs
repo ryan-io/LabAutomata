@@ -12,6 +12,8 @@
 		public async Task WorkAsync (Func<bool> exitCondition, Action? completeCallback = null, CancellationToken token = default) {
 			if (_isDisposed || _isRunning) return;
 
+			ArgumentNullException.ThrowIfNull(exitCondition, "Exit condition cannot be null for periodic work.");
+
 			_isRunning = true;
 			var timer = new PeriodicTimer(TimeSpan.FromSeconds(_period));
 
@@ -23,9 +25,9 @@
 			}
 			catch (Exception) {
 				_timer.Dispose();
-				completeCallback?.Invoke();
 				_isRunning = false;
 			}
+			completeCallback?.Invoke();
 
 		}
 

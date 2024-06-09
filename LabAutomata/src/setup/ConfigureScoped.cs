@@ -18,7 +18,10 @@ internal sealed class ConfigureScoped {
 		// reflection to get all classes in deriving from the Base view model class within the LabAutomata.Wpf.Library asm
 		var asmViewModels = typeof(Base).Assembly.GetSubclassOf<Base>().ToList();
 
+		var asmViewModelExceptions = new[] { typeof(PlotViewModel) };
+
 		foreach (var vmType in asmViewModels) {
+			if (asmViewModelExceptions.Contains(vmType)) continue;
 			_sc.AddScoped(vmType);
 		}
 
