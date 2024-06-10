@@ -3,6 +3,7 @@ using MQTTnet;
 using MQTTnet.Client;
 
 namespace LabAutomata.IoT {
+
 	/// <summary>
 	/// Represents a Blynk MQTT client.
 	/// </summary>
@@ -108,8 +109,8 @@ namespace LabAutomata.IoT {
 		/// <summary>
 		/// Gets or sets a value indicating whether the MQTT client is disposed.
 		/// </summary>
-		bool IsDisposed { get; set; }
+		private bool IsDisposed { get; set; }
 
-		readonly CancellationTokenSource _cancellation = new();
+		private readonly CancellationTokenSource _cancellation = new();
 	}
 }

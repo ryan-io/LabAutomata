@@ -2,6 +2,7 @@
 using LabAutomata.Db.common;
 
 namespace LabAutomata.Db.Tests.Unit {
+
 	public class ConfigurationServiceTests {
 		private readonly ConfigurationService _sut = new();
 

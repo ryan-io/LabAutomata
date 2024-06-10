@@ -5,6 +5,7 @@ using MQTTnet.Client;
 namespace LabAutomata.IoT;
 
 public class MqttTopicSubscriber {
+
 	public MqttTopicSubscriber (ILogger? logger) {
 		_logger = logger;
 	}

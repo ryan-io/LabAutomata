@@ -7,4 +7,4 @@ namespace LabAutomata.Db.repository;
 /// Represents a repository for managing Test entities in the database.
 /// </summary>
 public class TestRepository (ILabPostgreSqlDbContext dbCtx)
-    : Repository<Test>(dbCtx, dbCtx.Test);
+	: Repository<Test>(dbCtx, dbCtx.Test);

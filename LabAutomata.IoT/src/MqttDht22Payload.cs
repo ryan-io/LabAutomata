@@ -1,4 +1,5 @@
 ﻿namespace LabAutomata.IoT {
+
 	public struct MqttDht22Payload {
 		public float Temperature { get; init; }
 		public float RelHumidity { get; init; }

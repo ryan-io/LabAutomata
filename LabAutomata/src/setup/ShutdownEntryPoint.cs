@@ -39,7 +39,6 @@ namespace LabAutomata.setup {
 			var ctx = _sp.GetService<LabPostgreSqlDbContext>();
 			ctx?.Dispose();
 			logger?.CloseAndFlush();
-
 		}
 
 		private readonly IServiceProvider _sp;

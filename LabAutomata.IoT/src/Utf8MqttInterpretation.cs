@@ -4,6 +4,7 @@ using System.Buffers.Text;
 namespace LabAutomata.IoT;
 
 public class Utf8MqttInterpretation : IMqttInterpretationStrategy<float> {
+
 	/// <summary>
 	/// Interprets the MQTT application message payload as a float value.
 	/// </summary>
@@ -13,5 +14,4 @@ public class Utf8MqttInterpretation : IMqttInterpretationStrategy<float> {
 		var status = Utf8Parser.TryParse(e.ApplicationMessage.PayloadSegment, out float value, out var _);
 		return new MqttStrategyResponse<float>(value, status);
 	}
-
 }

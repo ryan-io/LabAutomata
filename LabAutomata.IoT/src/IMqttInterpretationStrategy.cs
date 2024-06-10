@@ -1,5 +1,4 @@
 ﻿using MQTTnet.Client;
-using static LabAutomata.IoT.Utf8MqttInterpretation;
 
 namespace LabAutomata.IoT;
 
@@ -27,5 +26,6 @@ namespace LabAutomata.IoT;
  */
 
 public interface IMqttInterpretationStrategy<T> {
+
 	MqttStrategyResponse<T> Interpret (MqttApplicationMessageReceivedEventArgs e);
 }

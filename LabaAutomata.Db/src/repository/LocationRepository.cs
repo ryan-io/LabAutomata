@@ -7,4 +7,4 @@ namespace LabAutomata.Db.repository;
 /// Represents a repository for managing Location entities in the database.
 /// </summary>
 public class LocationRepository (ILabPostgreSqlDbContext dbCtx)
-    : Repository<Location>(dbCtx, dbCtx.Location);
+	: Repository<Location>(dbCtx, dbCtx.Location);

@@ -5,67 +5,69 @@ using LabAutomata.Db.service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAutomata.WebApi.controllers {
-    public class TestController (TestService service) : BaseController {
-        // post: api/sstemptest/create/instanceId
-        [HttpPost("create/{instanceId:int}")]
-        public async Task<IActionResult> CreateSsTempTest ([FromRoute] int instanceId, CancellationToken ct = default) {
-            // factory call to get new model
-            var unionCreateModel = SsTempTestFactory.Create(instanceId, TestTypeFactory.PowerTemperatureCycling());
 
-            // check if model creation had any errors
-            if (unionCreateModel.IsError)
-                return ProblemInController(unionCreateModel.Errors);
+	public class TestController (TestService service) : BaseController {
 
-            // invoke service to save to db
-            var unionSaveToService = await service.Create(unionCreateModel.Value, ct);
+		// post: api/sstemptest/create/instanceId
+		[HttpPost("create/{instanceId:int}")]
+		public async Task<IActionResult> CreateSsTempTest ([FromRoute] int instanceId, CancellationToken ct = default) {
+			// factory call to get new model
+			var unionCreateModel = SsTempTestFactory.Create(instanceId, TestTypeFactory.PowerTemperatureCycling());
 
-            // optional mapping
+			// check if model creation had any errors
+			if (unionCreateModel.IsError)
+				return ProblemInController(unionCreateModel.Errors);
 
-            // this is expensive to do but versatile
-            // location: /api/SsTempTest/{unionCreateModel.Value.Id}
-            return unionSaveToService.Match(
-                i => CreatedAtAction(nameof(CreateSsTempTest),
-                                                   new { id = unionCreateModel.Value.Id },
-                                                   unionCreateModel),
-                ProblemInController);
-        }
+			// invoke service to save to db
+			var unionSaveToService = await service.Create(unionCreateModel.Value, ct);
 
-        [HttpGet("get/{id:int}")]
-        public async Task<IActionResult> GetSsTempTest (int id, CancellationToken ct = default) {
-            // query service to get the test
-            var unionGetFromService = await service.Get(id, ct);
+			// optional mapping
 
-            // optional mapping:
-            //      would be used to map the value from unionGetFromService.Value to a response
-            //      this mapped response would be passed into the Match invocation instead of unionGetFromService.Value
+			// this is expensive to do but versatile
+			// location: /api/SsTempTest/{unionCreateModel.Value.Id}
+			return unionSaveToService.Match(
+				i => CreatedAtAction(nameof(CreateSsTempTest),
+												   new { id = unionCreateModel.Value.Id },
+												   unionCreateModel),
+				ProblemInController);
+		}
 
-            return unionGetFromService.Match(_ => Ok(unionGetFromService.Value), ProblemInController);
-        }
+		[HttpGet("get/{id:int}")]
+		public async Task<IActionResult> GetSsTempTest (int id, CancellationToken ct = default) {
+			// query service to get the test
+			var unionGetFromService = await service.Get(id, ct);
 
-        [HttpPut("upsert/{id:int}")]
-        public async Task<IActionResult> UpsertSsTempTest ([FromRoute] int id, Test update, CancellationToken ct = default) {
-            var unionCreateClone = SsTempTestFactory.CloneWithId(id, update);
+			// optional mapping:
+			//      would be used to map the value from unionGetFromService.Value to a response
+			//      this mapped response would be passed into the Match invocation instead of unionGetFromService.Value
 
-            if (unionCreateClone.IsError)
-                return ProblemInController(unionCreateClone.Errors);
+			return unionGetFromService.Match(_ => Ok(unionGetFromService.Value), ProblemInController);
+		}
 
-            var unionUpsertToService = await service.Upsert(id, unionCreateClone.Value, ct);
+		[HttpPut("upsert/{id:int}")]
+		public async Task<IActionResult> UpsertSsTempTest ([FromRoute] int id, Test update, CancellationToken ct = default) {
+			var unionCreateClone = SsTempTestFactory.CloneWithId(id, update);
 
-            return unionUpsertToService.Match(
-                _ => Ok(unionCreateClone.Value),
-                ProblemInController);
-        }
+			if (unionCreateClone.IsError)
+				return ProblemInController(unionCreateClone.Errors);
 
-        [HttpDelete("delete/{id:int}")]
-        public async Task<IActionResult> DeleteSsTempTest ([FromRoute] int id, CancellationToken ct = default) {
-            var unionTransferObjCreation = SsTempTestFactory.CreateForDeletion(id);
+			var unionUpsertToService = await service.Upsert(id, unionCreateClone.Value, ct);
 
-            if (unionTransferObjCreation.IsError)
-                return ProblemInController(unionTransferObjCreation.Errors);
+			return unionUpsertToService.Match(
+				_ => Ok(unionCreateClone.Value),
+				ProblemInController);
+		}
 
-            var unionDeleteFromService = await service.Delete(id, ct);
+		[HttpDelete("delete/{id:int}")]
+		public async Task<IActionResult> DeleteSsTempTest ([FromRoute] int id, CancellationToken ct = default) {
+			var unionTransferObjCreation = SsTempTestFactory.CreateForDeletion(id);
 
-            return unionDeleteFromService.Match(_ => NoContent(), ProblemInController);
-        }
-    }
+			if (unionTransferObjCreation.IsError)
+				return ProblemInController(unionTransferObjCreation.Errors);
+
+			var unionDeleteFromService = await service.Delete(id, ct);
+
+			return unionDeleteFromService.Match(_ => NoContent(), ProblemInController);
+		}
+	}
 }

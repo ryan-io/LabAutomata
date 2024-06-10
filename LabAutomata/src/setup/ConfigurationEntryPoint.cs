@@ -6,6 +6,7 @@ using System.Windows;
 namespace LabAutomata.setup;
 
 internal sealed class ConfigurationEntryPoint {
+
 	public IServiceProvider Configure () {
 		var sc = new ServiceCollection();
 		ConfigureServices(sc);
@@ -17,7 +18,7 @@ internal sealed class ConfigurationEntryPoint {
 		return sp;
 	}
 
-	void ConfigureServices (IServiceCollection sc) {
+	private void ConfigureServices (IServiceCollection sc) {
 		var asm = Assembly.GetCallingAssembly();
 		ArgumentNullException.ThrowIfNull(asm, "Lab Db assembly cannot be null");
 

@@ -1,5 +1,5 @@
 ﻿namespace LabAutomata.Wpf.Library.common {
-    public static class ViewModelLocator {
 
-    }
+	public static class ViewModelLocator {
+	}
 }

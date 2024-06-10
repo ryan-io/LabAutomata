@@ -1,6 +1,7 @@
 using LabAutomata.Db.models;
 
 namespace LabAutomata.Wpf.Library.domain_models {
+
 	public class EquipmentDomainModel : DomainModel<Equipment> {
 		private string _name;
 		private DateTime _purchaseDate;
@@ -11,7 +12,6 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private ICollection<Workstation> _workstations;
 
 		public EquipmentDomainModel () {
-
 		}
 
 		public EquipmentDomainModel (Equipment equipment) {

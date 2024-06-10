@@ -15,7 +15,6 @@ internal sealed class ConfigureVmc {
 		foreach (var vmType in asmViewModels) {
 			vmc.Set(vmType.Name, (_sp.GetService(vmType) as Base)!);
 		}
-
 	}
 
 	public ConfigureVmc (IServiceProvider sp) {

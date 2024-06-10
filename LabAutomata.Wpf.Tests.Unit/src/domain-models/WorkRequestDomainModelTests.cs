@@ -5,147 +5,148 @@ using LabAutomata.Wpf.Library.domain_models;
 using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Tests.Unit.domain_models {
-    public class WorkRequestDomainModelTests {
-        private readonly WorkRequestDomainModel _sut = new();
 
-        [Fact]
-        public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+	public class WorkRequestDomainModelTests {
+		private readonly WorkRequestDomainModel _sut = new();
 
-            // Act
-            _sut.Name = "Test Name";
+		[Fact]
+		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.Name.Should().Be("Test Name");
-            propertyName.Should().Be(nameof(_sut.Name));
-        }
+			// Act
+			_sut.Name = "Test Name";
 
-        [Fact]
-        public void Name_Setter_Should_AddErrorWhenValueIsNullOrEmpty () {
-            // Arrange
+			// Assert
+			_sut.Name.Should().Be("Test Name");
+			propertyName.Should().Be(nameof(_sut.Name));
+		}
 
-            // Act
-            _sut.Name = null;
+		[Fact]
+		public void Name_Setter_Should_AddErrorWhenValueIsNullOrEmpty () {
+			// Arrange
 
-            // Assert
-            var errors = (List<string>)_sut.GetErrors(nameof(WorkRequestDomainModel.Name));
-            errors.Should().Contain(WpfLibC.Msg.WrDomainNameIsNull);
-        }
+			// Act
+			_sut.Name = null;
 
-        [Fact]
-        public void Program_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+			// Assert
+			var errors = (List<string>)_sut.GetErrors(nameof(WorkRequestDomainModel.Name));
+			errors.Should().Contain(WpfLibC.Msg.WrDomainNameIsNull);
+		}
 
-            // Act
-            _sut.Program = "Test Program";
+		[Fact]
+		public void Program_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.Program.Should().Be("Test Program");
-            propertyName.Should().Be(nameof(_sut.Program));
-        }
+			// Act
+			_sut.Program = "Test Program";
 
-        [Fact]
-        public void Description_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+			// Assert
+			_sut.Program.Should().Be("Test Program");
+			propertyName.Should().Be(nameof(_sut.Program));
+		}
 
-            // Act
-            _sut.Description = "Test Description";
+		[Fact]
+		public void Description_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.Description.Should().Be("Test Description");
-            propertyName.Should().Be(nameof(_sut.Description));
-        }
+			// Act
+			_sut.Description = "Test Description";
 
-        [Fact]
-        public void StartDate_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
-            var startDate = new DateTime(2024, 1, 1);
+			// Assert
+			_sut.Description.Should().Be("Test Description");
+			propertyName.Should().Be(nameof(_sut.Description));
+		}
 
-            // Act
-            _sut.StartDate = startDate;
+		[Fact]
+		public void StartDate_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+			var startDate = new DateTime(2024, 1, 1);
 
-            // Assert
-            _sut.StartDate.Should().Be(startDate);
-            propertyName.Should().Be(nameof(_sut.StartDate));
-        }
+			// Act
+			_sut.StartDate = startDate;
 
-        [Fact]
-        public void ObsGetErrors_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            var sut = new WorkRequestDomainModel();
-            sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+			// Assert
+			_sut.StartDate.Should().Be(startDate);
+			propertyName.Should().Be(nameof(_sut.StartDate));
+		}
 
-            // Act
-            var errors = new List<string> { "Error 1", "Error 2" };
-            sut.ObsGetErrors = errors;
+		[Fact]
+		public void ObsGetErrors_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			var sut = new WorkRequestDomainModel();
+			sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            sut.ObsGetErrors.Should().BeEquivalentTo(errors);
-            propertyName.Should().Be(nameof(sut.ObsGetErrors));
-        }
+			// Act
+			var errors = new List<string> { "Error 1", "Error 2" };
+			sut.ObsGetErrors = errors;
 
-        [Fact]
-        public void Reset_ShouldResetPropertiesToDefaultValues_WhenCalled () {
-            // Arrange
-            _sut.Name = "Test Name";
-            _sut.Program = "Test Program";
-            _sut.Description = "Test Description";
-            _sut.StartDate = DateTime.Now;
-            _sut.Tests = new ObservableCollection<Test> { new Test() };
+			// Assert
+			sut.ObsGetErrors.Should().BeEquivalentTo(errors);
+			propertyName.Should().Be(nameof(sut.ObsGetErrors));
+		}
 
-            // Act
-            _sut.Reset();
+		[Fact]
+		public void Reset_ShouldResetPropertiesToDefaultValues_WhenCalled () {
+			// Arrange
+			_sut.Name = "Test Name";
+			_sut.Program = "Test Program";
+			_sut.Description = "Test Description";
+			_sut.StartDate = DateTime.Now;
+			_sut.Tests = new ObservableCollection<Test> { new Test() };
 
-            // Assert
-            _sut.Name.Should().BeEmpty();
-            _sut.Program.Should().BeEmpty();
-            _sut.Description.Should().BeEmpty();
-            _sut.StartDate.Should().BeNull();
-            _sut.Tests.Should().BeEmpty();
-        }
+			// Act
+			_sut.Reset();
 
-        [Fact]
-        public void Create_ShouldReturnNewWorkRequestWithSameProperties_WhenCalled () {
-            // Arrange
-            _sut.Name = "Test Name";
-            _sut.Program = "Test Program";
-            _sut.Description = "Test Description";
-            _sut.StartDate = DateTime.Now;
-            _sut.Manufacturer = new Manufacturer();
-            _sut.Tests = new ObservableCollection<Test>();
+			// Assert
+			_sut.Name.Should().BeEmpty();
+			_sut.Program.Should().BeEmpty();
+			_sut.Description.Should().BeEmpty();
+			_sut.StartDate.Should().BeNull();
+			_sut.Tests.Should().BeEmpty();
+		}
 
-            // Act
-            var workRequest = _sut.Create();
+		[Fact]
+		public void Create_ShouldReturnNewWorkRequestWithSameProperties_WhenCalled () {
+			// Arrange
+			_sut.Name = "Test Name";
+			_sut.Program = "Test Program";
+			_sut.Description = "Test Description";
+			_sut.StartDate = DateTime.Now;
+			_sut.Manufacturer = new Manufacturer();
+			_sut.Tests = new ObservableCollection<Test>();
 
-            // Assert
-            workRequest.Name.Should().BeEquivalentTo(_sut.Name);
-            workRequest.Program.Should().BeEquivalentTo(_sut.Program);
-            workRequest.Description.Should().BeEquivalentTo(_sut.Description);
-            workRequest.Started.Should().Be(_sut.StartDate);
-            workRequest.Manufacturer.Should().NotBeNull();
-            workRequest.Tests.Should().BeEquivalentTo(_sut.Tests);
-        }
+			// Act
+			var workRequest = _sut.Create();
 
-        [Fact]
-        public void Validate_ShouldThrowArgumentNullException_WhenNameOrProgramAreNullOrWhiteSpace () {
-            // Arrange
-            _sut.Name = null;
-            _sut.Program = null;
+			// Assert
+			workRequest.Name.Should().BeEquivalentTo(_sut.Name);
+			workRequest.Program.Should().BeEquivalentTo(_sut.Program);
+			workRequest.Description.Should().BeEquivalentTo(_sut.Description);
+			workRequest.Started.Should().Be(_sut.StartDate);
+			workRequest.Manufacturer.Should().NotBeNull();
+			workRequest.Tests.Should().BeEquivalentTo(_sut.Tests);
+		}
 
-            // Act
-            Action act = () => _sut.Validate();
+		[Fact]
+		public void Validate_ShouldThrowArgumentNullException_WhenNameOrProgramAreNullOrWhiteSpace () {
+			// Arrange
+			_sut.Name = null;
+			_sut.Program = null;
 
-            // Assert
-            act.Should().Throw<ArgumentNullException>();
-        }
-    }
+			// Act
+			Action act = () => _sut.Validate();
+
+			// Assert
+			act.Should().Throw<ArgumentNullException>();
+		}
+	}
 }

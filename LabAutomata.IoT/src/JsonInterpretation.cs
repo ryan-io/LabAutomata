@@ -3,6 +3,7 @@
 namespace LabAutomata.IoT;
 
 public class JsonInterpretation : IMqttInterpretationStrategy<string?> {
+
 	/// <summary>
 	/// Interprets the MQTT application message received and converts it to a string.
 	/// </summary>

@@ -2,72 +2,73 @@ using FluentAssertions;
 using LabAutomata.Wpf.Library.domain_models;
 
 namespace LabAutomata.Wpf.Tests.Unit.domain_models {
-    public class TestTypeDomainModelTests {
-        private readonly TestTypeDomainModel _sut = new();
 
-        [Fact]
-        public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+	public class TestTypeDomainModelTests {
+		private readonly TestTypeDomainModel _sut = new();
 
-            // Act
-            _sut.Name = "Test Name";
+		[Fact]
+		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.Name.Should().Be("Test Name");
-            propertyName.Should().Be(nameof(_sut.Name));
-        }
+			// Act
+			_sut.Name = "Test Name";
 
-        [Fact]
-        public void BitId_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+			// Assert
+			_sut.Name.Should().Be("Test Name");
+			propertyName.Should().Be(nameof(_sut.Name));
+		}
 
-            // Act
-            _sut.BitId = 1;
+		[Fact]
+		public void BitId_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.BitId.Should().Be(1);
-            propertyName.Should().Be(nameof(_sut.BitId));
-        }
+			// Act
+			_sut.BitId = 1;
 
-        [Fact]
-        public void Create_ShouldReturnNewTestTypeWithSameProperties_WhenCalled () {
-            // Arrange
-            _sut.Name = "Test Name";
-            _sut.BitId = 1;
+			// Assert
+			_sut.BitId.Should().Be(1);
+			propertyName.Should().Be(nameof(_sut.BitId));
+		}
 
-            // Act
-            var testType = _sut.Create();
+		[Fact]
+		public void Create_ShouldReturnNewTestTypeWithSameProperties_WhenCalled () {
+			// Arrange
+			_sut.Name = "Test Name";
+			_sut.BitId = 1;
 
-            // Assert
-            testType.Name.Should().Be(_sut.Name);
-        }
+			// Act
+			var testType = _sut.Create();
 
-        [Fact]
-        public void Validate_ShouldThrowArgumentNullException_WhenNameIsNullOrWhiteSpace () {
-            // Arrange
-            _sut.Name = null;
+			// Assert
+			testType.Name.Should().Be(_sut.Name);
+		}
 
-            // Act
-            Action act = () => _sut.Validate();
+		[Fact]
+		public void Validate_ShouldThrowArgumentNullException_WhenNameIsNullOrWhiteSpace () {
+			// Arrange
+			_sut.Name = null;
 
-            // Assert
-            act.Should().Throw<ArgumentNullException>();
-        }
+			// Act
+			Action act = () => _sut.Validate();
 
-        [Fact]
-        public void Validate_ShouldThrowArgumentException_WhenBitIdIsLessThanOrEqualToZero () {
-            // Arrange
-            _sut.BitId = 0;
+			// Assert
+			act.Should().Throw<ArgumentNullException>();
+		}
 
-            // Act
-            Action act = () => _sut.Validate();
+		[Fact]
+		public void Validate_ShouldThrowArgumentException_WhenBitIdIsLessThanOrEqualToZero () {
+			// Arrange
+			_sut.BitId = 0;
 
-            // Assert
-            act.Should().Throw<ArgumentException>();
-        }
-    }
+			// Act
+			Action act = () => _sut.Validate();
+
+			// Assert
+			act.Should().Throw<ArgumentException>();
+		}
+	}
 }

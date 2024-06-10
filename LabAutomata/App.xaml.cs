@@ -2,10 +2,12 @@
 using System.Windows;
 
 namespace LabAutomata {
+
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
+
 		public App () {
 			ConfigurationEntryPoint entry = new(Current);
 			_serviceProvider = entry.Configure();

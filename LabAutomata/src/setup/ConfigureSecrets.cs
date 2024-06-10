@@ -4,6 +4,7 @@ using System.Reflection;
 namespace LabAutomata.setup;
 
 internal sealed class ConfigureSecrets {
+
 	public void Configure () {
 		_builder.AddUserSecrets(_asm);
 	}

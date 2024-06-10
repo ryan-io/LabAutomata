@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace LabAutomata.Db.common {
+
 	public interface ILabPostgreSqlDbContext {
 		DbSet<WorkRequest> WorkRequests { get; }
 		DbSet<Workstation> Workstations { get; }
@@ -30,7 +31,8 @@ namespace LabAutomata.Db.common {
 		public DbSet<SeedJson> SeedJson { get; set; }
 		public PostgreSqlDbContext PostgreSqlDb => this;
 
-		public LabPostgreSqlDbContext (IConfiguration config) : base(config) { }
+		public LabPostgreSqlDbContext (IConfiguration config) : base(config) {
+		}
 
 		protected override void OnModelCreating (ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);

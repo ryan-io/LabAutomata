@@ -2,14 +2,34 @@
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using SkiaSharp;
 using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
+
 	public class PlotViewModel : Base {
 		public ObservableCollection<ISeries> Series { get; set; }
 
+		public Axis[] XAxes { get; set; } =
+		[
+			new()
+			{
+				Name = "Timestamp",
+				LabelsPaint = new SolidColorPaint(SKColors.Black)
+			}
+		];
+
+		public Axis[] YAxes { get; set; } =
+		[
+			new()
+			{
+				Name = "Temperature",
+				LabelsPaint = new SolidColorPaint(SKColors.Black)
+			}
+		];
 
 		public PlotViewModel (IBlynkMqttClient blynkClient, ILogger logger) {
 			_blynkMqttClient = blynkClient;
@@ -25,7 +45,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 					Fill = null
 				}
 			};
-
 
 			var response = new JsonInterpretation();
 
@@ -51,7 +70,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			};
 		}
 
-		readonly IBlynkMqttClient _blynkMqttClient;
+		private readonly IBlynkMqttClient _blynkMqttClient;
 		private readonly ILogger _logger;
 		private readonly ObservableCollection<ObservablePoint> _observableValues;
 	}

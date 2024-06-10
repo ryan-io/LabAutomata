@@ -1,4 +1,5 @@
 ﻿namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
-    internal class EquipmentItemsContentVmTests {
-    }
+
+	internal class EquipmentItemsContentVmTests {
+	}
 }

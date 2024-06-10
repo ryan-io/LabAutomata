@@ -10,6 +10,7 @@ using rio_command_pipeline;
 namespace LabAutomata.setup;
 
 internal sealed class ConfigureSingletons {
+
 	public void Configure () {
 		_sc.AddSingleton(_ => _cb.Build());
 		_sc.AddSingleton(_ => new ConfigurationService().Create<App>());
@@ -33,5 +34,4 @@ internal sealed class ConfigureSingletons {
 
 	private readonly IServiceCollection _sc;
 	private readonly IConfigurationBuilder _cb;
-
 }

@@ -7,4 +7,4 @@ namespace LabAutomata.Db.repository;
 /// Represents a repository for managing Manufacturer entities in the database.
 /// </summary>
 public class ManufacturerRepository (ILabPostgreSqlDbContext dbCtx)
-    : Repository<Manufacturer>(dbCtx, dbCtx.Manufacturers);
+	: Repository<Manufacturer>(dbCtx, dbCtx.Manufacturers);

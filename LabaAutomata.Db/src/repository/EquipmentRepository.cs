@@ -8,6 +8,7 @@ namespace LabAutomata.Db.repository {
 	/// Represents a repository for managing Equipment entities in the database.
 	/// </summary>
 	public class EquipmentRepository : Repository<Equipment> {
+
 		public override async Task<List<Equipment>> GetAll (CancellationToken ct = default) {
 			return await DbCtx.Equipment
 				.Include(e => e.Workstations)

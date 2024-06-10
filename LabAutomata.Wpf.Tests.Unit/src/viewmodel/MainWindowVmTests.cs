@@ -8,6 +8,7 @@ using NSubstitute.ReturnsExtensions;
 using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
+
 	public class MainWindowVmTests {
 		private readonly MainWindowVm _sut;
 		private readonly IVmc _vmc = Substitute.For<IVmc>();

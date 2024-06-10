@@ -7,10 +7,12 @@ using System.Windows;
 using System.Windows.Threading;
 
 namespace LabAutomata.setup {
+
 	/// <summary>
 	/// Represents the startup entry point of the application.
 	/// </summary>
 	internal sealed class StartupEntryPoint : IStartupEntry {
+
 		/// <summary>
 		/// Starts the application, sets up global exception handlers, and shows the main window.
 		/// </summary>
@@ -70,6 +72,7 @@ namespace LabAutomata.setup {
 	/// Defines a contract for a startup entry point.
 	/// </summary>
 	internal interface IStartupEntry {
+
 		/// <summary>
 		/// Starts the application.
 		/// </summary>

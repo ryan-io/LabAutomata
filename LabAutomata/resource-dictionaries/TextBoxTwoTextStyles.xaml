@@ -12,7 +12,7 @@
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}">
                             <Grid>
-                                <Rectangle StrokeThickness="1"/>
+                                <Rectangle StrokeThickness="1" />
                                 <TextBox Margin="1"
                                      Text="{Binding RelativeSource={RelativeSource AncestorType=controls:TextBoxTwoText}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                      FontSize="{TemplateBinding Property=FontSize}"
@@ -39,11 +39,11 @@
                                                 <!-- where the value of SearchBox.Text is "", we set visibility to visible (no txt in txtbox) -->
                                                 <DataTrigger Binding="{Binding Text, ElementName=SearchBox}"
                                                          Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                             <!-- else -->
-                                            <Setter Property="Visibility" Value="Hidden"/>
+                                            <Setter Property="Visibility" Value="Hidden" />
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>

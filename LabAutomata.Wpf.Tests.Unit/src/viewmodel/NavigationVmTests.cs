@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using NSubstitute;
 
 namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
+
 	public class NavigationVmTests {
 		private readonly NavigationVm _sut;
 		private readonly IVmc _vmc = Substitute.For<IVmc>();

@@ -4,70 +4,72 @@ using Microsoft.Extensions.Logging;
 using System.Text;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-    /// <summary>
-    /// Represents a view model for navigation within the application.
-    /// </summary>
-    public class NavigationVm : Base {
-        /// <summary>
-        /// Gets the command for changing the current view model.
-        /// </summary>
-        public Command? ChangeVm {
-            get => _changeVm;
-            private set {
-                _changeVm = value;
-                NotifyPropertyChanged();
-            }
-        }
 
-        public Base? SubCurrentVm { get; set; }
+	/// <summary>
+	/// Represents a view model for navigation within the application.
+	/// </summary>
+	public class NavigationVm : Base {
 
-        private Base? _currentVm;
-        private Command? _changeVm;
+		/// <summary>
+		/// Gets the command for changing the current view model.
+		/// </summary>
+		public Command? ChangeVm {
+			get => _changeVm;
+			private set {
+				_changeVm = value;
+				NotifyPropertyChanged();
+			}
+		}
 
-        //TODO: this can just as easily be made a string
+		public Base? SubCurrentVm { get; set; }
 
-        /// <summary>
-        /// Gets or sets the current view model.
-        /// </summary>
-        public Base? CurrentVm {
-            get => _currentVm;
-            set {
-                _currentVm = value;
-                NotifyPropertyChanged();
-                ChangeVm?.RaiseCanExecuteChanged();
-            }
-        }
+		private Base? _currentVm;
+		private Command? _changeVm;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NavigationVm"/> class.
-        /// </summary>
-        /// <param name="vmc">A key-value collection containing all viewmodels in the application</param>
-        /// <param name="logger">Optional logger.</param>
-        public NavigationVm (IVmc vmc, ILogger? logger = default) : base(logger, true) {
-            _vmc = vmc;
-        }
+		//TODO: this can just as easily be made a string
 
-        public override void Load () {
-            // TODO: could refactor this into its own class
-            ChangeVm = new Command(vmIdObj => {
-                if (vmIdObj == null || vmIdObj is not string)
-                    return;
+		/// <summary>
+		/// Gets or sets the current view model.
+		/// </summary>
+		public Base? CurrentVm {
+			get => _currentVm;
+			set {
+				_currentVm = value;
+				NotifyPropertyChanged();
+				ChangeVm?.RaiseCanExecuteChanged();
+			}
+		}
 
-                _sb.Clear();
-                var vmId = (string)vmIdObj;
+		/// <summary>
+		/// Initializes a new instance of the <see cref="NavigationVm"/> class.
+		/// </summary>
+		/// <param name="vmc">A key-value collection containing all viewmodels in the application</param>
+		/// <param name="logger">Optional logger.</param>
+		public NavigationVm (IVmc vmc, ILogger? logger = default) : base(logger, true) {
+			_vmc = vmc;
+		}
 
-                _sb.Append(vmId.Remove(vmId.Length - 2));
-                _sb.Append(SubVmSuffix);
+		public override void Load () {
+			// TODO: could refactor this into its own class
+			ChangeVm = new Command(vmIdObj => {
+				if (vmIdObj == null || vmIdObj is not string)
+					return;
 
-                CurrentVm = _vmc.Get(vmId);
-                SubCurrentVm = _vmc.Get(_sb.ToString());
-            });
+				_sb.Clear();
+				var vmId = (string)vmIdObj;
 
-            CurrentVm = _vmc.Get(nameof(HomeVm));
-        }
+				_sb.Append(vmId.Remove(vmId.Length - 2));
+				_sb.Append(SubVmSuffix);
 
-        private const string SubVmSuffix = "ContentVm";
-        private readonly StringBuilder _sb = new();
-        private readonly IVmc _vmc;
-    }
+				CurrentVm = _vmc.Get(vmId);
+				SubCurrentVm = _vmc.Get(_sb.ToString());
+			});
+
+			CurrentVm = _vmc.Get(nameof(HomeVm));
+		}
+
+		private const string SubVmSuffix = "ContentVm";
+		private readonly StringBuilder _sb = new();
+		private readonly IVmc _vmc;
+	}
 }

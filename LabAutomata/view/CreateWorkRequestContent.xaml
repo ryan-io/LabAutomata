@@ -1,19 +1,19 @@
 ﻿<UserControl x:Class="LabAutomata.view.CreateWorkRequestContent"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              d:DataContext="{d:DesignInstance viewmodel:CreateWorkRequestContentVm}"
              xmlns:controls="clr-namespace:LabAutomata.controls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:viewmodel="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <controls:FocusedViewHeader HeaderText="Create a New Work Request Form" />
         <Border Grid.Row="1"
@@ -23,52 +23,52 @@
                         HorizontalAlignment="Stretch">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <controls:FormLabel Label="Request Name:"/>
+                    <controls:FormLabel Label="Request Name:" />
                     <controls:FormTextInput Grid.Row="0" Grid.Column="1"
                                             Margin="5"
                                             BoxEmptyTxt="{Binding NameEmptyBox, Mode=TwoWay}"
-                                            InputTxt="{Binding Model.Name, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}"/>
+                                            InputTxt="{Binding Model.Name, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}" />
                     <controls:FormLabel Grid.Row="1" Grid.Column="0"
-                                        Label="Program:"/>
+                                        Label="Program:" />
                     <controls:FormTextInput Grid.Row="1" Grid.Column="1"
                                             FontSize="22"
                                             Margin="5"
                                             InputTxt="{Binding Model.Program, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}"
-                                            BoxEmptyTxt="{Binding ProgramEmptyBox}"/>
+                                            BoxEmptyTxt="{Binding ProgramEmptyBox}" />
 
                     <controls:FormLabel Grid.Row="2" Grid.Column="0"
-                                        Label="DescriptionName:"/>
+                                        Label="DescriptionName:" />
                     <controls:FormTextInput Grid.Row="2" Grid.Column="1"
                                             Margin="5"
                                             InputTxt="{Binding Model.Description, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}"
-                                            BoxEmptyTxt="{Binding DescEmptyBox}"/>
+                                            BoxEmptyTxt="{Binding DescEmptyBox}" />
 
                     <controls:FormLabel Grid.Row="3" Grid.Column="0"
-                                        Label="Start Date:"/>
+                                        Label="Start Date:" />
                     <controls:FormTextInput Grid.Row="3" Grid.Column="1"
                                             Margin="5"
-                                            BoxEmptyTxt="{Binding StartEmptyBox}"/>
+                                            BoxEmptyTxt="{Binding StartEmptyBox}" />
 
                     <controls:FormLabel Grid.Row="4" Grid.Column="0"
-                                        Label="Test:"/>
+                                        Label="Test:" />
                     <controls:FormTextInput Grid.Row="4" Grid.Column="1"
                                             Margin="5"
-                                            BoxEmptyTxt="Date/calendar will go here"/>
+                                            BoxEmptyTxt="Date/calendar will go here" />
                     <controls:FormLabel Grid.Row="5" Grid.Column="0"
                                         VerticalAlignment="Top"
-                                        Label="Manufacturer:"/>
+                                        Label="Manufacturer:" />
                     <ListView Grid.Row="5" Grid.Column="1"
                               Width="200"
                               Margin="5"
@@ -94,7 +94,7 @@
                     <ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"
                               FontSize="22"
                               HorizontalAlignment="Center"
-                              ItemsSource="{Binding Model.ObsGetErrors, Mode=TwoWay}"/>
+                              ItemsSource="{Binding Model.ObsGetErrors, Mode=TwoWay}" />
                 </Grid>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
@@ -107,13 +107,13 @@
                              FontSize="22"
                              Margin="10"
                              Command="{Binding CreateDbModelCmd}"
-                             CommandParameter="{Binding Model}"/>
+                             CommandParameter="{Binding Model}" />
                     <Button Content="Reset"
                             FontWeight="Bold"
                             Height="40"
                             Margin="10"
                             FontSize="22"
-                            Command="{Binding ResetDbModel}"/>
+                            Command="{Binding ResetDbModel}" />
                 </StackPanel>
             </StackPanel>
         </Border>

@@ -6,6 +6,7 @@ using System.Reflection;
 namespace LabAutomata.Tests.Unit.common;
 
 public class PeriodicWorkTests : IDisposable {
+
 	// modify Period to adjust tick rate
 	private const int Period = 1;
 
@@ -14,7 +15,7 @@ public class PeriodicWorkTests : IDisposable {
 
 	private readonly Func<Task> _onExecute;
 
-	readonly CaptureInt _ci = new();
+	private readonly CaptureInt _ci = new();
 
 	public PeriodicWorkTests () {
 		_onExecute = Substitute.For<Func<Task>>(); //() => { _ci.Get()++; return Task.CompletedTask; };
@@ -95,9 +96,10 @@ public class PeriodicWorkTests : IDisposable {
 		_sut.Dispose();
 	}
 
-	class CaptureInt {
+	private class CaptureInt {
+
 		public ref int Get () => ref i;
 
-		int i = 0;
+		private int i = 0;
 	}
 }

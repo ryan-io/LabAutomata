@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using NSubstitute;
 
 namespace LabAutomata.Iot.Tests.Unit.src {
+
 	public class MqttTopicSubscriberTests {
 		private readonly ILogger<MqttTopicSubscriber> _logger = Substitute.For<ILogger<MqttTopicSubscriber>>();
 		private readonly MqttTopicSubscriber _sut;

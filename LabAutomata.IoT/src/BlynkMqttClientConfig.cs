@@ -1,6 +1,7 @@
 ﻿namespace LabAutomata.IoT;
 
 public interface IBlynkMqttClientConfig {
+
 	/// <summary>
 	/// Gets the MQTT broker address.
 	/// </summary>
@@ -26,6 +27,7 @@ public interface IBlynkMqttClientConfig {
 /// Represents the configuration for a Blynk MQTT client.
 /// </summary>
 public class BlynkMqttClientConfig : IBlynkMqttClientConfig {
+
 	/// <summary>
 	/// Gets the MQTT broker address.
 	/// </summary>

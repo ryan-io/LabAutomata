@@ -34,13 +34,14 @@ public class MqttEntryPoint {
 
 		IMqttMsg payload = new GetDatastreamPayloads();
 
-		var callbackTask = async () => await poll.Signal(payload, appCancellationToken);
+		async Task CallbackTask () => await poll.Signal(payload, appCancellationToken);
+
 		var onComplete = () => {
 			logger.LogInformation("MQTT background thread has stopped.");
 			_semaphore.Release(1);
 			_semaphore.Dispose();
 		};
-		var periodicWork = new PeriodicWork(callbackTask);
+		var periodicWork = new PeriodicWork(CallbackTask);
 
 		// start background thread... do not await this
 		_ = Task.Run(async () => {

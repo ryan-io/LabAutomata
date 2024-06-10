@@ -1,18 +1,18 @@
 ﻿<UserControl x:Class="LabAutomata.controls.HeaderNavButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              x:Name="MainWindow"
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
         <TextBlock Text="{Binding ElementName=MainWindow, Path=ButtonId}"
                    HorizontalAlignment="Center"
-                   Foreground="{StaticResource FontOne}"/>
+                   Foreground="{StaticResource FontOne}" />
 
         <StackPanel Style="{StaticResource ScaleEleMouseOver}">
-            <Image Source="{Binding ElementName=MainWindow, Path=Source}" 
+            <Image Source="{Binding ElementName=MainWindow, Path=Source}"
                Margin="10 10 10 30"
                Cursor="Hand"
                RenderOptions.BitmapScalingMode="Fant"
@@ -20,7 +20,7 @@
                 <Image.InputBindings>
                     <MouseBinding Gesture="LeftClick"
                               Command="{Binding ElementName=MainWindow, Path=Click}"
-                              CommandParameter="{Binding ElementName=MainWindow, Path=ClickParameter}"/>
+                              CommandParameter="{Binding ElementName=MainWindow, Path=ClickParameter}" />
                 </Image.InputBindings>
             </Image>
         </StackPanel>

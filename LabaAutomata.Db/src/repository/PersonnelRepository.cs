@@ -7,4 +7,4 @@ namespace LabAutomata.Db.repository;
 /// Represents a repository for managing Personnel entities in the database.
 /// </summary>
 public class PersonnelRepository (ILabPostgreSqlDbContext dbCtx)
-    : Repository<Personnel>(dbCtx, dbCtx.Personnels);
+	: Repository<Personnel>(dbCtx, dbCtx.Personnels);

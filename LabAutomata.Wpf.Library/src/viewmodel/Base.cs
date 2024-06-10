@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
+
 	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo {
+
 		/// <summary>
 		///  Raised when a property for this instance is changed
 		/// </summary>
@@ -40,12 +42,14 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 				return _errors.Any();
 			}
 		}
+
 		public virtual Task LoadAsync (CancellationToken token = default) => Task.CompletedTask;
 
 		public virtual void Load () {
 		}
 
-		public void OnClose () { }
+		public void OnClose () {
+		}
 
 		/// <summary>
 		///  Resets the instance to an initial state
@@ -164,14 +168,13 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 				return false;
 			}
 
-
 			error = _errors[propertyName];
 
 			return true;
 		}
 
-		readonly bool _shouldNotifyErrors;
-		readonly Dictionary<string, List<string>> _errors;
+		private readonly bool _shouldNotifyErrors;
+		private readonly Dictionary<string, List<string>> _errors;
 		private bool _hasLoaded;
 	}
 }

@@ -2,85 +2,86 @@ using FluentAssertions;
 using LabAutomata.Wpf.Library.domain_models;
 
 namespace LabAutomata.Wpf.Tests.Unit.domain_models {
-    public class TestDomainModelTests {
-        private readonly TestDomainModel _sut = new();
 
-        [Fact]
-        public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+	public class TestDomainModelTests {
+		private readonly TestDomainModel _sut = new();
 
-            // Act
-            _sut.Name = "Test Name";
+		[Fact]
+		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.Name.Should().Be("Test Name");
-            propertyName.Should().Be(nameof(_sut.Name));
-        }
+			// Act
+			_sut.Name = "Test Name";
 
-        [Fact]
-        public void WrId_Setter_Should_SetValueAndNotifyPropertyChanged () {
-            // Arrange
-            var propertyName = string.Empty;
-            _sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
+			// Assert
+			_sut.Name.Should().Be("Test Name");
+			propertyName.Should().Be(nameof(_sut.Name));
+		}
 
-            // Act
-            _sut.WrId = 1;
+		[Fact]
+		public void WrId_Setter_Should_SetValueAndNotifyPropertyChanged () {
+			// Arrange
+			var propertyName = string.Empty;
+			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
-            // Assert
-            _sut.WrId.Should().Be(1);
-            propertyName.Should().Be(nameof(_sut.WrId));
-        }
+			// Act
+			_sut.WrId = 1;
 
-        [Fact]
-        public void Create_ShouldReturnNewTestWithSameProperties_WhenCalled () {
-            // Arrange
-            _sut.Name = "Test Name";
-            _sut.WrId = 1;
-            _sut.InstanceId = 2;
-            _sut.TypeId = 3;
-            _sut.LocationId = 4;
-            _sut.OperatorId = 5;
-            _sut.Started = DateTime.Now;
-            _sut.Ended = DateTime.Now;
+			// Assert
+			_sut.WrId.Should().Be(1);
+			propertyName.Should().Be(nameof(_sut.WrId));
+		}
 
-            // Act
-            var test = _sut.Create();
+		[Fact]
+		public void Create_ShouldReturnNewTestWithSameProperties_WhenCalled () {
+			// Arrange
+			_sut.Name = "Test Name";
+			_sut.WrId = 1;
+			_sut.InstanceId = 2;
+			_sut.TypeId = 3;
+			_sut.LocationId = 4;
+			_sut.OperatorId = 5;
+			_sut.Started = DateTime.Now;
+			_sut.Ended = DateTime.Now;
 
-            // Assert
-            test.Name.Should().Be(_sut.Name);
-            test.WrId.Should().Be(_sut.WrId);
-            test.InstanceId.Should().Be(_sut.InstanceId);
-            test.TypeId.Should().Be(_sut.TypeId);
-            test.LocationId.Should().Be(_sut.LocationId);
-            test.OperatorId.Should().Be(_sut.OperatorId);
-            test.Started.Should().Be(_sut.Started);
-            test.Ended.Should().Be(_sut.Ended);
-        }
+			// Act
+			var test = _sut.Create();
 
-        [Fact]
-        public void Validate_ShouldThrowArgumentNullException_WhenNameIsNullOrWhiteSpace () {
-            // Arrange
-            _sut.Name = default;
+			// Assert
+			test.Name.Should().Be(_sut.Name);
+			test.WrId.Should().Be(_sut.WrId);
+			test.InstanceId.Should().Be(_sut.InstanceId);
+			test.TypeId.Should().Be(_sut.TypeId);
+			test.LocationId.Should().Be(_sut.LocationId);
+			test.OperatorId.Should().Be(_sut.OperatorId);
+			test.Started.Should().Be(_sut.Started);
+			test.Ended.Should().Be(_sut.Ended);
+		}
 
-            // Act
-            Action act = () => _sut.Validate();
+		[Fact]
+		public void Validate_ShouldThrowArgumentNullException_WhenNameIsNullOrWhiteSpace () {
+			// Arrange
+			_sut.Name = default;
 
-            // Assert
-            act.Should().Throw<ArgumentNullException>();
-        }
+			// Act
+			Action act = () => _sut.Validate();
 
-        [Fact]
-        public void Validate_ShouldThrowArgumentException_WhenWrIdIsLessThanOrEqualToZero () {
-            // Arrange
-            _sut.WrId = 0;
+			// Assert
+			act.Should().Throw<ArgumentNullException>();
+		}
 
-            // Act
-            Action act = () => _sut.Validate();
+		[Fact]
+		public void Validate_ShouldThrowArgumentException_WhenWrIdIsLessThanOrEqualToZero () {
+			// Arrange
+			_sut.WrId = 0;
 
-            // Assert
-            act.Should().Throw<ArgumentException>();
-        }
-    }
+			// Act
+			Action act = () => _sut.Validate();
+
+			// Assert
+			act.Should().Throw<ArgumentException>();
+		}
+	}
 }

@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace LabAutomata.Db.models {
+
 	public class Workstation : LabModel {
+
 		[Required, MaxLength(75)]
 		public string Name { get; init; }
 

@@ -3,6 +3,7 @@
 namespace LabAutomata.IoT;
 
 public class BlynkMqttOptionsBuilder {
+
 	/// <summary>
 	/// Builds the MQTT client options based on the provided configuration.
 	/// </summary>

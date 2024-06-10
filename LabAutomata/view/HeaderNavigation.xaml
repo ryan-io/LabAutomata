@@ -1,21 +1,21 @@
 ﻿<UserControl x:Class="LabAutomata.view.HeaderNavigation"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:common="clr-namespace:LabAutomata.common"
              xmlns:controls="clr-namespace:LabAutomata.controls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1200">
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="220"/>
+            <RowDefinition Height="220" />
         </Grid.RowDefinitions>
         <TextBox Height="50"
              VerticalContentAlignment="Top"
-             Margin="10 10 10 10" 
+             Margin="10 10 10 10"
              Style="{StaticResource TxtBoxDefault}">
         </TextBox>
         <Border Grid.Row="2"
@@ -26,54 +26,54 @@
             <Grid MinWidth="1000"
               Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <controls:HeaderNavButton ButtonId="Home" 
-                                          Source="/resources/images/home.png" 
+                <controls:HeaderNavButton ButtonId="Home"
+                                          Source="/resources/images/home.png"
                                           ToolTip="Home"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
-                                          Grid.Column="0"/>
+                                          Grid.Column="0" />
 
-                <controls:HeaderNavButton ButtonId="Work Requests" 
-                                          Source="/resources/images/work-requests.png" 
+                <controls:HeaderNavButton ButtonId="Work Requests"
+                                          Source="/resources/images/work-requests.png"
                                           ToolTip="Work Requests"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.WrVm}}"
-                                          Grid.Column="1"/>
+                                          Grid.Column="1" />
 
-                <controls:HeaderNavButton ButtonId="Create Request" 
-                                          Source="/resources/images/create-work-request.png" 
+                <controls:HeaderNavButton ButtonId="Create Request"
+                                          Source="/resources/images/create-work-request.png"
                                           ToolTip="Create Request"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.CwrVm}}"
-                                          Grid.Column="2"/>
+                                          Grid.Column="2" />
 
-                <controls:HeaderNavButton ButtonId="Workstations" 
-                                          Source="/resources/images/workstations.png" 
+                <controls:HeaderNavButton ButtonId="Workstations"
+                                          Source="/resources/images/workstations.png"
                                           ToolTip="Workstations"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.WsVm}}"
-                                          Grid.Column="3"/>
+                                          Grid.Column="3" />
 
-                <controls:HeaderNavButton ButtonId="Equipments" 
-                                          Source="/resources/images/equipment-items.png" 
+                <controls:HeaderNavButton ButtonId="Equipments"
+                                          Source="/resources/images/equipment-items.png"
                                           ToolTip="Equipments"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.EiVm}}"
-                                          Grid.Column="4"/>
+                                          Grid.Column="4" />
 
-                <controls:HeaderNavButton ButtonId="About" 
-                                          Source="/resources/images/help-about.png" 
+                <controls:HeaderNavButton ButtonId="About"
+                                          Source="/resources/images/help-about.png"
                                           ToolTip="About"
                                           Click="{Binding ChangeVm}"
                                           ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
-                                          Grid.Column="5"/>
+                                          Grid.Column="5" />
             </Grid>
         </Border>
     </Grid>

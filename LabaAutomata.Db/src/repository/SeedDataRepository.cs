@@ -7,4 +7,4 @@ namespace LabAutomata.Db.repository;
 /// Represents a repository for managing Work Request entities in the database.
 /// </summary>
 public class SeedDataRepository (ILabPostgreSqlDbContext dbCtx)
-    : Repository<SeedJson>(dbCtx, dbCtx.SeedJson);
+	: Repository<SeedJson>(dbCtx, dbCtx.SeedJson);

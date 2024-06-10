@@ -3,12 +3,13 @@
 namespace LabAutomata.Db.models;
 
 public class Manufacturer : LabModel {
-    [Required, MaxLength(100)]
-    public string? Name { get; init; } = string.Empty;
 
-    public int LocationId { get; init; }
+	[Required, MaxLength(100)]
+	public string? Name { get; init; } = string.Empty;
 
-    public Location Location { get; init; }
+	public int LocationId { get; init; }
 
-    public ICollection<WorkRequest> WorkRequests { get; init; }
+	public Location Location { get; init; }
+
+	public ICollection<WorkRequest> WorkRequests { get; init; }
 }

@@ -1,4 +1,5 @@
 ﻿namespace LabAutomata.Library.common {
+
 	/// <summary>
 	/// Handles an asynchronous unit of work
 	/// Use this class along with Dispatcher.InvokeAsync to prevent UI thread blocking
@@ -9,6 +10,7 @@
 	///     WorkAsync does invoke Dispose() on successful work completed
 	/// </summary>
 	public class PeriodicWork : IDisposable {
+
 		public async Task WorkAsync (Func<bool> exitCondition, Action? completeCallback = null, CancellationToken token = default) {
 			if (_isDisposed || _isRunning) return;
 
@@ -28,7 +30,6 @@
 				_isRunning = false;
 			}
 			completeCallback?.Invoke();
-
 		}
 
 		public void Dispose () {
@@ -74,7 +75,7 @@
 			_timer = new(TimeSpan.FromSeconds(period));
 		}
 
-		readonly Func<Task> _callback;
+		private readonly Func<Task> _callback;
 	}
 }
 
