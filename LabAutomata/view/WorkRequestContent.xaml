@@ -60,7 +60,7 @@
                       Width="200"
                       DisplayMemberBinding="{Binding WrId}">
                             </GridViewColumn>
-                            <GridViewColumn Header="Name"
+                            <GridViewColumn Header="SensorName"
                   Width="200"
                   DisplayMemberBinding="{Binding Name}">
                             </GridViewColumn>

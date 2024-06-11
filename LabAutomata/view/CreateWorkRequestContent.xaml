@@ -35,7 +35,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <controls:FormLabel Label="Request Name:" />
+                    <controls:FormLabel Label="Request SensorName:" />
                     <controls:FormTextInput Grid.Row="0" Grid.Column="1"
                                             Margin="5"
                                             BoxEmptyTxt="{Binding NameEmptyBox, Mode=TwoWay}"

@@ -16,10 +16,10 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
 			// Act
-			_sut.Name = "Test Name";
+			_sut.Name = "Test SensorName";
 
 			// Assert
-			_sut.Name.Should().Be("Test Name");
+			_sut.Name.Should().Be("Test SensorName");
 			propertyName.Should().Be(nameof(_sut.Name));
 		}
 
@@ -97,7 +97,7 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 		[Fact]
 		public void Reset_ShouldResetPropertiesToDefaultValues_WhenCalled () {
 			// Arrange
-			_sut.Name = "Test Name";
+			_sut.Name = "Test SensorName";
 			_sut.Program = "Test Program";
 			_sut.Description = "Test Description";
 			_sut.StartDate = DateTime.Now;
@@ -117,7 +117,7 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 		[Fact]
 		public void Create_ShouldReturnNewWorkRequestWithSameProperties_WhenCalled () {
 			// Arrange
-			_sut.Name = "Test Name";
+			_sut.Name = "Test SensorName";
 			_sut.Program = "Test Program";
 			_sut.Description = "Test Description";
 			_sut.StartDate = DateTime.Now;

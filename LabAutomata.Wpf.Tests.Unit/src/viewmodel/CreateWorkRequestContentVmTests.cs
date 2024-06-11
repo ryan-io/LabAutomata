@@ -29,7 +29,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 			var monitor = _sut.Model.Monitor();
 
 			// act
-			_sut.Model.Name = "New Name";
+			_sut.Model.Name = "New SensorName";
 
 			// assert
 			monitor.Should().RaisePropertyChangeFor(vm => vm.Name);

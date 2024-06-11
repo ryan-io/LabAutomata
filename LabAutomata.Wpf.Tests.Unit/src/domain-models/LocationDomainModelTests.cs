@@ -13,10 +13,10 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 			_sut.PropertyChanged += (sender, args) => propertyName = args.PropertyName;
 
 			// Act
-			_sut.Name = "Test Name";
+			_sut.Name = "Test SensorName";
 
 			// Assert
-			_sut.Name.Should().Be("Test Name");
+			_sut.Name.Should().Be("Test SensorName");
 			propertyName.Should().Be(nameof(_sut.Name));
 		}
 
@@ -79,7 +79,7 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 		[Fact]
 		public void Create_ShouldReturnNewLocationWithSameProperties_WhenCalled () {
 			// Arrange
-			_sut.Name = "Test Name";
+			_sut.Name = "Test SensorName";
 			_sut.Address = "Test Address";
 			_sut.City = "Test City";
 			_sut.State = "Test State";

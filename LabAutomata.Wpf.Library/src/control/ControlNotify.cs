@@ -15,7 +15,7 @@ namespace LabAutomata.Wpf.Library.control {
 		///  If no property is specified, CallerMemberName will be automatically populated with the member that invoked this method
 		///     This will be member 'Source' in all instances
 		/// </summary>
-		/// <param name="propertyName">Name of property that changed</param>
+		/// <param name="propertyName">SensorName of property that changed</param>
 		protected virtual void NotifyPropertyChanged ([CallerMemberName] string? propertyName = null) {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
