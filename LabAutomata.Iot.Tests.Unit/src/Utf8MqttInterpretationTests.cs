@@ -4,7 +4,7 @@ using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Packets;
 
-namespace LabAutomata.Iot.Tests.Unit.src {
+namespace LabAutomata.Iot.Tests.Unit {
 
 	public class Utf8MqttInterpretationTests {
 		private readonly Utf8MqttInterpretation _sut;

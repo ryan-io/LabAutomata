@@ -3,7 +3,7 @@ using LabAutomata.IoT;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
-namespace LabAutomata.Iot.Tests.Unit.src {
+namespace LabAutomata.Iot.Tests.Unit {
 
 	public class MqttTopicSubscriberTests {
 		private readonly ILogger<MqttTopicSubscriber> _logger = Substitute.For<ILogger<MqttTopicSubscriber>>();

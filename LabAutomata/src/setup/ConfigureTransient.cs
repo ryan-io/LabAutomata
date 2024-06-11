@@ -24,6 +24,8 @@ internal sealed class ConfigureTransient {
 		_sc.AddTransient<IRepository<SeedJson>, SeedDataRepository>();
 		_sc.AddTransient<IRepository<Test>, SteadyStateTemperatureTest>();
 		_sc.AddTransient<IRepository<Equipment>, EquipmentRepository>();
+		_sc.AddTransient<IRepository<DhtJsonData>, DhtJsonDataRepository>();
+		_sc.AddTransient<IRepository<DhtSensor>, DhtSensorRepository>();
 		_sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
 		_sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 		_sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());

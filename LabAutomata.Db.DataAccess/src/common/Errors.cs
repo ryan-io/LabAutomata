@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 
-namespace LabAutomata.Db.common {
+namespace LabAutomata.Db.DataAccess.src.common {
 
 	/// <summary>
 	/// Contains error definitions for the SsTempTest class.
@@ -9,19 +9,6 @@ namespace LabAutomata.Db.common {
 	/// This class is strictly a tool for getting appropriate error messages in a more fluent manner
 	/// </summary>
 	internal static class Errors {
-
-		internal static class Crud {
-
-			/// <summary>
-			/// Returns an error indicating that the provided instance id is '0' or less than '0'.
-			/// </summary>
-			/// <returns>The error object.</returns>
-			public static Error IdIsZeroOrLessThan (string code, string description) {
-				return Error.Validation(
-					"Test.IdIsZeroOrLessThan",
-					"The provided instance id is '0' or less than '0'");
-			}
-		}
 
 		internal static class Db {
 

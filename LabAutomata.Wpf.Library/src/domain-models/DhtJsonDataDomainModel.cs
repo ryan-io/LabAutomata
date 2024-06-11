@@ -3,10 +3,10 @@ using LabAutomata.Db.models;
 namespace LabAutomata.Wpf.Library.domain_models {
 
 	public class DhtJsonDataDomainModel : DomainModel<DhtJsonData> {
-		private int _id;
-		private string _jsonString;
-		private int _dhtSensorId;
-		private DhtSensor _dhtSensor;
+		private int _id = -1;
+		private string _jsonString = "";
+		private int _dhtSensorId = -1;
+		private DhtSensor? _dhtSensor = default;
 
 		// this constructor is intended for data binding
 		public DhtJsonDataDomainModel () {
@@ -50,7 +50,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public DhtSensor DhtSensor {
+		public DhtSensor? DhtSensor {
 			get => _dhtSensor;
 			set {
 				_dhtSensor = value;
@@ -60,10 +60,10 @@ namespace LabAutomata.Wpf.Library.domain_models {
 
 		public override DhtJsonData Create () {
 			return new DhtJsonData {
-				Id = this.Id,
-				JsonString = this.JsonString,
-				DhtSensorId = this.DhtSensorId,
-				DhtSensor = this.DhtSensor
+				Id = Id,
+				JsonString = JsonString,
+				DhtSensorId = DhtSensorId,
+				DhtSensor = DhtSensor!
 			};
 		}
 

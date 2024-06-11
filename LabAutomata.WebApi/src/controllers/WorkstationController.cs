@@ -5,13 +5,13 @@ using LabAutomata.Db.service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAutomata.WebApi.controllers {
-	public class TestController (TestService service) : BaseController {
+	public class WorkstationController (WorkstationService service) : BaseController {
 		// post: api/sstemptest/create/instanceId
-		[HttpPost("create/{instanceId:int}")]
-		public async Task<IActionResult> CreateSsTempTest ([FromRoute] int instanceId, CancellationToken ct = default) {
+		[HttpPost("create/{workstationId:int}")]
+		public async Task<IActionResult> CreateWorkstation ([FromRoute] int workstationId, CancellationToken ct = default) {
 			// factory call to get new model
 			var factory = new SsTempTestFactory();
-			var unionCreateModel = factory.Create(instanceId, TestTypeFactory.PowerTemperatureCycling());
+			var unionCreateModel = factory.Create(workstationId, TestTypeFactory.PowerTemperatureCycling());
 
 			// check if model creation had any errors
 			if (unionCreateModel.IsError)
