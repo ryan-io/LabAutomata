@@ -8,6 +8,7 @@ namespace LabAutomata.Db.repository {
 	/// Represents a repository for managing DhtSensor entities in the database.
 	/// </summary>
 	public class DhtSensorRepository : Repository<DhtSensor> {
+
 		public DhtSensorRepository (ILabPostgreSqlDbContext dbCtx)
 			: base(dbCtx, dbCtx.DhtSensors) {
 		}

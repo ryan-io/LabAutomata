@@ -17,7 +17,7 @@
                             <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.(ScaleTransform.ScaleX)"
                                         Duration="0:0:0.2"
                                         To="1.05"
-                                        AccelerationRatio="0.3">
+                                        AccelerationRatio="0.8">
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)"
                                         To="1.05"

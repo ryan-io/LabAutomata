@@ -1,6 +1,0 @@
-using LabAutomata.Db.DataAccess.src.repository;
-using LabAutomata.Db.models;
-
-namespace LabAutomata.Db.DataAccess.src.service;
-
-public class SeedJsonService (IRepository<SeedJson> repository) : Service<SeedJson>(repository);

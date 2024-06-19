@@ -8,6 +8,7 @@ namespace LabAutomata.Db.repository {
 	/// Represents a repository for managing DhtJsonData entities in the database.
 	/// </summary>
 	public class DhtJsonDataRepository : Repository<DhtJsonData> {
+
 		public DhtJsonDataRepository (ILabPostgreSqlDbContext dbCtx)
 			: base(dbCtx, dbCtx.DhtJsonData) {
 		}

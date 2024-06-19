@@ -23,7 +23,7 @@ namespace LabAutomata.WebApi.controllers {
      */
 
 	[ApiController]
-	[Route("api/[controller]")]
+	[Route("api/[controller]/")]
 	public class BaseController : Controller {
 
 		protected IActionResult ProblemInController (List<Error> errors) {

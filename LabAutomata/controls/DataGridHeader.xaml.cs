@@ -4,7 +4,6 @@ using System.Windows.Controls;
 namespace LabAutomata.controls {
 
 	public partial class DataGridHeader : UserControl {
-
 		public string Text {
 			get => (string)GetValue(TextProperty);
 			set => SetValue(TextProperty, value);

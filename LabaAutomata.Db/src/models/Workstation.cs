@@ -4,21 +4,21 @@ namespace LabAutomata.Db.models {
 
 	public class Workstation : LabModel {
 
-		[Required, MaxLength(75)]
-		public string Name { get; init; }
+		[Required, MaxLength(75)] public string Name { get; init; } = "";
 
 		public int StationNumber { get; init; }
 
 		public int LocationId { get; init; }
 
-		public Location Location { get; init; }
+		public Location? Location { get; init; }
 
-		public ICollection<WorkstationType> Types { get; init; }
-		public ICollection<Equipment> Equipment { get; init; }
+		public ICollection<WorkstationType> Types { get; init; } = new List<WorkstationType>();
+		public ICollection<Equipment> Equipment { get; init; } = new List<Equipment>();
 
-		public ICollection<Test> Tests { get; set; }
+		public ICollection<Test> Tests { get; set; } = new List<Test>();
 
 		[MaxLength(500)]
-		public string Description { get; init; }
+		public string? Description { get; init; }
+
 	}
 }
