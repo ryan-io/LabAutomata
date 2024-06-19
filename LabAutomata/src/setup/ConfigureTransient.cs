@@ -1,6 +1,9 @@
-﻿using LabAutomata.Db.common;
+﻿using LabAutomata.DataAccess.service;
+using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
+using LabAutomata.Dto.request;
+using LabAutomata.Dto.response;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +19,8 @@ internal sealed class ConfigureTransient {
 		_sc.AddTransient<MainWindow>();
 		_sc.AddTransient<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
 		_sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(_app));
+
+		// database repositories
 		_sc.AddTransient<IRepository<WorkRequest>, WorkRequestRepository>();
 		_sc.AddTransient<IRepository<Workstation>, WorkstationRepository>();
 		_sc.AddTransient<IRepository<Personnel>, PersonnelRepository>();
@@ -29,6 +34,11 @@ internal sealed class ConfigureTransient {
 		_sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
 		_sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 		_sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
+
+		// database services
+		_sc.AddTransient<IService<WorkstationRequest, WorkstationResponse>, WorkstationService>();
+
+		// misc. transients
 		_sc.AddTransient<PlotViewModel>();
 	}
 

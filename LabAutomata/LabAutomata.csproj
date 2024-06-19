@@ -45,6 +45,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LabaAutomata.Db\LabAutomata.Db.csproj" />
+    <ProjectReference Include="..\LabAutomata.DataAccess\LabAutomata.DataAccess.csproj" />
     <ProjectReference Include="..\LabAutomata.Library\LabAutomata.Library.csproj" />
     <ProjectReference Include="..\LabAutomata.Wpf.Library\LabAutomata.Wpf.Library.csproj" />
   </ItemGroup>

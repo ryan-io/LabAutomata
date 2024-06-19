@@ -1,12 +1,11 @@
-﻿using LabAutomata.DataAccess.factory;
-using LabAutomata.DataAccess.service;
+﻿using LabAutomata.DataAccess.service;
 using LabAutomata.DataAccess.validation;
 using LabAutomata.Dto.request;
+using LabAutomata.Dto.response;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LabAutomata.WebApi.controllers
-{
-    public class WorkstationController : BaseController {
+namespace LabAutomata.WebApi.controllers {
+	public class WorkstationController : BaseController {
 		// POST: api/workstation/
 		[HttpPost()]
 		public async Task<IActionResult> CreateWorkstation (WorkstationRequest request, CancellationToken ct = default) {
@@ -20,23 +19,40 @@ namespace LabAutomata.WebApi.controllers
 
 			// invoke service to save to db
 			var unionSaveToService = await _service.Create(unionCreateModel.Value, ct);
+			var unionSaveValidated = _validator.ValidateResponse(unionSaveToService.Value.Response);
 
+			if (unionSaveValidated.IsError)
+				return ProblemInController(unionSaveValidated.Errors);
 
 			// this is expensive to do but versatile
 			// location: /api/SsTempTest/{unionCreateModel.Value.Id}
-			return unionSaveToService.Match(
+			return unionSaveValidated.Match(
 				i => CreatedAtAction(nameof(CreateWorkstation),
-												   new { id = unionCreateModel.Value },
-												   unionCreateModel.Value),
+												   new { id = unionSaveValidated.Value },
+												   unionSaveValidated.Value),
 				ProblemInController);
 		}
 
 
 		// GET: api/workstation/id
 		[HttpGet("{id:int}")]
-		public async Task<IActionResult> GetSsTempTest ([FromRoute] int id, CancellationToken ct = default) {
+		public async Task<IActionResult> GetWorkstation ([FromRoute] int id, CancellationToken ct = default) {
 			// query service to get the test
 			var unionGetFromService = await _service.Get(id, ct);
+			var unionGetValidated = _validator.ValidateResponse(unionGetFromService.Value);
+			// optional mapping:
+			//      would be used to map the value from unionGetFromService.Value to a response
+			//      this mapped response would be passed into the Match invocation instead of unionGetFromService.Value
+
+			return unionGetValidated.Match(_ => Ok(unionGetValidated.Value), ProblemInController);
+		}
+
+		// GET: api/workstation/
+		[HttpGet]
+		public async Task<IActionResult> GetWorkstations (CancellationToken ct = default) {
+			// query service to get the test
+			var unionGetFromService = await _service.GetAll(ct);
+
 
 			// optional mapping:
 			//      would be used to map the value from unionGetFromService.Value to a response
@@ -47,39 +63,32 @@ namespace LabAutomata.WebApi.controllers
 
 		// PUT: api/workstation/id
 		[HttpPut("{id:int}")]
-		public async Task<IActionResult> UpsertSsTempTest ([FromRoute] int id, WorkstationRequest request, CancellationToken ct = default) {
-			//var factory = new SsTempTestFactory();
-			//var unionCreateClone = factory.CloneWithId(id, request);
+		public async Task<IActionResult> UpsertWorkstation ([FromRoute] int id, [FromBody] WorkstationRequest request, CancellationToken ct = default) {
+			var unionCreateClone = _validator.ValidateRequest(request);
 
-			//if (unionCreateClone.IsError)
-			//	return ProblemInController(unionCreateClone.Errors);
+			if (unionCreateClone.IsError)
+				return ProblemInController(unionCreateClone.Errors);
 
-			//var unionUpsertToService = await service.Upsert(id, unionCreateClone.Value, ct);
+			var unionUpsertToService = await _service.Upsert(id, unionCreateClone.Value, ct);
 
-			//return unionUpsertToService.Match(
-			//	_ => Ok(unionCreateClone.Value),
-			//	ProblemInController);
-
-			return Ok(request);
+			return unionUpsertToService.Match(
+				_ => Ok(unionCreateClone.Value),
+				ProblemInController);
 		}
 
 		// DELETE: api/workstation/id
 		[HttpDelete("{id:int}")]
-		public async Task<IActionResult> DeleteSsTempTest ([FromRoute] int id, CancellationToken ct = default) {
-			var factory = new
-				SsTempTestFactory();
-			var unionTransferObjCreation = factory.CreateForDeletion(id);
+		public async Task<IActionResult> DeleteWorkstation ([FromRoute] int id, CancellationToken ct = default) {
+			var unionTransferObjCreation = await _service.Delete(id, ct);
 
 			if (unionTransferObjCreation.IsError)
 				return ProblemInController(unionTransferObjCreation.Errors);
 
-			var unionDeleteFromService = await _service.Delete(id, ct);
-
-			return unionDeleteFromService.Match(_ => NoContent(), ProblemInController);
+			return unionTransferObjCreation.Match(_ => NoContent(), ProblemInController);
 		}
 
 		public WorkstationController (
-			WorkstationService service,
+			IService<WorkstationRequest, WorkstationResponse> service,
 			WorkstationValidator validator) {
 			_service = service;
 			_validator = validator;
@@ -87,6 +96,6 @@ namespace LabAutomata.WebApi.controllers
 
 		private readonly WorkstationValidator _validator;
 
-		private readonly WorkstationService _service;
+		private readonly IService<WorkstationRequest, WorkstationResponse> _service;
 	}
 }

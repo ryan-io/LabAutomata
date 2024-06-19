@@ -4,7 +4,7 @@ using LabAutomata.Dto.response;
 
 namespace LabAutomata.DataAccess.mapper;
 
-internal class WorkstationMapper : IMapper<Workstation, WorkstationRequest, WorkstationResponse> {
+public class WorkstationMapper : IMapper<Workstation, WorkstationRequest, WorkstationResponse> {
 	/// <summary>
 	/// Maps a WorkstationRequestCreate object to a Workstation model.
 	/// </summary>

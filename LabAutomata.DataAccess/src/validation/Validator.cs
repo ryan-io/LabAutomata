@@ -1,30 +1,6 @@
 ﻿using ErrorOr;
-using LabAutomata.Dto.request;
-using LabAutomata.Dto.response;
-using NotImplementedException = System.NotImplementedException;
 
-namespace LabAutomata.DataAccess.validation
-{
-    public class WorkstationValidator : Validator<WorkstationResponse, WorkstationRequest> {
-		public override ErrorOr<WorkstationResponse> ValidateResponse (WorkstationResponse response) {
-			throw new NotImplementedException();
-		}
-
-		public override ErrorOr<WorkstationRequest> ValidateRequest (WorkstationRequest request) {
-			var errors = new List<Error>();
-
-			if (string.IsNullOrWhiteSpace(request.Name))
-				errors.Add(Error.Validation(description: "Workstation request name cannot be null or empty."));
-
-			if (request.StationNumber <= 0)
-				errors.Add(Error.Validation(description: "Workstation number cannot be less than '0' or '0'."));
-
-			if (errors.Any()) return errors;
-
-			return request;
-		}
-	}
-
+namespace LabAutomata.DataAccess.validation {
 	/// <summary>
 	/// Represents an abstract class for validating responses and requests.
 	/// </summary>
@@ -45,5 +21,19 @@ namespace LabAutomata.DataAccess.validation
 		/// <param name="request">The request to validate.</param>
 		/// <returns>An ErrorOr object containing the validated request or an error.</returns>
 		public abstract ErrorOr<TRequest> ValidateRequest (TRequest request);
+
+		/// <summary>
+		/// Validates a list of requests.
+		/// </summary>
+		/// <param name="requests">The list of requests to validate.</param>
+		/// <returns>An ErrorOr object containing the validated list of requests or an error.</returns>
+		public abstract ErrorOr<List<TRequest>> ValidateRequests (List<TRequest> requests);
+
+		/// <summary>
+		/// Validates a list of responses.
+		/// </summary>
+		/// <param name="responses">The list of responses to validate.</param>
+		/// <returns>An ErrorOr object containing the validated list of responses or an error.</returns>
+		public abstract ErrorOr<List<TResponse>> ValidateResponses (List<TResponse> responses);
 	}
 }

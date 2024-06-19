@@ -42,7 +42,7 @@ namespace LabAutomata.DataAccess.service {
 				return new CreatedResponse<TResponse>() { IsError = result, Response = response };
 			}
 
-			return Errors.Db.CouldNotCreate("Entity.EntryReturned0", "Entry returned 0; this needs to be debugged.");
+			return Errors.Db.CouldNotCreate($"Entity.EntryReturned0 - {ModelName}", "Entry returned 0; this needs to be debugged.");
 		}
 
 		/// <summary>
@@ -55,11 +55,32 @@ namespace LabAutomata.DataAccess.service {
 			var entity = await Repository.Get(id, ct);
 
 			if (entity == null) {
-				return Errors.Db.CouldNotGet("Entity.IdCouldNotBeFound", "Could not find an entity with the provided id.");
+				return Errors.Db.CouldNotGet($"Entity.IdCouldNotBeFound - {ModelName}", "Could not find an entity with the provided id.");
 			}
 
 			var response = Mapper.ToResponse(entity);
 			return response;
+		}
+
+		/// <summary>
+		/// Gets all entities.
+		/// </summary>
+		/// <param name="ct">The cancellation token.</param>
+		/// <returns>An <see cref="ErrorOr{IList{TResponse}}"/> indicating the result of the operation.</returns>
+		public async Task<ErrorOr<IList<TResponse>>> GetAll (CancellationToken ct = default) {
+			var entities = await Repository.GetAll(ct);
+
+			if (entities.Count < 1)
+				return Errors.Db.CouldNotGetAll($"Entity.GetAllWasEmpty - {ModelName}",
+					"The returned list for 'get all entities' was empty.");
+
+			var output = new List<TResponse> { Capacity = entities.Count };
+
+			foreach (var entity in entities) {
+				output.Add(Mapper.ToResponse(entity));
+			}
+
+			return output;
 		}
 
 
@@ -77,7 +98,7 @@ namespace LabAutomata.DataAccess.service {
 
 			if (result)
 				return new Updated();
-			return Errors.Db.CouldNotUpsert("Entity.CouldNotUpsert" + typeof(TModel).Name, "Could not upsert the dtoEntity.");
+			return Errors.Db.CouldNotUpsert($"Entity.CouldNotUpsert - {ModelName}", "Could not upsert the dtoEntity.");
 		}
 
 		/// <summary>
@@ -92,8 +113,10 @@ namespace LabAutomata.DataAccess.service {
 			if (result) {
 				return new Deleted();
 			}
-			return Errors.Db.CouldNotDelete("Entity.CouldNotDelete", "Could not delete the entity.");
+			return Errors.Db.CouldNotDelete($"Entity.CouldNotDelete - {ModelName}", "Could not delete the entity.");
 		}
+
+		private string ModelName => typeof(TModel).Name;
 	}
 
 	public class CreatedResponse<TResponse> {

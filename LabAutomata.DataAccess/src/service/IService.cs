@@ -20,7 +20,14 @@ public interface IService<TRequest, TResponse> {
 	Task<ErrorOr<TResponse>> Get (int id, CancellationToken ct = default);
 
 	/// <summary>
-	/// Updates or inserts an dtoEntity.
+	/// Gets all entities.
+	/// </summary>
+	/// <param name="ct">The cancellation token.</param>
+	/// <returns>An <see cref="ErrorOr{IList{TResponse}}"/> indicating the result of the operation.</returns>
+	Task<ErrorOr<IList<TResponse>>> GetAll (CancellationToken ct = default);
+
+	/// <summary>
+	/// Updates or inserts a dtoEntity.
 	/// </summary>
 	/// <param name="id">The ID of the dtoEntity to update or insert.</param>
 	/// <param name="request">The request to map</param>

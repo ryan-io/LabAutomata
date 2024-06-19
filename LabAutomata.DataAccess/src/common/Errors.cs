@@ -9,12 +9,6 @@ namespace LabAutomata.DataAccess.common {
 	/// This class is strictly a tool for getting appropriate error messages in a more fluent manner
 	/// </summary>
 	internal static class Errors {
-		internal static class WorkStationFactory {
-			internal static Error DescriptionIsNUll (string description) {
-				return Error.Validation(description: description);
-			}
-		}
-
 		internal static class Db {
 
 			/// <summary>
@@ -35,6 +29,10 @@ namespace LabAutomata.DataAccess.common {
 
 			internal static Error CouldNotDelete (string code, string description) {
 				return Error.Conflict(code, description);
+			}
+
+			internal static Error CouldNotGetAll (string code, string description) {
+				return Error.NotFound(code, description);
 			}
 		}
 	}
