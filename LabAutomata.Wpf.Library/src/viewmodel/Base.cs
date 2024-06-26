@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo {
+	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo, IDisposable {
 
 		/// <summary>
 		///  Raised when a property for this instance is changed
@@ -47,7 +47,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		public virtual void Load () {
 		}
 
-		public void OnClose () {
+		public virtual void Dispose () {
+
 		}
 
 		/// <summary>

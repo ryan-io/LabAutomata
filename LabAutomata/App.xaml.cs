@@ -35,7 +35,7 @@ namespace LabAutomata {
 			base.OnExit(e);
 			await _tokenSource.CancelAsync();
 			_tokenSource?.Dispose();
-			IShutdownEntryPoint entry = new ShutdownEntryPoint(_serviceProvider);
+			var entry = new ShutdownEntryPoint(_serviceProvider);
 			await entry.Shutdown(CancellationToken.None);
 		}
 

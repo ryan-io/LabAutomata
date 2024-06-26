@@ -5,13 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using rio_command_pipeline;
 using riolog;
+using DhtSensorStore = LabAutomata.stores.DhtSensorStore;
 
 namespace LabAutomata.setup {
 
 	/// <summary>
 	/// Represents the shutdown entry point of the application.
 	/// </summary>
-	internal sealed class ShutdownEntryPoint : IShutdownEntryPoint {
+	internal sealed class ShutdownEntryPoint {
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ShutdownEntryPoint"/> class.
@@ -33,27 +34,17 @@ namespace LabAutomata.setup {
 			var client = _sp.GetRequiredService<IBlynkMqttClient>();
 			await client.Disconnect();
 
+			var dhtStore = _sp.GetRequiredService<DhtSensorStore>();
+			dhtStore?.Dispose();
+
 			var logger = _sp.GetService<ILogger>();
 			logger?.LogInformation("Application now closing.");
 			logger?.LogInformation("Closing DbContext");
 			var ctx = _sp.GetService<LabPostgreSqlDbContext>();
 			ctx?.Dispose();
-			logger?.CloseAndFlush();
+			logger?.CloseAndFlushAsync();
 		}
 
 		private readonly IServiceProvider _sp;
-	}
-
-	/// <summary>
-	/// Defines a contract for a shutdown entry point.
-	/// </summary>
-	internal interface IShutdownEntryPoint {
-
-		/// <summary>
-		/// Initiates the shutdown process of the application.
-		/// </summary>
-		/// <param name="token">A cancellation token that can be used to cancel the shutdown process.</param>
-		/// <returns>A task that represents the asynchronous shutdown operation.</returns>
-		Task Shutdown (CancellationToken token = default);
 	}
 }

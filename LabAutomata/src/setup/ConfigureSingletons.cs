@@ -1,6 +1,8 @@
 ﻿using LabAutomata.common;
 using LabAutomata.Db.common;
 using LabAutomata.IoT;
+using LabAutomata.stores;
+using LabAutomata.Wpf.Library.contracts;
 using LabAutomata.Wpf.Library.data_structures;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +20,8 @@ internal sealed class ConfigureSingletons {
 		_sc.AddSingleton(sp => sp); // little trick to simply return a singleton to our Sp instance
 		_sc.AddSingleton<IBlynkMqttClient, BlynkMqttClient>();
 		_sc.AddSingleton<IVmc, Vmc>();
-
+		_sc.AddSingleton<DhtSensorStore>();
+		_sc.AddSingleton<IDht22Payload>(sp => sp.GetRequiredService<DhtSensorStore>());
 		_sc.AddSingleton(_ => {
 			var factory = new MqttFactory();
 			return factory.CreateMqttClient();
