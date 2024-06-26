@@ -1,4 +1,5 @@
 ﻿using LabAutomata.IoT;
+using LabAutomata.Wpf.Library.common;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
@@ -13,14 +14,9 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 	public class PlotViewModel : Base {
 		public ObservableCollection<ISeries> Series { get; set; }
 
-		public Axis[] XAxes { get; set; } =
-		[
-			new()
-			{
-				Name = "Timestamp",
-				LabelsPaint = new SolidColorPaint(SKColors.Black)
-			}
-		];
+		//public Axis[] XAxes { get; set; }
+
+		public Axis[] XAxes { get; set; }
 
 		public Axis[] YAxes { get; set; } =
 		[
@@ -32,14 +28,16 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		];
 
 		public PlotViewModel (IBlynkMqttClient blynkClient, ILogger logger) {
+			XAxes = [new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("MM dd"))];
+
 			_blynkMqttClient = blynkClient;
 			_logger = logger;
 
-			_observableValues = new ObservableCollection<ObservablePoint>();
+			_observableValues = new ObservableCollection<DateTimePoint>();
 
 			Series = new ObservableCollection<ISeries>()
 			{
-				new LineSeries<ObservablePoint>()
+				new LineSeries<DateTimePoint>()
 				{
 					Values = _observableValues,
 					Fill = null
@@ -50,7 +48,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
 			blynkClient.MessageReceived += args => {
 				var output = response.Interpret(args);
-				if (output.IsError || output.ResponseObject == null)
+
+				if (output.IsError)
 					return;
 
 				// this try-catch needs to be here... especially for DHT11 & DHT22 temp/humidity sensors
@@ -61,17 +60,27 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 				// 9-June-2024 -> updated .ino to change the sampling rate to 1sample/3sec
 				// TODO: more appropriate handling of errors
 				try {
-					var payload = JsonConvert.DeserializeObject<MqttDht22Payload>(output.ResponseObject);
-					_observableValues.Add(new ObservablePoint(payload.TimeStamp, payload.Temperature));
+					if (args.ApplicationMessage.Topic.Equals("downlink/ds/temperature_sys_1")) {
+						if (output.ResponseObject != null) {
+							var payload = JsonConvert.DeserializeObject<MqttDht22Payload>(output.ResponseObject);
+							var date = payload.ToDateTime();
+							_observableValues.Add(new DateTimePoint(date, payload.Temperature));
+						}
+					}
+					else if (args.ApplicationMessage.Topic.Equals("downlink/ds/timestamp")) {
+						//
+					}
+
 				}
 				catch (Exception ex) {
 					_logger.LogError(ex.Message);
 				}
 			};
+
 		}
 
 		private readonly IBlynkMqttClient _blynkMqttClient;
 		private readonly ILogger _logger;
-		private readonly ObservableCollection<ObservablePoint> _observableValues;
+		private readonly ObservableCollection<DateTimePoint> _observableValues;
 	}
 }

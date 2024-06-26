@@ -1,8 +1,20 @@
-﻿using System.Reflection;
+﻿using LabAutomata.IoT;
+using System.Reflection;
 
 namespace LabAutomata.Wpf.Library.common {
 
 	public static class Extensions {
+		public static DateTime ToDateTime (this MqttDht22Payload payload) {
+			var output = new DateTime(
+				payload.Year,
+				payload.Month,
+				payload.Day,
+				payload.Hour,
+				payload.Minute,
+				payload.Second);
+
+			return output;
+		}
 
 		public static IEnumerable<Type> OfBase (this Type type) {
 			Type t = type;

@@ -3,7 +3,6 @@
 namespace LabAutomata.IoT;
 
 public class JsonInterpretation : IMqttInterpretationStrategy<string?> {
-
 	/// <summary>
 	/// Interprets the MQTT application message received and converts it to a string.
 	/// </summary>
@@ -12,7 +11,7 @@ public class JsonInterpretation : IMqttInterpretationStrategy<string?> {
 	public MqttStrategyResponse<string?> Interpret (MqttApplicationMessageReceivedEventArgs e) {
 		/* json form (example):
 		 {
-			 "RelHumidity": 43.0,                                        // Temperature data
+			 "RelativeHumidity": 43.0,                                        // Temperature data
 			 "TimeStamp": "2024-06-09T07:55:22.3889779-05:00"    // timestamp data
 		  }
 		 */

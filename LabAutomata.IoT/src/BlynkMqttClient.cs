@@ -3,7 +3,7 @@ using MQTTnet;
 using MQTTnet.Client;
 
 namespace LabAutomata.IoT {
-
+	// TODO: THIS CLASS NEEDS DOCUMENTATION. I DID NOT WRITE THIS CLASS AS WELL AS I SHOULD HAVE
 	/// <summary>
 	/// Represents a Blynk MQTT client.
 	/// </summary>

@@ -13,3 +13,15 @@ public class GetDatastreamPayloads : IMqttMsg {
 		return applicationMessage;
 	}
 }
+
+public class GetTimestampPayload : IMqttMsg {
+
+	public MqttApplicationMessage Get () {
+		var applicationMessage = new MqttApplicationMessageBuilder()
+			.WithTopic("get/ds")
+			.WithPayload("timestamp")
+			.Build();
+
+		return applicationMessage;
+	}
+}

@@ -1,14 +1,25 @@
-﻿namespace LabAutomata.IoT {
+﻿using Newtonsoft.Json;
 
-	public struct MqttDht22Payload {
-		public float Temperature { get; init; }
-		public float RelHumidity { get; init; }
-		public float TimeStamp { get; init; }
+namespace LabAutomata.IoT {
+	public readonly struct MqttDht22Payload (float temperature, float relativeHumidity) {
+		[JsonProperty("temp")]
+		public float Temperature { get; init; } = temperature;
 
-		public MqttDht22Payload (float temperature, float relHumidity, float timeStamp) {
-			Temperature = temperature;
-			RelHumidity = relHumidity;
-			TimeStamp = timeStamp;
-		}
+		[JsonProperty("rh")]
+		public float RelativeHumidity { get; init; } = relativeHumidity;
+
+		public int Year { get; init; }
+
+		public int Month { get; init; }
+
+		public int Day { get; init; }
+
+		public int Hour { get; init; }
+
+		[JsonProperty("min")]
+		public int Minute { get; init; }
+
+		[JsonProperty("sec")]
+		public int Second { get; init; }
 	}
 }

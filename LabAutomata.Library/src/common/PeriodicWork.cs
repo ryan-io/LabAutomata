@@ -68,7 +68,7 @@
 		///     WorkAsync does invoke Dispose() on successful work completed
 		/// </summary>
 		/// <param name="callback">Callback to invoke after period</param>
-		/// <param name="period">Time interval to tick</param>
+		/// <param name="period">Time interval to tick in seconds</param>
 		public PeriodicWork (Func<Task> callback, int period = 1) {
 			_callback = callback;
 			_period = period;

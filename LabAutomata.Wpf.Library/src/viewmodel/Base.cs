@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-
 	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo {
 
 		/// <summary>
