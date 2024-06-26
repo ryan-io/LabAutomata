@@ -1,5 +1,6 @@
 ﻿using LabAutomata.IoT;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MQTTnet.Client;
 
 namespace LabAutomata.setup;
@@ -10,6 +11,7 @@ namespace LabAutomata.setup;
 /// </summary>
 public class MqttEntryPoint {
 	private readonly IServiceProvider _sp;
+	private readonly ILogger? _logger;
 	//private readonly SemaphoreSlim _semaphore;
 
 	/// <summary>
@@ -18,6 +20,7 @@ public class MqttEntryPoint {
 	/// <param name="sp">The service provider.</param>
 	public MqttEntryPoint (IServiceProvider sp) {
 		_sp = sp;
+		_logger = _sp.GetRequiredService<ILogger>();
 		//_semaphore = new SemaphoreSlim(1, 1);
 	}
 
@@ -26,19 +29,23 @@ public class MqttEntryPoint {
 	/// </summary>
 	/// <param name="appCancellationToken">The cancellation token for the application.</param>
 	public void Startup (CancellationToken appCancellationToken) {
-		//var logger = _sp.GetRequiredService<ILogger>();
+		var logger = _sp.GetRequiredService<ILogger>();
 		var client = _sp.GetRequiredService<IMqttClient>();
-		var poll = new BlynkMqttPoll(client);
+		var poll = new BlynkMqttPoll(client, logger);
 
 		IMqttMsg timestampPayload = new GetTimestampPayload();
 		IMqttMsg dataPayloads = new GetDatastreamPayloads();
 
 		Task.Run(async () => {
-			while (!appCancellationToken.IsCancellationRequested) {
-				await poll.Signal(dataPayloads, appCancellationToken);
-				await poll.Signal(timestampPayload, appCancellationToken);
+			try {
+				while (!appCancellationToken.IsCancellationRequested) {
+					await poll.Signal(dataPayloads, appCancellationToken);
+					await poll.Signal(timestampPayload, appCancellationToken);
+				}
 			}
-
-		}, appCancellationToken);
+			catch (Exception e) {
+				_logger?.LogError("Async error: " + e.Message);
+			}
+		});
 	}
 }

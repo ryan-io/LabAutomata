@@ -44,7 +44,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		}
 
 		public override void Dispose () {
-			_dht22Payload.PayloadDeserialized -= GetPayload;
+			//_dht22Payload.PayloadDeserialized -= GetPayload;
 		}
 
 		void GetPayload (MqttDht22Payload payload) {

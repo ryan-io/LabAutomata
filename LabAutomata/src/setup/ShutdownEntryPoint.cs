@@ -35,14 +35,14 @@ namespace LabAutomata.setup {
 			await client.Disconnect();
 
 			var dhtStore = _sp.GetRequiredService<DhtSensorStore>();
-			dhtStore?.Dispose();
+			//dhtStore?.Dispose();
 
 			var logger = _sp.GetService<ILogger>();
 			logger?.LogInformation("Application now closing.");
 			logger?.LogInformation("Closing DbContext");
 			var ctx = _sp.GetService<LabPostgreSqlDbContext>();
 			ctx?.Dispose();
-			logger?.CloseAndFlushAsync();
+			logger?.CloseAndFlush();
 		}
 
 		private readonly IServiceProvider _sp;

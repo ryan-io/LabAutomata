@@ -36,6 +36,9 @@ internal sealed class ConfigurationEntryPoint {
 		var singletonConfiguration = new ConfigureSingletons(sc, cb);
 		singletonConfiguration.Configure();
 
+		var storeConfiguration = new ConfigureStores(sc, cb);
+		storeConfiguration.Configure();
+
 		var scopedConfiguration = new ConfigureScoped(sc);
 		scopedConfiguration.Configure();
 

@@ -1,10 +1,8 @@
-﻿using LabAutomata.common;
-using LabAutomata.IoT;
+﻿using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using riolog;
 
 namespace LabAutomata.setup;
 
@@ -12,9 +10,6 @@ internal sealed class ConfigureScoped {
 	private readonly IServiceCollection _sc;
 
 	public void Configure () {
-		var logPath = AppC.GetRootPath() + @"\logging\log_.txt"; //TODO - change where the log path points to?
-		_sc.AddScoped(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
-
 		// reflection to get all classes in deriving from the Base view model class within the LabAutomata.Wpf.Library asm
 		var asmViewModels = typeof(Base).Assembly.GetSubclassOf<Base>().ToList();
 

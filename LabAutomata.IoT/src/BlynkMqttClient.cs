@@ -67,6 +67,9 @@ namespace LabAutomata.IoT {
 					try {
 						MessageReceived?.Invoke(e);
 					}
+					catch (Exception) {
+						// 
+					}
 					finally {
 						semaphore.Release();
 					}

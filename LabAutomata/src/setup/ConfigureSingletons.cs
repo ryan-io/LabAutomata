@@ -1,18 +1,16 @@
 ﻿using LabAutomata.common;
 using LabAutomata.Db.common;
 using LabAutomata.IoT;
-using LabAutomata.stores;
-using LabAutomata.Wpf.Library.contracts;
 using LabAutomata.Wpf.Library.data_structures;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MQTTnet;
 using rio_command_pipeline;
+using riolog;
 
 namespace LabAutomata.setup;
 
 internal sealed class ConfigureSingletons {
-
 	public void Configure () {
 		_sc.AddSingleton(_ => _cb.Build());
 		_sc.AddSingleton(_ => new ConfigurationService().Create<App>());
@@ -20,8 +18,10 @@ internal sealed class ConfigureSingletons {
 		_sc.AddSingleton(sp => sp); // little trick to simply return a singleton to our Sp instance
 		_sc.AddSingleton<IBlynkMqttClient, BlynkMqttClient>();
 		_sc.AddSingleton<IVmc, Vmc>();
-		_sc.AddSingleton<DhtSensorStore>();
-		_sc.AddSingleton<IDht22Payload>(sp => sp.GetRequiredService<DhtSensorStore>());
+
+		var logPath = AppC.GetRootPath() + @"\logging\log_.txt"; //TODO - change where the log path points to?
+		_sc.AddSingleton(_ => InternalLogFactory.SetupAndStart(Output.All, logPath).AsLogger<App>());
+
 		_sc.AddSingleton(_ => {
 			var factory = new MqttFactory();
 			return factory.CreateMqttClient();
