@@ -1,5 +1,5 @@
-﻿using LabAutomata.stores;
-using LabAutomata.Wpf.Library.contracts;
+﻿using LabAutomata.Wpf.Library.contracts;
+using LabAutomata.Wpf.Library.mediator_stores;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

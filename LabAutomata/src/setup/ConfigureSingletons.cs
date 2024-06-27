@@ -2,6 +2,7 @@
 using LabAutomata.Db.common;
 using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.data_structures;
+using LabAutomata.Wpf.Library.mediator_stores;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MQTTnet;
@@ -48,5 +49,8 @@ internal sealed class ConfigureSingletons {
 			return factory.CreateMqttClient();
 		});
 
+
+		// persistent stores
+		_sc.AddSingleton<WorkstationStore>();
 	}
 }

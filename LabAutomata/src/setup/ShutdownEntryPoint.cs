@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using rio_command_pipeline;
 using riolog;
-using DhtSensorStore = LabAutomata.stores.DhtSensorStore;
+using DhtSensorStore = LabAutomata.Wpf.Library.mediator_stores.DhtSensorStore;
 
 namespace LabAutomata.setup {
 

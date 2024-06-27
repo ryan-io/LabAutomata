@@ -5,7 +5,7 @@ namespace LabAutomata.Wpf.Library.commands;
 
 public class ApplicationEntryCommand : Command {
 
-	private async void InvokeVmLoadAsync (object? sender) {
+	private async void LoadAsync (object? sender) {
 		var v = _vmc.GetValues().ToArray();
 		var tasks = new List<Task>();
 
@@ -18,7 +18,7 @@ public class ApplicationEntryCommand : Command {
 
 	public ApplicationEntryCommand (IVmc vmc) {
 		_vmc = vmc;
-		ContextAction = InvokeVmLoadAsync;
+		ContextAction = LoadAsync;
 	}
 
 	private readonly IVmc _vmc;

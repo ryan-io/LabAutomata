@@ -20,8 +20,15 @@ namespace LabAutomata {
 		protected override async void OnStartup (StartupEventArgs e) {
 			base.OnStartup(e);
 
+			List<Task> tasks = new List<Task>();
+
 			IStartupEntry entry = new StartupEntryPoint(this, _serviceProvider);
-			await entry.Startup(CancellationToken.None);
+			tasks.Add(entry.Startup());
+
+			var persistentStoreEntryPoint = new PersistentStoreEntryPoint(_serviceProvider);
+			tasks.Add(persistentStoreEntryPoint.Startup());
+
+			await Task.WhenAll(tasks);
 
 			var mqttEntryPoint = new MqttEntryPoint(_serviceProvider);
 			mqttEntryPoint.Startup(_tokenSource.Token);

@@ -3,7 +3,7 @@ using LabAutomata.Wpf.Library.contracts;
 using MQTTnet.Client;
 using Newtonsoft.Json;
 
-namespace LabAutomata.stores;
+namespace LabAutomata.Wpf.Library.mediator_stores;
 
 public class DhtSensorStore : IDisposable, IDht22PayloadData {
 	public event Action<MqttDht22Payload>? PayloadDeserialized;
@@ -22,6 +22,11 @@ public class DhtSensorStore : IDisposable, IDht22PayloadData {
 		}
 	}
 
+	/// <summary>
+	/// This is typically registered as a Singleton and explicit invocation is not required
+	/// IF this is registered as transient, it will need to be explicitly invoked
+	/// this is to ensure we do not have any dangling references
+	/// </summary>
 	public void Dispose () {
 		_client.MessageReceived -= NotifyPayloadDeserialzied;
 	}

@@ -1,8 +1,6 @@
-﻿using LabAutomata.Db.models;
-using LabAutomata.Db.repository;
-using LabAutomata.Wpf.Library.domain_models;
+﻿using LabAutomata.Wpf.Library.domain_models;
+using LabAutomata.Wpf.Library.mediator_stores;
 using Microsoft.Extensions.Logging;
-using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Library.viewmodel;
 
@@ -10,32 +8,35 @@ namespace LabAutomata.Wpf.Library.viewmodel;
 /// Represents the view model for the WorkstationsContent view.
 /// </summary>
 public class WorkstationsContentVm : Base {
-
 	/// <summary>
 	/// Gets or sets the collection of workstations.
 	/// </summary>
-	public ObservableCollection<WorkstationDomainModel> Workstations { get; set; } = new();
+	public IEnumerable<WorkstationDomainModel> Workstations => _workstationStore.Workstations;
 
-	public override async Task LoadAsync (CancellationToken token = default) {
-		var workstations = await _repository.GetAll(token);
-		List<WorkstationDomainModel> models = new();
+	//public override async Task LoadAsync (CancellationToken token = default) {
+	//	var workstations = await _repository.GetAll(token);
+	//	List<WorkstationDomainModel> models = new();
 
-		foreach (var ws in workstations) {
-			var wsdm = new WorkstationDomainModel(ws);
-			models.Add(wsdm);
-		}
+	//	foreach (var ws in workstations) {
+	//		var wsdm = new WorkstationDomainModel(ws);
+	//		models.Add(wsdm);
+	//	}
 
-		Workstations = new ObservableCollection<WorkstationDomainModel>(models);
-	}
+	//	_workstations = new ObservableCollection<WorkstationDomainModel>(models);
+	//}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="WorkstationsContentVm"/> class.
 	/// </summary>
 	/// <param name="repository">The repository for workstations.</param>
+	/// <param name="workstationStore">Source of truth for Workstations throughout the application</param>
 	/// <param name="logger">The logger.</param>
-	public WorkstationsContentVm (IRepository<Workstation> repository, ILogger? logger = default) : base(logger, true) {
-		_repository = repository;
+	public WorkstationsContentVm (
+		WorkstationStore workstationStore,
+		ILogger? logger = default)
+		: base(logger, true) {
+		_workstationStore = workstationStore;
 	}
 
-	private readonly IRepository<Workstation> _repository;
+	private readonly WorkstationStore _workstationStore;
 }

@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using System.Windows.Input;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-
 	public class WindowNavigator : Base {
 		public ICommand CloseCmd { get; set; }
 		public ICommand LoadedCmd { get; set; }
