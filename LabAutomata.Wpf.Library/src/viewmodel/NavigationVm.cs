@@ -1,7 +1,6 @@
 ﻿using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
 using Microsoft.Extensions.Logging;
-using System.Text;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
 
@@ -21,7 +20,13 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			}
 		}
 
-		public Base? SubCurrentVm { get; set; }
+		public Base? SubCurrentVm {
+			get => _subCurrentVm;
+			set {
+				_subCurrentVm?.Dispose();
+				_subCurrentVm = value;
+			}
+		}
 
 		private Base? _currentVm;
 		private Command? _changeVm;
@@ -34,6 +39,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		public Base? CurrentVm {
 			get => _currentVm;
 			set {
+				_currentVm?.Dispose();
 				_currentVm = value;
 				NotifyPropertyChanged();
 				ChangeVm?.RaiseCanExecuteChanged();
@@ -43,33 +49,30 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NavigationVm"/> class.
 		/// </summary>
-		/// <param name="vmc">A key-value collection containing all viewmodels in the application</param>
+		/// <param name="vmc">A key-value collection containing all view models in the application</param>
+		/// <param name="extractor">For handling creating key values of type string passed to a VMC</param>
 		/// <param name="logger">Optional logger.</param>
-		public NavigationVm (IVmc vmc, ILogger? logger = default) : base(logger, true) {
+		public NavigationVm (IVmc vmc, IVmIdExtractor extractor, ILogger? logger = default)
+			: base(logger, true) {
 			_vmc = vmc;
+			_extractor = extractor;
 		}
 
 		public override void Load () {
-			// TODO: could refactor this into its own class
-			ChangeVm = new Command(vmIdObj => {
-				if (vmIdObj == null || vmIdObj is not string)
-					return;
-
-				_sb.Clear();
-				var vmId = (string)vmIdObj;
-
-				_sb.Append(vmId.Remove(vmId.Length - 2));
-				_sb.Append(SubVmSuffix);
-
-				CurrentVm = _vmc.Get(vmId);
-				SubCurrentVm = _vmc.Get(_sb.ToString());
-			});
-
+			ChangeVm = new Command(ChangeViewModel);
 			CurrentVm = _vmc.Get(nameof(HomeVm));
 		}
 
-		private const string SubVmSuffix = "ContentVm";
-		private readonly StringBuilder _sb = new();
+		private void ChangeViewModel (object? obj) {
+			if (obj is not string vmId)
+				return;
+
+			CurrentVm = _vmc.Get(vmId);
+			SubCurrentVm = _vmc.Get(_extractor.Extract(vmId));
+		}
+
 		private readonly IVmc _vmc;
+		private readonly IVmIdExtractor _extractor;
+		private Base? _subCurrentVm;
 	}
 }

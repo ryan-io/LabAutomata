@@ -1,4 +1,5 @@
 using FluentAssertions;
+using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.data_structures;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 	public class NavigationVmTests {
 		private readonly NavigationVm _sut;
 		private readonly IVmc _vmc = Substitute.For<IVmc>();
+		private readonly IVmIdExtractor _extractor = Substitute.For<IVmIdExtractor>();
 		private readonly ILogger _logger = Substitute.For<ILogger>();
 		private readonly HomeVm _homeVm;
 		private readonly HomeContentVm _homeContentVm;
@@ -17,7 +19,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 		public NavigationVmTests () {
 			_homeVm = new HomeVm(_logger);
 			_homeContentVm = new HomeContentVm(_plotViewModel, _logger);
-			_sut = new NavigationVm(_vmc, _logger);
+			_sut = new NavigationVm(_vmc, _extractor, _logger);
 			_vmc.Get(nameof(HomeVm)).Returns(_homeVm);
 			_vmc.Get(nameof(HomeContentVm)).Returns(_homeContentVm);
 			_vmc.Get(nameof(PlotViewModel)).Returns(_plotViewModel);

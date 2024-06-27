@@ -24,11 +24,11 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			}
 		];
 
-		public PlotViewModel (IDht22Payload dhtPayload, ILogger logger) {
+		public PlotViewModel (IDht22PayloadData dhtPayloadData, ILogger logger) {
 			XAxes = [new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("MM dd"))];
 
 			_logger = logger;
-			_dht22Payload = dhtPayload;
+			_dht22PayloadData = dhtPayloadData;
 			_observableValues = new ObservableCollection<DateTimePoint>();
 
 			Series = new ObservableCollection<ISeries>()
@@ -40,20 +40,20 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 				}
 			};
 
-			_dht22Payload.PayloadDeserialized += GetPayload;
+			_dht22PayloadData.PayloadDeserialized += GetPayloadData;
 		}
 
-		public override void Dispose () {
-			//_dht22Payload.PayloadDeserialized -= GetPayload;
+		protected override void InternalDispose () {
+			_dht22PayloadData.PayloadDeserialized -= GetPayloadData;
 		}
 
-		void GetPayload (MqttDht22Payload payload) {
+		void GetPayloadData (MqttDht22Payload payload) {
 			var date = payload.ToDateTime();
 			_observableValues.Add(new DateTimePoint(date, payload.Temperature));
 		}
 
 		private readonly ILogger _logger;
 		private readonly ObservableCollection<DateTimePoint> _observableValues;
-		private readonly IDht22Payload _dht22Payload;
+		private readonly IDht22PayloadData _dht22PayloadData;
 	}
 }

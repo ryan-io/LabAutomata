@@ -11,7 +11,7 @@ using System.Windows.Threading;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
 
-	public class CreateWorkRequestContentVm : Base, ICreateWorkRequestContentVm {
+	public class CreateWorkRequestContentVm : Base {
 		public ICommand CreateDbModelCmd { get; }
 
 		public ICommand ResetDbModel { get; }
@@ -19,14 +19,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		public WorkRequestDomainModel Model { get; set; } = new();
 
 		public ObservableCollection<Manufacturer> Manufacturers { get; set; } = null!;
-
-		/// <summary>
-		/// Resets the properties of the CreateWorkRequestContentVm to their default values.
-		/// </summary>
-		public override void Reset (object? sender) {
-			Model.Reset();
-			NotifyPropertyChanged(nameof(Model));
-		}
 
 		public string NameEmptyBox {
 			get => _nameEmptyBox;
@@ -65,29 +57,19 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			_manufacturerRepository = manRepository;
 		}
 
+		/// <summary>
+		/// Resets the properties of the CreateWorkRequestContentVm to their default values.
+		/// </summary>
+		private void Reset (object? sender) {
+			Model.Reset();
+			NotifyPropertyChanged(nameof(Model));
+		}
+
+
 		private string _nameEmptyBox = "Enter a name";
 		private string _programEmptyBox = "Enter a program";
 		private string _descEmptyBox = "Enter a description for the work request";
 		private string _startEmptyBox = "Enter a start on date";
 		private readonly IRepository<Manufacturer> _manufacturerRepository;
-	}
-
-	#region ABSTRACTION
-
-	public interface ICreateWorkRequestContentVm {
-		ICommand CreateDbModelCmd { get; }
-		ICommand ResetDbModel { get; }
-		WorkRequestDomainModel Model { get; set; }
-		string NameEmptyBox { get; set; }
-		string ProgramEmptyBox { get; set; }
-		string DescEmptyBox { get; set; }
-		string StartEmptyBox { get; set; }
-
-		/// <summary>
-		/// Resets the properties of the CreateWorkRequestContentVm to their default values.
-		/// </summary>
-		void Reset (object? sender);
-
-		#endregion ABSTRACTION
 	}
 }

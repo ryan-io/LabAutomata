@@ -35,11 +35,6 @@ public abstract class BaseAsync : Base {
 	}
 
 	/// <summary>
-	/// Resets the cancellation token to its initial state.
-	/// </summary>
-	protected void Reset () => Cancellation.TryReset();
-
-	/// <summary>
 	/// Validates the cancellation token and creates a new one if necessary.
 	/// </summary>
 	/// <param name="createNew">Specifies whether to create a new cancellation token if the current one is already cancelled.</param>
@@ -56,20 +51,10 @@ public abstract class BaseAsync : Base {
 	/// <summary>
 	/// Disposes the resources used by the <see cref="BaseAsync"/> class.
 	/// </summary>
-	public void Dispose () {
-		if (IsDisposed) {
-			return;
-		}
-
+	protected override void InternalDispose () {
 		Cancellation.Cancel();
 		Cancellation.Dispose();
-		IsDisposed = true;
 	}
-
-	/// <summary>
-	/// Gets or sets a value indicating whether the <see cref="BaseAsync"/> class has been disposed.
-	/// </summary>
-	private bool IsDisposed { get; set; }
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="BaseAsync"/> class.

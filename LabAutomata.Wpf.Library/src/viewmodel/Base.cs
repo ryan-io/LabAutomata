@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
 	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo, IDisposable {
-
 		/// <summary>
 		///  Raised when a property for this instance is changed
 		/// </summary>
@@ -15,17 +14,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		///  Raised when any errors have been added to error collection
 		/// </summary>
 		public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-
-		/// <summary>
-		/// Notifies any listeners that this instance has completed its load process
-		/// </summary>
-		public bool HasLoaded {
-			get => _hasLoaded;
-			set {
-				_hasLoaded = value;
-				NotifyPropertyChanged();
-			}
-		}
 
 		public ILogger? Logger { get; }
 
@@ -38,31 +26,36 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 				if (!_shouldNotifyErrors)
 					return false;
 
-				return _errors.Any();
+				return _errors.Count < 1;
 			}
 		}
 
 		public virtual Task LoadAsync (CancellationToken token = default) => Task.CompletedTask;
 
+		/// <summary>
+		/// Any logic that should be "loaded" goes here.
+		/// Not the same as a constructor
+		/// </summary>
 		public virtual void Load () {
 		}
 
-		public virtual void Dispose () {
-
-		}
-
 		/// <summary>
-		///  Resets the instance to an initial state
+		///  Resets the instance to an initial state; use this for view models that are transient in nature
 		/// </summary>
-		/// <param name="sender"></param>
-		public virtual void Reset (object? sender) { }
+		public void Dispose () {
+			if (IsDisposed)
+				return;
+
+			InternalDispose();
+			IsDisposed = true;
+		}
 
 		/// <summary>
 		///  If no property is specified, CallerMemberName will be automatically populated with the member that invoked this method
 		///     This will be member 'Source' in all instances
 		/// </summary>
 		/// <param name="property">SensorName of property that changed</param>
-		protected virtual void NotifyPropertyChanged ([CallerMemberName] string? property = default) {
+		protected void NotifyPropertyChanged ([CallerMemberName] string? property = default) {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 		}
 
@@ -75,7 +68,10 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			if (!_shouldNotifyErrors || string.IsNullOrWhiteSpace(propertyName))
 				return Enumerable.Empty<string>();
 
-			return _errors[propertyName];
+			if (_errors.TryGetValue(propertyName, out var output))
+				return output;
+
+			return Enumerable.Empty<string>();
 		}
 
 		/// <summary>
@@ -83,16 +79,27 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		/// </summary>
 		/// <param name="logger">Optional logger</param>
 		/// <param name="shouldNotifyErrors">Default yes, will not add, remove, clear, or propogate events that pertain to errors</param>
-		public Base (ILogger? logger = default, bool shouldNotifyErrors = false) {
+		protected Base (ILogger? logger = default, bool shouldNotifyErrors = false) {
 			_shouldNotifyErrors = shouldNotifyErrors;
-			_errors = new Dictionary<string, List<string>>();
+			Logger = logger;
 		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether the <see cref="BaseAsync"/> class has been disposed.
+		/// </summary>
+		protected bool IsDisposed { get; set; }
+
+		/// <summary>
+		/// Internal method to override to handle freeing unmanaged memory
+		/// This method is automatically invoked via the Dispose pattern
+		/// </summary>
+		protected virtual void InternalDispose () { }
 
 		/// <summary>
 		///  Raises ErrorsChanged event
 		/// </summary>
 		/// <param name="args">Relevent data transfer object</param>
-		protected virtual void OnErrorsChanged (DataErrorsChangedEventArgs args) {
+		private void OnErrorsChanged (DataErrorsChangedEventArgs args) {
 			if (!_shouldNotifyErrors)
 				return;
 
@@ -162,7 +169,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		/// <param name="error">Enumerable of strings containing error messages</param>
 		/// <returns>True if there are errors for propertyName</returns>
 		protected bool TryGetErrorString (string? propertyName, out IEnumerable<string>? error) {
-			error = Enumerable.Empty<string>();
+			error = [];
 
 			if (string.IsNullOrWhiteSpace(propertyName)) {
 				return false;
@@ -174,7 +181,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		}
 
 		private readonly bool _shouldNotifyErrors;
-		private readonly Dictionary<string, List<string>> _errors;
-		private bool _hasLoaded;
+		private readonly Dictionary<string, List<string>> _errors = new();
 	}
 }

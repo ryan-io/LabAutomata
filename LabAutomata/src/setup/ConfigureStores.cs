@@ -8,7 +8,7 @@ namespace LabAutomata.setup;
 internal sealed class ConfigureStores {
 	public void Configure () {
 		_sc.AddSingleton<DhtSensorStore>();
-		_sc.AddSingleton<IDht22Payload>(sp => sp.GetRequiredService<DhtSensorStore>());
+		_sc.AddSingleton<IDht22PayloadData>(sp => sp.GetRequiredService<DhtSensorStore>());
 		_sc.AddSingleton<DhtSensorDbWriteStore>();
 	}
 

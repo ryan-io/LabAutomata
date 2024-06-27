@@ -11,7 +11,7 @@
                  ResizeMode="CanResizeWithGrip"
                  SizeToContent="WidthAndHeight"
                  Background="Transparent"
-                 d:DataContext="{d:DesignInstance viewmodel:MainWindowVm}"
+                 d:DataContext="{d:DesignInstance viewmodel:WindowNavigator}"
                  Title="Lab Automata" Height="900" Width="800">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">

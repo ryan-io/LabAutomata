@@ -11,8 +11,8 @@ namespace LabAutomata {
 	/// </summary>
 	public partial class MainWindow : Window {
 
-		public MainWindow (MainWindowVm vm) {
-			DataContext = vm;
+		public MainWindow (WindowNavigator navigator) {
+			DataContext = navigator;
 			InitializeComponent();
 
 			ApplicationThemeManager.Apply(ApplicationTheme.Dark, WindowBackdropType.Auto);

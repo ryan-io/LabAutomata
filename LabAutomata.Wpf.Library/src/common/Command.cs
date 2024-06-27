@@ -52,10 +52,10 @@ namespace LabAutomata.Wpf.Library.common {
 		/// <summary>
 		///  Invokes the context action
 		/// </summary>
-		/// <param name="parameter">object to pass to action _context</param>
-		public virtual void Execute (object? parameter) {
+		/// <param name="obj">object to pass to action _context</param>
+		public virtual void Execute (object? obj) {
 			if (ContextAction == null) return;
-			ContextAction?.Invoke(parameter);
+			ContextAction?.Invoke(obj);
 			OnExecutedCallback?.Invoke();
 		}
 

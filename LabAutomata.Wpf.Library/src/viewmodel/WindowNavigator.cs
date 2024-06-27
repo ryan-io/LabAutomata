@@ -5,13 +5,14 @@ using System.Windows.Input;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
 
-	public class MainWindowVm : Base {
+	public class WindowNavigator : Base {
 		public ICommand CloseCmd { get; set; }
 		public ICommand LoadedCmd { get; set; }
 
 		public Base? NavVm {
 			get => _navVm;
 			private set {
+				_navVm?.Dispose();
 				_navVm = value;
 				NotifyPropertyChanged();
 			}
@@ -20,6 +21,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		public Base? FocusedVm {
 			get => _focusedVm;
 			set {
+				_focusedVm?.Dispose();
 				_focusedVm = value;
 				NotifyPropertyChanged();
 				NotifyPropertyChanged(nameof(SubFocusedVm));
@@ -29,6 +31,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		public Base? MainNavVm {
 			get => _headerNavVm;
 			set {
+				_headerNavVm?.Dispose();
 				_headerNavVm = value;
 				NotifyPropertyChanged();
 			}
@@ -54,7 +57,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			};
 		}
 
-		public MainWindowVm (
+		public WindowNavigator (
 			IVmc vmc,
 			NavigationVm nvm,
 			HomeVm hvm,

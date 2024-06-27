@@ -26,8 +26,8 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
             _sut.
 
              // Assert
-             vm.Workstations.Should().NotBeNull();
-            vm.Workstations.Count.Should().Be(workstations.Count);
+             navigator.Workstations.Should().NotBeNull();
+            navigator.Workstations.Count.Should().Be(workstations.Count);
         }*/
 	}
 }
