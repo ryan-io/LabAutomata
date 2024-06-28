@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace LabAutomata.Wpf.Library.mediator_stores;
 
-public class DhtSensorStore : IDisposable, IDht22PayloadData {
+public class DhtSensorStore : IDht22PayloadData {
 	public event Action<MqttDht22Payload>? PayloadDeserialized;
 
 	void NotifyPayloadDeserialzied (MqttApplicationMessageReceivedEventArgs args) {

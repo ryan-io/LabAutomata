@@ -8,6 +8,8 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private int _locationId;
 		private Location _location;
 		private ICollection<Test> _tests;
+		private ICollection<WorkstationType> _types;
+		private ICollection<Equipment> _equipment;
 		private string _description;
 		private int _testCount;
 
@@ -23,15 +25,20 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			Tests = ws.Tests;
 			Description = ws.Description;
 			TestCount = ws.Tests.Count;
+			Types = ws.Types;
+			Equipment = ws.Equipment;
 		}
 
-		public WorkstationDomainModel (string name, int stationNumber, int locationId, Location location, ICollection<Test> tests, string description) {
+		public WorkstationDomainModel (string name, int stationNumber, int locationId, Location location, ICollection<Test> tests, string description,
+			ICollection<WorkstationType> types, ICollection<Equipment> equipment) {
 			Name = name;
 			StationNumber = stationNumber;
 			LocationId = locationId;
 			Location = location;
 			Tests = tests;
 			Description = description;
+			Types = types;
+			Equipment = equipment;
 		}
 
 		public string Name {
@@ -70,6 +77,22 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			get => _tests;
 			set {
 				_tests = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		public ICollection<Equipment> Equipment {
+			get => _equipment;
+			set {
+				_equipment = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		public ICollection<WorkstationType> Types {
+			get => _types;
+			set {
+				_types = value;
 				NotifyPropertyChanged();
 			}
 		}

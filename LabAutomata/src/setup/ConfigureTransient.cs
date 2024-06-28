@@ -1,4 +1,5 @@
-﻿using LabAutomata.DataAccess.service;
+﻿using LabAutomata.DataAccess.mapper;
+using LabAutomata.DataAccess.service;
 using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using LabAutomata.Db.repository;
@@ -37,8 +38,11 @@ internal sealed class ConfigureTransient {
 		_sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 		_sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 
-		// data access services
+		// data access services 
 		_sc.AddTransient<IService<WorkstationRequest, WorkstationResponse>, WorkstationService>();
+
+		// mappers
+		_sc.AddTransient<IMapper<Workstation, WorkstationRequest, WorkstationResponse>, WorkstationMapper>();
 
 		// misc. transients
 		_sc.AddTransient<PlotViewModel>();

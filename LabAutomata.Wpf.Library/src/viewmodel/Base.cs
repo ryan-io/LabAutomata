@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
-	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo, IDisposable {
+	public abstract class Base : INotifyPropertyChanged, INotifyDataErrorInfo {
 		/// <summary>
 		///  Raised when a property for this instance is changed
 		/// </summary>
@@ -48,6 +48,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
 			InternalDispose();
 			IsDisposed = true;
+			GC.SuppressFinalize(this);
 		}
 
 		/// <summary>

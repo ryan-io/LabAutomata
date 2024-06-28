@@ -3,7 +3,7 @@ using LabAutomata.IoT;
 
 namespace LabAutomata.Wpf.Library.mediator_stores;
 
-public class DhtSensorDbWriteStore : IDisposable {
+public sealed class DhtSensorDbWriteStore : IDisposable {
 	public DhtSensorDbWriteStore (DhtSensorService service, DhtSensorStore store) {
 		_service = service;
 		_store = store;
