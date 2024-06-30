@@ -40,9 +40,11 @@ internal sealed class ConfigureTransient {
 
 		// data access services 
 		_sc.AddTransient<IService<WorkstationRequest, WorkstationResponse>, WorkstationService>();
+		_sc.AddTransient<IService<DhtJsonDataRequest, DhtJsonDataResponse>, DhtJsonDataService>();
 
 		// mappers
 		_sc.AddTransient<IMapper<Workstation, WorkstationRequest, WorkstationResponse>, WorkstationMapper>();
+		_sc.AddTransient<IMapper<DhtJsonData, DhtJsonDataRequest, DhtJsonDataResponse>, DhtJsondataMapper>();
 
 		// misc. transients
 		_sc.AddTransient<PlotViewModel>();

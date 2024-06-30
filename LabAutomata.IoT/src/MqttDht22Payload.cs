@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 namespace LabAutomata.IoT {
-	public readonly struct MqttDht22Payload (float temperature, float relativeHumidity) {
+	public class MqttDht22Payload (float temperature, float relativeHumidity) {
 		[JsonProperty("temp")]
 		public float Temperature { get; init; } = temperature;
 
@@ -21,5 +21,11 @@ namespace LabAutomata.IoT {
 
 		[JsonProperty("sec")]
 		public int Second { get; init; }
+
+		[JsonProperty("id")]
+		public int DhtSensorId { get; init; }
+
+		[JsonIgnore]
+		public string? Raw { get; set; }
 	}
 }

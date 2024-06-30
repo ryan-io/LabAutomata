@@ -14,8 +14,13 @@ public class DhtSensorStore : IDht22PayloadData {
 
 			if (output.ResponseObject != null) {
 				var payload = JsonConvert.DeserializeObject<MqttDht22Payload>(output.ResponseObject);
-				PayloadDeserialized?.Invoke(payload);
 
+				if (payload == null) {
+					throw new NullReferenceException($"{nameof(MqttDht22Payload)} was null");
+				}
+
+				payload.Raw = output.ResponseObject;
+				PayloadDeserialized?.Invoke(payload);
 				// move this to appropriate class
 				//_observableValues.Add(new DateTimePoint(date, payload.Temperature));
 			}
