@@ -16,12 +16,12 @@ internal sealed class ConfigureScoped {
 		var asmViewModelExceptions = new[] { typeof(PlotViewModel) };
 
 		foreach (var vmType in asmViewModels) {
-			if (asmViewModelExceptions.Contains(vmType)) continue;
+			//if (asmViewModelExceptions.Contains(vmType)) continue;
 			_sc.AddScoped(vmType);
 		}
 
 		// scoped
-		_sc.AddScoped<IBlynkMqttClientConfig>(sp => {
+		_sc.AddSingleton<IBlynkMqttClientConfig>(sp => {
 			var config = sp.GetRequiredService<IConfigurationRoot>();
 
 			ArgumentNullException.ThrowIfNull(config, CouldNotExtractConfigFromServiceProvider);

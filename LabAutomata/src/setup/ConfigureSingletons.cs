@@ -47,5 +47,7 @@ internal sealed class ConfigureSingletons {
 			var factory = new MqttFactory();
 			return factory.CreateMqttClient();
 		});
+
+
 	}
 }

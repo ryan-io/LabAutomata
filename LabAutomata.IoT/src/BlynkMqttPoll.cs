@@ -27,6 +27,7 @@ public class BlynkMqttPoll {
 	/// <param name="token">The cancellation token.</param>
 	public async Task Signal (IMqttMsg msgPayload, CancellationToken token = default) {
 		try {
+			await Task.Delay(TimeSpan.FromSeconds(PollLimitSeconds), token);
 			await _client.PublishAsync(msgPayload.Get(), token);
 		}
 		catch (Exception e) {
@@ -34,4 +35,6 @@ public class BlynkMqttPoll {
 			throw;
 		}
 	}
+
+	private const int PollLimitSeconds = 2;
 }

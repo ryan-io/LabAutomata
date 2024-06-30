@@ -39,17 +39,25 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 					Fill = null
 				}
 			};
+		}
 
+		public override void Load () {
 			_dht22PayloadData.PayloadDeserialized += GetPayloadData;
+
 		}
 
 		protected override void InternalDispose () {
 			_dht22PayloadData.PayloadDeserialized -= GetPayloadData;
 		}
 
+
+		private int counter = 0;
+
 		void GetPayloadData (MqttDht22Payload payload) {
 			var date = payload.ToDateTime();
 			_observableValues.Add(new DateTimePoint(date, payload.Temperature));
+			_logger.LogInformation("Received payloed {counter}", counter);
+			counter++;
 		}
 
 		private readonly ILogger _logger;

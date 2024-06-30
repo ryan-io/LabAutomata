@@ -7,7 +7,6 @@ using LabAutomata.Dto.request;
 using LabAutomata.Dto.response;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.common;
-using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Threading;
@@ -45,9 +44,6 @@ internal sealed class ConfigureTransient {
 		// mappers
 		_sc.AddTransient<IMapper<Workstation, WorkstationRequest, WorkstationResponse>, WorkstationMapper>();
 		_sc.AddTransient<IMapper<DhtJsonData, DhtJsonDataRequest, DhtJsonDataResponse>, DhtJsondataMapper>();
-
-		// misc. transients
-		_sc.AddTransient<PlotViewModel>();
 	}
 
 	public ConfigureTransient (IServiceCollection sc, Application app) {

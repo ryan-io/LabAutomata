@@ -11,6 +11,8 @@ namespace LabAutomata.IoT {
 		private readonly IMqttClient _client;
 		private readonly ILogger? _logger;
 		private readonly IBlynkMqttClientConfig _config;
+		private readonly SemaphoreSlim _semaphore = new(Environment.ProcessorCount - 1);
+
 
 		/// <summary>
 		/// Event for subscribing to any available MQTT message types
@@ -45,7 +47,6 @@ namespace LabAutomata.IoT {
 		public async Task<bool> Connect (MqttSubcription subscription = (MqttSubcription.Uplink | MqttSubcription.Downlink), CancellationToken token = default) {
 			var optionsBuilder = new BlynkMqttOptionsBuilder();
 			var mqttClientOptions = optionsBuilder.BuildOptions(_config);
-
 			if (_logger != null) {
 				_client.ConnectedAsync += _ => {
 					_logger.LogInformation("Connected to {iot}", _config.Broker);
@@ -59,25 +60,11 @@ namespace LabAutomata.IoT {
 			}
 
 			// the '-1' is due to a dedicated background worker thread already polling for MQTT messages
-			var semaphore = new SemaphoreSlim(Environment.ProcessorCount - 1);
+
 			_client.ApplicationMessageReceivedAsync += async e => {
-				await semaphore.WaitAsync(_cancellation.Token).ConfigureAwait(false);
-
-				Task LocalProcess () {
-					try {
-						MessageReceived?.Invoke(e);
-					}
-					catch (Exception) {
-						// 
-					}
-					finally {
-						semaphore.Release();
-					}
-
-					return Task.CompletedTask;
-				}
-
-				await Task.Run(LocalProcess, _cancellation.Token);
+				e.AutoAcknowledge = false;
+				e.AcknowledgeAsync(_cancellation.Token);
+				MessageReceived?.Invoke(e);
 			};
 
 			var result = await _client.ConnectAsync(mqttClientOptions, token);

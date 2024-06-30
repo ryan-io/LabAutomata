@@ -1,5 +1,6 @@
 ﻿using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.contracts;
+using Microsoft.Extensions.Logging;
 using MQTTnet.Client;
 using Newtonsoft.Json;
 
@@ -20,9 +21,14 @@ public class DhtSensorStore : IDht22PayloadData {
 				}
 
 				payload.Raw = output.ResponseObject;
+				var list = PayloadDeserialized.GetInvocationList();
+				var count = list.Length;
+
+				foreach (var @delegate in list) {
+					var name = @delegate.Method.Name;
+				}
+
 				PayloadDeserialized?.Invoke(payload);
-				// move this to appropriate class
-				//_observableValues.Add(new DateTimePoint(date, payload.Temperature));
 			}
 		}
 	}
@@ -36,14 +42,16 @@ public class DhtSensorStore : IDht22PayloadData {
 		_client.MessageReceived -= NotifyPayloadDeserialzied;
 	}
 
-	public DhtSensorStore (IBlynkMqttClient client) {
+	public DhtSensorStore (IBlynkMqttClient client, ILogger logger1, ILogger? logger = default) {
 		_interpretation = new JsonInterpretation();
 		_client = client;
+		_logger = logger1;
 		_client.MessageReceived += NotifyPayloadDeserialzied;
 	}
 
 	private readonly JsonInterpretation _interpretation;
 	private readonly IBlynkMqttClient _client;
+	readonly ILogger _logger;
 	private const string DhtSensor1 = "downlink/ds/temperature_sys_1";
 
 }

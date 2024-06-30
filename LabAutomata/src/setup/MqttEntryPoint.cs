@@ -33,14 +33,12 @@ public class MqttEntryPoint {
 		var client = _sp.GetRequiredService<IMqttClient>();
 		var poll = new BlynkMqttPoll(client, logger);
 
-		IMqttMsg timestampPayload = new GetTimestampPayload();
 		IMqttMsg dataPayloads = new GetDatastreamPayloads();
 
 		Task.Run(async () => {
 			try {
 				while (!appCancellationToken.IsCancellationRequested) {
 					await poll.Signal(dataPayloads, appCancellationToken);
-					await poll.Signal(timestampPayload, appCancellationToken);
 				}
 			}
 			catch (Exception e) {
