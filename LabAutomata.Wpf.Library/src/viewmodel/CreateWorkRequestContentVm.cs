@@ -41,8 +41,8 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		}
 
 		public override async Task LoadAsync (CancellationToken token = default) {
-			var m = await _manufacturerRepository.GetAll(token);
-			Manufacturers = new ObservableCollection<Manufacturer>(m);
+			//var m = await _manufacturerRepository.GetAll(token);
+			//Manufacturers = new ObservableCollection<Manufacturer>(m);
 		}
 
 		/// There is a dependence on the actual wrRepository

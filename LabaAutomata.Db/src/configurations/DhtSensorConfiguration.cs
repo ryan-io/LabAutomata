@@ -8,7 +8,7 @@ namespace LabAutomata.Db.configurations {
 		public void Configure (EntityTypeBuilder<DhtSensor> builder) {
 			builder.HasMany(s => s.Data)
 				.WithOne(d => d.DhtSensor)
-				.HasForeignKey(d => d.DhtSensorId);
+				.HasForeignKey(data => data.Id);
 		}
 	}
 }

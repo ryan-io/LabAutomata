@@ -14,12 +14,14 @@ public class PersistentStoreEntryPoint {
 	/// </summary>
 	/// <param name="appCancellationToken">The cancellation token for the application.</param>
 	public async Task Startup (CancellationToken appCancellationToken = default) {
-		var tasks = new List<Task>();
+		//var tasks = new List<Task>();
 		var workstationStore = _serviceProvider.GetRequiredService<IWorkstationStore>();
-		var dhtDataWriterStore = _serviceProvider.GetRequiredService<IDhtSensorDataWriter>();
-		tasks.Add(workstationStore.Load(appCancellationToken));
+		//var dhtDataWriterStore = _serviceProvider.GetRequiredService<IDhtSensorDataWriter>();
+		//tasks.Add(workstationStore.Load(appCancellationToken));
 
-		await Task.WhenAll(tasks);
+		await workstationStore.Load(appCancellationToken);
+
+		//await Task.WhenAll(tasks);
 	}
 
 	/// <summary>

@@ -4,16 +4,6 @@ using LabAutomata.Dto.response;
 
 namespace LabAutomata.DataAccess.mapper;
 
-public class DhtJsondataMapper : IMapper<DhtJsonData, DhtJsonDataRequest, DhtJsonDataResponse> {
-	public DhtJsonData ToModel (DhtJsonDataRequest request) {
-		throw new NotImplementedException();
-	}
-
-	public DhtJsonDataResponse ToResponse (DhtJsonData model) {
-		throw new NotImplementedException();
-	}
-}
-
 public class WorkstationMapper : IMapper<Workstation, WorkstationRequest, WorkstationResponse> {
 	/// <summary>
 	/// Maps a WorkstationRequestCreate object to a Workstation model.
@@ -50,6 +40,5 @@ public class WorkstationMapper : IMapper<Workstation, WorkstationRequest, Workst
 			model.Equipment,
 			model.Tests);
 	}
-
 
 }

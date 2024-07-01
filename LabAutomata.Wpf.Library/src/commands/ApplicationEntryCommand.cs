@@ -7,13 +7,14 @@ public class ApplicationEntryCommand : Command {
 
 	private async void LoadAsync (object? sender) {
 		var v = _vmc.GetValues().ToArray();
-		var tasks = new List<Task>();
+		//var tasks = new List<Task>();
 
 		foreach (var vm in v) {
-			tasks.Add(vm.LoadAsync());
+			//tasks.Add(vm.LoadAsync());
+			await vm.LoadAsync();
 			vm.Load();
 		}
-		await Task.WhenAll(tasks);
+		//await Task.WhenAll(tasks);
 	}
 
 	public ApplicationEntryCommand (IVmc vmc) {

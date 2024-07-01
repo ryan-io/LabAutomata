@@ -18,7 +18,6 @@ internal sealed class ConfigureTransient {
 
 	public void Configure () {
 		_sc.AddTransient<MainWindow>();
-		_sc.AddTransient<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
 		_sc.AddTransient<IAdapter<Dispatcher>>(_ => new DispatcherAdapter(_app));
 
 		// database repositories
@@ -44,6 +43,9 @@ internal sealed class ConfigureTransient {
 		// mappers
 		_sc.AddTransient<IMapper<Workstation, WorkstationRequest, WorkstationResponse>, WorkstationMapper>();
 		_sc.AddTransient<IMapper<DhtJsonData, DhtJsonDataRequest, DhtJsonDataResponse>, DhtJsondataMapper>();
+
+		// db-sets
+		_sc.AddTransient<IDhtSensorSet>(sp => sp.GetRequiredService<ILabPostgreSqlDbContext>());
 	}
 
 	public ConfigureTransient (IServiceCollection sc, Application app) {

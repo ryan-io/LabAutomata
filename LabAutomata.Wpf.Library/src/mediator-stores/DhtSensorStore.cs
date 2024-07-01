@@ -21,12 +21,12 @@ public class DhtSensorStore : IDht22PayloadData {
 				}
 
 				payload.Raw = output.ResponseObject;
-				var list = PayloadDeserialized.GetInvocationList();
-				var count = list.Length;
+				//var list = PayloadDeserialized.GetInvocationList();
+				//var count = list.Length;
 
-				foreach (var @delegate in list) {
-					var name = @delegate.Method.Name;
-				}
+				//foreach (var @delegate in list) {
+				//	var name = @delegate.Method.Name;
+				//}
 
 				PayloadDeserialized?.Invoke(payload);
 			}

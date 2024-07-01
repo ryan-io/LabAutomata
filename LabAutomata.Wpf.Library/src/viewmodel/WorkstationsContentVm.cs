@@ -13,17 +13,17 @@ public class WorkstationsContentVm : Base {
 	/// </summary>
 	public IEnumerable<WorkstationDomainModel> Workstations => _workstationStore.Workstations;
 
-	//public override async Task LoadAsync (CancellationToken token = default) {
-	//	var workstations = await _repository.GetAll(token);
-	//	List<WorkstationDomainModel> models = new();
+	public override async Task LoadAsync (CancellationToken token = default) {
+		//var workstations = await _repository.GetAll(token);
+		//List<WorkstationDomainModel> models = new();
 
-	//	foreach (var ws in workstations) {
-	//		var wsdm = new WorkstationDomainModel(ws);
-	//		models.Add(wsdm);
-	//	}
+		//foreach (var ws in workstations) {
+		//	var wsdm = new WorkstationDomainModel(ws);
+		//	models.Add(wsdm);
+		//}
 
-	//	_workstations = new ObservableCollection<WorkstationDomainModel>(models);
-	//}
+		//_workstations = new ObservableCollection<WorkstationDomainModel>(models);
+	}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="WorkstationsContentVm"/> class.

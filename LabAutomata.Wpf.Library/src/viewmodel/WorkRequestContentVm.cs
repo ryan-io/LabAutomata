@@ -26,16 +26,16 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 	/// <param name="token">The cancellation token.</param>
 	/// <returns>A task representing the asynchronous operation.</returns>
 	public override async Task LoadAsync (CancellationToken token = default) {
-		var wrs = await _repository.GetAll(token);
-		List<WorkRequestDomainModel> models = new();
+		//var wrs = await _repository.GetAll(token);
+		//List<WorkRequestDomainModel> models = new();
 
-		foreach (var wr in wrs) {
-			var count = wr.Tests?.Count ?? 0;
-			var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.WrId, wr.Manufacturer, count);
-			models.Add(wrdm);
-		}
+		//foreach (var wr in wrs) {
+		//	var count = wr.Tests?.Count ?? 0;
+		//	var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.WrId, wr.Manufacturer, count);
+		//	models.Add(wrdm);
+		//}
 
-		WorkRequests = new ObservableCollection<WorkRequestDomainModel>(models);
+		//WorkRequests = new ObservableCollection<WorkRequestDomainModel>(models);
 	}
 
 	/// <summary>

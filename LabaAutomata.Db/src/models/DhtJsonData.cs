@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LabAutomata.Db.models;
+
+[Table("dht_json_data")]
 
 public class DhtJsonData : LabModel {
 	/// <summary>
@@ -11,5 +14,5 @@ public class DhtJsonData : LabModel {
 
 	public int DhtSensorId { get; init; }
 
-	public DhtSensor DhtSensor { get; init; }
+	public DhtSensor? DhtSensor { get; init; }
 }

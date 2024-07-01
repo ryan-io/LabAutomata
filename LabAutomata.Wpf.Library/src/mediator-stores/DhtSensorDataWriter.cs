@@ -37,7 +37,7 @@ public class DhtSensorDataWriter : IDhtSensorDataWriter {
 		if (string.IsNullOrWhiteSpace(obj.Raw))
 			return;
 
-		var request = new DhtJsonDataRequest(obj.Raw, 1);
+		var request = new DhtJsonDataRequest(obj.Raw, obj.DhtSensorId);
 		//await _serviceProvider.Create(request);
 	}
 

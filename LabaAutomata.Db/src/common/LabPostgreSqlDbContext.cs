@@ -12,13 +12,18 @@ namespace LabAutomata.Db.common {
 		public DbSet<TestType> TestType { get; set; }
 		public DbSet<WorkstationType> WorkstationTypesType { get; set; }
 		public DbSet<Location> Location { get; set; }
-		public DbSet<DhtSensor> DhtSensors { get; }
-		public DbSet<DhtJsonData> DhtJsonData { get; }
+		public DbSet<DhtSensor> DhtSensors { get; set; }
+		public DbSet<DhtJsonData> DhtJsonData { get; set; }
 		public DbSet<Personnel> Personnels { get; set; }
 		public DbSet<SeedJson> SeedJson { get; set; }
 		public PostgreSqlDbContext PostgreSqlDb => this;
 
 		public LabPostgreSqlDbContext (IConfiguration config) : base(config) {
+		}
+
+		public LabPostgreSqlDbContext (DbContextOptions<LabPostgreSqlDbContext> options, IConfiguration config)
+			: base(config) {
+
 		}
 
 		protected override void OnModelCreating (ModelBuilder modelBuilder) {

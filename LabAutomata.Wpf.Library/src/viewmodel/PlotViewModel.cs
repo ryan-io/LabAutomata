@@ -1,6 +1,7 @@
 ﻿using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.contracts;
+using LabAutomata.Wpf.Library.mediator_stores;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
@@ -24,11 +25,12 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			}
 		];
 
-		public PlotViewModel (IDht22PayloadData dhtPayloadData, ILogger logger) {
+		public PlotViewModel (IDht22PayloadData dhtPayloadData, IDhtSensorDataWriter dataWriter, ILogger logger) {
 			XAxes = [new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("MM dd"))];
 
 			_logger = logger;
 			_dht22PayloadData = dhtPayloadData;
+			_dataWriter = dataWriter;
 			_observableValues = new ObservableCollection<DateTimePoint>();
 
 			Series = new ObservableCollection<ISeries>()
@@ -63,5 +65,6 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		private readonly ILogger _logger;
 		private readonly ObservableCollection<DateTimePoint> _observableValues;
 		private readonly IDht22PayloadData _dht22PayloadData;
+		private readonly IDhtSensorDataWriter _dataWriter;
 	}
 }

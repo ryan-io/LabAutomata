@@ -1,4 +1,5 @@
-﻿using LabAutomata.IoT;
+﻿using LabAutomata.Db.common;
+using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.viewmodel;
 using Microsoft.Extensions.Configuration;
@@ -10,10 +11,12 @@ internal sealed class ConfigureScoped {
 	private readonly IServiceCollection _sc;
 
 	public void Configure () {
+		_sc.AddScoped<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
+		_sc.AddDbContext<ILabPostgreSqlDbContext, LabPostgreSqlDbContext>();
 		// reflection to get all classes in deriving from the Base view model class within the LabAutomata.Wpf.Library asm
 		var asmViewModels = typeof(Base).Assembly.GetSubclassOf<Base>().ToList();
 
-		var asmViewModelExceptions = new[] { typeof(PlotViewModel) };
+		//var asmViewModelExceptions = new[] { typeof(PlotViewModel) };
 
 		foreach (var vmType in asmViewModels) {
 			//if (asmViewModelExceptions.Contains(vmType)) continue;
