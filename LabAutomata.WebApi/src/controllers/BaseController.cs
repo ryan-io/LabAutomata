@@ -4,23 +4,23 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace LabAutomata.WebApi.controllers {
 	/*
-     * Post-template:
-     *      Query factory to create a new model
-     *      Check if the factory return a discriminated union (ErrorOr)
-     *          result.IsError
-     *      Invoked user service to create the model and serialize to db context
-     *      Optional: Map the response from the factory method in step 1
-     *      Return the ErrorOr<Created> discriminated union via 'Match' method
-     *      Example:            ** ProblemInController is defined in this base controller
-     *          	var addToRepositoryResult = m_demoService.CreateMockDemoItem(createNewResult.Value);
-       		        var response = MapResponse(createNewResult.Value);
-       		        return addToRepositoryResult.Match(
-       			        item => CreatedAtAction(
-       				        nameof(CreateMockDemoItem),
-       				        new { id = createNewResult.Value.Id },
-       				        response),
-       			        ProblemInController);
-     */
+	 * Post-template:
+	 *      Query factory to create a new model
+	 *      Check if the factory return a discriminated union (ErrorOr)
+	 *          result.IsError
+	 *      Invoked user service to create the model and serialize to db context
+	 *      Optional: Map the response from the factory method in step 1
+	 *      Return the ErrorOr<Created> discriminated union via 'Match' method
+	 *      Example:            ** ProblemInController is defined in this base controller
+	 *          	var addToRepositoryResult = m_demoService.CreateMockDemoItem(createNewResult.Value);
+					var response = MapResponse(createNewResult.Value);
+					return addToRepositoryResult.Match(
+						item => CreatedAtAction(
+							nameof(CreateMockDemoItem),
+							new { id = createNewResult.Value.Id },
+							response),
+						ProblemInController);
+	 */
 	// reference a video from Amichai
 	//		https://www.youtube.com/watch?v=PmDJIooZjBE
 	[ApiController]
