@@ -5,6 +5,6 @@ namespace LabAutomata.Dto.response {
 		int Id,
 		string JsonString,
 		int DhtSensorId,
-		DhtSensor? DhtSensor) {
+		Dht22Sensor? DhtSensor) {
 	}
 }

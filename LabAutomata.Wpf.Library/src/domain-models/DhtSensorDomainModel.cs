@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace LabAutomata.Wpf.Library.domain_models {
 	//TODO: this model needs to be dependent on DhtJsonDataDomainModel
 	//		and should convert all DhtJsonData to DhtJsonDataDomainModel
-	public class DhtSensorDomainModel : DomainModel<DhtSensor> {
+	public class DhtSensorDomainModel : DomainModel<Dht22Sensor> {
 		private int _id = -1;
 		private string _sensorName = "";
 		private string? _description = "";
@@ -14,7 +14,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			Data = new ObservableCollection<DhtJsonDataDomainModel>();
 		}
 
-		public DhtSensorDomainModel (DhtSensor sensor) {
+		public DhtSensorDomainModel (Dht22Sensor sensor) {
 			Id = sensor.Id;
 			SensorName = sensor.SensorName;
 			Description = sensor.Description;
@@ -70,8 +70,8 @@ namespace LabAutomata.Wpf.Library.domain_models {
 
 		public ObservableCollection<DhtJsonDataDomainModel> Data { get; set; }
 
-		public override DhtSensor Create () {
-			return new DhtSensor {
+		public override Dht22Sensor Create () {
+			return new Dht22Sensor {
 				Id = Id,
 				SensorName = SensorName,
 				Description = Description,

@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models;
 
-public class Manufacturer : LabModel {
+public class Manufacturer {
 
 	[Required, MaxLength(100)]
 	public string? Name { get; init; } = string.Empty;

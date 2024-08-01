@@ -20,7 +20,7 @@ namespace LabAutomata {
 		protected override async void OnStartup (StartupEventArgs e) {
 			base.OnStartup(e);
 
-			List<Task> tasks = new List<Task>();
+			List<Task> tasks = [];
 
 			IStartupEntry entry = new StartupEntryPoint(this, _serviceProvider);
 			tasks.Add(entry.Startup());

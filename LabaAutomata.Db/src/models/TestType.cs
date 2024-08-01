@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models {
 
-	public class TestType : LabModel {
+	public class TestType {
 
 		[Required, MaxLength(50)]
 		public string Name { get; init; }

@@ -9,7 +9,6 @@ namespace LabAutomata.DataAccess.validation;
 public class WorkstationValidator : Validator<WorkstationResponse, WorkstationRequest> {
 	public override ErrorOr<WorkstationResponse> ValidateResponse (WorkstationResponse response) {
 		var errors = new List<Error>();
-
 		if (response.Id < 0)
 			errors.Add(Error.Validation("The assigned 'id' cannot be less than '0'"));
 

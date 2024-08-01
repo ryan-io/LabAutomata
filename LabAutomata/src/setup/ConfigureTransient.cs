@@ -30,8 +30,8 @@ internal sealed class ConfigureTransient {
 		_sc.AddTransient<IRepository<SeedJson>, SeedDataRepository>();
 		_sc.AddTransient<IRepository<Test>, SteadyStateTemperatureTest>();
 		_sc.AddTransient<IRepository<Equipment>, EquipmentRepository>();
-		_sc.AddTransient<IRepository<DhtJsonData>, DhtJsonDataRepository>();
-		_sc.AddTransient<IRepository<DhtSensor>, DhtSensorRepository>();
+		_sc.AddTransient<IRepository<Dht22Data>, DhtJsonDataRepository>();
+		_sc.AddTransient<IRepository<Dht22Sensor>, DhtSensorRepository>();
 		_sc.AddTransient<IRepository<Manufacturer>, ManufacturerRepository>();
 		_sc.AddTransient<IRepositoryCreate<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
 		_sc.AddTransient<IRepositoryGet<SeedJson>>(sp => sp.GetRequiredService<IRepository<SeedJson>>());
@@ -42,7 +42,7 @@ internal sealed class ConfigureTransient {
 
 		// mappers
 		_sc.AddTransient<IMapper<Workstation, WorkstationRequest, WorkstationResponse>, WorkstationMapper>();
-		_sc.AddTransient<IMapper<DhtJsonData, DhtJsonDataRequest, DhtJsonDataResponse>, DhtJsondataMapper>();
+		_sc.AddTransient<IMapper<Dht22Data, DhtJsonDataRequest, DhtJsonDataResponse>, DhtJsondataMapper>();
 
 		// db-sets
 		_sc.AddTransient<IDhtSensorSet>(sp => sp.GetRequiredService<ILabPostgreSqlDbContext>());

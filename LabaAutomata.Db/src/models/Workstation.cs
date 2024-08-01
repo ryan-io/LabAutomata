@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models {
 
-	public class Workstation : LabModel {
+	public class Workstation {
 
 		[Required, MaxLength(75)] public string Name { get; init; } = "";
 

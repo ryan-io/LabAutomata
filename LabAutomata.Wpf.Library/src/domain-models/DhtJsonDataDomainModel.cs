@@ -2,28 +2,28 @@ using LabAutomata.Db.models;
 
 namespace LabAutomata.Wpf.Library.domain_models {
 
-	public class DhtJsonDataDomainModel : DomainModel<DhtJsonData> {
+	public class DhtJsonDataDomainModel : DomainModel<Dht22Data> {
 		private int _id = -1;
 		private string _jsonString = "";
 		private int _dhtSensorId = -1;
-		private DhtSensor? _dhtSensor = default;
+		private Dht22Sensor? _dht22Sensor = default;
 
 		// this constructor is intended for data binding
 		public DhtJsonDataDomainModel () {
 		}
 
-		public DhtJsonDataDomainModel (DhtJsonData data) {
+		public DhtJsonDataDomainModel (Dht22Data data) {
 			Id = data.Id;
 			JsonString = data.JsonString;
 			DhtSensorId = data.DhtSensorId;
-			DhtSensor = data.DhtSensor;
+			Dht22Sensor = data.Dht22Sensor;
 		}
 
-		public DhtJsonDataDomainModel (int id, string jsonString, int dhtSensorId, DhtSensor dhtSensor) {
+		public DhtJsonDataDomainModel (int id, string jsonString, int dhtSensorId, Dht22Sensor dht22Sensor) {
 			Id = id;
 			JsonString = jsonString;
 			DhtSensorId = dhtSensorId;
-			DhtSensor = dhtSensor;
+			Dht22Sensor = dht22Sensor;
 		}
 
 		public int Id {
@@ -50,27 +50,27 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public DhtSensor? DhtSensor {
-			get => _dhtSensor;
+		public Dht22Sensor? Dht22Sensor {
+			get => _dht22Sensor;
 			set {
-				_dhtSensor = value;
+				_dht22Sensor = value;
 				NotifyPropertyChanged();
 			}
 		}
 
-		public override DhtJsonData Create () {
-			return new DhtJsonData {
+		public override Dht22Data Create () {
+			return new Dht22Data {
 				Id = Id,
 				JsonString = JsonString,
 				DhtSensorId = DhtSensorId,
-				DhtSensor = DhtSensor!
+				Dht22Sensor = Dht22Sensor!
 			};
 		}
 
 		public override void Validate () {
 			ArgumentException.ThrowIfNullOrWhiteSpace(JsonString);
 			ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, DhtSensorId, "DhtSensorId");
-			ArgumentNullException.ThrowIfNull(DhtSensor);
+			ArgumentNullException.ThrowIfNull(Dht22Sensor);
 		}
 	}
 }

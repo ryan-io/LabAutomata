@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LabAutomata.Db.models {
 	[Table("work_requests")]
-	public class WorkRequest : LabModel {
+	public class WorkRequest {
 		public int WrId { get; init; }
 
 		[Required, MaxLength(100)]

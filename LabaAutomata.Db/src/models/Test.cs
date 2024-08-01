@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models {
 
-	public class Test : LabModel {
+	public class Test {
 		[Required, MaxLength(100)] public string? Name { get; init; }
 
 		[Required]
@@ -47,7 +47,6 @@ namespace LabAutomata.Db.models {
 		}
 
 		public Test (int id, Test test) {
-			Id = id;
 			Name = test.Name;
 			InstanceId = test.InstanceId;
 			Started = test.Started;

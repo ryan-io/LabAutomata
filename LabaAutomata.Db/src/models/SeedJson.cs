@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LabAutomata.Db.models {
 
-	public class SeedJson : LabModel {
+	public class SeedJson {
 
 		[Column(TypeName = "jsonb")]
 		[Required, MaxLength(300)]

@@ -1,5 +1,4 @@
 ﻿using LabAutomata.Db.models;
-using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;

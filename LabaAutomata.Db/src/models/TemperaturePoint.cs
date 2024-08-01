@@ -1,6 +1,6 @@
 ﻿namespace LabAutomata.Db.models {
 
-	public class TemperaturePoint : LabModel {
+	public class TemperaturePoint {
 		public int InstanceId { get; private set; }
 		public float Value { get; private set; }
 		public DateTime Timestamp { get; private set; }

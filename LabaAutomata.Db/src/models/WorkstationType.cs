@@ -2,20 +2,20 @@
 
 namespace LabAutomata.Db.models {
 
-	public class WorkstationType : LabModel {
+	public class WorkstationType {
 
 		[Required, MaxLength(50)]
 		public string Name { get; init; }
 
-		public static int ThermalShock = 1 << 0;
-		public static int PowerTemperatureCycle = 1 << 1;
-		public static int Salt = 1 << 2;
-		public static int Corrosion = 1 << 3;
-		public static int Drop = 1 << 4;
-		public static int WaterSpray = 1 << 5;
-		public static int Water = 1 << 6;
-		public static int Vibration = 1 << 7;
-		public static int Humidity = 1 << 8;
-		public static int Temperature = 1 << 9;
+		public const int ThermalShock = 1 << 0;
+		public const int PowerTemperatureCycle = 1 << 1;
+		public const int Salt = 1 << 2;
+		public const int Corrosion = 1 << 3;
+		public const int Drop = 1 << 4;
+		public const int WaterSpray = 1 << 5;
+		public const int Water = 1 << 6;
+		public const int Vibration = 1 << 7;
+		public const int Humidity = 1 << 8;
+		public const int Temperature = 1 << 9;
 	}
 }

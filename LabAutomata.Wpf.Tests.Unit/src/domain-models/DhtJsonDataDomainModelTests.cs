@@ -10,18 +10,18 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 			int id = 1;
 			string jsonString = "{\"temperature\": 25, \"humidity\": 50}";
 			int dhtSensorId = 2;
-			DhtSensor dhtSensor = new DhtSensor();
+			Dht22Sensor dht22Sensor = new Dht22Sensor();
 
-			DhtJsonDataDomainModel domainModel = new DhtJsonDataDomainModel(id, jsonString, dhtSensorId, dhtSensor);
+			DhtJsonDataDomainModel domainModel = new DhtJsonDataDomainModel(id, jsonString, dhtSensorId, dht22Sensor);
 
 			// Act
-			DhtJsonData result = domainModel.Create();
+			Dht22Data result = domainModel.Create();
 
 			// Assert
 			result.Id.Should().Be(id);
 			result.JsonString.Should().Be(jsonString);
 			result.DhtSensorId.Should().Be(dhtSensorId);
-			result.DhtSensor.Should().Be(dhtSensor);
+			result.Dht22Sensor.Should().Be(dht22Sensor);
 		}
 
 		[Fact]
@@ -54,7 +54,7 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 		public void Validate_ShouldThrowArgumentNullException_WhenDhtSensorIsNull () {
 			// Arrange
 			DhtJsonDataDomainModel domainModel = new DhtJsonDataDomainModel();
-			domainModel.DhtSensor = null;
+			domainModel.Dht22Sensor = null;
 
 			// Act
 			var action = new Action(() => domainModel.Validate());

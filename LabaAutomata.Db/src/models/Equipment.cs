@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models {
 
-	public class Equipment : LabModel {
+	public class Equipment {
 
 		[Required]
 		public string Name { get; init; }

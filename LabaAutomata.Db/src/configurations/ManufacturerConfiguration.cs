@@ -10,7 +10,6 @@ internal class ManufacturerConfiguration : IEntityTypeConfiguration<Manufacturer
 		builder.HasMany(e => e.WorkRequests)
 			.WithOne(e => e.Manufacturer)
 			.HasForeignKey(e => e.ManufacturerId)
-			.HasPrincipalKey(e => e.Id)
 			.IsRequired();
 
 		builder.HasOne(e => e.Location)

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LabAutomata.Db.common;
 
 public interface IDhtSensorSet {
-	DbSet<DhtSensor> DhtSensors { get; }
+	DbSet<Dht22Sensor> DhtSensors { get; }
 }
 
 public interface ILabPostgreSqlDbContext : IDhtSensorSet {
@@ -18,6 +18,6 @@ public interface ILabPostgreSqlDbContext : IDhtSensorSet {
 	DbSet<TestType> TestType { get; }
 	DbSet<WorkstationType> WorkstationTypesType { get; }
 	DbSet<Location> Location { get; }
-	DbSet<DhtJsonData> DhtJsonData { get; }
+	DbSet<Dht22Data> DhtJsonData { get; }
 	PostgreSqlDbContext PostgreSqlDb { get; }
 }

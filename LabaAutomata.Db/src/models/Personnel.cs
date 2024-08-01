@@ -2,7 +2,7 @@
 
 namespace LabAutomata.Db.models {
 
-	public class Personnel : LabModel {
+	public class Personnel {
 
 		[Required]
 		public string FirstName { get; init; } = string.Empty;
