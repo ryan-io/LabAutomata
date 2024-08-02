@@ -3,18 +3,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response;
 
-public record Dht22SensorResponse (
+public record LocationResponse (
 	int DbId,
 	string Name,
-	string? Description,
-	ICollection<Dht22DataResponse>? Data,
-	EntityState State)
+	string Country,
+	string City,
+	string State,
+	string? Address,
+	EntityState EntityState)
 	: RequestResponseBase { }
 
-public record Dht22SensorUpsertResponse (
+public record LocationUpsertResponse (
 	int DbId,
 	string Name,
-	string? Description,
-	ICollection<Dht22DataResponse>? Data,
+	string Country,
+	string City,
+	string State,
+	string? Address,
 	bool WasUpdated)
 	: RequestResponseBase { }

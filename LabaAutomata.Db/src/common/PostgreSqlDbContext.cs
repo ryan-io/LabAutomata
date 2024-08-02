@@ -8,8 +8,10 @@ namespace LabAutomata.Db.common {
 	/// Represents a base class for a PostgreSQL database context.
 	/// </summary>
 	public class PostgreSqlDbContext : DbContext {
-		public DbSet<Dht22Sensor> Dht22Sensors { get; set; }
-		public DbSet<Dht22Data> Dht22Data { get; set; }
+		public DbSet<Dht22Sensor> Dht22Sensors { get; private set; }
+		public DbSet<Dht22Data> Dht22Data { get; private set; }
+		public DbSet<Location> Location { get; private set; }
+
 		/*
 		public DbSet<WorkRequest> WorkRequests { get; set; }
 		public DbSet<Workstation> Workstations { get; set; }
@@ -18,7 +20,6 @@ namespace LabAutomata.Db.common {
 		public DbSet<Manufacturer> Manufacturers { get; set; }
 		public DbSet<TestType> TestType { get; set; }
 		public DbSet<WorkstationType> WorkstationTypesType { get; set; }
-		public DbSet<Location> Location { get; set; }
 
 		public DbSet<Personnel> Personnels { get; set; }
 		public DbSet<SeedJson> SeedJson { get; set; }

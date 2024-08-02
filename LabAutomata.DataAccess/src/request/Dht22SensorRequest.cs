@@ -1,11 +1,24 @@
-﻿using LabAutomata.Db.models;
+﻿using LabAutomata.DataAccess.common;
+using LabAutomata.Db.models;
 
 namespace LabAutomata.DataAccess.request;
 
-public record Dht22SensorRequest (int Id, string Name, string? Description, ICollection<Dht22Data> Data) {
-	public DateTime DateModified { get; } = DateTime.UtcNow;
-}
+/// <summary>
+/// Requests an already existing Dht22Sensor from the database
+/// </summary>
+public record Dht22SensorRequest (
+	int DbId,
+	string Name,
+	string? Description,
+	LocationRequest Location,
+	ICollection<Dht22Data> Data)
+	: RequestResponseBase { }
 
-public record Dht22SensorNewRequest (string Name, string? Description) {
-	public DateTime DateModified { get; } = DateTime.UtcNow;
-}
+/// <summary>
+/// Requests to add a new Dht22Sensor to the database
+/// </summary>
+public record Dht22SensorNewRequest (
+	string Name,
+	string? Description,
+	LocationRequest Location)
+	: RequestResponseBase { }

@@ -48,7 +48,7 @@ public class Dht22DataService : ServiceBase {
 	}
 
 	public async Task<ErrorOr<Dht22DataResponse>> DeleteData (Dht22DataRequest request, CancellationToken token) {
-		var dataPoint = await DbContext.Dht22Data.FirstOrDefaultAsync(d => d.Id == request.Id, token);
+		var dataPoint = await DbContext.Dht22Data.FirstOrDefaultAsync(d => d.Id == request.DbId, token);
 
 		if (dataPoint == null) {
 			// return error; data is not present in the db
@@ -56,6 +56,7 @@ public class Dht22DataService : ServiceBase {
 		}
 
 		DbContext.Dht22Data.Remove(dataPoint);
+		await DbContext.SaveChangesAsync(token);
 		return dataPoint.ToResponse(EntityState.Deleted);
 	}
 
@@ -67,7 +68,7 @@ public class Dht22DataService : ServiceBase {
 		return $"Could not delete entity from request {request.Dht22Sensor.Name}";
 	}
 
-	private string Name => nameof(Dht22DataService);
+	protected override string Name => nameof(Dht22DataService);
 
 	private const string CouldNotGet = "Could not get data for the provided sensor id.";
 

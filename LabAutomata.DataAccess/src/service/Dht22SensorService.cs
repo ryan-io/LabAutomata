@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
-public class DhtSensorService : ServiceBase {
+public class Dht22SensorService : ServiceBase {
 	public async Task<ErrorOr<Dht22SensorResponse>> AddSensor (Dht22SensorNewRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
 		var result = await DbContext.Dht22Sensors.AddAsync(model, token);
@@ -25,10 +25,18 @@ public class DhtSensorService : ServiceBase {
 		return Errors.Db.CouldNotCreate(Name, NotCreated);
 	}
 
-	public DhtSensorService (PostgreSqlDbContext dbContext) : base(dbContext) {
+	public async Task<Dht22SensorUpsertResponse> UpsertSensor (Dht22SensorRequest request, CancellationToken token) {
+		var model = request.ToDbModel();
+		var result = DbContext.Dht22Sensors.Update(model);
+		var response = result.ToUpsertResponse();
+		await DbContext.SaveChangesAsync(token);
+		return response;
 	}
 
-	private string Name => nameof(DhtSensorService);
+	public Dht22SensorService (PostgreSqlDbContext dbContext) : base(dbContext) {
+	}
+
+	protected override string Name => nameof(Dht22SensorService);
 
 	private const string NotCreated = "Could not create a new Dht22 sensor.";
 }

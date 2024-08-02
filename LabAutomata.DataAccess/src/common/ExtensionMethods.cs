@@ -10,7 +10,7 @@ namespace LabAutomata.DataAccess.common {
 
 		public static Dht22Data ToDbModel (this Dht22DataRequest request) {
 			return new Dht22Data() {
-				Id = request.Id,
+				Id = request.DbId,
 				JsonString = request.JsonString,
 				Dht22Sensor = request.Dht22Sensor
 			};
@@ -39,6 +39,7 @@ namespace LabAutomata.DataAccess.common {
 		public static Dht22Sensor ToDbModel (this Dht22SensorNewRequest request) {
 			return new Dht22Sensor() {
 				Name = request.Name,
+				Location = request.Location.ToDbModel(),
 				Description = request.Description,
 				Data = []
 			};
@@ -46,9 +47,10 @@ namespace LabAutomata.DataAccess.common {
 
 		public static Dht22Sensor ToDbModel (this Dht22SensorRequest request) {
 			return new Dht22Sensor() {
-				Id = request.Id,
+				Id = request.DbId,
 				Name = request.Name,
 				Description = request.Description,
+				Location = request.Location.ToDbModel(),
 				Data = request.Data
 			};
 		}
@@ -62,6 +64,72 @@ namespace LabAutomata.DataAccess.common {
 				.ToList();
 
 			return new Dht22SensorResponse(e.Id, e.Name, e.Description, data, entityEntry.State);
+		}
+
+		public static Dht22SensorUpsertResponse ToUpsertResponse (this EntityEntry<Dht22Sensor> entityEntry) {
+			var e = entityEntry.Entity;
+
+			var data = e.Data?
+				.Select(d => d.ToResponse(EntityState.Unchanged))
+				.ToList();
+
+			return new Dht22SensorUpsertResponse(
+				e.Id,
+				e.Name,
+				e.Description,
+				data,
+				entityEntry.State == EntityState.Modified);
+		}
+
+		#endregion
+
+		#region LOCATION
+
+		public static Location ToDbModel (this LocationNewRequest request) {
+			return new Location() {
+				Name = request.Name,
+				City = request.City,
+				State = request.State,
+				Address = request.Address,
+				Country = request.Country
+			};
+		}
+		public static Location ToDbModel (this LocationRequest request) {
+			return new Location() {
+				Id = request.DbId,
+				Name = request.Name,
+				City = request.City,
+				State = request.State,
+				Address = request.Address,
+				Country = request.Country
+			};
+		}
+
+
+		public static LocationResponse ToResponse (this EntityEntry<Location> entityEntry) {
+			var e = entityEntry.Entity;
+
+			return new LocationResponse(
+				e.Id,
+				e.Name,
+				e.Country,
+				e.City,
+				e.State,
+				e.Address,
+				entityEntry.State);
+		}
+
+		public static LocationUpsertResponse ToUpsertResponse (this EntityEntry<Location> entityEntry) {
+			var e = entityEntry.Entity;
+
+			return new LocationUpsertResponse(
+				e.Id,
+				e.Name,
+				e.Country,
+				e.City,
+				e.State,
+				e.Address,
+				entityEntry.State == EntityState.Modified);
 		}
 
 		#endregion

@@ -1,4 +1,5 @@
-﻿using LabAutomata.Db.models;
+﻿using LabAutomata.DataAccess.common;
+using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response {
@@ -6,7 +7,6 @@ namespace LabAutomata.DataAccess.response {
 		int DbId,
 		string JsonString,
 		Dht22Sensor Dht22Sensor,
-		EntityState State = EntityState.Unchanged) {
-		public DateTime DateModified { get; } = DateTime.UtcNow;
+		EntityState State = EntityState.Unchanged) : RequestResponseBase {
 	}
 }

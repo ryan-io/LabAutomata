@@ -6,4 +6,6 @@ public abstract class ServiceBase {
 	protected ServiceBase (PostgreSqlDbContext dbContext) => DbContext = dbContext;
 
 	protected PostgreSqlDbContext DbContext { get; }
+
+	protected abstract string Name { get; }
 }

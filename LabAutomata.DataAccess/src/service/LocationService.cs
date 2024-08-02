@@ -1,12 +1,41 @@
-//using LabAutomata.DataAccess.mapper;
-//using LabAutomata.Db.models;
-//using LabAutomata.Db.repository;
-//using LabAutomata.Dto.request;
-//using LabAutomata.Dto.response;
+using ErrorOr;
+using LabAutomata.DataAccess.common;
+using LabAutomata.DataAccess.request;
+using LabAutomata.DataAccess.response;
+using LabAutomata.Db.common;
+using Microsoft.EntityFrameworkCore;
 
-//namespace LabAutomata.DataAccess.service;
+namespace LabAutomata.DataAccess.service;
 
-//public class LocationService (
-//	IRepository<Location> repository,
-//	IMapper<Location, LocationRequest, LocationResponse> mapper)
-//	: Service<Location, LocationRequest, LocationResponse>(repository, mapper);
+public class LocationService : ServiceBase {
+	public async Task<ErrorOr<LocationResponse>> AddLocation (LocationNewRequest request, CancellationToken token) {
+		var model = request.ToDbModel();
+		var result = await DbContext.Location.AddAsync(model, token);
+		var response = result.ToResponse();
+
+		if (result.State == EntityState.Added) {
+			await DbContext.SaveChangesAsync(token);
+			return response;
+		}
+
+		if (result.State == EntityState.Unchanged) {
+			return response;
+		}
+
+		return Errors.Db.CouldNotCreate(Name, NotCreated);
+	}
+	public async Task<LocationUpsertResponse> UpsertLocation (LocationRequest request, CancellationToken token) {
+		var model = request.ToDbModel();
+		var result = DbContext.Location.Update(model);
+		var response = result.ToUpsertResponse();
+		await DbContext.SaveChangesAsync(token);
+		return response;
+	}
+
+
+	public LocationService (PostgreSqlDbContext dbContext) : base(dbContext) { }
+
+	protected override string Name => nameof(LocationService);
+
+	private const string NotCreated = "Could not created a new location.";
+}
