@@ -1,4 +1,4 @@
-﻿namespace LabAutomata.Db.models {
+﻿//namespace LabAutomata.Db.models {
 
-	public enum TemperatureUnit { Celcius, Farenheit, Kelvin }
-}
+//	public enum TemperatureUnit { Celcius, Farenheit, Kelvin }
+//}

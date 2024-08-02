@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿//using System.ComponentModel.DataAnnotations;
+//using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LabAutomata.Db.models {
+//namespace LabAutomata.Db.models {
 
-	public class SeedJson {
+//	public class SeedJson {
 
-		[Column(TypeName = "jsonb")]
-		[Required, MaxLength(300)]
-		public string SerializedData { get; set; } = string.Empty;
-	}
-}
+//		[Column(TypeName = "jsonb")]
+//		[Required, MaxLength(300)]
+//		public string SerializedData { get; set; } = string.Empty;
+//	}
+//}

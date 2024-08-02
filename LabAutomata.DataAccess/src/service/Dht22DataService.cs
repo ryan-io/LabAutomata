@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 namespace LabAutomata.DataAccess.service;
 
 public class Dht22DataService : ServiceBase {
-	public async Task<ErrorOr<Dht22DataResponse>> Add (Dht22DataRequest request, CancellationToken token) {
-		var model = Dht22DataRequest.NewRequest(request);
+	public async Task<ErrorOr<Dht22DataResponse>> AddData (Dht22DataNewRequest request, CancellationToken token) {
+		var model = request.ToDbModel();
 		var result = await DbContext.Dht22Data.AddAsync(model, token);
+		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
 			await DbContext.SaveChangesAsync(token);
-			var response = Dht22DataResponse.NewResponse(result.Entity, EntityState.Added);
 			return response;
 		}
 
 		if (result.State == EntityState.Unchanged) {
-			return Dht22DataResponse.NewResponse(result.Entity);
+			return response;
 		}
 
 		return Errors.Db.CouldNotCreate(Name, NotCreated);
@@ -36,18 +36,36 @@ public class Dht22DataService : ServiceBase {
 		}
 
 		return sensor.Data
-			.Select(point => Dht22DataResponse.NewResponse(point))
+			.Select(point => point.ToResponse(EntityState.Unchanged))
 			.ToList();
 	}
 
-	public async Task<ErrorOr<Dht22DataResponse>> Get (Dht22DataRequest request, CancellationToken token) {
+	/// <summary>
+	/// This method should be used if you have a request object with a valid Dht22Sensor instance
+	/// </summary>
+	public async Task<ErrorOr<IList<Dht22DataResponse>>> GetData (Dht22DataRequest request, CancellationToken token) {
+		return await GetData(request.Dht22Sensor.Id, token);
+	}
 
+	public async Task<ErrorOr<Dht22DataResponse>> DeleteData (Dht22DataRequest request, CancellationToken token) {
+		var dataPoint = await DbContext.Dht22Data.FirstOrDefaultAsync(d => d.Id == request.Id, token);
+
+		if (dataPoint == null) {
+			// return error; data is not present in the db
+			return Errors.Db.CouldNotDelete(Name, GetFailedDeleteDescription(request));
+		}
+
+		DbContext.Dht22Data.Remove(dataPoint);
+		return dataPoint.ToResponse(EntityState.Deleted);
 	}
 
 	/// <inheritdoc />
 	public Dht22DataService (PostgreSqlDbContext dbContext) : base(dbContext) {
 	}
 
+	private static string GetFailedDeleteDescription (Dht22DataRequest request) {
+		return $"Could not delete entity from request {request.Dht22Sensor.Name}";
+	}
 
 	private string Name => nameof(Dht22DataService);
 

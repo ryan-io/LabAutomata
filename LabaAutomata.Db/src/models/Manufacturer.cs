@@ -1,15 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//using System.ComponentModel.DataAnnotations;
 
-namespace LabAutomata.Db.models;
+//namespace LabAutomata.Db.models;
 
-public class Manufacturer {
+//public class Manufacturer {
 
-	[Required, MaxLength(100)]
-	public string? Name { get; init; } = string.Empty;
+//	[Required, MaxLength(100)]
+//	public string? Name { get; init; } = string.Empty;
 
-	public int LocationId { get; init; }
+//	public int LocationId { get; init; }
 
-	public Location Location { get; init; }
+//	public Location Location { get; init; }
 
-	public ICollection<WorkRequest> WorkRequests { get; init; }
-}
+//	public ICollection<WorkRequest> WorkRequests { get; init; }
+//}

@@ -6,20 +6,7 @@ namespace LabAutomata.DataAccess.response {
 		int DbId,
 		string JsonString,
 		Dht22Sensor Dht22Sensor,
-		EntityState State = EntityState.Unchanged,
-		bool HadErrors = false) {
+		EntityState State = EntityState.Unchanged) {
 		public DateTime DateModified { get; } = DateTime.UtcNow;
-
-		public static Dht22DataResponse NewResponse (
-			Dht22Data data,
-			EntityState state = EntityState.Unchanged,
-			bool hadErrors = false) {
-			return new Dht22DataResponse(
-				data.Id,
-				data.JsonString,
-				data.Dht22Sensor,
-				state,
-				hadErrors);
-		}
 	}
 }

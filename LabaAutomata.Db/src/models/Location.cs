@@ -1,17 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//using System.ComponentModel.DataAnnotations;
 
-namespace LabAutomata.Db.models {
+//namespace LabAutomata.Db.models {
 
-	public class Location {
+//	public class Location {
 
-		[Required, MaxLength(150)]
-		public string Name { get; init; }
+//		[Required, MaxLength(150)]
+//		public string Name { get; init; }
 
-		[Required] public string Address { get; init; }
+//		[Required] public string Address { get; init; }
 
-		[Required] public string City { get; init; }
+//		[Required] public string City { get; init; }
 
-		[Required] public string State { get; init; }
-		[Required] public string Country { get; init; }
-	}
-}
+//		[Required] public string State { get; init; }
+//		[Required] public string Country { get; init; }
+//	}
+//}

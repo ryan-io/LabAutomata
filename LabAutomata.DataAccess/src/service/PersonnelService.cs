@@ -1,12 +1,12 @@
-using LabAutomata.DataAccess.mapper;
-using LabAutomata.Db.models;
-using LabAutomata.Db.repository;
-using LabAutomata.Dto.request;
-using LabAutomata.Dto.response;
+//using LabAutomata.DataAccess.mapper;
+//using LabAutomata.Db.models;
+//using LabAutomata.Db.repository;
+//using LabAutomata.Dto.request;
+//using LabAutomata.Dto.response;
 
-namespace LabAutomata.DataAccess.service;
+//namespace LabAutomata.DataAccess.service;
 
-public class PersonnelService (
-	IRepository<Personnel> repository,
-	IMapper<Personnel, PersonnelRequest, PersonnelResponse> mapper)
-	: Service<Personnel, PersonnelRequest, PersonnelResponse>(repository, mapper);
+//public class PersonnelService (
+//	IRepository<Personnel> repository,
+//	IMapper<Personnel, PersonnelRequest, PersonnelResponse> mapper)
+//	: Service<Personnel, PersonnelRequest, PersonnelResponse>(repository, mapper);

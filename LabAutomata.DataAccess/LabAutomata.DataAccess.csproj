@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LabaAutomata.Db\LabAutomata.Db.csproj" />
-    <ProjectReference Include="..\LabAutomata.Dto\LabAutomata.Dto.csproj" />
   </ItemGroup>
 
 </Project>
