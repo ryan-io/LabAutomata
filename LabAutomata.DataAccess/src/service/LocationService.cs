@@ -32,7 +32,6 @@ public class LocationService : ServiceBase {
 		return response;
 	}
 
-
 	public LocationService (PostgreSqlDbContext dbContext) : base(dbContext) { }
 
 	protected override string Name => nameof(LocationService);

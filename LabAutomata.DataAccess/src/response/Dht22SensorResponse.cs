@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response;
 
+/// <summary>
+/// This is the result of querying the database for Dht22Sensor and converting
+/// the database model to a domain model
+/// </summary>
 public record Dht22SensorResponse (
 	int DbId,
 	string Name,
@@ -11,6 +15,10 @@ public record Dht22SensorResponse (
 	EntityState State)
 	: RequestResponseBase { }
 
+/// <summary>
+/// This is the result of querying the database for Dht22Sensor and converting
+/// the database model to a domain model; this is the result of an add or update
+/// </summary>
 public record Dht22SensorUpsertResponse (
 	int DbId,
 	string Name,

@@ -105,6 +105,15 @@ namespace LabAutomata.DataAccess.common {
 			};
 		}
 
+		public static LocationRequest ToRequest (this Location location) {
+			return new LocationRequest(
+				location.Id,
+				location.Name,
+				location.Country,
+				location.City,
+				location.State,
+				location.Address);
+		}
 
 		public static LocationResponse ToResponse (this EntityEntry<Location> entityEntry) {
 			var e = entityEntry.Entity;
@@ -129,6 +138,44 @@ namespace LabAutomata.DataAccess.common {
 				e.City,
 				e.State,
 				e.Address,
+				entityEntry.State == EntityState.Modified);
+		}
+
+		#endregion
+
+		#region MANUFACTURER
+
+		public static Manufacturer ToDbModel (this ManufacturerNewRequest request) {
+			return new Manufacturer() {
+				Name = request.Name,
+				Location = request.Location.ToDbModel()
+			};
+		}
+		public static Manufacturer ToDbModel (this ManufacturerRequest request) {
+			return new Manufacturer() {
+				Id = request.DbId,
+				Name = request.Name,
+				Location = request.Location.ToDbModel()
+			};
+		}
+
+		public static ManufacturerResponse ToResponse (this EntityEntry<Manufacturer> entityEntry) {
+			var e = entityEntry.Entity;
+
+			return new ManufacturerResponse(
+				e.Id,
+				e.Name,
+				e.Location.ToRequest(),
+				entityEntry.State);
+		}
+
+		public static ManufacturerUpsertResponse ToUpsertResponse (this EntityEntry<Manufacturer> entityEntry) {
+			var e = entityEntry.Entity;
+
+			return new ManufacturerUpsertResponse(
+				e.Id,
+				e.Name,
+				e.Location.ToRequest(),
 				entityEntry.State == EntityState.Modified);
 		}
 
