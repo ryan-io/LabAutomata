@@ -1,6 +1,5 @@
 ﻿using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace LabAutomata.Db.common {
 
@@ -28,9 +27,11 @@ namespace LabAutomata.Db.common {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PostgreSqlDbContext"/> class with the specified configuration.
 		/// </summary>
-		/// <param name="config">The configuration object used to retrieve the connection string.</param>
-		public PostgreSqlDbContext (IConfiguration config) {
-			_configuration = config;
+		public PostgreSqlDbContext (DbContextOptions<PostgreSqlDbContext> options) {
+			// Gets the connection string from the appsettings.json/secrets.json file
+			//options.UseNpgsql(_configuration.GetConnectionString(C.DatabaseConnectionId))
+			//	.UseSnakeCaseNamingConvention()
+			//	.EnableDetailedErrors();
 		}
 
 		/// <summary>
@@ -38,15 +39,15 @@ namespace LabAutomata.Db.common {
 		/// </summary>
 		/// <param name="optionsBuilder">The options builder used to configure the database connection.</param>
 		protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder) {
-			if (_configuration == null)
-				return;
+			//if (_configuration == null)
+			//	return;
 
-			if (!optionsBuilder.IsConfigured) {
-				// Gets the connection string from the appsettings.json/secrets.json file
-				optionsBuilder.UseNpgsql(_configuration.GetConnectionString(C.DatabaseConnectionId))
-					.UseSnakeCaseNamingConvention()
-					.EnableDetailedErrors();
-			}
+			//if (!optionsBuilder.IsConfigured) {
+			//	// Gets the connection string from the appsettings.json/secrets.json file
+			//	optionsBuilder.UseNpgsql(_configuration.GetConnectionString(C.DatabaseConnectionId))
+			//		.UseSnakeCaseNamingConvention()
+			//		.EnableDetailedErrors();
+			//}
 		}
 
 		/// <summary>
@@ -60,6 +61,6 @@ namespace LabAutomata.Db.common {
 		/// <summary>
 		/// Gets or sets the configuration object used to retrieve the connection string.
 		/// </summary>
-		private readonly IConfiguration? _configuration;
+		//private readonly IConfiguration? _configuration;
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using LabAutomata.Db.common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using System.Windows;
@@ -29,7 +31,6 @@ internal sealed class ConfigurationEntryPoint {
 		//	Create a new configuration builder
 		//  Invoke AddUserSecrets on the builder
 		//	Call c.Builder and register it as a service
-
 		var secretsConfiguration = new ConfigureSecrets(cb, asm);
 		secretsConfiguration.Configure();
 
@@ -44,6 +45,14 @@ internal sealed class ConfigurationEntryPoint {
 
 		var transientConfiguration = new ConfigureTransient(sc, _application);
 		transientConfiguration.Configure();
+
+		var builder = cb.Build();
+
+		// setting up DbContextFactory for PostgreSQL database
+		sc.AddDbContextFactory<PostgreSqlDbContext>(options => options
+				.UseNpgsql(builder.GetConnectionString(DatabaseConnectionId))
+				.UseSnakeCaseNamingConvention()
+				.EnableDetailedErrors());
 	}
 
 	internal ConfigurationEntryPoint (Application application) {
@@ -51,4 +60,6 @@ internal sealed class ConfigurationEntryPoint {
 	}
 
 	private readonly Application _application;
+
+	private const string DatabaseConnectionId = "LabDatabase";
 }

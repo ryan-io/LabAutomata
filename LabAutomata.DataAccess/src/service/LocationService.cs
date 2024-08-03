@@ -10,7 +10,7 @@ namespace LabAutomata.DataAccess.service;
 public class LocationService : ServiceBase {
 	public async Task<ErrorOr<LocationResponse>> AddLocation (LocationNewRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
-		var result = await DbContext.Location.AddAsync(model, token);
+		var result = await DbContext.Locations.AddAsync(model, token);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
@@ -26,7 +26,7 @@ public class LocationService : ServiceBase {
 	}
 	public async Task<LocationUpsertResponse> UpsertLocation (LocationRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
-		var result = DbContext.Location.Update(model);
+		var result = DbContext.Locations.Update(model);
 		var response = result.ToUpsertResponse();
 		await DbContext.SaveChangesAsync(token);
 		return response;
