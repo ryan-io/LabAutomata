@@ -7,10 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
-public class Dht22SensorService : ServiceBase {
+public interface IDht22SensorService {
+	Task<ErrorOr<Dht22SensorResponse>> AddSensor (Dht22SensorNewRequest request, CancellationToken token);
+	Task<Dht22SensorUpsertResponse> UpsertSensor (Dht22SensorRequest request, CancellationToken token);
+}
+
+public class Dht22SensorService : ServiceBase, IDht22SensorService {
 	public async Task<ErrorOr<Dht22SensorResponse>> AddSensor (Dht22SensorNewRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
-		var result = await DbContext.Dht22Sensors.AddAsync(model, token);
+		// we can use AddAsync here
+		var result = DbContext.Dht22Sensors.Add(model);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {

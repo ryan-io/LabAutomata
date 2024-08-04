@@ -171,7 +171,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 				Description = Description,
 				Started = StartDate,
 				Tests = Tests,
-				WrId = WrId,
+				Id = WrId,
 				Manufacturer = Manufacturer,
 				ManufacturerId = Manufacturer == null ? -1 : Manufacturer.Id,
 			};

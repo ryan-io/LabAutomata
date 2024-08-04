@@ -11,10 +11,10 @@ namespace LabAutomata.Db.common {
 		public DbSet<Dht22Data> Dht22Data { get; private set; }
 		public DbSet<Location> Locations { get; private set; }
 		public DbSet<Manufacturer> Manufacturers { get; private set; }
-
-		/*
 		public DbSet<WorkRequest> WorkRequests { get; set; }
 		public DbSet<Workstation> Workstations { get; set; }
+
+		/*
 		public DbSet<Equipment> Equipment { get; set; }
 		public DbSet<Test> Test { get; set; }
 		public DbSet<TestType> TestType { get; set; }

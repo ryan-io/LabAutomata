@@ -1,5 +1,4 @@
 ﻿using LabAutomata.common;
-using LabAutomata.Db.common;
 using LabAutomata.IoT;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,7 +16,6 @@ namespace LabAutomata.setup {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ShutdownEntryPoint"/> class.
 		/// </summary>
-		/// <param name="sp">The service provider to resolve services.</param>
 		public ShutdownEntryPoint (IServiceProvider sp) {
 			_sp = sp;
 		}
@@ -40,8 +38,6 @@ namespace LabAutomata.setup {
 			var logger = _sp.GetService<ILogger>();
 			logger?.LogInformation("Application now closing.");
 			logger?.LogInformation("Closing DbContext");
-			var ctx = _sp.GetService<LabPostgreSqlDbContext>();
-			ctx?.Dispose();
 			logger?.CloseAndFlush();
 		}
 

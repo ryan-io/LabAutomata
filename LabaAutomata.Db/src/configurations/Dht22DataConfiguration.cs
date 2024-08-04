@@ -14,8 +14,6 @@ internal class Dht22DataConfiguration : IEntityTypeConfiguration<Dht22Data> {
 			.WithMany(dh => dh.Data)
 			.HasForeignKey(dht => dht.Id);
 
-		builder.Property(e => e.Id).UseIdentityAlwaysColumn();
-
 		builder.ToTable("dht_data", C.DbSchema);
 	}
 }

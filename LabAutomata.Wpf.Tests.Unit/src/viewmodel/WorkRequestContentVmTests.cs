@@ -31,7 +31,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 			List<WorkRequestDomainModel> models = new();
 
 			foreach (var wr in workRequests) {
-				var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.WrId, wr.Manufacturer);
+				var wrdm = new WorkRequestDomainModel(wr.Name, wr.Program, wr.Description, wr.Started, wr.Id, wr.Manufacturer);
 				models.Add(wrdm);
 			}
 
@@ -41,7 +41,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 			// assert
 			_sut.WorkRequests.Should().HaveCount(workRequests.Count);
 			for (int i = 0; i < workRequests.Count; i++) {
-				var expected = new WorkRequestDomainModel(workRequests[i].Name, workRequests[i].Program, workRequests[i].Description, workRequests[i].Started, workRequests[i].WrId, workRequests[i].Manufacturer);
+				var expected = new WorkRequestDomainModel(workRequests[i].Name, workRequests[i].Program, workRequests[i].Description, workRequests[i].Started, workRequests[i].Id, workRequests[i].Manufacturer);
 				_sut.WorkRequests[i].Should().BeEquivalentTo(expected);
 			}
 		}

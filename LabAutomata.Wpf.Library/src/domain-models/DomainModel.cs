@@ -1,5 +1,4 @@
-﻿using LabAutomata.Db.models;
-using System.Collections;
+﻿using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -9,7 +8,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 	/// Represents an abstract base class for domain models.
 	/// </summary>
 	/// <typeparam name="T">The type of the associated database model.</typeparam>
-	public abstract class DomainModel<T> : INotifyPropertyChanged, INotifyDataErrorInfo where T : LabModel {
+	public abstract class DomainModel<T> : INotifyPropertyChanged, INotifyDataErrorInfo {
 
 		/// <summary>
 		/// Event handler for when a property is changed

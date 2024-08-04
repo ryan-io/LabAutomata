@@ -151,6 +151,7 @@ namespace LabAutomata.DataAccess.common {
 				Location = request.Location.ToDbModel()
 			};
 		}
+
 		public static Manufacturer ToDbModel (this ManufacturerRequest request) {
 			return new Manufacturer() {
 				Id = request.DbId,
@@ -178,6 +179,58 @@ namespace LabAutomata.DataAccess.common {
 				e.Location.ToRequest(),
 				entityEntry.State == EntityState.Modified);
 		}
+
+		#endregion
+
+		#region WORKREQUEST
+
+		public static WorkRequest ToDbModel (this WorkRequestNewRequest request) {
+			return new WorkRequest() {
+				Name = request.Name,
+				Program = request.Program,
+				Description = request.Description,
+				Started = request.Started,
+				Finished = request.Finished
+			};
+		}
+
+		public static WorkRequest ToDbModel (this WorkRequestRequest request) {
+			return new WorkRequest() {
+				Id = request.Id,
+				Name = request.Name,
+				Program = request.Program,
+				Description = request.Description,
+				Started = request.Started,
+				Finished = request.Finished
+			};
+		}
+
+		public static WorkRequestResponse ToResponse (this EntityEntry<WorkRequest> entityEntry) {
+			var e = entityEntry.Entity;
+
+			return new WorkRequestResponse(
+				e.Id,
+				e.Name,
+				e.Name,
+				e.Description,
+				e.Started,
+				e.Finished,
+				entityEntry.State);
+		}
+
+		public static WorkRequestUpsertResponse ToUpsertResponse (this EntityEntry<WorkRequest> entityEntry) {
+			var e = entityEntry.Entity;
+
+			return new WorkRequestUpsertResponse(
+				e.Id,
+				e.Name,
+				e.Name,
+				e.Description,
+				e.Started,
+				e.Finished,
+				entityEntry.State == EntityState.Modified);
+		}
+
 
 		#endregion
 	}

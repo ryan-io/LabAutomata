@@ -7,10 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
-public class Dht22DataService : ServiceBase {
+public interface IDht22DataService {
+	Task<ErrorOr<Dht22DataResponse>> AddData (Dht22DataNewRequest request, CancellationToken token);
+	Task<ErrorOr<IList<Dht22DataResponse>>> GetData (int dhtSensorId, CancellationToken token);
+
+	/// <summary>
+	/// This method should be used if you have a request object with a valid Dht22Sensor instance
+	/// </summary>
+	Task<ErrorOr<IList<Dht22DataResponse>>> GetData (Dht22DataRequest request, CancellationToken token);
+
+	Task<ErrorOr<Dht22DataResponse>> DeleteData (Dht22DataRequest request, CancellationToken token);
+}
+
+public class Dht22DataService : ServiceBase, IDht22DataService {
 	public async Task<ErrorOr<Dht22DataResponse>> AddData (Dht22DataNewRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
-		var result = await DbContext.Dht22Data.AddAsync(model, token);
+		var result = DbContext.Dht22Data.Add(model);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {

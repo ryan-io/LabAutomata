@@ -1,23 +1,26 @@
-﻿using LabAutomata.Dto.response;
-using LabAutomata.IoT;
-using LabAutomata.Wpf.Library.domain_models;
+﻿using LabAutomata.IoT;
 using System.Reflection;
 
 namespace LabAutomata.Wpf.Library.common {
 
 	public static class Extensions {
-		public static WorkstationDomainModel ToDomain (this WorkstationResponse wsr) {
-			return new WorkstationDomainModel() {
-				Name = wsr.Name,
-				StationNumber = wsr.StationNumber,
-				Description = wsr.Description,
-				LocationId = wsr.LocationId,
-				Location = wsr.Location,
-				Types = wsr.Types,
-				Equipment = wsr.Equipment,
-				Tests = wsr.Tests
-			};
-		}
+		#region DOMAINMODELS
+
+		//TODO: is this needed?
+		//public static WorkstationDomainModel ToDomain (this WorkstationResponse wsr) {
+		//	return new WorkstationDomainModel() {
+		//		Name = wsr.Name,
+		//		StationNumber = wsr.StationNumber,
+		//		Description = wsr.Description,
+		//		LocationId = wsr.LocationId,
+		//		Location = wsr.Location,
+		//		Types = wsr.Types,
+		//		Equipment = wsr.Equipment,
+		//		Tests = wsr.Tests
+		//	};
+		//}
+
+		#endregion
 
 		public static DateTime ToDateTime (this MqttDht22Payload payload) {
 			var output = new DateTime(

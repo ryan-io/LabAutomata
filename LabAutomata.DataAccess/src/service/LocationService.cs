@@ -7,7 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
-public class LocationService : ServiceBase {
+public interface ILocationService {
+	Task<ErrorOr<LocationResponse>> AddLocation (LocationNewRequest request, CancellationToken token);
+	Task<LocationUpsertResponse> UpsertLocation (LocationRequest request, CancellationToken token);
+}
+
+public class LocationService : ServiceBase, ILocationService {
 	public async Task<ErrorOr<LocationResponse>> AddLocation (LocationNewRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
 		var result = await DbContext.Locations.AddAsync(model, token);

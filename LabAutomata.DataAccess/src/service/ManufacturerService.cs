@@ -7,7 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
-public class ManufacturerService : ServiceBase {
+public interface IManufacturerService {
+	Task<ErrorOr<ManufacturerResponse>> AddManufacturer (ManufacturerNewRequest request, CancellationToken token);
+	Task<ManufacturerUpsertResponse> UpsertLocation (ManufacturerRequest request, CancellationToken token);
+}
+
+public class ManufacturerService : ServiceBase, IManufacturerService {
 	public async Task<ErrorOr<ManufacturerResponse>> AddManufacturer (ManufacturerNewRequest request, CancellationToken token) {
 		var model = request.ToDbModel();
 		var result = await DbContext.Manufacturers.AddAsync(model, token);

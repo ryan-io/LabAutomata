@@ -1,5 +1,4 @@
 ﻿using LabAutomata.Db.models;
-using LabAutomata.Db.repository;
 using LabAutomata.Wpf.Library.adapter;
 using LabAutomata.Wpf.Library.commands;
 using LabAutomata.Wpf.Library.common;
@@ -52,7 +51,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			IAdapter<Dispatcher> dA,
 			ILogger? logger = default)
 				: base(logger) {
-			CreateDbModelCmd = new CreateWrDbModelCmd(dA, wrRepository, () => Reset(CreateDbModelCmd), logger);
+			CreateDbModelCmd = new CreateWrDbModelCommand(dA, wrRepository, () => Reset(CreateDbModelCmd), logger);
 			ResetDbModel = new Command(Reset);
 			_manufacturerRepository = manRepository;
 		}
