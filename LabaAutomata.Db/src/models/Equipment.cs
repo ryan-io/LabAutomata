@@ -1,17 +1,18 @@
-﻿//using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-//namespace LabAutomata.Db.models {
+namespace LabAutomata.Db.models {
 
-//	public class Equipment {
+	public class Equipment {
+		public int Id { get; init; }
 
-//		[Required]
-//		public string Name { get; init; }
+		[Required] public required string Name { get; init; }
 
-//		public DateTime PurchaseDate { get; init; }
-//		public DateTime CalibrationDate { get; init; }
-//		public DateTime CalibrationDueDate { get; init; }
-//		public Manufacturer Manufacturer { get; init; }
-//		public int ManufacturerId { get; init; }
-//		public ICollection<Workstation> Workstations { get; init; }
-//	}
-//}
+		[Required] public required DateTime PurchaseDate { get; init; }
+		[Required] public required DateTime CalibrationDate { get; init; }
+		[Required] public required DateTime CalibrationDueDate { get; init; }
+		[Required] public required Manufacturer Manufacturer { get; init; }
+
+		//TODO: add navigation property for this collection
+		//public ICollection<Workstation> Workstations { get; init; }
+	}
+}
