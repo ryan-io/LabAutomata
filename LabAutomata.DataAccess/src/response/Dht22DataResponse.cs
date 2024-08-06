@@ -11,6 +11,6 @@ namespace LabAutomata.DataAccess.response {
 		int DbId,
 		string JsonString,
 		Dht22Sensor Dht22Sensor,
-		EntityState State = EntityState.Unchanged) : RequestResponseBase {
+		EntityState State = EntityState.Unchanged) : RequestResponseBase, IResponse {
 	}
 }

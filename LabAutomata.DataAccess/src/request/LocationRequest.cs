@@ -12,7 +12,7 @@ public record LocationRequest (
 	string City,
 	string State,
 	string? Address = "")
-	: RequestResponseBase { }
+	: RequestResponseBase, IRequest { }
 
 /// <summary>
 /// Requests to add a new Location to the database
@@ -23,4 +23,4 @@ public record LocationNewRequest (
 	string City,
 	string State,
 	string? Address = "")
-	: RequestResponseBase { }
+	: RequestResponseBase, IRequest { }

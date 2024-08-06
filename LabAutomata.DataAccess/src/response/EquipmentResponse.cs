@@ -16,7 +16,7 @@ public record EquipmentResponse (
 	DateTime CalibrationDueDate,
 	Manufacturer Manufacturer,
 	EntityState State)
-	: RequestResponseBase { }
+	: RequestResponseBase, IResponse { }
 
 /// <summary>
 /// This is the result of querying the database for Equipment and converting
@@ -30,4 +30,4 @@ public record EquipmentUpsertResponse (
 	DateTime CalibrationDueDate,
 	Manufacturer Manufacturer,
 	bool WasUpdated)
-	: RequestResponseBase { }
+	: RequestResponseBase, IResponse { }

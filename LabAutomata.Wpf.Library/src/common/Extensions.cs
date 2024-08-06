@@ -1,4 +1,6 @@
-﻿using LabAutomata.IoT;
+﻿using LabAutomata.DataAccess.response;
+using LabAutomata.IoT;
+using LabAutomata.Wpf.Library.domain_models;
 using System.Reflection;
 
 namespace LabAutomata.Wpf.Library.common {
@@ -6,19 +8,9 @@ namespace LabAutomata.Wpf.Library.common {
 	public static class Extensions {
 		#region DOMAINMODELS
 
-		//TODO: is this needed?
-		//public static WorkstationDomainModel ToDomain (this WorkstationResponse wsr) {
-		//	return new WorkstationDomainModel() {
-		//		Name = wsr.Name,
-		//		StationNumber = wsr.StationNumber,
-		//		Description = wsr.Description,
-		//		LocationId = wsr.LocationId,
-		//		Location = wsr.Location,
-		//		Types = wsr.Types,
-		//		Equipment = wsr.Equipment,
-		//		Tests = wsr.Tests
-		//	};
-		//}
+		public static WorkstationDomainModel ToDomain (this WorkstationResponse response) {
+			return new WorkstationDomainModel(response);
+		}
 
 		#endregion
 

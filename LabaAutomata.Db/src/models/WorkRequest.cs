@@ -7,6 +7,8 @@ namespace LabAutomata.Db.models {
 		[Required, MaxLength(100)]
 		public required string Name { get; init; }
 
+		[Required] public required int RequestId { get; init; }
+
 		[Required, MaxLength(100)] public required string Program { get; init; }
 
 		[MaxLength(1000)]

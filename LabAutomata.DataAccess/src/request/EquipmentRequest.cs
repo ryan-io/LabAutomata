@@ -7,10 +7,10 @@ namespace LabAutomata.DataAccess.request;
 /// Requests an already existing Equipment from the database
 /// </summary>
 public record EquipmentRequest (int DbId, string Name, DateTime PurchaseDate, DateTime CalibrationDate, DateTime CalibrationDueDate, Manufacturer Manufacturer)
-	: RequestResponseBase { }
+	: RequestResponseBase, IRequest { }
 
 /// <summary>
 /// Requests to add a new Equipment to the database
 /// </summary>
 public record EquipmentNewRequest (string Name, DateTime PurchaseDate, DateTime CalibrationDate, DateTime CalibrationDueDate, Manufacturer Manufacturer)
-	: RequestResponseBase { }
+	: RequestResponseBase, IRequest { }

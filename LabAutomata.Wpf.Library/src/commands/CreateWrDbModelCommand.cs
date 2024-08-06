@@ -14,7 +14,7 @@ public class CreateWrDbModelCommand : ToDatabaseModelCommand<WorkRequestService>
 			return;
 
 		try {
-			await Service.CreateWorkRequest(request.ToDbModel());
+			//await Service.CreateWorkRequest(request.to);
 			Callback?.Invoke();
 			Logger?.LogInformation("Creating DbModel status: - {dM}", request);
 		}
@@ -26,10 +26,10 @@ public class CreateWrDbModelCommand : ToDatabaseModelCommand<WorkRequestService>
 
 	public CreateWrDbModelCommand (
 		IAdapter<Dispatcher> dA,
-		WorkRequestService service,
+		IWorkRequestService service,
 		Action? callback = default,
 		ILogger? logger = default,
 		Func<object?, bool>? canExecute = default)
-		: base(dA, service, callback, logger, canExecute) {
+		: base(dA, null, callback, logger, canExecute) {
 	}
 }

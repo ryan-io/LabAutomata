@@ -58,7 +58,7 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn Header="WR ID"
                       Width="200"
-                      DisplayMemberBinding="{Binding WrId}">
+                      DisplayMemberBinding="{Binding RequestId}">
                             </GridViewColumn>
                             <GridViewColumn Header="SensorName"
                   Width="200"

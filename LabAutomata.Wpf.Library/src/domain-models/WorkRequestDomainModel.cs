@@ -1,4 +1,5 @@
-﻿using LabAutomata.Db.models;
+﻿using LabAutomata.DataAccess.response;
+using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.common;
 using System.Collections.ObjectModel;
 
@@ -7,43 +8,17 @@ namespace LabAutomata.Wpf.Library.domain_models {
 	/// <summary>
 	/// Represents a domain model for a work request.
 	/// </summary>
-	public class WorkRequestDomainModel : DomainModel<WorkRequest> {
-		private string? _name;
-		private string? _program;
-		private string? _description;
-		private DateTime? _startDate;
-		private int _testCount;
-		private Manufacturer? _manufacturer;
-		private List<string> _obsGetErrors = new();
-		private int _wrId;
-
-		public WorkRequestDomainModel () {
-		}
-
+	public class WorkRequestDomainModel : DomainModel<WorkRequestResponse> {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WorkRequestDomainModel"/> class with the specified parameters.
 		/// </summary>
-		/// <param name="name">The name of the work request.</param>
-		/// <param name="program">The program associated with the work request.</param>
-		/// <param name="description">The description of the work request.</param>
-		/// <param name="startDate">The start date of the work request.</param>
-		/// <param name="wrId">Id of the work request</param>
-		/// <param name="manufacturer">Manufacturer the work request is for</param>
-		/// <param name="testCount">Number of tests in the work request</param>
-		public WorkRequestDomainModel (string? name,
-			string? program,
-			string? description,
-			DateTime? startDate,
-			int wrId,
-			Manufacturer manufacturer,
-			int testCount = 0) : base() {
-			Name = name;
-			Program = program;
-			Description = description;
-			StartDate = startDate;
-			TestCount = testCount;
-			WrId = wrId;
-			Manufacturer = manufacturer;
+		public WorkRequestDomainModel (WorkRequestResponse response) : base() {
+			Name = response.Name;
+			RequestId = response.RequestId;
+			Program = response.Program;
+			Description = response.Description;
+			StartDate = response.Started;
+			FinishDate = response.Finished;
 		}
 
 		/// <summary>
@@ -54,6 +29,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			Description = string.Empty;
 			Program = string.Empty;
 			StartDate = default;
+			FinishDate = default;
 			Tests?.Clear();
 			ClearAllErrors();
 		}
@@ -108,9 +84,9 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		/// <summary>
 		/// Gets or sets the WrId.
 		/// </summary>
-		public int WrId {
-			get => _wrId;
-			set => _wrId = value;
+		public int RequestId {
+			get => _requestId;
+			set => _requestId = value;
 		}
 
 		public Manufacturer Manufacturer {
@@ -128,6 +104,17 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			get => _startDate;
 			set {
 				_startDate = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the end date of the work request.
+		/// </summary>
+		public DateTime? FinishDate {
+			get => _finishDate;
+			set {
+				_finishDate = value;
 				NotifyPropertyChanged();
 			}
 		}
@@ -160,34 +147,14 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		/// <summary>
-		/// Creates a new instance of the <see cref="WorkRequest"/> class based on the properties of the work request domain model.
-		/// </summary>
-		/// <returns>A new instance of the <see cref="WorkRequest"/> class.</returns>
-		public override WorkRequest Create () {
-			return new WorkRequest {
-				Name = Name,
-				Program = Program,
-				Description = Description,
-				Started = StartDate,
-				Tests = Tests,
-				Id = WrId,
-				Manufacturer = Manufacturer,
-				ManufacturerId = Manufacturer == null ? -1 : Manufacturer.Id,
-			};
-		}
-
-		/// <summary>
-		/// Validates the properties of the work request domain model.
-		/// </summary>
-		public override void Validate () {
-			if (string.IsNullOrWhiteSpace(Name))
-				throw new ArgumentNullException(Name);
-
-			if (string.IsNullOrWhiteSpace(Program))
-				throw new ArgumentNullException(Name);
-
-			//TODO: do we care if description and start date are null and tests is empty?
-		}
+		private string _name;
+		private string _program;
+		private string? _description;
+		private int _requestId;
+		private int _testCount;
+		private DateTime? _startDate;
+		private DateTime? _finishDate;
+		private Manufacturer? _manufacturer;
+		private List<string> _obsGetErrors = new();
 	}
 }

@@ -12,7 +12,7 @@ public record Dht22SensorRequest (
 	string? Description,
 	LocationRequest Location,
 	ICollection<Dht22Data> Data)
-	: RequestResponseBase;
+	: RequestResponseBase, IRequest;
 
 /// <summary>
 /// Requests to add a new Dht22Sensor to the database
@@ -21,4 +21,4 @@ public record Dht22SensorNewRequest (
 	string Name,
 	string? Description,
 	LocationRequest Location)
-	: RequestResponseBase;
+	: RequestResponseBase, IRequest;

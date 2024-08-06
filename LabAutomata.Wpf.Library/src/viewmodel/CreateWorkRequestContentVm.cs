@@ -1,6 +1,5 @@
 ﻿using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.adapter;
-using LabAutomata.Wpf.Library.commands;
 using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
@@ -15,7 +14,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
 		public ICommand ResetDbModel { get; }
 
-		public WorkRequestDomainModel Model { get; set; } = new();
+		public WorkRequestDomainModel Model { get; set; }
 
 		public ObservableCollection<Manufacturer> Manufacturers { get; set; } = null!;
 
@@ -46,14 +45,11 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
 		/// There is a dependence on the actual wrRepository
 		public CreateWorkRequestContentVm (
-			IRepository<WorkRequest> wrRepository,
-			IRepository<Manufacturer> manRepository,
 			IAdapter<Dispatcher> dA,
 			ILogger? logger = default)
 				: base(logger) {
-			CreateDbModelCmd = new CreateWrDbModelCommand(dA, wrRepository, () => Reset(CreateDbModelCmd), logger);
+			//CreateDbModelCmd = new CreateWrDbModelCommand(dA, () => Reset(CreateDbModelCmd), logger);
 			ResetDbModel = new Command(Reset);
-			_manufacturerRepository = manRepository;
 		}
 
 		/// <summary>
@@ -69,6 +65,5 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		private string _programEmptyBox = "Enter a program";
 		private string _descEmptyBox = "Enter a description for the work request";
 		private string _startEmptyBox = "Enter a start on date";
-		private readonly IRepository<Manufacturer> _manufacturerRepository;
 	}
 }

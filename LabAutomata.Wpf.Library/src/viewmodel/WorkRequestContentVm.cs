@@ -1,5 +1,4 @@
-﻿using LabAutomata.Db.models;
-using LabAutomata.Db.repository;
+﻿using LabAutomata.DataAccess.service;
 using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -41,11 +40,11 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 	/// <summary>
 	/// Initializes a new instance of the <see cref="WorkRequestContentVm"/> class.
 	/// </summary>
-	/// <param name="repository">The repository for work requests.</param>
+	/// <param name="service">The repository for work requests.</param>
 	/// <param name="logger">The logger.</param>
-	public WorkRequestContentVm (IRepository<WorkRequest> repository, ILogger? logger = default) : base(logger, true) {
-		_repository = repository;
+	public WorkRequestContentVm (IWorkRequestService service, ILogger? logger = default) : base(logger, true) {
+		_service = service;
 	}
 
-	private readonly IRepository<WorkRequest> _repository;
+	private readonly IWorkRequestService _service;
 }

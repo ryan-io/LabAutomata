@@ -14,5 +14,5 @@ public class Dht22Sensor {
 	[Required]
 	public required Location Location { get; init; }
 
-	public ICollection<Dht22Data>? Data { get; init; }
+	public ICollection<Dht22Data> Data { get; init; } = new List<Dht22Data>();
 }

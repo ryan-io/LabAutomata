@@ -21,12 +21,14 @@ public interface IDht22DataService {
 
 public class Dht22DataService : ServiceBase, IDht22DataService {
 	public async Task<ErrorOr<Dht22DataResponse>> AddData (Dht22DataNewRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = DbContext.Dht22Data.Add(model);
+		var result = ctx.Dht22Data.Add(model);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
-			await DbContext.SaveChangesAsync(token);
+			await ctx.SaveChangesAsync(token);
 			return response;
 		}
 
@@ -38,14 +40,12 @@ public class Dht22DataService : ServiceBase, IDht22DataService {
 	}
 
 	public async Task<ErrorOr<IList<Dht22DataResponse>>> GetData (int dhtSensorId, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		// we'll retrieve all fields for the target sensor
-		var sensor = await DbContext.Dht22Sensors
+		var sensor = await ctx.Dht22Sensors
 			.Where(s => s.Id == dhtSensorId)
 			.FirstAsync(token);
-
-		if (sensor.Data == null) {
-			return Errors.Db.CouldNotGetAll(Name, CouldNotGet);
-		}
 
 		return sensor.Data
 			.Select(point => point.ToResponse(EntityState.Unchanged))
@@ -60,20 +60,23 @@ public class Dht22DataService : ServiceBase, IDht22DataService {
 	}
 
 	public async Task<ErrorOr<Dht22DataResponse>> DeleteData (Dht22DataRequest request, CancellationToken token) {
-		var dataPoint = await DbContext.Dht22Data.FirstOrDefaultAsync(d => d.Id == request.DbId, token);
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
+		var dataPoint = await ctx.Dht22Data.FirstOrDefaultAsync(d => d.Id == request.DbId, token);
 
 		if (dataPoint == null) {
 			// return error; data is not present in the db
 			return Errors.Db.CouldNotDelete(Name, GetFailedDeleteDescription(request));
 		}
 
-		DbContext.Dht22Data.Remove(dataPoint);
-		await DbContext.SaveChangesAsync(token);
+		ctx.Dht22Data.Remove(dataPoint);
+		await ctx.SaveChangesAsync(token);
 		return dataPoint.ToResponse(EntityState.Deleted);
 	}
 
 	/// <inheritdoc />
-	public Dht22DataService (PostgreSqlDbContext dbContext) : base(dbContext) {
+	public Dht22DataService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory)
+		: base(dbContextFactory) {
 	}
 
 	private static string GetFailedDeleteDescription (Dht22DataRequest request) {

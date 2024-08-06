@@ -14,13 +14,15 @@ public interface IDht22SensorService {
 
 public class Dht22SensorService : ServiceBase, IDht22SensorService {
 	public async Task<ErrorOr<Dht22SensorResponse>> AddSensor (Dht22SensorNewRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
 		// we can use AddAsync here
-		var result = DbContext.Dht22Sensors.Add(model);
+		var result = ctx.Dht22Sensors.Add(model);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
-			await DbContext.SaveChangesAsync(token);
+			await ctx.SaveChangesAsync(token);
 			return response;
 		}
 
@@ -32,14 +34,17 @@ public class Dht22SensorService : ServiceBase, IDht22SensorService {
 	}
 
 	public async Task<Dht22SensorUpsertResponse> UpsertSensor (Dht22SensorRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = DbContext.Dht22Sensors.Update(model);
+		var result = ctx.Dht22Sensors.Update(model);
 		var response = result.ToUpsertResponse();
-		await DbContext.SaveChangesAsync(token);
+		await ctx.SaveChangesAsync(token);
 		return response;
 	}
 
-	public Dht22SensorService (PostgreSqlDbContext dbContext) : base(dbContext) {
+	public Dht22SensorService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory)
+		: base(dbContextFactory) {
 	}
 
 	protected override string Name => nameof(Dht22SensorService);

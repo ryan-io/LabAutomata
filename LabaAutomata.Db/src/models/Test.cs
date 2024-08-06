@@ -1,62 +1,27 @@
-﻿//using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-//namespace LabAutomata.Db.models {
+namespace LabAutomata.Db.models {
+	public class Test {
+		public int Id { get; set; }
 
-//	public class Test {
-//		[Required, MaxLength(100)] public string? Name { get; init; }
+		[Required] public int InstanceId { get; init; }
 
-//		[Required]
-//		public int WrId { get; init; }
+		[Required, MaxLength(100)] public string? Name { get; init; }
 
-//		public WorkRequest? WorkRequest { get; init; }
+		[Required] public required WorkRequest WorkRequest { get; init; }
 
-//		public ICollection<Workstation>? Workstations { get; set; }
+		[Required] public required TestType Type { get; init; }
 
-//		[Required]
-//		public int InstanceId { get; init; }
+		public Personnel? Operator { get; init; }
 
-//		[Required]
-//		public int TypeId { get; init; }
+		public Location? Location { get; init; }
 
-//		[Required]
-//		public TestType? Type { get; init; }
+		public DateTime? Started { get; init; }
 
-//		[Required]
-//		public int LocationId { get; init; }
+		public DateTime? Ended { get; init; }
 
-//		public int OperatorId { get; init; }
 
-//		public Personnel? Operator { get; init; }
-
-//		public Location? Location { get; init; }
-
-//		public DateTime? Started { get; init; } = DateTime.UtcNow;
-
-//		public DateTime? Ended { get; init; }
-
-//		public Test () {
-//			Name = "unnamed";
-//		}
-
-//		public Test (Test test) {
-//			Name = test.Name;
-//			InstanceId = test.InstanceId;
-//			Started = test.Started;
-//			Ended = test.Ended;
-//			Type = test.Type;
-//		}
-
-//		public Test (int id, Test test) {
-//			Name = test.Name;
-//			InstanceId = test.InstanceId;
-//			Started = test.Started;
-//			Ended = test.Ended;
-//			Type = test.Type;
-//		}
-
-//		public Test (string name, int instanceId) {
-//			Name = name;
-//			InstanceId = instanceId;
-//		}
-//	}
-//}
+		//TODO: redefine the workstation collection for Test
+		//public ICollection<Workstation>? Workstations { get; set; }
+	}
+}

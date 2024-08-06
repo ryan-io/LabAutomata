@@ -14,12 +14,14 @@ public interface ILocationService {
 
 public class LocationService : ServiceBase, ILocationService {
 	public async Task<ErrorOr<LocationResponse>> AddLocation (LocationNewRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = await DbContext.Locations.AddAsync(model, token);
+		var result = await ctx.Locations.AddAsync(model, token);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
-			await DbContext.SaveChangesAsync(token);
+			await ctx.SaveChangesAsync(token);
 			return response;
 		}
 
@@ -30,14 +32,16 @@ public class LocationService : ServiceBase, ILocationService {
 		return Errors.Db.CouldNotCreate(Name, NotCreated);
 	}
 	public async Task<LocationUpsertResponse> UpsertLocation (LocationRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = DbContext.Locations.Update(model);
+		var result = ctx.Locations.Update(model);
 		var response = result.ToUpsertResponse();
-		await DbContext.SaveChangesAsync(token);
+		await ctx.SaveChangesAsync(token);
 		return response;
 	}
 
-	public LocationService (PostgreSqlDbContext dbContext) : base(dbContext) { }
+	public LocationService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory) : base(dbContextFactory) { }
 
 	protected override string Name => nameof(LocationService);
 

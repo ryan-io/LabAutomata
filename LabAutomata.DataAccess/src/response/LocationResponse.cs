@@ -15,7 +15,7 @@ public record LocationResponse (
 	string State,
 	string? Address,
 	EntityState EntityState)
-	: RequestResponseBase;
+	: RequestResponseBase, IResponse;
 
 /// <summary>
 /// This is the result of querying the database for Location and converting
@@ -29,4 +29,4 @@ public record LocationUpsertResponse (
 	string State,
 	string? Address,
 	bool WasUpdated)
-	: RequestResponseBase;
+	: RequestResponseBase, IResponse;

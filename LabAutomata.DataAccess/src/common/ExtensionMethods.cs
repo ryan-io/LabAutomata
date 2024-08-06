@@ -63,7 +63,13 @@ namespace LabAutomata.DataAccess.common {
 				.Select(d => d.ToResponse(EntityState.Unchanged))
 				.ToList();
 
-			return new Dht22SensorResponse(e.Id, e.Name, e.Description, data, entityEntry.State);
+			return new Dht22SensorResponse(
+				e.Id,
+				e.Name,
+				e.Description,
+				e.Location,
+				data,
+				entityEntry.State);
 		}
 
 		public static Dht22SensorUpsertResponse ToUpsertResponse (this EntityEntry<Dht22Sensor> entityEntry) {
@@ -77,6 +83,7 @@ namespace LabAutomata.DataAccess.common {
 				e.Id,
 				e.Name,
 				e.Description,
+				e.Location,
 				data,
 				entityEntry.State == EntityState.Modified);
 		}
@@ -113,6 +120,17 @@ namespace LabAutomata.DataAccess.common {
 				location.City,
 				location.State,
 				location.Address);
+		}
+
+		public static LocationResponse ToResponse (this Location location) {
+			return new LocationResponse(
+				location.Id,
+				location.Name,
+				location.Country,
+				location.City,
+				location.State,
+				location.Address,
+				EntityState.Unchanged);
 		}
 
 		public static LocationResponse ToResponse (this EntityEntry<Location> entityEntry) {
@@ -166,7 +184,7 @@ namespace LabAutomata.DataAccess.common {
 			return new ManufacturerResponse(
 				e.Id,
 				e.Name,
-				e.Location.ToRequest(),
+				e.Location.ToResponse(),
 				entityEntry.State);
 		}
 
@@ -176,7 +194,7 @@ namespace LabAutomata.DataAccess.common {
 			return new ManufacturerUpsertResponse(
 				e.Id,
 				e.Name,
-				e.Location.ToRequest(),
+				e.Location.ToResponse(),
 				entityEntry.State == EntityState.Modified);
 		}
 
@@ -187,6 +205,7 @@ namespace LabAutomata.DataAccess.common {
 		public static WorkRequest ToDbModel (this WorkRequestNewRequest request) {
 			return new WorkRequest() {
 				Name = request.Name,
+				RequestId = request.RequestId,
 				Program = request.Program,
 				Description = request.Description,
 				Started = request.Started,
@@ -198,6 +217,7 @@ namespace LabAutomata.DataAccess.common {
 			return new WorkRequest() {
 				Id = request.Id,
 				Name = request.Name,
+				RequestId = request.RequestId,
 				Program = request.Program,
 				Description = request.Description,
 				Started = request.Started,
@@ -211,6 +231,7 @@ namespace LabAutomata.DataAccess.common {
 			return new WorkRequestResponse(
 				e.Id,
 				e.Name,
+				e.RequestId,
 				e.Name,
 				e.Description,
 				e.Started,
@@ -224,6 +245,7 @@ namespace LabAutomata.DataAccess.common {
 			return new WorkRequestUpsertResponse(
 				e.Id,
 				e.Name,
+				e.RequestId,
 				e.Name,
 				e.Description,
 				e.Started,
@@ -231,6 +253,21 @@ namespace LabAutomata.DataAccess.common {
 				entityEntry.State == EntityState.Modified);
 		}
 
+
+		#endregion
+
+		#region WORKSTATION
+
+		public static WorkstationResponse ToResponse (this Workstation workstation) {
+			return new WorkstationResponse(
+				workstation.Id,
+				workstation.Name,
+				workstation.StationNumber,
+				workstation.Description,
+				workstation.Created,
+				workstation.Location,
+				EntityState.Unchanged);
+		}
 
 		#endregion
 	}

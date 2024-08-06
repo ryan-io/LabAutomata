@@ -11,13 +11,15 @@ namespace LabAutomata.Db.models {
 
 		[MaxLength(500)] public string? Description { get; init; }
 
+		[Required] public required DateTime Created { get; init; } = DateTime.UtcNow;
+
 		public Location? Location { get; init; }
 
 		//TODO: add collections for this model
 		//public ICollection<WorkstationType> Types { get; init; } = new List<WorkstationType>();
+
 		//public ICollection<Equipment> Equipment { get; init; } = new List<Equipment>();
 
 		//public ICollection<Test> Tests { get; set; } = new List<Test>();
-
 	}
 }

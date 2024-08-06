@@ -1,27 +1,16 @@
+using LabAutomata.DataAccess.response;
 using LabAutomata.Db.models;
 
 namespace LabAutomata.Wpf.Library.domain_models {
 
-	public class EquipmentDomainModel : DomainModel<Equipment> {
-		private string _name;
-		private DateTime _purchaseDate;
-		private DateTime _calibrationDate;
-		private DateTime _calibrationDueDate;
-		private Manufacturer _manufacturer;
-		private int _manufacturerId;
-		private ICollection<Workstation> _workstations;
-
-		public EquipmentDomainModel () {
-		}
-
-		public EquipmentDomainModel (Equipment equipment) {
-			Name = equipment.Name;
-			PurchaseDate = equipment.PurchaseDate;
-			CalibrationDate = equipment.CalibrationDate;
-			CalibrationDueDate = equipment.CalibrationDueDate;
-			Manufacturer = equipment.Manufacturer;
-			ManufacturerId = equipment.ManufacturerId;
-			Workstations = equipment.Workstations;
+	public class EquipmentDomainModel : DomainModel<EquipmentResponse> {
+		public EquipmentDomainModel (EquipmentResponse response) {
+			Name = response.Name;
+			PurchaseDate = response.PurchaseDate;
+			CalibrationDate = response.CalibrationDate;
+			CalibrationDueDate = response.CalibrationDueDate;
+			Manufacturer = response.Manufacturer;
+			//Workstations = equipment.Workstations;
 		}
 
 		public string Name {
@@ -64,43 +53,20 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public int ManufacturerId {
-			get => _manufacturerId;
-			set {
-				_manufacturerId = value;
-				NotifyPropertyChanged();
-			}
-		}
 
-		public ICollection<Workstation> Workstations {
-			get => _workstations;
-			set {
-				_workstations = value;
-				NotifyPropertyChanged();
-			}
-		}
+		//public ICollection<Workstation> Workstations {
+		//	get => _workstations;
+		//	set {
+		//		_workstations = value;
+		//		NotifyPropertyChanged();
+		//	}
+		//}
 
-		public override Equipment Create () {
-			return new Equipment {
-				Name = this.Name,
-				PurchaseDate = this.PurchaseDate,
-				CalibrationDate = this.CalibrationDate,
-				CalibrationDueDate = this.CalibrationDueDate,
-				Manufacturer = this.Manufacturer,
-				ManufacturerId = this.ManufacturerId,
-				Workstations = this.Workstations
-			};
-		}
-
-		public override void Validate () {
-			if (string.IsNullOrWhiteSpace(Name))
-				throw new ArgumentNullException(nameof(Name));
-
-			if (Manufacturer == null)
-				throw new ArgumentNullException(nameof(Manufacturer));
-
-			if (ManufacturerId <= 0)
-				throw new ArgumentException("ManufacturerId must be greater than 0", nameof(ManufacturerId));
-		}
+		private string _name;
+		private DateTime _purchaseDate;
+		private DateTime _calibrationDate;
+		private DateTime _calibrationDueDate;
+		private Manufacturer _manufacturer;
+		//private ICollection<Workstation> _workstations;
 	}
 }

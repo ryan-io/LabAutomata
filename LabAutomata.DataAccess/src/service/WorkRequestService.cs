@@ -7,15 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
-public class WorkRequestService : ServiceBase {
-	public async Task<ErrorOr<WorkRequestResponse>> CreateWorkRequest (WorkRequestNewRequest request,
-		CancellationToken token) {
+public interface IWorkRequestService {
+	Task<ErrorOr<WorkRequestResponse>> CreateWorkRequest (
+		WorkRequestNewRequest request, CancellationToken token);
+}
+
+public class WorkRequestService : ServiceBase, IWorkRequestService {
+	public async Task<ErrorOr<WorkRequestResponse>> CreateWorkRequest (
+		WorkRequestNewRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = DbContext.WorkRequests.Add(model);
+		var result = ctx.WorkRequests.Add(model);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
-			await DbContext.SaveChangesAsync(token);
+			await ctx.SaveChangesAsync(token);
 			return response;
 		}
 
@@ -26,8 +33,8 @@ public class WorkRequestService : ServiceBase {
 		return Errors.Db.CouldNotCreate(Name, NotCreated);
 	}
 
-	public WorkRequestService (PostgreSqlDbContext dbContext) : base(dbContext) {
-	}
+	public WorkRequestService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory)
+		: base(dbContextFactory) { }
 
 	protected override string Name => nameof(WorkRequestService);
 

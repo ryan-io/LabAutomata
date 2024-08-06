@@ -1,20 +1,18 @@
-//using LabAutomata.DataAccess.mapper;
-//using LabAutomata.Db.models;
-//using LabAutomata.Db.repository;
-//using LabAutomata.Dto.request;
-//using LabAutomata.Dto.response;
+using LabAutomata.Db.common;
+using Microsoft.EntityFrameworkCore;
 
-//namespace LabAutomata.DataAccess.service {
+namespace LabAutomata.DataAccess.service {
+	public interface IEquipmentService {
+	}
 
-//	/// <summary>
-//	/// Represents a service for managing Equipment entities.
-//	/// </summary>
-//	public class EquipmentService : Service<Equipment, EquipmentRequest, EquipmentResponse> {
+	/// <summary>
+	/// Represents a service for managing Equipment entities.
+	/// </summary>
+	public class EquipmentService : ServiceBase, IEquipmentService {
 
-//		public EquipmentService (
-//			IRepository<Equipment> repository,
-//			IMapper<Equipment, EquipmentRequest, EquipmentResponse> mapper)
-//			: base(repository, mapper) {
-//		}
-//	}
-//}
+		public EquipmentService (IDbContextFactory<PostgreSqlDbContext> dbFactory)
+			: base(dbFactory) { }
+
+		protected override string Name => nameof(EquipmentService);
+	}
+}

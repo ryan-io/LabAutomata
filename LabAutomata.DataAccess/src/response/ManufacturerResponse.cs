@@ -1,5 +1,4 @@
 ﻿using LabAutomata.DataAccess.common;
-using LabAutomata.DataAccess.request;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response {
@@ -10,9 +9,9 @@ namespace LabAutomata.DataAccess.response {
 	public record ManufacturerResponse (
 		int DbId,
 		string Name,
-		LocationRequest Location,
+		LocationResponse Location,
 		EntityState EntityState)
-		: RequestResponseBase;
+		: RequestResponseBase, IResponse;
 
 	/// <summary>
 	/// This is the result of querying the database for Manufacturer and converting
@@ -21,7 +20,7 @@ namespace LabAutomata.DataAccess.response {
 	public record ManufacturerUpsertResponse (
 		int DbId,
 		string Name,
-		LocationRequest Location,
+		LocationResponse Location,
 		bool WasUpdated)
-		: RequestResponseBase;
+		: RequestResponseBase, IResponse;
 }

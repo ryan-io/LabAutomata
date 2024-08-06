@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LabAutomata.DataAccess.response;
+using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -8,33 +9,13 @@ namespace LabAutomata.Wpf.Library.domain_models {
 	/// Represents an abstract base class for domain models.
 	/// </summary>
 	/// <typeparam name="T">The type of the associated database model.</typeparam>
-	public abstract class DomainModel<T> : INotifyPropertyChanged, INotifyDataErrorInfo {
+	public abstract class DomainModel<T> : INotifyPropertyChanged, INotifyDataErrorInfo
+		where T : IResponse {
 
 		/// <summary>
 		/// Event handler for when a property is changed
 		/// </summary>
 		public event PropertyChangedEventHandler? PropertyChanged;
-
-		/// <summary>
-		/// Converts the domain model to its corresponding database model.
-		/// </summary>
-		/// <returns>The database model.</returns>
-		public T ToDbModel () {
-			Validate();
-			return Create();
-		}
-
-		/// <summary>
-		/// Allows the user to define mapping for creating a database model from a domain model
-		/// </summary>
-		/// <returns>A new instance of the db model</returns>
-		public abstract T Create ();
-
-		/// <summary>
-		/// Provide validation logic of the domain to database models
-		/// This method is expected to throw exceptions
-		/// </summary>
-		public abstract void Validate ();
 
 		protected void NotifyPropertyChanged ([CallerMemberName] string? propertyName = null)
 			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

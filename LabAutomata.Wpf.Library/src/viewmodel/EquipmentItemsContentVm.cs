@@ -1,4 +1,4 @@
-﻿using LabAutomata.Db.models;
+﻿using LabAutomata.DataAccess.service;
 using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -20,9 +20,9 @@ public class EquipmentItemsContentVm : Base {
 		//Equipment = new ObservableCollection<EquipmentDomainModel>(models);
 	}
 
-	public EquipmentItemsContentVm (IRepository<Equipment> repository, ILogger? logger = default, bool shouldNotifyErrors = false) : base(logger, shouldNotifyErrors) {
-		_repository = repository; ;
+	public EquipmentItemsContentVm (IEquipmentService service, ILogger? logger = default, bool shouldNotifyErrors = false) : base(logger, shouldNotifyErrors) {
+		_service = service; ;
 	}
 
-	private readonly IRepository<Equipment> _repository;
+	private readonly IEquipmentService _service;
 }

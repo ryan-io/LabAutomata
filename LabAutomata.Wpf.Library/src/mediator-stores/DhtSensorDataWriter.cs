@@ -1,6 +1,5 @@
-﻿using LabAutomata.DataAccess.service;
-using LabAutomata.Dto.request;
-using LabAutomata.Dto.response;
+﻿using LabAutomata.DataAccess.request;
+using LabAutomata.DataAccess.unit_of_work;
 using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.contracts;
 
@@ -21,10 +20,10 @@ public class DhtSensorDataWriter : IDhtSensorDataWriter {
 		_dht22Data.PayloadDeserialized -= Dht22DataOnPayloadDeserialized;
 	}
 
-	public DhtSensorDataWriter (IDht22PayloadData dht22Data, IService<DhtJsonDataRequest, DhtJsonDataResponse> serviceProvider) {
+	public DhtSensorDataWriter (IDht22PayloadData dht22Data, IDht22SensorDataUnitOfWork unitOfWork) {
 		_dht22Data = dht22Data;
-		_serviceProvider = serviceProvider;
 		_dht22Data.PayloadDeserialized += Dht22DataOnPayloadDeserialized;
+		_unitOfWork = unitOfWork;
 	}
 
 	/// <summary>
@@ -32,15 +31,15 @@ public class DhtSensorDataWriter : IDhtSensorDataWriter {
 	/// This class should have it's Dispose method invoked if objects are not instantiated
 	///		as singletons
 	/// </summary>
-	/// <param name="obj">DHT22 Payload</param>
 	public async void Dht22DataOnPayloadDeserialized (MqttDht22Payload obj) {
 		if (string.IsNullOrWhiteSpace(obj.Raw))
 			return;
 
-		var request = new DhtJsonDataRequest(obj.Raw, obj.DhtSensorId);
-		//await _serviceProvider.Create(request);
+		//TODO: optimize this method in regard to number of database calls
+		var request = new Dht22AddDataToSensorRequest(obj.DhtSensorId, obj.Raw);
+		await _unitOfWork.RunWork(request, CancellationToken.None);
 	}
 
-	private readonly IService<DhtJsonDataRequest, DhtJsonDataResponse> _serviceProvider;
 	private readonly IDht22PayloadData _dht22Data;
+	private readonly IDht22SensorDataUnitOfWork _unitOfWork;
 }

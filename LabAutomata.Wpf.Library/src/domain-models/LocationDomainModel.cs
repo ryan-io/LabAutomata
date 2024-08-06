@@ -1,23 +1,14 @@
-using LabAutomata.Db.models;
+using LabAutomata.DataAccess.response;
 
 namespace LabAutomata.Wpf.Library.domain_models {
 
-	public class LocationDomainModel : DomainModel<Location> {
-		private string _name;
-		private string _address;
-		private string _city;
-		private string _state;
-		private string _country;
-
-		public LocationDomainModel () {
-		}
-
-		public LocationDomainModel (string name, string address, string city, string state, string country) {
-			Name = name;
-			Address = address;
-			City = city;
-			State = state;
-			Country = country;
+	public class LocationDomainModel : DomainModel<LocationResponse> {
+		public LocationDomainModel (LocationResponse response) {
+			Name = response.Name;
+			Address = response.Address;
+			City = response.City;
+			State = response.State;
+			Country = response.Country;
 		}
 
 		public string Name {
@@ -28,7 +19,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public string Address {
+		public string? Address {
 			get => _address;
 			set {
 				_address = value;
@@ -60,31 +51,10 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public override Location Create () {
-			return new Location {
-				Name = this.Name,
-				Address = this.Address,
-				City = this.City,
-				State = this.State,
-				Country = this.Country
-			};
-		}
-
-		public override void Validate () {
-			if (string.IsNullOrWhiteSpace(Name))
-				throw new ArgumentNullException(nameof(Name));
-
-			if (string.IsNullOrWhiteSpace(Address))
-				throw new ArgumentNullException(nameof(Address));
-
-			if (string.IsNullOrWhiteSpace(City))
-				throw new ArgumentNullException(nameof(City));
-
-			if (string.IsNullOrWhiteSpace(State))
-				throw new ArgumentNullException(nameof(State));
-
-			if (string.IsNullOrWhiteSpace(Country))
-				throw new ArgumentNullException(nameof(Country));
-		}
+		private string _name;
+		private string _city;
+		private string _state;
+		private string _country;
+		private string? _address;
 	}
 }

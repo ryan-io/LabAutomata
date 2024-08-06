@@ -5,11 +5,11 @@ namespace LabAutomata.DataAccess.request;
 /// Requests an already existing Manufacturer from the database
 /// </summary>
 public record ManufacturerRequest (int DbId, string Name, LocationRequest Location)
-	: RequestResponseBase;
+	: RequestResponseBase, IRequest;
 
 
 /// <summary>
 /// Requests to add a new Manufacturer to the database
 /// </summary>
 public record ManufacturerNewRequest (string Name, LocationRequest Location)
-	: RequestResponseBase;
+	: RequestResponseBase, IRequest;

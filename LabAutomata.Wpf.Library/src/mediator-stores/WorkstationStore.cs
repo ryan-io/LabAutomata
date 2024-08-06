@@ -1,8 +1,8 @@
-﻿using LabAutomata.Wpf.Library.common;
+﻿using LabAutomata.DataAccess.service;
+using LabAutomata.Wpf.Library.common;
 using LabAutomata.Wpf.Library.domain_models;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
-using WsService = LabAutomata.DataAccess.service.IService<LabAutomata.Dto.request.WorkstationRequest, LabAutomata.Dto.response.WorkstationResponse>;
 
 namespace LabAutomata.Wpf.Library.mediator_stores {
 	#region ABSTRACTION
@@ -59,7 +59,7 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 		}
 
 		public async Task Load (CancellationToken token = default) {
-			var workstations = await _service.GetAll(token);
+			var workstations = await _service.GetWorkstations(token);
 
 			if (workstations.IsError) {
 				_logger?.LogError(workstations.Errors.First().Description);
@@ -77,7 +77,7 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 			_workstations = new ObservableCollection<WorkstationDomainModel>(models);
 		}
 
-		public WorkstationStore (WsService service, ILogger? logger = default) {
+		public WorkstationStore (IWorkstationService service, ILogger? logger = default) {
 			_service = service;
 			_logger = logger;
 		}
@@ -86,7 +86,7 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 
 		private ObservableCollection<WorkstationDomainModel> _workstations = new();
 
-		readonly WsService _service;
+		readonly IWorkstationService _service;
 		readonly ILogger? _logger;
 	}
 }

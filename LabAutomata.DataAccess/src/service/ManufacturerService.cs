@@ -14,12 +14,14 @@ public interface IManufacturerService {
 
 public class ManufacturerService : ServiceBase, IManufacturerService {
 	public async Task<ErrorOr<ManufacturerResponse>> AddManufacturer (ManufacturerNewRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = await DbContext.Manufacturers.AddAsync(model, token);
+		var result = await ctx.Manufacturers.AddAsync(model, token);
 		var response = result.ToResponse();
 
 		if (result.State == EntityState.Added) {
-			await DbContext.SaveChangesAsync(token);
+			await ctx.SaveChangesAsync(token);
 			return response;
 		}
 
@@ -31,14 +33,16 @@ public class ManufacturerService : ServiceBase, IManufacturerService {
 	}
 
 	public async Task<ManufacturerUpsertResponse> UpsertLocation (ManufacturerRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
 		var model = request.ToDbModel();
-		var result = DbContext.Manufacturers.Update(model);
+		var result = ctx.Manufacturers.Update(model);
 		var response = result.ToUpsertResponse();
-		await DbContext.SaveChangesAsync(token);
+		await ctx.SaveChangesAsync(token);
 		return response;
 	}
 
-	public ManufacturerService (PostgreSqlDbContext dbContext) : base(dbContext) { }
+	public ManufacturerService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory) : base(dbContextFactory) { }
 
 	protected override string Name => nameof(ManufacturerService);
 

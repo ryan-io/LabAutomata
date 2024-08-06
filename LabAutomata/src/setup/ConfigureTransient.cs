@@ -15,6 +15,10 @@ internal sealed class ConfigureTransient {
 
 		// database repositories
 		_sc.AddTransient<IVmIdExtractor, VmIdExtractor>();
+
+		// services
+
+		// units of work
 	}
 
 	public ConfigureTransient (IServiceCollection sc, Application app) {

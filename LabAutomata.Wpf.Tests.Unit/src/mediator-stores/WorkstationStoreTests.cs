@@ -1,14 +1,13 @@
 using FluentAssertions;
+using LabAutomata.DataAccess.service;
 using LabAutomata.Db.models;
-using LabAutomata.Dto.response;
 using LabAutomata.Wpf.Library.domain_models;
 using LabAutomata.Wpf.Library.mediator_stores;
 using NSubstitute;
-using wsService = LabAutomata.DataAccess.service.Service<LabAutomata.Db.models.Workstation, LabAutomata.Dto.request.WorkstationRequest, LabAutomata.Dto.response.WorkstationResponse>;
 
 namespace LabAutomata.Wpf.Tests.Unit.mediator_stores {
 	public class WorkstationStoreTests {
-		private readonly wsService _service = Substitute.For<wsService>();
+		private readonly IWorkstationService _service = Substitute.For<IWorkstationService>();
 		private readonly WorkstationStore _sut;
 
 		public WorkstationStoreTests () {
