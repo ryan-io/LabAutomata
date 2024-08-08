@@ -24,14 +24,16 @@ namespace LabAutomata.Db.common {
 		public DbSet<SeedJson> SeedJson { get; set; }
 		*/
 
+
+		public PostgreSqlDbContext (DbContextOptions options) : base(options) {
+
+		}
+
 		/// <summary>
-		/// Initializes a new instance of the <see cref="PostgreSqlDbContext"/> class with the specified configuration.
+		/// Empty constructor: EF Core scaffolding with code first migrations
 		/// </summary>
-		public PostgreSqlDbContext (DbContextOptions<PostgreSqlDbContext> options) {
-			// Gets the connection string from the appsettings.json/secrets.json file
-			//options.UseNpgsql(_configuration.GetConnectionString(C.DatabaseConnectionId))
-			//	.UseSnakeCaseNamingConvention()
-			//	.EnableDetailedErrors();
+		public PostgreSqlDbContext () {
+
 		}
 
 		/// <summary>
@@ -39,15 +41,12 @@ namespace LabAutomata.Db.common {
 		/// </summary>
 		/// <param name="optionsBuilder">The options builder used to configure the database connection.</param>
 		protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder) {
-			//if (_configuration == null)
-			//	return;
-
-			//if (!optionsBuilder.IsConfigured) {
-			//	// Gets the connection string from the appsettings.json/secrets.json file
-			//	optionsBuilder.UseNpgsql(_configuration.GetConnectionString(C.DatabaseConnectionId))
-			//		.UseSnakeCaseNamingConvention()
-			//		.EnableDetailedErrors();
-			//}
+#if DEBUG
+			//Gets the connection string from the appsettings.json / secrets.json file
+			optionsBuilder.UseNpgsql("Host=localhost;Database=lab;username=postgres;Password=Dev.Internal9911!;IncludeErrorDetail=true")
+				.UseSnakeCaseNamingConvention()
+				.EnableDetailedErrors();
+#endif
 		}
 
 		/// <summary>
@@ -57,10 +56,5 @@ namespace LabAutomata.Db.common {
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostgreSqlDbContext).Assembly);
 		}
-
-		/// <summary>
-		/// Gets or sets the configuration object used to retrieve the connection string.
-		/// </summary>
-		//private readonly IConfiguration? _configuration;
 	}
 }

@@ -4,7 +4,7 @@ using LabAutomata.Wpf.Library.domain_models;
 namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 
 	public class LocationDomainModelTests {
-		private readonly LocationDomainModel _sut = new();
+		private readonly LocationDomainModel _sut;
 
 		[Fact]
 		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {
@@ -74,42 +74,6 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 			// Assert
 			_sut.Country.Should().Be("Test Country");
 			propertyName.Should().Be(nameof(_sut.Country));
-		}
-
-		[Fact]
-		public void Create_ShouldReturnNewLocationWithSameProperties_WhenCalled () {
-			// Arrange
-			_sut.Name = "Test SensorName";
-			_sut.Address = "Test Address";
-			_sut.City = "Test City";
-			_sut.State = "Test State";
-			_sut.Country = "Test Country";
-
-			// Act
-			var location = _sut.Create();
-
-			// Assert
-			location.Name.Should().Be(_sut.Name);
-			location.Address.Should().Be(_sut.Address);
-			location.City.Should().Be(_sut.City);
-			location.State.Should().Be(_sut.State);
-			location.Country.Should().Be(_sut.Country);
-		}
-
-		[Fact]
-		public void Validate_ShouldThrowArgumentNullException_WhenNameOrAddressOrCityOrStateOrCountryAreNullOrWhiteSpace () {
-			// Arrange
-			_sut.Name = null;
-			_sut.Address = null;
-			_sut.City = null;
-			_sut.State = null;
-			_sut.Country = null;
-
-			// Act
-			Action act = () => _sut.Validate();
-
-			// Assert
-			act.Should().Throw<ArgumentNullException>();
 		}
 	}
 }

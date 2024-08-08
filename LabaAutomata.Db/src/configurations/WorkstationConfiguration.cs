@@ -7,9 +7,9 @@ namespace LabAutomata.Db.configurations;
 internal class WorkstationConfiguration : IEntityTypeConfiguration<Workstation> {
 
 	public void Configure (EntityTypeBuilder<Workstation> builder) {
-		builder.HasOne(e => e.Location)
-			.WithMany()
-			.HasForeignKey(e => e.Location!.Id);    // null suppression here
+		//builder.HasOne(e => e.Location)
+		//	.WithMany()
+		//	.HasForeignKey(e => e.Location!.Id);    // null suppression here
 
 		//TODO: redefine these navigation collections once they are implemented
 

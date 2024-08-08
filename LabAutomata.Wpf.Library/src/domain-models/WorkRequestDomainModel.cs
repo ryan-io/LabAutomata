@@ -37,7 +37,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		/// <summary>
 		/// Gets or sets the name of the work request.
 		/// </summary>
-		public string? Name {
+		public string Name {
 			get => _name;
 			set {
 				_name = value;
@@ -55,7 +55,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		/// <summary>
 		/// Gets or sets the program associated with the work request.
 		/// </summary>
-		public string? Program {
+		public string Program {
 			get => _program;
 			set {
 				_program = value;
@@ -89,7 +89,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			set => _requestId = value;
 		}
 
-		public Manufacturer Manufacturer {
+		public Manufacturer? Manufacturer {
 			get => _manufacturer;
 			set {
 				_manufacturer = value;

@@ -11,6 +11,7 @@ namespace LabAutomata.DataAccess.common {
 		public static Dht22Data ToDbModel (this Dht22DataRequest request) {
 			return new Dht22Data() {
 				Id = request.DbId,
+				Dht22SensorId = request.Dht22Sensor.Id,
 				JsonString = request.JsonString,
 				Dht22Sensor = request.Dht22Sensor
 			};
@@ -19,6 +20,7 @@ namespace LabAutomata.DataAccess.common {
 		public static Dht22Data ToDbModel (this Dht22DataNewRequest request) {
 			return new Dht22Data() {
 				JsonString = request.JsonString,
+				Dht22SensorId = request.Dht22Sensor.Id,
 				Dht22Sensor = request.Dht22Sensor
 			};
 		}
@@ -166,6 +168,7 @@ namespace LabAutomata.DataAccess.common {
 		public static Manufacturer ToDbModel (this ManufacturerNewRequest request) {
 			return new Manufacturer() {
 				Name = request.Name,
+				LocationId = request.Location.DbId,
 				Location = request.Location.ToDbModel()
 			};
 		}
@@ -173,6 +176,7 @@ namespace LabAutomata.DataAccess.common {
 		public static Manufacturer ToDbModel (this ManufacturerRequest request) {
 			return new Manufacturer() {
 				Id = request.DbId,
+				LocationId = request.Location.DbId,
 				Name = request.Name,
 				Location = request.Location.ToDbModel()
 			};
@@ -259,13 +263,17 @@ namespace LabAutomata.DataAccess.common {
 		#region WORKSTATION
 
 		public static WorkstationResponse ToResponse (this Workstation workstation) {
+			LocationResponse location = workstation.Location != null
+				? workstation.Location.ToResponse()
+				: LocationResponse.Empty;
+
 			return new WorkstationResponse(
 				workstation.Id,
 				workstation.Name,
 				workstation.StationNumber,
 				workstation.Description,
 				workstation.Created,
-				workstation.Location,
+				location,
 				EntityState.Unchanged);
 		}
 

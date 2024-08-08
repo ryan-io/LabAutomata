@@ -16,10 +16,15 @@ namespace LabAutomata.Iot.Tests.Unit {
 		[Fact]
 		public void Interpret_ShouldReturnFloatValue_WhenPayloadCanBeParsed () {
 			// Arrange
-			var payload = new byte[] { 49, 46, 50, 51 }; // "1.23" in ASCII
+			// UTF8 literal: "1.23"u8.ToArray();
+			ReadOnlySpan<byte> test = "1.23"u8;
+			var payload = new byte[] { 49, 46, 50, 51 }; // "1.23" in ASCII-> implicit char to int
+			ReadOnlySpan<byte> payloadSpan = new ReadOnlySpan<byte>(payload);
 			var applicationMessage = new MqttApplicationMessage {
-				Payload = payload
+				//TODO: I'm not sure if this is a breaking API change
+				PayloadSegment = payload
 			};
+
 			var eventArgs = new MqttApplicationMessageReceivedEventArgs("", applicationMessage, new MqttPublishPacket(), null);
 
 			// Act

@@ -3,11 +3,14 @@
 namespace LabAutomata.Db.models;
 
 public class Dht22Data {
-	public int Id { get; init; }
+	public int Id { get; set; }
 
 	[Required, MaxLength(500)]
-	public required string JsonString { get; init; }
+	public required string JsonString { get; set; }
 
 	[Required]
-	public required Dht22Sensor Dht22Sensor { get; init; }
+	public required int Dht22SensorId { get; set; }
+
+	[Required]
+	public required Dht22Sensor Dht22Sensor { get; set; }
 }

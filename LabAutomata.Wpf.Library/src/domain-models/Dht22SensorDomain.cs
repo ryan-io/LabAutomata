@@ -67,6 +67,5 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private string _sensorName = "";
 		private string? _description = "";
 		private Location? _location;
-
 	}
 }

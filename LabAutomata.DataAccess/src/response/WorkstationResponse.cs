@@ -1,5 +1,4 @@
 using LabAutomata.DataAccess.common;
-using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response {
@@ -9,7 +8,7 @@ namespace LabAutomata.DataAccess.response {
 		int StationNumber,
 		string? Description,
 		DateTime Created,
-		Location? Location,
+		LocationResponse? Location,
 		EntityState EntityState) : RequestResponseBase, IResponse;
 
 	public record WorkstationUpsertResponse (
@@ -18,6 +17,6 @@ namespace LabAutomata.DataAccess.response {
 		int StationNumber,
 		string? Description,
 		DateTime Created,
-		Location? Location,
+		LocationResponse? Location,
 		bool WasUpdated) : RequestResponseBase, IResponse;
 }

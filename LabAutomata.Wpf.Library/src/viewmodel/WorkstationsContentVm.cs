@@ -11,7 +11,7 @@ public class WorkstationsContentVm : Base {
 	/// <summary>
 	/// Gets or sets the collection of workstations.
 	/// </summary>
-	public IEnumerable<WorkstationDomainModel> Workstations => _workstationStore.Workstations;
+	public IEnumerable<WorkstationDomain> Workstations => _workstationStore.Workstations;
 
 	public override async Task LoadAsync (CancellationToken token = default) {
 		//var workstations = await _repository.GetAll(token);

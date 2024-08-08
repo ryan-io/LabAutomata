@@ -8,8 +8,12 @@ namespace LabAutomata.Wpf.Library.common {
 	public static class Extensions {
 		#region DOMAINMODELS
 
-		public static WorkstationDomainModel ToDomain (this WorkstationResponse response) {
-			return new WorkstationDomainModel(response);
+		public static WorkstationDomain ToDomain (this WorkstationResponse response) {
+			return new WorkstationDomain(response);
+		}
+
+		public static Dht22SensorDomain ToDomain (this Dht22SensorResponse response) {
+			return new Dht22SensorDomain(response);
 		}
 
 		#endregion

@@ -7,11 +7,11 @@ using System.Collections.ObjectModel;
 namespace LabAutomata.Wpf.Library.mediator_stores {
 	#region ABSTRACTION
 	public interface IWorkstationStore {
-		event Action<WorkstationDomainModel>? StateChanged;
-		IEnumerable<WorkstationDomainModel> Workstations { get; }
+		event Action<WorkstationDomain>? StateChanged;
+		IEnumerable<WorkstationDomain> Workstations { get; }
 		Task Load (CancellationToken token = default);
-		void AddWorkstation (WorkstationDomainModel model);
-		void RemoveWorkstation (WorkstationDomainModel model);
+		void AddWorkstation (WorkstationDomain model);
+		void RemoveWorkstation (WorkstationDomain model);
 	}
 	#endregion
 
@@ -22,18 +22,18 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 	/// implements IDisposable; if this class is used in a transient manner, Dispose should be invoked
 	/// </summary>
 	public sealed class WorkstationStore : IWorkstationStore {
-		public event Action<WorkstationDomainModel>? StateChanged;
+		public event Action<WorkstationDomain>? StateChanged;
 
-		public IEnumerable<WorkstationDomainModel> Workstations => _workstations;
+		public IEnumerable<WorkstationDomain> Workstations => _workstations;
 
-		public void AddWorkstation (WorkstationDomainModel model) {
+		public void AddWorkstation (WorkstationDomain model) {
 			if (_workstations.Contains(model)) return;
 
 			_workstations.Add(model);
 			StateChanged?.Invoke(model);
 		}
 
-		public void RemoveWorkstation (WorkstationDomainModel model) {
+		public void RemoveWorkstation (WorkstationDomain model) {
 			if (!_workstations.Contains(model))
 				return;
 
@@ -51,7 +51,7 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 
 			if (StateChanged != null)
 				foreach (var subscriber in StateChanged.GetInvocationList()) {
-					var action = (Action<WorkstationDomainModel>)subscriber;
+					var action = (Action<WorkstationDomain>)subscriber;
 					StateChanged -= action;
 				}
 
@@ -67,14 +67,14 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 			}
 
 
-			List<WorkstationDomainModel> models = new();
+			List<WorkstationDomain> models = new();
 
 			foreach (var ws in workstations.Value) {
 				var wsdm = ws.ToDomain();
 				models.Add(wsdm);
 			}
 
-			_workstations = new ObservableCollection<WorkstationDomainModel>(models);
+			_workstations = new ObservableCollection<WorkstationDomain>(models);
 		}
 
 		public WorkstationStore (IWorkstationService service, ILogger? logger = default) {
@@ -84,7 +84,7 @@ namespace LabAutomata.Wpf.Library.mediator_stores {
 
 		private bool IsDisposed { get; set; }
 
-		private ObservableCollection<WorkstationDomainModel> _workstations = new();
+		private ObservableCollection<WorkstationDomain> _workstations = new();
 
 		readonly IWorkstationService _service;
 		readonly ILogger? _logger;

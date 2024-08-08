@@ -3,17 +3,19 @@
 namespace LabAutomata.Db.models {
 
 	public class Personnel {
-		public int Id { get; init; }
+		public int Id { get; set; }
 
-		[Required]
-		public required string FirstName { get; init; }
+		[Required, MaxLength(50)]
+		public required string FirstName { get; set; }
 
-		[Required]
-		public required string LastName { get; init; }
+		[Required, MaxLength(50)]
+		public required string LastName { get; set; }
 
-		[EmailAddress]
-		public string? Email { get; init; }
+		[MaxLength(125)]
+		public string? Email { get; set; }
 
-		public Location? Location { get; init; }
+		public int LocationId { get; set; }
+
+		public Location? Location { get; set; }
 	}
 }

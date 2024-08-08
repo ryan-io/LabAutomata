@@ -3,11 +3,13 @@
 namespace LabAutomata.Db.models;
 
 public class Manufacturer {
-	public int Id { get; init; }
+	public int Id { get; set; }
 
 	[Required, MaxLength(100)]
-	public required string Name { get; init; }
+	public required string Name { get; set; }
+
+	[Required] public required int LocationId { get; set; }
 
 	[Required]
-	public required Location Location { get; init; }
+	public required Location Location { get; set; }
 }

@@ -4,24 +4,27 @@ namespace LabAutomata.Db.models {
 	public class Test {
 		public int Id { get; set; }
 
-		[Required] public int InstanceId { get; init; }
+		[Required] public int InstanceId { get; set; }
 
-		[Required, MaxLength(100)] public string? Name { get; init; }
+		[Required, MaxLength(100)] public string? Name { get; set; }
 
-		[Required] public required WorkRequest WorkRequest { get; init; }
+		[Required] public required int WorkRequestId { get; set; }
+		[Required] public required WorkRequest WorkRequest { get; set; }
 
-		[Required] public required TestType Type { get; init; }
+		[Required] public required int TypeId { get; set; }
+		[Required] public required TestType Type { get; set; }
 
-		public Personnel? Operator { get; init; }
+		public int PersonnelId { get; set; }
 
-		public Location? Location { get; init; }
+		public Personnel? Operator { get; set; }
+		public int LocationId { get; set; }
 
-		public DateTime? Started { get; init; }
+		public Location? Location { get; set; }
 
-		public DateTime? Ended { get; init; }
+		public DateTime? Started { get; set; }
 
+		public DateTime? Ended { get; set; }
 
-		//TODO: redefine the workstation collection for Test
-		//public ICollection<Workstation>? Workstations { get; set; }
+		public ICollection<Workstation>? Workstations { get; set; } = new List<Workstation>();
 	}
 }

@@ -2,9 +2,9 @@ using LabAutomata.DataAccess.response;
 using LabAutomata.Db.models;
 
 namespace LabAutomata.Wpf.Library.domain_models {
-	public class WorkstationDomainModel : DomainModel<WorkstationResponse> {
+	public class WorkstationDomain : DomainModel<WorkstationResponse> {
 
-		public WorkstationDomainModel (WorkstationResponse response) {
+		public WorkstationDomain (WorkstationResponse response) {
 			Name = response.Name;
 			StationNumber = response.StationNumber;
 			Location = response.Location;
@@ -31,7 +31,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public Location? Location {
+		public LocationResponse? Location {
 			get => _location;
 			set {
 				_location = value;
@@ -82,7 +82,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private string _name;
 		private int _stationNumber;
 		private string? _description;
-		private Location? _location;
+		private LocationResponse? _location;
 		private ICollection<Test> _tests;
 		private ICollection<WorkstationType> _types;
 		private ICollection<Equipment> _equipment;

@@ -3,23 +3,23 @@
 namespace LabAutomata.Db.models {
 
 	public class Workstation {
-		public int Id { get; init; }
+		public int Id { get; set; }
 
-		[Required, MaxLength(75)] public required string Name { get; init; }
+		[Required, MaxLength(75)] public required string Name { get; set; }
 
-		[Required] public required int StationNumber { get; init; }
+		[Required] public required int StationNumber { get; set; }
 
-		[MaxLength(500)] public string? Description { get; init; }
+		[MaxLength(500)] public string? Description { get; set; }
 
-		[Required] public required DateTime Created { get; init; } = DateTime.UtcNow;
+		[Required] public required DateTime Created { get; set; } = DateTime.UtcNow;
 
-		public Location? Location { get; init; }
+		public int LocationId { get; set; }
+		public Location? Location { get; set; }
 
-		//TODO: add collections for this model
-		//public ICollection<WorkstationType> Types { get; init; } = new List<WorkstationType>();
+		public ICollection<WorkstationType> Types { get; set; } = new List<WorkstationType>();
 
-		//public ICollection<Equipment> Equipment { get; init; } = new List<Equipment>();
+		public ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();
 
-		//public ICollection<Test> Tests { get; set; } = new List<Test>();
+		public ICollection<Test> Tests { get; set; } = new List<Test>();
 	}
 }

@@ -15,7 +15,16 @@ public record LocationResponse (
 	string State,
 	string? Address,
 	EntityState EntityState)
-	: RequestResponseBase, IResponse;
+	: RequestResponseBase, IResponse {
+	public static LocationResponse Empty => new(
+		-1,
+		"",
+		"",
+		"",
+		"",
+		"",
+		EntityState.Detached);
+}
 
 /// <summary>
 /// This is the result of querying the database for Location and converting

@@ -39,11 +39,11 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 		[Fact]
 		public void ChangeVm_ShouldNotChangeCurrentVm_WhenCalledWithInvalidVmId () {
 			// Arrange
-			_vmc.Get("InvalidVm").Returns(x => null);
+			_vmc.Get("InvalidVm").Returns(x => null!);
 			_sut.Load();
 
 			// Act
-			_sut.ChangeVm.Execute("InvalidVm");
+			_sut.ChangeVm!.Execute("InvalidVm");
 
 			// Assert
 			_sut.CurrentVm.Should().BeNull();

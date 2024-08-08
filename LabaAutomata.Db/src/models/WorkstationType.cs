@@ -3,9 +3,9 @@
 namespace LabAutomata.Db.models {
 
 	public class WorkstationType {
-		public int Id { get; init; }
+		public int Id { get; set; }
 
 		[Required, MaxLength(50)]
-		public required string Name { get; init; }
+		public required string Name { get; set; }
 	}
 }

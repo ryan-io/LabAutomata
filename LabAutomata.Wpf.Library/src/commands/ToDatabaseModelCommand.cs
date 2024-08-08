@@ -18,8 +18,6 @@ namespace LabAutomata.Wpf.Library.commands {
 
 		protected TDomainService Service { get; }
 
-		protected ILogger? Logger { get; }
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ToDatabaseModelCommand{TDomainService}"/> class.
 		/// </summary>
@@ -38,7 +36,6 @@ namespace LabAutomata.Wpf.Library.commands {
 			Service = service;
 			Callback = callback;
 			Context = Create;
-			Logger = logger;
 		}
 	}
 }

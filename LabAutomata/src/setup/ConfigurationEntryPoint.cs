@@ -10,6 +10,7 @@ namespace LabAutomata.setup;
 internal sealed class ConfigurationEntryPoint {
 
 	public IServiceProvider Configure () {
+
 		var sc = new ServiceCollection();
 		ConfigureServices(sc);
 		var sp = sc.BuildServiceProvider();
