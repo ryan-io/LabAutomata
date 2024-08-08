@@ -3,16 +3,16 @@
 namespace LabAutomata.Db.models;
 
 public class Dht22Sensor {
-	public int Id { get; set; }
+	public int Id { get; init; }
 
 	[Required, MaxLength(100)]
-	public required string Name { get; set; }
+	public required string Name { get; init; }
 
 	[MaxLength(150)]
-	public string? Description { get; set; }
+	public string? Description { get; init; }
 
 	[Required]
-	public required Location Location { get; set; }
+	public required Location Location { get; init; }
 
-	public ICollection<Dht22Data> Data { get; set; } = new List<Dht22Data>();
+	public ICollection<Dht22Data> Data { get; init; } = new List<Dht22Data>();
 }

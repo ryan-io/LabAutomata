@@ -2,11 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.Db.common {
+	public interface IPostgreSqlDbContext {
+		DbSet<Dht22Sensor> Dht22Sensors { get; }
+		DbSet<Dht22Data> Dht22Data { get; }
+		DbSet<Location> Locations { get; }
+		DbSet<Manufacturer> Manufacturers { get; }
+		DbSet<WorkRequest> WorkRequests { get; set; }
+		DbSet<Workstation> Workstations { get; set; }
+	}
 
 	/// <summary>
 	/// Represents a base class for a PostgreSQL database context.
 	/// </summary>
-	public class PostgreSqlDbContext : DbContext {
+	public class PostgreSqlDbContext : DbContext, IPostgreSqlDbContext {
 		public DbSet<Dht22Sensor> Dht22Sensors { get; private set; }
 		public DbSet<Dht22Data> Dht22Data { get; private set; }
 		public DbSet<Location> Locations { get; private set; }

@@ -3,7 +3,7 @@
 //namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 
 //	public class TestDomainModelTests {
-//		private readonly TestDomainModel _sut = new();
+//		private readonly TestDomain _sut = new();
 
 //		[Fact]
 //		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {

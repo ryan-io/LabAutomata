@@ -8,13 +8,13 @@ namespace LabAutomata.Wpf.Library.domain_models {
 	/// <summary>
 	/// Represents a domain model for a work request.
 	/// </summary>
-	public class WorkRequestDomainModel : DomainModel<WorkRequestResponse> {
+	public class WorkRequestDomain : DomainModel<WorkRequestResponse> {
 		/// <summary>
-		/// Initializes a new instance of the <see cref="WorkRequestDomainModel"/> class with the specified parameters.
+		/// Initializes a new instance of the <see cref="WorkRequestDomain"/> class with the specified parameters.
 		/// </summary>
-		public WorkRequestDomainModel (WorkRequestResponse response) : base() {
+		public WorkRequestDomain (WorkRequestResponse response) : base() {
 			Name = response.Name;
-			RequestId = response.RequestId;
+			//RequestId = response.RequestId;
 			Program = response.Program;
 			Description = response.Description;
 			StartDate = response.Started;
@@ -84,12 +84,12 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		/// <summary>
 		/// Gets or sets the WrId.
 		/// </summary>
-		public int RequestId {
-			get => _requestId;
-			set => _requestId = value;
-		}
+		//public int RequestId {
+		//	get => _requestId;
+		//	set => _requestId = value;
+		//}
 
-		public Manufacturer? Manufacturer {
+		public ManufacturerResponse? Manufacturer {
 			get => _manufacturer;
 			set {
 				_manufacturer = value;
@@ -150,11 +150,11 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private string _name;
 		private string _program;
 		private string? _description;
-		private int _requestId;
+		//private int _requestId;
 		private int _testCount;
 		private DateTime? _startDate;
 		private DateTime? _finishDate;
-		private Manufacturer? _manufacturer;
+		private ManufacturerResponse? _manufacturer;
 		private List<string> _obsGetErrors = new();
 	}
 }

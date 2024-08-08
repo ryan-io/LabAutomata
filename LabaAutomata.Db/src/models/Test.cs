@@ -2,29 +2,29 @@
 
 namespace LabAutomata.Db.models {
 	public class Test {
-		public int Id { get; set; }
+		public int Id { get; init; }
 
-		[Required] public int InstanceId { get; set; }
+		[Required] public int InstanceId { get; init; }
 
-		[Required, MaxLength(100)] public string? Name { get; set; }
+		[Required, MaxLength(100)] public string? Name { get; init; }
 
-		[Required] public required int WorkRequestId { get; set; }
-		[Required] public required WorkRequest WorkRequest { get; set; }
+		//[Required] public required int WorkRequestId { get; init; }
+		[Required] public required WorkRequest WorkRequest { get; init; }
 
-		[Required] public required int TypeId { get; set; }
-		[Required] public required TestType Type { get; set; }
+		//[Required] public required int TypeId { get; init; }
+		[Required] public required TestType Type { get; init; }
 
-		public int PersonnelId { get; set; }
+		//public int PersonnelId { get; init; }
 
-		public Personnel? Operator { get; set; }
-		public int LocationId { get; set; }
+		public Personnel? Operator { get; init; }
+		//public int LocationId { get; init; }
 
-		public Location? Location { get; set; }
+		public Location? Location { get; init; }
 
-		public DateTime? Started { get; set; }
+		public DateTime? Started { get; init; }
 
-		public DateTime? Ended { get; set; }
+		public DateTime? Ended { get; init; }
 
-		public ICollection<Workstation>? Workstations { get; set; } = new List<Workstation>();
+		public ICollection<Workstation>? Workstations { get; init; } = new List<Workstation>();
 	}
 }

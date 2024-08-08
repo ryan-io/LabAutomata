@@ -11,7 +11,13 @@ namespace LabAutomata.DataAccess.response {
 		string Name,
 		LocationResponse Location,
 		EntityState EntityState)
-		: RequestResponseBase, IResponse;
+		: RequestResponseBase, IResponse {
+		public static ManufacturerResponse Empty () => new(
+			-1,
+			"Empty",
+			LocationResponse.Empty,
+			EntityState.Unchanged);
+	}
 
 	/// <summary>
 	/// This is the result of querying the database for Manufacturer and converting

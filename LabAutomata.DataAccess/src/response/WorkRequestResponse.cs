@@ -5,7 +5,7 @@ namespace LabAutomata.DataAccess.response {
 	public record WorkRequestResponse (
 		int DbId,
 		string Name,
-		int RequestId,
+		//int RequestId,
 		string Program,
 		string? Description,
 		DateTime? Started,
@@ -15,7 +15,7 @@ namespace LabAutomata.DataAccess.response {
 	public record WorkRequestUpsertResponse (
 		int DbId,
 		string Name,
-		int RequestId,
+		//int RequestId,
 		string Program,
 		string? Description,
 		DateTime? Started,

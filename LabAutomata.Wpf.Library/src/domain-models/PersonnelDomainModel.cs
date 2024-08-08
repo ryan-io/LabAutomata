@@ -1,5 +1,4 @@
 using LabAutomata.DataAccess.response;
-using LabAutomata.Db.models;
 
 namespace LabAutomata.Wpf.Library.domain_models {
 
@@ -36,7 +35,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public Location? Location {
+		public LocationResponse? Location {
 			get => _location;
 			set {
 				_location = value;
@@ -47,6 +46,6 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private string _firstName;
 		private string _lastName;
 		private string? _email;
-		private Location? _location;
+		private LocationResponse? _location;
 	}
 }

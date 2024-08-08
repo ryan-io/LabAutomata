@@ -1,5 +1,4 @@
 using LabAutomata.DataAccess.common;
-using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response;
@@ -13,7 +12,7 @@ public record PersonnelResponse (
 	string FirstName,
 	string LastName,
 	string? Email,
-	Location? Location,
+	LocationResponse? Location,
 	EntityState State)
 	: RequestResponseBase, IResponse { }
 
@@ -26,6 +25,6 @@ public record PersonnelUpsertResponse (
 	string FirstName,
 	string LastName,
 	string? Email,
-	Location? Location,
+	LocationResponse? Location,
 	bool WasUpdated)
 	: RequestResponseBase, IResponse { }

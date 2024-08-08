@@ -1,10 +1,19 @@
 using FluentAssertions;
+using LabAutomata.DataAccess.response;
 using LabAutomata.Wpf.Library.domain_models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 
 	public class LocationDomainModelTests {
 		private readonly LocationDomainModel _sut;
+
+		public LocationDomainModelTests () {
+			var request = new LocationResponse(1, "testname", "testcountry",
+				"testcity", "teststate", "testaddtress", EntityState.Unchanged);
+
+			_sut = new LocationDomainModel(request);
+		}
 
 		[Fact]
 		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {

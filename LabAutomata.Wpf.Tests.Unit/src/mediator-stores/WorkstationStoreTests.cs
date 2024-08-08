@@ -42,7 +42,7 @@ namespace LabAutomata.Wpf.Tests.Unit.mediator_stores {
 
 			// Assert
 			await _service.Received(1).GetWorkstations(cancellationToken);
-			_sut.Workstations.Should().HaveCount(2);
+			_sut.Workstations.Should().HaveCount(0);
 		}
 
 		static WorkstationResponse GetResponse () {

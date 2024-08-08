@@ -14,7 +14,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 
 		public ICommand ResetDbModel { get; }
 
-		public WorkRequestDomainModel Model { get; set; }
+		public WorkRequestDomain Model { get; set; }
 
 		public ObservableCollection<Manufacturer> Manufacturers { get; set; } = null!;
 

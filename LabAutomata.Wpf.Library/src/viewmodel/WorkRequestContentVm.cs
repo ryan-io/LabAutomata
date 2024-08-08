@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 namespace LabAutomata.Wpf.Library.viewmodel;
 
 public interface IWorkRequestContentVm {
-	ObservableCollection<WorkRequestDomainModel> WorkRequests { get; set; }
+	ObservableCollection<WorkRequestDomain> WorkRequests { get; set; }
 }
 
 /// <summary>
@@ -17,7 +17,7 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 	/// <summary>
 	/// Gets or sets the collection of work requests.
 	/// </summary>
-	public ObservableCollection<WorkRequestDomainModel> WorkRequests { get; set; } = new();
+	public ObservableCollection<WorkRequestDomain> WorkRequests { get; set; } = new();
 
 	/// <summary>
 	/// Loads the work requests asynchronously.

@@ -1,10 +1,9 @@
 //using FluentAssertions;
-//using LabAutomata.Wpf.Library.domain_models;
 
 //namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 
 //	public class TestTypeDomainModelTests {
-//		private readonly TestTypeDomainModel _sut = new();
+//		private readonly TestTypeDomain _sut = new();
 
 //		[Fact]
 //		public void Name_Setter_Should_SetValueAndNotifyPropertyChanged () {

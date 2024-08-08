@@ -12,7 +12,6 @@ namespace LabAutomata.Db.configurations {
 				.HasForeignKey(data => data.Id);
 
 			builder.ToTable("dht22_sensors", C.DbSchema);
-
 		}
 	}
 }
