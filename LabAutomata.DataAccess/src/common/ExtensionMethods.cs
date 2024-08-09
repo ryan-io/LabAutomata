@@ -90,6 +90,20 @@ namespace LabAutomata.DataAccess.common {
 				entityEntry.State == EntityState.Modified);
 		}
 
+		public static Dht22SensorResponse ToResponse (this Dht22Sensor domainModel) {
+			var data = domainModel.Data?
+				.Select(d => d.ToResponse(EntityState.Unchanged))
+				.ToList();
+
+			return new Dht22SensorResponse(
+				domainModel.Id,
+				domainModel.Name,
+				domainModel.Description,
+				domainModel.Location,
+				data,
+				EntityState.Unchanged);
+		}
+
 		#endregion
 
 		#region LOCATION

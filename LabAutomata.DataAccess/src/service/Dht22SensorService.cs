@@ -10,6 +10,7 @@ namespace LabAutomata.DataAccess.service;
 public interface IDht22SensorService {
 	Task<ErrorOr<Dht22SensorResponse>> AddSensor (Dht22SensorNewRequest request, CancellationToken token);
 	Task<Dht22SensorUpsertResponse> UpsertSensor (Dht22SensorRequest request, CancellationToken token);
+	Task<ErrorOr<Dht22SensorResponse>> GetSensor (Dht22SensorGetRequest request, CancellationToken token);
 }
 
 public class Dht22SensorService : ServiceBase, IDht22SensorService {
@@ -41,6 +42,18 @@ public class Dht22SensorService : ServiceBase, IDht22SensorService {
 		var response = result.ToUpsertResponse();
 		await ctx.SaveChangesAsync(token);
 		return response;
+	}
+
+	public async Task<ErrorOr<Dht22SensorResponse>> GetSensor (Dht22SensorGetRequest request, CancellationToken token) {
+		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
+
+		var result = ctx.Dht22Sensors.FirstOrDefault(sen => sen.Id == request.DbId);
+
+		if (result == null) {
+			return Errors.Db.CouldNotGet(Name, $"Could not get dht22 sensor with the id {request.DbId}");
+		}
+
+		return result.ToResponse();
 	}
 
 	public Dht22SensorService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory)

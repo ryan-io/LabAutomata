@@ -15,6 +15,13 @@ public record Dht22SensorRequest (
 	: RequestResponseBase, IRequest;
 
 /// <summary>
+/// Requests an already existing Dht22Sensor from the database 
+/// </summary>
+public record Dht22SensorGetRequest (
+	int DbId)
+	: RequestResponseBase, IRequest;
+
+/// <summary>
 /// Requests to add a new Dht22Sensor to the database
 /// </summary>
 public record Dht22SensorNewRequest (
