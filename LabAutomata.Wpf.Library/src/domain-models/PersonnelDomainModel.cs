@@ -43,9 +43,9 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		private string _firstName;
-		private string _lastName;
-		private string? _email;
-		private LocationResponse? _location;
+		private string _firstName = string.Empty;
+		private string _lastName = string.Empty;
+		private string? _email = string.Empty;
+		private LocationResponse? _location = LocationResponse.Empty;
 	}
 }

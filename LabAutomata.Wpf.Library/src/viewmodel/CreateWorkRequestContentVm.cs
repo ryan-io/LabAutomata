@@ -10,11 +10,11 @@ using System.Windows.Threading;
 namespace LabAutomata.Wpf.Library.viewmodel {
 
 	public class CreateWorkRequestContentVm : Base {
-		public ICommand CreateDbModelCmd { get; }
+		public ICommand CreateDbModelCmd { get; } = null!;
 
 		public ICommand ResetDbModel { get; }
 
-		public WorkRequestDomain Model { get; set; }
+		public WorkRequestDomain Model { get; set; } = null!;
 
 		public ObservableCollection<Manufacturer> Manufacturers { get; set; } = null!;
 
@@ -38,9 +38,11 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			set { _startEmptyBox = value; NotifyPropertyChanged(); }
 		}
 
-		public override async Task LoadAsync (CancellationToken token = default) {
+		//TODO: implement this method properly
+		public override Task LoadAsync (CancellationToken token = default) {
 			//var m = await _manufacturerRepository.GetAll(token);
 			//Manufacturers = new ObservableCollection<Manufacturer>(m);
+			return Task.CompletedTask;
 		}
 
 		/// There is a dependence on the actual wrRepository

@@ -79,13 +79,13 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		private string _name;
+		private string _name = string.Empty;
 		private int _stationNumber;
-		private string? _description;
-		private LocationResponse? _location;
-		private ICollection<Test> _tests;
-		private ICollection<WorkstationType> _types;
-		private ICollection<Equipment> _equipment;
+		private string? _description = string.Empty;
+		private LocationResponse? _location = LocationResponse.Empty;
+		private ICollection<Test> _tests = new List<Test>();
+		private ICollection<WorkstationType> _types = new List<WorkstationType>();
+		private ICollection<Equipment> _equipment = new List<Equipment>();
 		private int _testCount;
 	}
 }

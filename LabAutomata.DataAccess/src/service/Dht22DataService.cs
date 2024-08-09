@@ -56,7 +56,7 @@ public class Dht22DataService : ServiceBase, IDht22DataService {
 	/// This method should be used if you have a request object with a valid Dht22Sensor instance
 	/// </summary>
 	public async Task<ErrorOr<IList<Dht22DataResponse>>> GetData (Dht22DataRequest request, CancellationToken token) {
-		return await GetData(request.Dht22Sensor.Id, token);
+		return await GetData(request.Dht22Sensor.DbId, token);
 	}
 
 	public async Task<ErrorOr<Dht22DataResponse>> DeleteData (Dht22DataRequest request, CancellationToken token) {

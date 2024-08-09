@@ -1,4 +1,5 @@
 using FluentAssertions;
+using LabAutomata.DataAccess.common;
 using LabAutomata.DataAccess.response;
 using LabAutomata.Db.models;
 using LabAutomata.Wpf.Library.common;
@@ -32,8 +33,8 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 		}
 
 		static Dht22SensorResponse GetResponse () {
-			int id = 1;
-			string jsonString = "{\"temperature\": 25, \"humidity\": 50}";
+			//int id = 1;
+			//string jsonString = "{\"temperature\": 25, \"humidity\": 50}";
 			int dhtSensorId = 2;
 			string name = "testName";
 			string description = "testDesc";
@@ -51,7 +52,7 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 				dhtSensorId,
 				name,
 				description,
-				location,
+				location.ToResponse(),
 				new List<Dht22DataResponse>(),
 				EntityState.Unchanged
 			);

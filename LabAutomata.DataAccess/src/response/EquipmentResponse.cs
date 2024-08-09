@@ -1,5 +1,4 @@
 using LabAutomata.DataAccess.common;
-using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response;
@@ -14,7 +13,7 @@ public record EquipmentResponse (
 	DateTime PurchaseDate,
 	DateTime CalibrationDate,
 	DateTime CalibrationDueDate,
-	Manufacturer Manufacturer,
+	ManufacturerResponse Manufacturer,
 	EntityState State)
 	: RequestResponseBase, IResponse { }
 
@@ -28,6 +27,6 @@ public record EquipmentUpsertResponse (
 	DateTime PurchaseDate,
 	DateTime CalibrationDate,
 	DateTime CalibrationDueDate,
-	Manufacturer Manufacturer,
+	ManufacturerResponse Manufacturer,
 	bool WasUpdated)
 	: RequestResponseBase, IResponse { }

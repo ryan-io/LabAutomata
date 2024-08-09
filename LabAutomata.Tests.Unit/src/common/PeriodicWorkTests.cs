@@ -58,8 +58,9 @@ public class PeriodicWorkTests : IDisposable {
 		isDisposed.Should().BeTrue();
 	}
 
+	//TODO: implement this method properly
 	[Fact]
-	public async Task WorkAsync_ShouldTickTwiceThenComplete_WhenValidCallbacksProvided () {
+	public Task WorkAsync_ShouldTickTwiceThenComplete_WhenValidCallbacksProvided () {
 		//// arrange
 		//// simulates 'ticking' twice
 		//_sut.SetPeriod(2);  // changes the period to 3 seconds; work has not begun yet
@@ -76,6 +77,7 @@ public class PeriodicWorkTests : IDisposable {
 
 		//// assumption is Get() should be 2 if cb is invoked twice
 		//_ci.Get().Should().Be(2);
+		return Task.CompletedTask;
 	}
 
 	[Fact]

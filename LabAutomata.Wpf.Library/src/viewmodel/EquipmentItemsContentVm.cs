@@ -6,9 +6,10 @@ using System.Collections.ObjectModel;
 namespace LabAutomata.Wpf.Library.viewmodel;
 
 public class EquipmentItemsContentVm : Base {
-	public ObservableCollection<EquipmentDomainModel> Equipment { get; set; }
+	public ObservableCollection<EquipmentDomainModel> Equipment { get; set; } = null!;
 
-	public override async Task LoadAsync (CancellationToken token = default) {
+	//TODO: implement this method properly
+	public override Task LoadAsync (CancellationToken token = default) {
 		//var equipment = await _repository.GetAll(token);
 		//List<EquipmentDomainModel> models = new();
 
@@ -18,6 +19,7 @@ public class EquipmentItemsContentVm : Base {
 		//}
 
 		//Equipment = new ObservableCollection<EquipmentDomainModel>(models);
+		return Task.CompletedTask;
 	}
 
 	public EquipmentItemsContentVm (IEquipmentService service, ILogger? logger = default, bool shouldNotifyErrors = false) : base(logger, shouldNotifyErrors) {

@@ -1,5 +1,4 @@
 ﻿using LabAutomata.DataAccess.common;
-using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.response;
@@ -12,7 +11,7 @@ public record Dht22SensorResponse (
 	int DbId,
 	string Name,
 	string? Description,
-	Location? Location,
+	LocationResponse Location,
 	ICollection<Dht22DataResponse>? Data,
 	EntityState State)
 	: RequestResponseBase, IResponse { }
@@ -25,7 +24,7 @@ public record Dht22SensorUpsertResponse (
 	int DbId,
 	string Name,
 	string? Description,
-	Location? Location,
+	LocationResponse Location,
 	ICollection<Dht22DataResponse>? Data,
 	bool WasUpdated)
 	: RequestResponseBase, IResponse { }

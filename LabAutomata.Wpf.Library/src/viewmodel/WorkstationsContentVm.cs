@@ -13,7 +13,8 @@ public class WorkstationsContentVm : Base {
 	/// </summary>
 	public IEnumerable<WorkstationDomain> Workstations => _workstationStore.Workstations;
 
-	public override async Task LoadAsync (CancellationToken token = default) {
+	//TODO: implement this method properly
+	public override Task LoadAsync (CancellationToken token = default) {
 		//var workstations = await _repository.GetAll(token);
 		//List<WorkstationDomainModel> models = new();
 
@@ -23,6 +24,7 @@ public class WorkstationsContentVm : Base {
 		//}
 
 		//_workstations = new ObservableCollection<WorkstationDomainModel>(models);
+		return Task.CompletedTask;
 	}
 
 	/// <summary>

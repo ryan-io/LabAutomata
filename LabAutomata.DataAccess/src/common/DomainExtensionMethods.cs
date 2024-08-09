@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace LabAutomata.DataAccess.common {
-	internal static class ExtensionMethods {
+	public static class DomainExtensionMethods {
 		#region DHT22DATA
 
 		public static Dht22Data ToDbModel (this Dht22DataRequest request) {
@@ -13,15 +13,22 @@ namespace LabAutomata.DataAccess.common {
 				Id = request.DbId,
 				//Dht22SensorId = request.Dht22Sensor.Id,
 				JsonString = request.JsonString,
-				Dht22Sensor = request.Dht22Sensor
+				Dht22Sensor = request.Dht22Sensor.ToDbModel()
 			};
 		}
 
 		public static Dht22Data ToDbModel (this Dht22DataNewRequest request) {
 			return new Dht22Data() {
 				JsonString = request.JsonString,
-				//Dht22SensorId = request.Dht22Sensor.Id,
-				Dht22Sensor = request.Dht22Sensor
+				Dht22Sensor = request.Dht22Sensor.ToDbModel()
+			};
+		}
+
+		public static Dht22Data ToDbModel (this Dht22DataResponse response) {
+			return new Dht22Data() {
+				Id = response.DbId,
+				JsonString = response.JsonString,
+				Dht22Sensor = response.Dht22Sensor
 			};
 		}
 
@@ -37,6 +44,42 @@ namespace LabAutomata.DataAccess.common {
 		#endregion
 
 		#region DHT22SENSOR
+
+		/// <summary>
+		/// Converts Dht22Sensor domain model to Dht22Sensor response data access model
+		/// This method allocates a new list collection
+		/// </summary>
+		public static Dht22SensorResponse ToDbModel (this Dht22Sensor domain) {
+			var responseData = domain.Data
+				.Select(data => data.ToResponse(EntityState.Unchanged))
+				.ToList();
+
+			return new Dht22SensorResponse(
+				domain.Id,
+				domain.Name,
+				domain.Description,
+				domain.Location.ToResponse(),
+				responseData,
+				EntityState.Unchanged);
+		}
+
+		public static Dht22Sensor ToDbModel (this Dht22SensorResponse response) {
+			var domainData = new List<Dht22Data>();
+
+			if (response.Data != null) {
+				foreach (var responseElement in response.Data) {
+					domainData.Add(responseElement.ToDbModel());
+				}
+			}
+
+			return new Dht22Sensor() {
+				Id = response.DbId,
+				Name = response.Name,
+				Description = response.Description,
+				Data = domainData,
+				Location = response.Location.ToDbModel()!   // location is required in db model
+			};
+		}
 
 		public static Dht22Sensor ToDbModel (this Dht22SensorNewRequest request) {
 			return new Dht22Sensor() {
@@ -69,7 +112,7 @@ namespace LabAutomata.DataAccess.common {
 				e.Id,
 				e.Name,
 				e.Description,
-				e.Location,
+				e.Location.ToResponse(),
 				data,
 				entityEntry.State);
 		}
@@ -85,7 +128,7 @@ namespace LabAutomata.DataAccess.common {
 				e.Id,
 				e.Name,
 				e.Description,
-				e.Location,
+				e.Location.ToResponse(),
 				data,
 				entityEntry.State == EntityState.Modified);
 		}
@@ -99,7 +142,7 @@ namespace LabAutomata.DataAccess.common {
 				domainModel.Id,
 				domainModel.Name,
 				domainModel.Description,
-				domainModel.Location,
+				domainModel.Location.ToResponse(),
 				data,
 				EntityState.Unchanged);
 		}
@@ -107,6 +150,17 @@ namespace LabAutomata.DataAccess.common {
 		#endregion
 
 		#region LOCATION
+
+		public static Location? ToDbModel (this LocationResponse response) {
+			return new Location() {
+				Id = response.DbId,
+				Name = response.Name,
+				City = response.City,
+				State = response.State,
+				Address = response.Address,
+				Country = response.Country
+			};
+		}
 
 		public static Location ToDbModel (this LocationNewRequest request) {
 			return new Location() {

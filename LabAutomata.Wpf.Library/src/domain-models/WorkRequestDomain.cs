@@ -147,14 +147,39 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		private string _name;
-		private string _program;
-		private string? _description;
-		//private int _requestId;
+		private WorkRequestDomain (
+			string name,
+			string program,
+			string description,
+			DateTime start,
+			DateTime? end,
+			ManufacturerResponse? manufacturer) {
+			_name = name;
+			_program = program;
+			_description = description;
+			_startDate = start;
+			_finishDate = end;
+			_manufacturer = manufacturer;
+		}
+
+		private string _name = string.Empty;
+		private string _program = string.Empty;
+		private string? _description = string.Empty;
 		private int _testCount;
 		private DateTime? _startDate;
 		private DateTime? _finishDate;
-		private ManufacturerResponse? _manufacturer;
+		private ManufacturerResponse? _manufacturer = ManufacturerResponse.Empty();
 		private List<string> _obsGetErrors = new();
+
+		#region FACTORY
+
+		public static WorkRequestDomain New =>
+			 new(
+				 "New Request",
+				 "Program",
+				 "Enter a description",
+				 DateTime.UtcNow,
+				 null, null);
 	}
+	#endregion
 }

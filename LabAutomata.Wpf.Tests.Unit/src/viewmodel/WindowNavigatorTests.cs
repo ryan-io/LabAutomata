@@ -20,11 +20,11 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 		private readonly HomeContentVm _homeContentVm;
 		private readonly NavigationVm _navigationVm;
 		private readonly HeaderNavVm _headerNavVm;
-		private readonly PlotViewModel _plotViewModel;
+		private readonly PlotViewModel _plotViewModel = null!;
 
 		public WindowNavigatorTests () {
 			_homeVm = new HomeVm(_logger);
-			_homeContentVm = new HomeContentVm(_plotViewModel, _logger);
+			_homeContentVm = new HomeContentVm(_plotViewModel!, _logger);
 			_navigationVm = new NavigationVm(_vmc, _extractor, _logger);
 			_headerNavVm = new HeaderNavVm(_vmc, _logger);
 			_sut = new WindowNavigator(_vmc, _navigationVm, _homeVm, _homeContentVm, _logger);

@@ -3,7 +3,7 @@
 namespace LabAutomata.Wpf.Library.viewmodel;
 
 public class HomeContentVm : Base {
-	private PlotViewModel _plotViewModel;
+	private PlotViewModel _plotViewModel = null!;
 
 	public PlotViewModel PlotViewModel {
 		get => _plotViewModel;

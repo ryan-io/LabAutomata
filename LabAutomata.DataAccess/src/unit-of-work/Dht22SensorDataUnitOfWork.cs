@@ -29,7 +29,7 @@ public class Dht22SensorDataUnitOfWork : UnitOfWork, IDht22SensorDataUnitOfWork 
 
 		ArgumentNullException.ThrowIfNull(sensor, $"Could not find sensor with id {request.DbId}.");
 
-		var dataRequest = new Dht22DataRequest(request.DbId, request.JsonString, sensor);
+		var dataRequest = new Dht22DataRequest(request.DbId, request.JsonString, sensor.ToResponse());
 		sensor.Data.Add(dataRequest.ToDbModel());
 		// add the new dataRequest DbModel to the database
 		//ctx.Dht22Data.Add(dataRequest.ToDbModel());

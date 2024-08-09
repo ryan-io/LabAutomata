@@ -8,10 +8,9 @@ namespace LabAutomata.Wpf.Library.commands;
 
 public class CreateWrDbModelCommand : ToDatabaseModelCommand<WorkRequestService> {
 	//TODO: the sender 'obj' will need to be refactored to ensure we pass an appropriate object
-
-	public override async Task Create (object? obj) {
+	public override Task Create (object? obj) {
 		if (obj is not WorkRequestRequest request)
-			return;
+			return Task.CompletedTask;
 
 		try {
 			//await Service.CreateWorkRequest(request.to);
@@ -22,6 +21,9 @@ public class CreateWrDbModelCommand : ToDatabaseModelCommand<WorkRequestService>
 			Logger?.LogError("An error occurred: {name} - {msg}", nameof(Create), e.InnerException);
 			throw;
 		}
+
+		//TODO: remove this -> implement this method properly
+		return Task.CompletedTask;
 	}
 
 	public CreateWrDbModelCommand (
@@ -30,6 +32,6 @@ public class CreateWrDbModelCommand : ToDatabaseModelCommand<WorkRequestService>
 		Action? callback = default,
 		ILogger? logger = default,
 		Func<object?, bool>? canExecute = default)
-		: base(dA, null, callback, logger, canExecute) {
+		: base(dA, null!, callback, logger, canExecute) {
 	}
 }

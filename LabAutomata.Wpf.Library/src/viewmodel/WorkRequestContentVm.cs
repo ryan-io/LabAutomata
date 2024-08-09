@@ -24,7 +24,8 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 	/// </summary>
 	/// <param name="token">The cancellation token.</param>
 	/// <returns>A task representing the asynchronous operation.</returns>
-	public override async Task LoadAsync (CancellationToken token = default) {
+	//TODO: implement this method properly
+	public override Task LoadAsync (CancellationToken token = default) {
 		//var wrs = await _repository.GetAll(token);
 		//List<WorkRequestDomainModel> models = new();
 
@@ -35,6 +36,7 @@ public class WorkRequestContentVm : Base, IWorkRequestContentVm {
 		//}
 
 		//WorkRequests = new ObservableCollection<WorkRequestDomainModel>(models);
+		return Task.CompletedTask;
 	}
 
 	/// <summary>

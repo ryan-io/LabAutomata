@@ -1,5 +1,4 @@
 using LabAutomata.DataAccess.response;
-using LabAutomata.Db.models;
 using System.Collections.ObjectModel;
 
 namespace LabAutomata.Wpf.Library.domain_models {
@@ -27,7 +26,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		//	}
 		//}
 
-		public Location? Location {
+		public LocationResponse Location {
 			get => _location;
 			set {
 				_location = value;
@@ -66,6 +65,6 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		private int _dbId = -1;
 		private string _sensorName = "";
 		private string? _description = "";
-		private Location? _location;
+		private LocationResponse _location = LocationResponse.Empty;
 	}
 }

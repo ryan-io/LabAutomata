@@ -51,10 +51,10 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		private string _name;
-		private string _city;
-		private string _state;
-		private string _country;
-		private string? _address;
+		private string _name = string.Empty;
+		private string _city = string.Empty;
+		private string _state = string.Empty;
+		private string _country = string.Empty;
+		private string? _address = string.Empty;
 	}
 }

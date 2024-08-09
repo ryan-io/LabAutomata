@@ -33,8 +33,8 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		//	}
 		//}
 
-		private string _name;
-		private LocationResponse _location;
+		private string _name = string.Empty;
+		private LocationResponse _location = LocationResponse.Empty;
 		//private ICollection<WorkRequest> _workRequests;
 	}
 }

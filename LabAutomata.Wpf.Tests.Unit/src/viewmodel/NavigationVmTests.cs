@@ -14,11 +14,11 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 		private readonly ILogger _logger = Substitute.For<ILogger>();
 		private readonly HomeVm _homeVm;
 		private readonly HomeContentVm _homeContentVm;
-		private readonly PlotViewModel _plotViewModel;
+		private readonly PlotViewModel _plotViewModel = null!;
 
 		public NavigationVmTests () {
 			_homeVm = new HomeVm(_logger);
-			_homeContentVm = new HomeContentVm(_plotViewModel, _logger);
+			_homeContentVm = new HomeContentVm(_plotViewModel!, _logger);
 			_sut = new NavigationVm(_vmc, _extractor, _logger);
 			_vmc.Get(nameof(HomeVm)).Returns(_homeVm);
 			_vmc.Get(nameof(HomeContentVm)).Returns(_homeContentVm);

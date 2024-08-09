@@ -32,6 +32,7 @@ public class Dht22SensorController : BaseController {
 		var getResult = await _service.GetSensor(request, ct);
 
 		if (getResult.IsError) {
+
 			return ProblemInController(getResult.Errors);
 		}
 

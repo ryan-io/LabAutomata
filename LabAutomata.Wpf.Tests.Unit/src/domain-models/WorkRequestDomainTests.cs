@@ -36,7 +36,7 @@ namespace LabAutomata.Wpf.Tests.Unit.domain_models {
 			// Arrange
 
 			// Act
-			_sut.Name = null;
+			_sut.Name = null!;
 
 			// Assert
 			var errors = (List<string>)_sut.GetErrors(nameof(WorkRequestDomain.Name));

@@ -59,7 +59,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 			_sut.Load();
 
 			// act
-			_sut.ChangeVm.Execute(tvm);
+			_sut.ChangeVm!.Execute(tvm);
 
 			// assert
 			_sut.CurrentVm.Should().BeOfType<HomeVm>();
@@ -74,7 +74,7 @@ namespace LabAutomata.Wpf.Tests.Unit.viewmodel {
 
 			// act
 			_sut.CurrentVm = new HomeVm(_logger);
-			_sut.ChangeVm.Execute("InvalidVm");
+			_sut.ChangeVm!.Execute("InvalidVm");
 
 			// assert
 			_sut.CurrentVm.Should().BeNull();

@@ -1,5 +1,4 @@
 using LabAutomata.DataAccess.response;
-using LabAutomata.Db.models;
 
 namespace LabAutomata.Wpf.Library.domain_models {
 
@@ -45,7 +44,7 @@ namespace LabAutomata.Wpf.Library.domain_models {
 			}
 		}
 
-		public Manufacturer Manufacturer {
+		public ManufacturerResponse Manufacturer {
 			get => _manufacturer;
 			set {
 				_manufacturer = value;
@@ -62,11 +61,11 @@ namespace LabAutomata.Wpf.Library.domain_models {
 		//	}
 		//}
 
-		private string _name;
+		private string _name = null!;
 		private DateTime _purchaseDate;
 		private DateTime _calibrationDate;
 		private DateTime _calibrationDueDate;
-		private Manufacturer _manufacturer;
+		private ManufacturerResponse _manufacturer = ManufacturerResponse.Empty();
 		//private ICollection<Workstation> _workstations;
 	}
 }
