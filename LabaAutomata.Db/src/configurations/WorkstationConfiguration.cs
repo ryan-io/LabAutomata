@@ -1,4 +1,5 @@
-﻿using LabAutomata.Db.models;
+﻿using LabAutomata.Db.common;
+using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,10 +14,14 @@ internal class WorkstationConfiguration : IEntityTypeConfiguration<Workstation> 
 
 		//TODO: redefine these navigation collections once they are implemented
 
-		//builder.HasMany(e => e.Types)
-		//	.WithMany();
+		builder.HasMany(ws => ws.Types);
 
-		//builder.HasMany(e => e.Equipment)
-		//	.WithMany(e => e.Workstations);
+		builder.HasMany(e => e.Equipment)
+			.WithMany(e => e.Workstations);
+
+		builder.HasMany(ws => ws.Tests);
+
+		builder.ToTable("workstations", C.DbSchema);
+
 	}
 }
