@@ -13,7 +13,6 @@ namespace LabAutomata.Db.models {
 
 		[Required] public required DateTime Created { get; init; } = DateTime.UtcNow;
 
-		//public int LocationId { get; init; }
 		public Location? Location { get; init; }
 
 		public ICollection<WorkstationType> Types { get; init; } = new List<WorkstationType>();

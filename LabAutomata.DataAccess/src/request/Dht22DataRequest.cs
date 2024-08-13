@@ -18,5 +18,5 @@ public record Dht22DataNewRequest (string JsonString, Dht22SensorResponse Dht22S
 /// <summary>
 /// Requests to add a new Dht22Data point to the database
 /// </summary>
-public record Dht22AddDataToSensorRequest (int DbId, string JsonString)
+public record Dht22AddDataToSensorRequest (int SensorDbId, string JsonString)
 	: RequestResponseBase, IRequest { }

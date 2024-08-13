@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace LabAutomata.WebApi.controllers {
-	/*
+	/* Reference for REST API response returns:
+	 *		https://www.mailersend.com/help/rest-api-response-codes
 	 * Post-template:
 	 *      Query factory to create a new model
 	 *      Check if the factory return a discriminated union (ErrorOr)
@@ -23,6 +24,10 @@ namespace LabAutomata.WebApi.controllers {
 	 */
 	// reference a video from Amichai
 	//		https://www.youtube.com/watch?v=PmDJIooZjBE
+	/*
+	 * PUT:		when you have a known URI & idempotent (updating something)
+	 * POST:	when you want to create something new in the database
+	 */
 	[ApiController]
 	[Route("api/[controller]/")]
 	public class BaseController : Controller {
@@ -35,11 +40,12 @@ namespace LabAutomata.WebApi.controllers {
 				foreach (var error in errors)
 					dict.AddModelError(error.Code, error.Description);
 
-				return ValidationProblem();
+				return ValidationProblem(dict);
 			}
 
-			if (errors.Any(e => e.Type == ErrorType.Unexpected))
+			if (errors.Any(e => e.Type == ErrorType.Unexpected)) {
 				return Problem();
+			}
 
 			var code = StatusCodes.Status500InternalServerError;
 
