@@ -1,7 +1,6 @@
 ﻿using ErrorOr;
 using LabAutomata.DataAccess.common;
 using LabAutomata.DataAccess.request;
-using LabAutomata.DataAccess.response;
 using LabAutomata.DataAccess.service;
 using LabAutomata.Db.common;
 using LabAutomata.Db.models;
@@ -10,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LabAutomata.DataAccess.unit_of_work;
 
 public interface IDht22SensorDataUnitOfWork {
-	Task<ErrorOr<Dht22SensorResponse>> RunWork (
+	Task<ErrorOr<bool>> RunWork (
 		Dht22AddDataToSensorRequest request,
 		CancellationToken token);
 }
@@ -19,7 +18,7 @@ public interface IDht22SensorDataUnitOfWork {
 /// A transaction to add a new data point to a sensor
 /// </summary>
 public class Dht22SensorDataUnitOfWork : UnitOfWork, IDht22SensorDataUnitOfWork {
-	public async Task<ErrorOr<Dht22SensorResponse>> RunWork (Dht22AddDataToSensorRequest request, CancellationToken token) {
+	public async Task<ErrorOr<bool>> RunWork (Dht22AddDataToSensorRequest request, CancellationToken token) {
 		//TODO: should this be refactored? any benefits? would it really be cleaner to isolate this into a helper method? it would still require a using statement for scope and it would still need to be awaited with the current implementation
 		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
 
@@ -41,31 +40,36 @@ public class Dht22SensorDataUnitOfWork : UnitOfWork, IDht22SensorDataUnitOfWork 
 		// reference Microsoft documentation on change tracking:
 		// https://learn.microsoft.com/en-us/ef/core/change-tracking/
 		Dht22Sensor? sensor = ctx.Dht22Sensors
-			.Include(s => s.Location)
-			.Include(s => s.Data)
+			.Include(sensor => sensor.Location)
+			.Include(sensor => sensor.Data)
 			.FirstOrDefault(sensor => sensor.Id == sensorDbId);
 
-		// if we could not get the sensor for the db, add an error to the errors list
+		//// if we could not get the sensor for the db, add an error to the errors list
 		if (sensor == null) {
 			_errors.Add(Errors.Db.CouldNotGet(nameof(Errors.Db.CouldNotGet),
 				$"Could not find a sensor with the id {sensorDbId}"));
 
-			return ErrorOr<Dht22SensorResponse>.From(_errors);
+			return false; //ErrorOr<Dht22SensorResponse>.From(_errors);
 		}
 
-		var dataRequest = new Dht22DataRequest(
-			request.SensorDbId,
-			request.JsonString,
-			sensor.ToResponse());
+		var replace = new ReplaceApostopheWithQuote();
+		var requestJsonString = request.JsonString;
+		var jsonString = replace.Modify(ref requestJsonString);
+		var newRequest = new Dht22DataNewRequest(jsonString, sensor.ToResponse());
 
-		sensor.Data.Add(dataRequest.ToDbModel());
+		ctx.Dht22Data.Add(newRequest.ToDbModel());
+
+		//var dataRequest = new Dht22DataRequest(
+		//	request.SensorDbId,
+		//	jsonString,
+		//	sensor.ToResponse());
 
 		if (!_errors.Any()) {
 			await ctx.SaveChangesAsync(token);  // save to db
 		}
 
 		// return either a response (good) or problem (bad)
-		return sensor.ToResponse();
+		return true; //sensor.ToResponse();
 	}
 
 	public Dht22SensorDataUnitOfWork (

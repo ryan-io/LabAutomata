@@ -3,12 +3,13 @@ using LabAutomata.DataAccess.common;
 using LabAutomata.DataAccess.request;
 using LabAutomata.DataAccess.response;
 using LabAutomata.Db.common;
+using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabAutomata.DataAccess.service;
 
 public interface IDht22DataService {
-	Task<ErrorOr<Dht22DataResponse>> AddData (Dht22DataNewRequest request, CancellationToken token);
+	Task<ErrorOr<Dht22DataResponse>> AddData (Dht22AddDataToSensorRequest request, CancellationToken token);
 	Task<ErrorOr<IList<Dht22DataResponse>>> GetData (int dhtSensorId, CancellationToken token);
 
 	/// <summary>
@@ -20,10 +21,18 @@ public interface IDht22DataService {
 }
 
 public class Dht22DataService : ServiceBase, IDht22DataService {
-	public async Task<ErrorOr<Dht22DataResponse>> AddData (Dht22DataNewRequest request, CancellationToken token) {
+	public async Task<ErrorOr<Dht22DataResponse>> AddData (Dht22AddDataToSensorRequest request, CancellationToken token) {
 		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
 
-		var model = request.ToDbModel();
+		var json = request.JsonString;
+		var replace = new ReplaceApostopheWithQuote();
+		var jsonValidated = replace.Modify(ref json);
+
+		var model = new Dht22Data() {
+			Dht22SensorId = request.SensorDbId,
+			JsonString = jsonValidated
+		};
+
 		var result = ctx.Dht22Data.Add(model);
 		var response = result.ToResponse();
 

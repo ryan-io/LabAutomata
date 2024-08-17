@@ -6,21 +6,35 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace LabAutomata.DataAccess.common {
 	public static class DomainExtensionMethods {
+		//public static bool Contains<T>(this DbSet<T> set, T entity) where T : class
+		//{
+		//	return set.loc
+		//}
+
 		#region DHT22DATA
 
 		public static Dht22Data ToDbModel (this Dht22DataRequest request) {
 			return new Dht22Data() {
 				Id = request.DbId,
-				//Dht22SensorId = request.Dht22Sensor.Id,
+				Dht22SensorId = request.Dht22Sensor.DbId,
 				JsonString = request.JsonString,
 				Dht22Sensor = request.Dht22Sensor.ToDbModel()
 			};
 		}
 
-		public static Dht22Data ToDbModel (this Dht22DataNewRequest request) {
+		public static Dht22Data ToDbModelNew (this Dht22DataRequest request) {
 			return new Dht22Data() {
 				JsonString = request.JsonString,
+				Dht22SensorId = request.Dht22Sensor.DbId,
 				Dht22Sensor = request.Dht22Sensor.ToDbModel()
+			};
+		}
+
+		public static Dht22Data ToDbModel (this Dht22DataNewRequest request, bool passSensor = true) {
+			return new Dht22Data() {
+				JsonString = request.JsonString,
+				Dht22SensorId = request.Dht22Sensor.DbId,
+				Dht22Sensor = passSensor ? request.Dht22Sensor.ToDbModel() : default
 			};
 		}
 
@@ -28,6 +42,7 @@ namespace LabAutomata.DataAccess.common {
 			return new Dht22Data() {
 				Id = response.DbId,
 				JsonString = response.JsonString,
+				Dht22SensorId = response.Dht22Sensor.Id,
 				Dht22Sensor = response.Dht22Sensor
 			};
 		}

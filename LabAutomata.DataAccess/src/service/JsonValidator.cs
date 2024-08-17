@@ -18,11 +18,7 @@ namespace LabAutomata.DataAccess.service;
 ///		"Payload":"12, 323, 232"
 /// }"
 /// For this method, the double parenthesis (") need to be replaced with single parenthesis (')
-/// "{
-///		'Id':1,
-///		'Name': 'Test',
-///		'Payload': '12, 323, 232'
-/// }"
+/// "{'Id':1,'Name': 'Test','Payload':'12, 323, 232'}"
 /// </summary>
 public interface IJsonValidator {
 	ErrorOr<bool> Validate (string json);

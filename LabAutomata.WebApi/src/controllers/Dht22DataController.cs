@@ -2,7 +2,6 @@
 using LabAutomata.DataAccess.request;
 using LabAutomata.DataAccess.response;
 using LabAutomata.DataAccess.service;
-using LabAutomata.DataAccess.unit_of_work;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAutomata.WebApi.controllers;
@@ -20,7 +19,8 @@ public class Dht22DataController : BaseController {
 		Dht22AddDataToSensorRequest request,
 		CancellationToken token) {
 
-		var response = await _unitOfWork.RunWork(request, token);
+		//var response = await _unitOfWork.RunWork(request, token);
+		var response = await _service.AddData(request, token);
 
 		return response.Match(
 			_ => CreatedAtAction(nameof(AddDht22Data), response.Value),
@@ -28,14 +28,16 @@ public class Dht22DataController : BaseController {
 	}
 
 	public Dht22DataController (
-		IDht22DataService service,
-		IDht22SensorDataUnitOfWork unitOfWork) {
+		IDht22DataService service//,
+								 //IDht22SensorDataUnitOfWork unitOfWork
+		) {
 		_service = service;
-		_unitOfWork = unitOfWork;
+		//_unitOfWork = unitOfWork;
 	}
 
 	private readonly IDht22DataService _service;
-	private readonly IDht22SensorDataUnitOfWork _unitOfWork;
+	//_
+	//private readonly IDht22SensorDataUnitOfWork _unitOfWork;
 }
 
 /*
