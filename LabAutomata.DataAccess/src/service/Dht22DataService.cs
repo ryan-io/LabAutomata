@@ -5,6 +5,7 @@ using LabAutomata.DataAccess.response;
 using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
+using rbcl;
 
 namespace LabAutomata.DataAccess.service;
 
@@ -25,24 +26,31 @@ public class Dht22DataService : ServiceBase, IDht22DataService {
 		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
 
 		var json = request.JsonString;
-		var replace = new ReplaceApostopheWithQuote();
-		var jsonValidated = replace.Modify(ref json);
+		var jsonValidated = _jsonValidator.Validate(ref json);
+
+		if (jsonValidated.HadErrors) {
+			var errors = Errors.Validate.InvalidJson(jsonValidated.Errors!);
+			return ErrorOr<Dht22DataResponse>.From(errors);
+		}
 
 		var model = new Dht22Data() {
 			Dht22SensorId = request.SensorDbId,
-			JsonString = jsonValidated
+			JsonString = jsonValidated.Json
 		};
 
-		var result = ctx.Dht22Data.Add(model);
-		var response = result.ToResponse();
+		var result = ctx.Dht22Data.Attach(model);
 
 		if (result.State == EntityState.Added) {
 			await ctx.SaveChangesAsync(token);
-			return response;
+			await ctx.Dht22Data
+				.Entry(result.Entity)
+				.Reference(e => e.Dht22Sensor)
+				.LoadAsync(token);
+			return result.ToResponse();
 		}
 
 		if (result.State == EntityState.Unchanged) {
-			return response;
+			return result.ToResponse();
 		}
 
 		return Errors.Db.CouldNotCreate(Name, NotCreated);
@@ -84,8 +92,10 @@ public class Dht22DataService : ServiceBase, IDht22DataService {
 	}
 
 	/// <inheritdoc />
-	public Dht22DataService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory)
+	public Dht22DataService (
+		IDbContextFactory<PostgreSqlDbContext> dbContextFactory, IJsonValidator jsonValidator)
 		: base(dbContextFactory) {
+		_jsonValidator = jsonValidator;
 	}
 
 	private static string GetFailedDeleteDescription (Dht22DataRequest request) {
@@ -94,7 +104,7 @@ public class Dht22DataService : ServiceBase, IDht22DataService {
 
 	protected override string Name => nameof(Dht22DataService);
 
-	private const string CouldNotGet = "Could not get data for the provided sensor id.";
+	private readonly IJsonValidator _jsonValidator;
 
 	private const string NotCreated = "Entry returned could not be created.";
 }

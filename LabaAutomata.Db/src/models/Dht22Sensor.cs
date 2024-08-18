@@ -14,8 +14,9 @@ public class Dht22Sensor {
 	[MaxLength(150)]
 	public string? Description { get; init; }
 
-	[Required]
-	public required Location Location { get; init; }
+	public int? LocationId { get; init; }
+
+	public Location? Location { get; init; }
 
 	[JsonIgnore]
 	public ICollection<Dht22Data> Data { get; init; } = new List<Dht22Data>();

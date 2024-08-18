@@ -60,7 +60,8 @@ public class Dht22SensorService : ServiceBase, IDht22SensorService {
 		return result.ToResponse();
 	}
 
-	public Dht22SensorService (IDbContextFactory<PostgreSqlDbContext> dbContextFactory)
+	public Dht22SensorService (
+		IDbContextFactory<PostgreSqlDbContext> dbContextFactory)
 		: base(dbContextFactory) {
 	}
 

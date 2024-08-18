@@ -13,5 +13,6 @@ public class Dht22Data {
 	[Required]
 	public required int Dht22SensorId { get; init; }
 
+	[Required]
 	public Dht22Sensor? Dht22Sensor { get; init; }
 }

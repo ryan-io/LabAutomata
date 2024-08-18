@@ -1,10 +1,10 @@
 ﻿using ErrorOr;
 using LabAutomata.DataAccess.common;
 using LabAutomata.DataAccess.request;
-using LabAutomata.DataAccess.service;
 using LabAutomata.Db.common;
 using LabAutomata.Db.models;
 using Microsoft.EntityFrameworkCore;
+using rbcl;
 
 namespace LabAutomata.DataAccess.unit_of_work;
 
@@ -26,16 +26,13 @@ public class Dht22SensorDataUnitOfWork : UnitOfWork, IDht22SensorDataUnitOfWork 
 		_errors.Clear();
 		int sensorDbId = request.SensorDbId;
 
-		//TODO: give this line some thought; the SRP here is to run a unit of work in the context
-		//		of a database transactions
-		// since this is an "all or nothing" process, I think it makes sense to also validate the data
-		//		we passed in the 'Dht22AddDataToSensorRequest' to ensure validity
-		var jsonValidation = _jsonValidator.Validate(request.JsonString);
+
+		//	var jsonValidation = _jsonValidator.Validate(request.JsonString);
 
 		// if we could not parse the json string, add an error to the errors list
-		if (jsonValidation.IsError) {
-			_errors.AddRange(jsonValidation.Errors);
-		}
+		//if (jsonValidation.IsError) {
+		//	_errors.AddRange(jsonValidation.Errors);
+		//}
 
 		// reference Microsoft documentation on change tracking:
 		// https://learn.microsoft.com/en-us/ef/core/change-tracking/
@@ -52,12 +49,11 @@ public class Dht22SensorDataUnitOfWork : UnitOfWork, IDht22SensorDataUnitOfWork 
 			return false; //ErrorOr<Dht22SensorResponse>.From(_errors);
 		}
 
-		var replace = new ReplaceApostopheWithQuote();
 		var requestJsonString = request.JsonString;
-		var jsonString = replace.Modify(ref requestJsonString);
-		var newRequest = new Dht22DataNewRequest(jsonString, sensor.ToResponse());
+		//var jsonString = replace.Modify(ref requestJsonString);
+		//var newRequest = new Dht22DataNewRequest(jsonString, sensor.ToResponse());
 
-		ctx.Dht22Data.Add(newRequest.ToDbModel());
+		//ctx.Dht22Data.Add(newRequest.ToDbModel());
 
 		//var dataRequest = new Dht22DataRequest(
 		//	request.SensorDbId,

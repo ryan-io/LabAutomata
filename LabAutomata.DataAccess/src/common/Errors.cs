@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using rbcl;
 
 namespace LabAutomata.DataAccess.common {
 
@@ -37,6 +38,19 @@ namespace LabAutomata.DataAccess.common {
 		}
 
 		internal static class Validate {
+			internal static List<Error> InvalidJson (JsonValidationErrorMap errors) {
+				var output = new List<Error>();
+
+				foreach (var pair in errors) {
+					foreach (var errorMsg in pair.Value) {
+						var e = Error.Validation(nameof(InvalidJson), errorMsg);
+						output.Add(e);
+					}
+				}
+
+				return output;
+			}
+
 			internal static Error StringIsNullOrEmpty (string? code = default, string? description = default) {
 				if (string.IsNullOrWhiteSpace(code)) {
 					code = nameof(StringIsNullOrEmpty);
@@ -47,18 +61,6 @@ namespace LabAutomata.DataAccess.common {
 				}
 
 				return Error.Validation(code, description);
-			}
-
-			internal static Error InvalidJsonString (string? code = default, string? description = default) {
-				if (string.IsNullOrWhiteSpace(code)) {
-					code = nameof(InvalidJsonString);
-				}
-
-				if (string.IsNullOrWhiteSpace(description)) {
-					description = "The provided JSON string could not be parsed into a JObject";
-				}
-
-				return Error.Failure(code, description);
 			}
 		}
 	}

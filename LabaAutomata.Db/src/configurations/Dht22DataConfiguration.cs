@@ -14,7 +14,7 @@ internal class Dht22DataConfiguration : IEntityTypeConfiguration<Dht22Data> {
 
 		builder.HasOne(data => data.Dht22Sensor)
 			.WithMany(dh => dh.Data)
-			.HasForeignKey(dht => dht.Id);
+			.HasForeignKey(dht => dht.Dht22SensorId);
 
 		builder.ToTable("dht_data", C.DbSchema);
 	}

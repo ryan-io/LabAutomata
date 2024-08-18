@@ -10,9 +10,9 @@ namespace LabAutomata.Db.configurations {
 
 			builder.ToTable("dht22_sensors", C.DbSchema);
 
-			builder.HasMany(s => s.Data)
-				.WithOne(dh => dh.Dht22Sensor)
-				.HasForeignKey(dht => dht.Dht22SensorId);
+			//builder.HasMany(s => s.Data)
+			//	.WithOne(dh => dh.Dht22Sensor)
+			//	.HasForeignKey(dht => dht.Dht22SensorId);
 		}
 	}
 }

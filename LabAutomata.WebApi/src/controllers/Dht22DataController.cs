@@ -15,6 +15,7 @@ public class Dht22DataController : BaseController {
 	[HttpPost("add")]
 	[ProducesResponseType(typeof(ErrorOr<Dht22SensorResponse>), 200)]
 	[ProducesResponseType(417)]
+	[ProducesResponseType(400)]
 	public async Task<IActionResult> AddDht22Data (
 		Dht22AddDataToSensorRequest request,
 		CancellationToken token) {
