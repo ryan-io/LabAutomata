@@ -1,5 +1,5 @@
 ﻿using LabAutomata.DataAccess.request;
-using LabAutomata.DataAccess.unit_of_work;
+using LabAutomata.DataAccess.service;
 using LabAutomata.IoT;
 using LabAutomata.Wpf.Library.contracts;
 
@@ -20,10 +20,10 @@ public class DhtSensorDataWriter : IDhtSensorDataWriter {
 		_dht22Data.PayloadDeserialized -= Dht22DataOnPayloadDeserialized;
 	}
 
-	public DhtSensorDataWriter (IDht22PayloadData dht22Data, IDht22SensorDataUnitOfWork unitOfWork) {
+	public DhtSensorDataWriter (IDht22PayloadData dht22Data, IDht22DataService service) {
 		_dht22Data = dht22Data;
 		_dht22Data.PayloadDeserialized += Dht22DataOnPayloadDeserialized;
-		_unitOfWork = unitOfWork;
+		_service = service;
 	}
 
 	/// <summary>
@@ -37,9 +37,9 @@ public class DhtSensorDataWriter : IDhtSensorDataWriter {
 
 		//TODO: optimize this method in regard to number of database calls
 		var request = new Dht22AddDataToSensorRequest(obj.DhtSensorId, obj.Raw);
-		await _unitOfWork.RunWork(request, CancellationToken.None);
+		await _service.AddData(request, CancellationToken.None);
 	}
 
 	private readonly IDht22PayloadData _dht22Data;
-	private readonly IDht22SensorDataUnitOfWork _unitOfWork;
+	private readonly IDht22DataService _service;
 }

@@ -47,10 +47,12 @@ public class Dht22SensorService : ServiceBase, IDht22SensorService {
 	public async Task<ErrorOr<Dht22SensorResponse>> GetSensor (Dht22SensorGetRequest request, CancellationToken token) {
 		await using var ctx = await DbContextFactory.CreateDbContextAsync(token);
 
+		//TODO: profile this -> AsSplitQuery, SingleQuery, or default to SplitQuery behavior?
 		var result = ctx.Dht22Sensors
 			.AsNoTrackingWithIdentityResolution()
 			.Include(sen => sen.Data)
 			.Include(sen => sen.Location)
+			.AsSplitQuery()
 			.FirstOrDefault(sen => sen.Id == request.DbId);
 
 		if (result == null) {

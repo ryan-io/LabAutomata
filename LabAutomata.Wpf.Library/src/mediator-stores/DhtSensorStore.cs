@@ -42,16 +42,16 @@ public class DhtSensorStore : IDht22PayloadData {
 		_client.MessageReceived -= NotifyPayloadDeserialzied;
 	}
 
-	public DhtSensorStore (IBlynkMqttClient client, ILogger logger1, ILogger? logger = default) {
+	public DhtSensorStore (IBlynkMqttClient client, ILogger? logger = default) {
 		_interpretation = new JsonInterpretation();
 		_client = client;
-		_logger = logger1;
+		_logger = logger;
 		_client.MessageReceived += NotifyPayloadDeserialzied;
 	}
 
 	private readonly JsonInterpretation _interpretation;
 	private readonly IBlynkMqttClient _client;
-	readonly ILogger _logger;
+	readonly ILogger? _logger;
 	private const string DhtSensor1 = "downlink/ds/temperature_sys_1";
 
 }

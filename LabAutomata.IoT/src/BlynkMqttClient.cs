@@ -11,8 +11,6 @@ namespace LabAutomata.IoT {
 		private readonly IMqttClient _client;
 		private readonly ILogger? _logger;
 		private readonly IBlynkMqttClientConfig _config;
-		private readonly SemaphoreSlim _semaphore = new(Environment.ProcessorCount - 1);
-
 
 		/// <summary>
 		/// Event for subscribing to any available MQTT message types
@@ -63,7 +61,7 @@ namespace LabAutomata.IoT {
 
 			_client.ApplicationMessageReceivedAsync += async e => {
 				e.AutoAcknowledge = false;
-				e.AcknowledgeAsync(_cancellation.Token);
+				await e.AcknowledgeAsync(_cancellation.Token);
 				MessageReceived?.Invoke(e);
 			};
 
