@@ -9,7 +9,6 @@ namespace LabAutomata.controls {
 	/// Interaction logic for HeaderNavButton.xaml
 	/// </summary>
 	public partial class HeaderNavButton : UserControl {
-
 		public ICommand Click {
 			get => (ICommand)GetValue(ClickProperty);
 			set => SetValue(ClickProperty, value);
