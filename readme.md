@@ -19,8 +19,11 @@ au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a funct
     <a href="https://github.com//ryan-io/CommandPipeline/issues">Request Feature</a>
   </p>
 </div>
+
 <h6>This project is a work in progress. The UI is simply a mock to demonstrate backend capabilities.</h6>
+
 ![lab-auto-demo-alpha](https://github.com/user-attachments/assets/7f86978a-5142-42e6-a896-78d30da63c94)
+
 ---
 <!-- TABLE OF CONTENTS -->
 
