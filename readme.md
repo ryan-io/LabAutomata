@@ -1,16 +1,5 @@
 <a name="readme-top"></a>
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-
 <!-- PROJECT LOGO -->
-
 <p align="center">
 <img width="300" height="125" src="https://i.imgur.com/w5hcUtR.png">
 </p>
@@ -22,7 +11,7 @@ au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a funct
 <h3 align="center">Lab Automata</h3>
 
   <p align="center">
-    A .NET application to automate laboratory data acquisiton (DAQ) and processing.
+    A .NET application to automate laboratory data acquisiton (DAQ) and processing. Allows a laboratory to track equipment, work requests, test instances, calibrations, and personnel.
     <br />
     <br />
     <a href="https://github.com//ryan-io/CommandPipeline/issues">Report Bug</a>
@@ -54,9 +43,11 @@ au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a funct
 
 This passion project comes as the result of an 8 year professional career within an automotive qualification laboratory. The focus was on executing OEM product validation. During validations, an enormous amount of data is acquired: temperature, humidity, voltage input/output, software logging, and quiescient current to name a few. Any and all parameters needed to be collected and logged as data. The intent of this project is to provide a rather generic application for interfacing with your DAQ systems. 
 
-It is also a project to showcase a large breadth of software concepts - one of my goals is to make to make it all encompasing. Depth-wise, it is a bit shallow in areas. Overall, it has a front end GUI, backend systems, database communication, CI/CD pipelines, a Web API, Blynk IoT integration, and version control.
+It is also a project to showcase a large breadth of software concepts - one of my goals is to make to make it all encompasing. Depth-wise, it is a bit shallow in areas. Overall, it has a front end GUI, backend systems, database communication, CI/CD pipelines, a Web API, Blynk IoT integration, and version control. Communciation between devices, HMI, and this application are primarily done via MQTT.
 
 Circuit schematics were created with TinkerCad
+
+[Imgur](https://imgur.com/YqvqOb7)
 
 # Tech Stack
 
@@ -96,8 +87,18 @@ Circuit schematics were created with TinkerCad
         <li>LabAutomata.Wap</li>
         <ul><li>Windows Application Packaging project for creating MSIX packages</li></ul>
     </ul>
+      <ul>
+        <li>LabAutomata.IoT</li>
+        <ul>
+          <li>Project for handling the Internet of Things related logic</li>
+          <li>Implmenets MQTT.net for communicaiton with an ESP8266/ESP01 module</li>
+          <li>Communication is done via MQTT w/ C++ written in Arduino IDE</li>
+        </ul>
+    </ul>
     <li> GUI </li>
-        <ul><li>Windows Presentation Foundation (WPF)</li>
+        <ul>
+          <li>Windows Presentation Foundation (WPF)</li>
+          <li>Controls are made to be as modular and isolated as possible</li>
       </ul>
     <li> Backend </li>
     <ul>
@@ -120,11 +121,13 @@ Circuit schematics were created with TinkerCad
     </ul>
     <li>Database</li>
     <ul> 
-        <li>PostgreSQL along with pgAdmin4 for management</li>
+        <li>PostgreSQL along with pgAdmin4 for DB management</li>
+        <li>Mockaroo for populating a test/mock database with data</li>
     </ul>
     <li>Logging</li>
     <ul> 
         <li>My own logging package that is a simple wrapper for SeriLog</li>
+        <li>Implements ILogger from the Microsoft.Extensions.Logging package</li>
     </ul>
      <li>CI/CD</li>
     <ul> 

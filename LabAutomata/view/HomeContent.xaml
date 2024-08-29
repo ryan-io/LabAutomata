@@ -13,31 +13,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <controls:FocusedViewHeader HeaderText="News" />
         <StackPanel Grid.Row="1" Orientation="Vertical">
+            <controls:FocusedViewHeader HeaderText="News" />
             <controls:ContentCard
                 Margin="5 0 5 10">
                 <controls:ContentCard.CardContent>
                     <StackPanel Orientation="Vertical">
                         <TextBlock FontSize="24">
-                    Congratulations on OEM Program 1 on a successful validation of work request WorkRequest1!
+                            Any relevant news or other information deemed relevant can go here!
                         </TextBlock>
                     </StackPanel>
                 </controls:ContentCard.CardContent>
             </controls:ContentCard>
-
+            <controls:FocusedViewHeader HeaderText="Lab Monitoring" />
             <controls:ContentCard
                 Margin="5 0 5 0">
-                <controls:ContentCard.CardContent>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock FontSize="24">
-                            We can add another message to the home screen here.
-                        </TextBlock>
-                    </StackPanel>
-                </controls:ContentCard.CardContent>
+                <ContentControl Content="{Binding PlotViewModel}" />
             </controls:ContentCard>
-            <ContentControl Content="{Binding PlotViewModel}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <TextBlock Text="DAQ Data"
+        <TextBlock Text="Chamber 100 - SE Thermotron 1700 - SN 111111"
                        HorizontalAlignment="Center"
                        FontWeight="SemiBold"
                        FontSize="28" />
