@@ -20,6 +20,7 @@ au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a funct
   </p>
 </div>
 
+![lab-auto-demo-alpha](https://github.com/user-attachments/assets/7f86978a-5142-42e6-a896-78d30da63c94)
 ---
 <!-- TABLE OF CONTENTS -->
 
