@@ -157,6 +157,14 @@ Circuit schematics were created with TinkerCad
     </ul>
 </ul>
 
+# Sensor & Arduino Setup
+
+![IMG_1937](https://github.com/user-attachments/assets/1daaee6e-52af-4f81-8879-7ad934868eff)
+
+![IMG_1936](https://github.com/user-attachments/assets/3b0b745a-4fb5-4cae-9dfe-510a1d85417b)
+
+** TODO - Finalize TinkerCad circuit and upload **
+
 # Running Notes
 <ul>
 <li>LabAutomata.Library has dependency on LabAutomata.Db</li>
