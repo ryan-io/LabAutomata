@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:common="clr-namespace:LabAutomata.common"
              xmlns:controls="clr-namespace:LabAutomata.controls"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
@@ -13,16 +14,28 @@
             <RowDefinition />
             <RowDefinition Height="220" />
         </Grid.RowDefinitions>
-        <TextBox Height="50"
+        <Border CornerRadius="8"
+                Margin="10 10 10 10"
+                Height="60"
+                Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}">
+            <TextBox Height="Auto"
+                     mat:TextBlockAssist.AutoToolTip="True"
              VerticalContentAlignment="Top"
-             Margin="10 10 10 10"
-             Style="{StaticResource TxtBoxDefault}">
-        </TextBox>
+             mat:HintAssist.HelperText="au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/"
+             mat:HintAssist.Hint="Search the application..."
+             mat:HintAssist.HelperTextFontSize="10"
+                     FontSize="20"
+                     mat:TextFieldAssist.HasClearButton="True"
+                     FontFamily="{StaticResource MaterialDesignFont}"
+             Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}"
+             Margin="10 10 10 10">
+            </TextBox>
+        </Border>
         <Border Grid.Row="2"
             x:Name="NavBorder"
             CornerRadius="{StaticResource CornerRadius}"
             Margin="10"
-            Background="{StaticResource FgOne}">
+            Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}">
             <Grid MinWidth="1000"
               Margin="10">
                 <Grid.ColumnDefinitions>
@@ -61,7 +74,7 @@
                                           ClickParameter="{Binding Source={x:Static common:AppC.WsVm}}"
                                           Grid.Column="3" />
 
-                <controls:HeaderNavButton ButtonId="Equipments"
+                <controls:HeaderNavButton ButtonId="Equipment"
                                           Source="/resources/images/equipment-items.png"
                                           ToolTip="Equipments"
                                           Click="{Binding ChangeVm}"

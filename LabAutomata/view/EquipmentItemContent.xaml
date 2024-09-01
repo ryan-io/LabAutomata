@@ -22,7 +22,7 @@
                               Style="{StaticResource TxtBoxTwoTextStyle}"
                               BoxEmptyText="Search for a work request" />
 
-            <ui:Card Padding="0"
+            <controls:ContentCard Padding="0"
      Margin="15 0 15 2"
      Foreground="{StaticResource FgOne}"
      Background="{StaticResource FgOne}"
@@ -81,7 +81,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ui:Card>
+            </controls:ContentCard>
         </StackPanel>
     </StackPanel>
 </UserControl>

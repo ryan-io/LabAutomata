@@ -1,8 +1,6 @@
 ﻿using LabAutomata.Wpf.Library.viewmodel;
 using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
 
 namespace LabAutomata {
 
@@ -15,7 +13,7 @@ namespace LabAutomata {
 			DataContext = navigator;
 			InitializeComponent();
 
-			ApplicationThemeManager.Apply(ApplicationTheme.Dark, WindowBackdropType.Auto);
+			//ApplicationThemeManager.Apply(ApplicationTheme.Dark, WindowBackdropType.Auto);
 		}
 
 		// no reason to move this logic into a view model...

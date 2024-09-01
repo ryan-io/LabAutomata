@@ -8,6 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
         <TextBlock Text="{Binding ElementName=MainWindow, Path=ButtonId}"
+                   FontFamily="{StaticResource MaterialDesignFont}"
+                   FontSize="20"
                    HorizontalAlignment="Center"
                    Foreground="{StaticResource FontOne}" />
 

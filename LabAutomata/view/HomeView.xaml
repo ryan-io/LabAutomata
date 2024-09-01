@@ -29,12 +29,10 @@
                 <Grid>
                     <StackPanel>
                         <TextBlock Text="News"
-                                   FontFamily="{StaticResource MahApps.Fonts.Family.Window.Title}"
                                    Foreground="Black"
                                    FontSize="28"
                                    Margin="20,10,10,0" />
                         <TextBlock Text="News item highlight 1 &#x0a;News item highlight 2"
-                                   FontFamily="{StaticResource MahApps.Fonts.Family.Header}"
                                    Foreground="Black"
                                    FontSize="18"
                                    Margin="20,10,10,0" />
@@ -48,7 +46,6 @@
                     Margin="30 0 0 0"
                     CornerRadius="10">
                 <TextBlock Text="Upcoming Tests"
-                           FontFamily="{StaticResource MahApps.Fonts.Family.Window.Title}"
                            FontSize="28"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
@@ -64,7 +61,6 @@
                     Margin="30 0 0 0"
                     CornerRadius="10">
                 <TextBlock Text="Calibrations"
-                           FontFamily="{StaticResource MahApps.Fonts.Family.Window.Title}"
                            FontSize="28"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />

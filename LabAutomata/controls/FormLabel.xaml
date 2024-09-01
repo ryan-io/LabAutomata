@@ -7,7 +7,7 @@
              x:Name="FormLbl"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <ui:TextBlock Text="{Binding ElementName=FormLbl, Path=Label}"
+    <TextBlock Text="{Binding ElementName=FormLbl, Path=Label}"
                Margin="5 0 5 0"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"

@@ -4,17 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:LabAutomata.controls"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <ui:Card  Padding="0"
-              Margin="15 0 15 2"
-              Background="{StaticResource FgTwo}"
-              BorderBrush="{StaticResource FgOne}"
-              BorderThickness="1">
+    <mat:Card>
         <ContentControl  Content="{Binding RelativeSource={RelativeSource AncestorType=local:ContentCard}, Path=CardContent}"
-                         Foreground="{StaticResource FgOne}"
                          Margin="3">
         </ContentControl>
-    </ui:Card>
+    </mat:Card>
 </UserControl>

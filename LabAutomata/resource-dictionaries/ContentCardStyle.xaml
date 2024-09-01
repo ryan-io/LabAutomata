@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:LabAutomata.controls"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
-    <Style x:Key="ContentCardStyle" TargetType="{x:Type ui:Card }">
+    <Style x:Key="ContentCardStyle" TargetType="{x:Type controls:ContentCard }">
         <Setter Property="LayoutTransform" >
             <Setter.Value>
                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>

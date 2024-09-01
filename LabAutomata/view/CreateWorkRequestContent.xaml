@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DataContext="{d:DesignInstance viewmodel:CreateWorkRequestContentVm}"
              xmlns:controls="clr-namespace:LabAutomata.controls"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:viewmodel="clr-namespace:LabAutomata.Wpf.Library.viewmodel;assembly=LabAutomata.Wpf.Library"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -34,14 +34,18 @@
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-
-                    <controls:FormLabel Label="Request SensorName:" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mat:PackIcon Kind="Required" VerticalAlignment="Center"/>
+                        <controls:FormLabel Label="Request:" />
+                    </StackPanel>
                     <controls:FormTextInput Grid.Row="0" Grid.Column="1"
                                             Margin="5"
                                             BoxEmptyTxt="{Binding NameEmptyBox, Mode=TwoWay}"
                                             InputTxt="{Binding Model.Name, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}" />
-                    <controls:FormLabel Grid.Row="1" Grid.Column="0"
-                                        Label="Program:" />
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <mat:PackIcon Kind="Required" VerticalAlignment="Center"/>
+                        <controls:FormLabel Label="Request:" />
+                    </StackPanel>
                     <controls:FormTextInput Grid.Row="1" Grid.Column="1"
                                             FontSize="22"
                                             Margin="5"
@@ -49,7 +53,7 @@
                                             BoxEmptyTxt="{Binding ProgramEmptyBox}" />
 
                     <controls:FormLabel Grid.Row="2" Grid.Column="0"
-                                        Label="DescriptionName:" />
+                                        Label="Description:" />
                     <controls:FormTextInput Grid.Row="2" Grid.Column="1"
                                             Margin="5"
                                             InputTxt="{Binding Model.Description, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}"
@@ -62,10 +66,10 @@
                                             BoxEmptyTxt="{Binding StartEmptyBox}" />
 
                     <controls:FormLabel Grid.Row="4" Grid.Column="0"
-                                        Label="Test:" />
+                                        Label="Tests:" />
                     <controls:FormTextInput Grid.Row="4" Grid.Column="1"
                                             Margin="5"
-                                            BoxEmptyTxt="Date/calendar will go here" />
+                                            BoxEmptyTxt="Drop-down For Tests" />
                     <controls:FormLabel Grid.Row="5" Grid.Column="0"
                                         VerticalAlignment="Top"
                                         Label="Manufacturer:" />

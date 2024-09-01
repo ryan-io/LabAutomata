@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <controls:FocusedViewHeader HeaderText="Workstations List" />
         <StackPanel Grid.Row="1" Height="400" HorizontalAlignment="Center">
-            <ui:Card Padding="0"
+            <controls:ContentCard Padding="0"
               Margin="15 0 15 2"
               Foreground="{StaticResource FgOne}"
               Background="{StaticResource FgOne}"
@@ -75,7 +75,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ui:Card>
+            </controls:ContentCard>
         </StackPanel>
     </Grid>
 </UserControl>

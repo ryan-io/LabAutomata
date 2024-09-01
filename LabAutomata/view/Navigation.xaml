@@ -4,50 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:common="clr-namespace:LabAutomata.common"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Margin="10"
-            CornerRadius="{StaticResource CornerRadius}"
-            Background="{StaticResource FgTwo}">
-        <StackPanel
+
+    <StackPanel
             Margin="10"
-            Background="{StaticResource  FgOne}">
-            <RadioButton Content="SubNav 1"
-                         Height="40"
-                         FontSize="22"
-                         FontWeight="Bold"
-                         IsChecked="true"
+            Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}">
+        <StackPanel.Style>
+            <Style TargetType="{x:Type RadioButton}">
+                <Setter Property="FontFamily" Value="{DynamicResource MaterialDesignFont}"/>
+            </Style>
+        </StackPanel.Style>
+        <mat:Card >
+            <StackPanel Margin="4" Orientation="Vertical">
+                <TextBlock></TextBlock>
+                <RadioButton Margin="4"
+                         Content="FIRST"
+                         FontSize="20"
                          Command="{Binding ChangeVm}"
                          CommandParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
-                         Style="{StaticResource MenuBtn}" />
-            <RadioButton Content="SubNav 2"
-                         Command="{Binding ChangeVm}"
-                         CommandParameter="{Binding Source={x:Static common:AppC.WrVm}}"
-                         FontWeight="Bold"
-                         Height="40"
-                         FontSize="22"
-                         Style="{StaticResource MenuBtn}" />
-            <RadioButton Content="SubNav 3"
-                         Height="40"
-                         Command="{Binding ChangeVm}"
-                         CommandParameter="{Binding Source={x:Static common:AppC.CwrVm}}"
-                         FontWeight="Bold"
-                         FontSize="22"
-                         Style="{StaticResource MenuBtn}" />
-            <RadioButton Content="SubNav 4"
-                         Height="40"
-                         FontWeight="Bold"
-                         FontSize="22"
-                         Command="{Binding ChangeVm}"
-                         CommandParameter="{Binding Source={x:Static common:AppC.WsVm}}"
-                         Style="{StaticResource MenuBtn}" />
-            <RadioButton Content="SubNav 5"
-                         Height="40"
-                         FontWeight="Bold"
-                         FontSize="22"
-                         Command="{Binding ChangeVm}"
-                         CommandParameter="{Binding Source={x:Static common:AppC.EiVm}}"
-                         Style="{StaticResource MenuBtn}" />
-        </StackPanel>
-    </Border>
+                         IsChecked="True"
+                         Style="{StaticResource MaterialDesignTabRadioButtonRight}" />
+
+                <RadioButton Margin="4"
+                             Content="SECOND"
+                             FontSize="20"
+                             IsChecked="False"
+                             Command="{Binding ChangeVm}"
+                             CommandParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
+                             Style="{StaticResource MaterialDesignTabRadioButtonRight}" />
+
+                <RadioButton Margin="4"
+                             Content="THIRD"
+                             FontSize="20"
+                             IsChecked="False"
+                             Command="{Binding ChangeVm}"
+                             CommandParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
+                             Style="{StaticResource MaterialDesignTabRadioButtonRight}" />
+            </StackPanel>
+        </mat:Card>
+    </StackPanel>
 </UserControl>

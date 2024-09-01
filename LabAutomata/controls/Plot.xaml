@@ -9,9 +9,12 @@
     <StackPanel>
         <TextBlock Text="Chamber 100 - SE Thermotron 1700 - SN 111111"
                        HorizontalAlignment="Center"
+                       Margin="0 0 0 10"
                        FontWeight="SemiBold"
-                       FontSize="28" />
-        <lvc:CartesianChart Width="800" Height="400"
+                       Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dak}"
+                       FontSize="20" />
+        <lvc:CartesianChart Width="Auto" Height="400"
+                            Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dak}"
                         Series="{Binding Series}"
                         XAxes="{Binding XAxes}"
                         YAxes="{Binding YAxes}">

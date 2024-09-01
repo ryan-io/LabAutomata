@@ -58,7 +58,7 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 		/// Resets the properties of the CreateWorkRequestContentVm to their default values.
 		/// </summary>
 		private void Reset (object? sender) {
-			Model.Reset();
+			Model?.Reset();
 			NotifyPropertyChanged(nameof(Model));
 		}
 
