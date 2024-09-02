@@ -20,6 +20,10 @@ au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a funct
   </p>
 </div>
 
+<h6>This project is a work in progress. The UI is simply a mock to demonstrate backend capabilities.</h6>
+
+![lab-auto-demo-alpha](https://github.com/user-attachments/assets/7f86978a-5142-42e6-a896-78d30da63c94)
+
 ---
 <!-- TABLE OF CONTENTS -->
 
@@ -152,6 +156,14 @@ Circuit schematics were created with TinkerCad
         <li>I implore SOLID principles with the caveat that I approach these principles more as guidelines or tools rather than strict rules. A core piece of software is maintainability and extensibility. With that said, there are time crunches where I need to get something release. Separation of concerns may not be the best, it could appear more as a jumble of code, or I fail to document a piece of code. These are perfect opportunties for me to go back through the SDLC and refactor code like this. It is an ever evolving process and you can very easily put yourself in a place where development of a piece of software never ceases to end.</li>
     </ul>
 </ul>
+
+# Sensor & Arduino Setup
+
+![IMG_1937](https://github.com/user-attachments/assets/1daaee6e-52af-4f81-8879-7ad934868eff)
+
+![IMG_1936](https://github.com/user-attachments/assets/3b0b745a-4fb5-4cae-9dfe-510a1d85417b)
+
+** TODO - Finalize TinkerCad circuit and upload **
 
 # Running Notes
 <ul>
