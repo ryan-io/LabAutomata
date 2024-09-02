@@ -22,7 +22,7 @@ au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/ a machine that performs a funct
 
 <h6>This project is a work in progress. The UI is simply a mock to demonstrate backend capabilities.</h6>
 
-![lab-auto-demo-alpha](https://github.com/user-attachments/assets/7f86978a-5142-42e6-a896-78d30da63c94)
+![Screenshot 2024-09-02 173017](https://github.com/user-attachments/assets/6be48de3-6855-4e50-9d71-5ca19c701d34)
 
 ---
 <!-- TABLE OF CONTENTS -->
