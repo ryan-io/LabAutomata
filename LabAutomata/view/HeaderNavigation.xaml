@@ -14,28 +14,29 @@
             <RowDefinition />
             <RowDefinition Height="220" />
         </Grid.RowDefinitions>
-        <Border CornerRadius="8"
+        <mat:Card UniformCornerRadius="10"
                 Margin="10 10 10 10"
                 Height="60"
-                Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}">
+                mat:ElevationAssist.Elevation="Dp7"
+                Background="{DynamicResource MaterialDesign.Brush.Secondary}">
             <TextBox Height="Auto"
                      mat:TextBlockAssist.AutoToolTip="True"
              VerticalContentAlignment="Top"
-             mat:HintAssist.HelperText="au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/"
              mat:HintAssist.Hint="Search the application..."
              mat:HintAssist.HelperTextFontSize="10"
                      FontSize="20"
                      mat:TextFieldAssist.HasClearButton="True"
                      FontFamily="{StaticResource MaterialDesignFont}"
-             Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}"
-             Margin="10 10 10 10">
+             Background="{DynamicResource MaterialDesign.Brush.SecondaryDark}"
+             Margin="20 10 10 10">
             </TextBox>
-        </Border>
-        <Border Grid.Row="2"
+        </mat:Card>
+        <mat:Card Grid.Row="2"
             x:Name="NavBorder"
-            CornerRadius="{StaticResource CornerRadius}"
+            UniformCornerRadius="10"
             Margin="10"
-            Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}">
+            mat:ElevationAssist.Elevation="Dp7"
+                Background="{DynamicResource MaterialDesign.Brush.Primary}">
             <Grid MinWidth="1000"
               Margin="10">
                 <Grid.ColumnDefinitions>
@@ -88,6 +89,6 @@
                                           ClickParameter="{Binding Source={x:Static common:AppC.HomeVm}}"
                                           Grid.Column="5" />
             </Grid>
-        </Border>
+        </mat:Card>
     </Grid>
 </UserControl>

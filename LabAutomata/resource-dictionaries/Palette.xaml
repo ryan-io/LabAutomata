@@ -24,4 +24,8 @@
                      x:Key="Green" />
     <SolidColorBrush Color="#feffff "
                      x:Key="OffWhite" />
+    <SolidColorBrush Color="#95a5a6"
+                     x:Key="AppBackgroundLight"/>
+    <SolidColorBrush Color="#7f8c8d"
+                     x:Key="AppAccentBackgroundDark"/>
 </ResourceDictionary>

@@ -9,9 +9,12 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.Logging;
 using SkiaSharp;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace LabAutomata.Wpf.Library.viewmodel {
 	public class PlotViewModel : Base {
+		public string Title { get; set; } = "Unnamed Plot";
+
 		public ObservableCollection<ISeries> Series { get; set; }
 
 		public Axis[] XAxes { get; set; }
@@ -25,8 +28,24 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 			}
 		];
 
+		public void HandleSelectedPlotChange (object? sender, PropertyChangedEventArgs e) {
+			if (string.Equals(e.PropertyName, "SelectedPlot")) {
+				// logic
+			}
+		}
+
 		public PlotViewModel (IDht22PayloadData dhtPayloadData, IDhtSensorDataWriter dataWriter, ILogger logger) {
-			XAxes = [new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("MM dd"))];
+			//XAxes = [new() {
+			//	Name = "Date & Time (UTC)",
+			//	LabelsPaint = new SolidColorPaint(SKColors.Black),
+
+			//}];
+
+			XAxes = [new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("MM dd"))
+			{
+				Name = "Date & Time (UTC)",
+				LabelsPaint = new SolidColorPaint(SKColors.Black)
+			}];
 
 			_logger = logger;
 			_dht22PayloadData = dhtPayloadData;
@@ -38,7 +57,9 @@ namespace LabAutomata.Wpf.Library.viewmodel {
 				new LineSeries<DateTimePoint>()
 				{
 					Values = _observableValues,
-					Fill = null
+					Stroke = new SolidColorPaint(SKColors.Black),
+					GeometryStroke= new SolidColorPaint(SKColors.Goldenrod, 2),
+					GeometryFill = null
 				}
 			};
 		}

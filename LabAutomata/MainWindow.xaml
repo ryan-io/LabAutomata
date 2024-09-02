@@ -8,12 +8,11 @@
                  xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                  xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
                  mc:Ignorable="d"
-                 MinWidth="1600"
+                 MaxWidth="1600"
                  TextElement.FontFamily="{StaticResource MaterialDesignFont}"
                  Style="{StaticResource MaterialDesignWindow}"
                  ResizeMode="CanResizeWithGrip"
                  SizeToContent="WidthAndHeight"
-                 Background="{DynamicResource MaterialDesign.Brush.Primary}"
                  d:DataContext="{d:DesignInstance viewmodel:WindowNavigator}"
                  Title="Lab Automata" Height="900" Width="800">
 
@@ -27,7 +26,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -36,18 +34,25 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
+       
         <!-- Top-left logo; click to drag window-->
-        <Border Grid.Row="0"
-                BorderThickness="0"
-                Background="{DynamicResource MaterialDesign.Brush.Primary}">
+        <mat:Card
+                Background="{DynamicResource MaterialDesign.Brush.Primary}"
+                UniformCornerRadius="10"
+                Margin="10"
+                mat:ElevationAssist.Elevation="Dp7"
+                BorderThickness="0">
             <StackPanel Margin="10, 10 10 10"
-                        Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}">
+                        Background="{DynamicResource MaterialDesign.Brush.Primary}">
                 <Image Source="resources/images/lab-automata-logo-transparent.png"
                        MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
                 </Image>
+                <TextBlock mat:ElevationAssist.Elevation="Dp16"
+                           Margin="-20"
+                           TextAlignment="Center"
+                           Text="au·tom·a·ton/ôˈtämədən,ôˈtäməˌtän/"/>
             </StackPanel>
-        </Border>
+        </mat:Card>
 
         <!-- Primary navigation-->
         <ContentControl Grid.Column="1" Grid.Row="0" 
@@ -73,35 +78,20 @@
         </Border>-->
 
         <!-- Secondary content-->
-        <StackPanel Margin="10 0 10 10"
+        <StackPanel Margin="10 0 0 10"
                   Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2">
-            <ScrollViewer mat:ScrollViewerAssist.IsAutoHideEnabled="True">
-                <StackPanel Height="Auto">
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuOpen"
-                                mat:ElevationAssist.Elevation="Dp16"
-                                Width="56"
-                                Height="56"
-                                DockPanel.Dock="Right"
-                                Foreground="{DynamicResource MaterialDesign.Brush.Secondary}"
-                                mat:ButtonAssist.CornerRadius="16">
-                            <mat:PackIcon Width="36"
-                                         Height="36"
-                                         Kind="MenuOpen" />
-                        </Button>
-                    </StackPanel>
-                    <ContentControl Content="{Binding SubFocusedVm}"  />
-                </StackPanel>
-            </ScrollViewer>
+            <StackPanel Height="Auto">
+                <ContentControl Content="{Binding SubFocusedVm}"  />
+            </StackPanel>
         </StackPanel>
 
         <!-- Copyright/footer-->
-        
+
         <v:Footer  Grid.Column="0"
                    Grid.Row="4"
-                   Grid.ColumnSpan="3"
+                   Grid.ColumnSpan="2"
                    FooterText="Copyright 2024 Ryan IO. All rights reserved." />
     </Grid>
 </Window>

@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="resource-dictionaries/ContentCardStyle.xaml" />
 
                 <!-- Google Material Design-->
-                <materialDesign:CustomColorTheme  BaseTheme="Dark" PrimaryColor="#34495e" SecondaryColor="#8e44ad" />
+                <materialDesign:CustomColorTheme  BaseTheme="Dark" PrimaryColor="#34495e" SecondaryColor="#7f8c8d" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />

@@ -15,33 +15,99 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <mat:Card Background="{DynamicResource MaterialDesign.Brush.Primary}"
-                      mat:ShadowAssist.Darken="True"
-                      mat:ShadowAssist.ShadowAnimationDuration="2">
-                <controls:FocusedViewHeader HeaderText="News" />
-            </mat:Card>
-            <mat:Card Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dark}"
-                Background="{DynamicResource MaterialDesign.Brush.Primary.Foreground}"
-                      mat:ShadowAssist.Darken="True"
-                      Margin="20">
-                <TextBlock FontSize="18"
-                           Margin="10">
-                            Any relevant news or other information deemed relevant can go here!
-                </TextBlock>
-            </mat:Card>
-
-            <mat:Card Background="{DynamicResource MaterialDesign.Brush.Primary}"
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 0 10 0">
+            <mat:Card Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                       mat:ShadowAssist.Darken="True"
                       mat:ShadowAssist.ShadowAnimationDuration="2"
-                      Margin="0 0 0 0">
-                <controls:FocusedViewHeader HeaderText="Lab Monitoring" />
+                      Margin="0 10 0 20">
+                <GroupBox
+                    Margin="16"
+                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mat:Card}}}"
+                    mat:ElevationAssist.Elevation="Dp8"
+                    BorderThickness="0"
+                    Style="{StaticResource MaterialDesignGroupBox}">
+                    <GroupBox.Header>
+                        <TextBlock FontSize="15">Welcome to Lab Management Portal</TextBlock>
+                    </GroupBox.Header>
+                    <ScrollViewer mat:ScrollViewerAssist.IsAutoHideEnabled="True">
+                        <TextBlock
+                        Margin="6,6,6,6"
+                        Text="Short loin picanha boudin pork belly. Ground round porchetta biltong, cow t-bone tri-tip strip steak chuck filet mignon jowl turducken. Landjaeger strip steak pork chop, jowl sirloin pork capicola andouille. Kevin ribeye tongue, drumstick hamburger frankfurter t-bone corned beef beef biltong cow venison. Biltong picanha bresaola pork belly, filet mignon spare ribs doner pork chop kielbasa. Swine flank drumstick pork belly pancetta spare ribs rump filet mignon."
+                        TextWrapping="Wrap" />
+                    </ScrollViewer>
+                </GroupBox>
             </mat:Card>
+            <mat:Card Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                      mat:ShadowAssist.Darken="True"
+                      mat:ShadowAssist.ShadowAnimationDuration="2"
+                      Margin="0 0 0 00">
 
-            <mat:Card Background="{DynamicResource MaterialDesign.Brush.Primary.Foreground}"
-                      Margin="20">
-                <ContentControl Content="{Binding PlotViewModel}" />
+                <GroupBox
+                    Margin="16"
+                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mat:Card}}}"
+                    mat:ElevationAssist.Elevation="Dp8"
+                    BorderThickness="0"
+                    Style="{StaticResource MaterialDesignGroupBox}">
+                    <GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="17"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Text="Lab Monitoring"
+                                       FontFamily="{DynamicResource MaterialDesignFont}"
+                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       FontSize="15"
+                                       HorizontalAlignment="Left"
+                                       />
+                            <Button Grid.Column="1"
+                                    MaxHeight="24"
+                                    Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                                    Margin="0 0">
+                                <mat:PackIcon MaxHeight="18" Kind="ArrowLeft"/>
+                            </Button>
+                            <ComboBox Grid.Column="2"
+                                      MaxHeight="20"
+                                      MinWidth="72"
+                                      mat:ComboBoxAssist.ShowSelectedItem="True"
+                                      ItemsSource="{Binding ElementName=HeaderBound, Path=Plots}"
+                                      DisplayMemberPath="Title"
+                                      SelectedItem="{Binding ElementName=HeaderBound, 
+                                       Path=SelectedPlot, 
+                                       UpdateSourceTrigger=PropertyChanged, 
+                                       Mode=TwoWay}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <Button Grid.Column="3" Margin="10 0"
+                                    MaxHeight="24"
+                                    Style="{DynamicResource MaterialDesignToolForegroundButton}">
+                                <mat:PackIcon MaxHeight="18" Kind="ArrowRight"/>
+                            </Button>
+                        </Grid>
+
+                    </GroupBox.Header>
+                    <ScrollViewer mat:ScrollViewerAssist.IsAutoHideEnabled="True">
+                        <ContentControl Content="{Binding Path=Plots[0]}" />
+                    </ScrollViewer>
+                </GroupBox>
             </mat:Card>
+            <ScrollViewer mat:ScrollViewerAssist.IsAutoHideEnabled="True">
+                <mat:Card Background="{DynamicResource AppAccentBackgroundDark}"
+                      mat:ElevationAssist.Elevation="Dp5"
+                      Margin="20">
+                   
+                </mat:Card>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </UserControl>

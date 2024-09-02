@@ -12,7 +12,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <controls:FocusedViewHeader HeaderText="Work Requests" />
-        <StackPanel Height="400"
+        <StackPanel 
                     HorizontalAlignment="Center"
                     Orientation="Vertical">
             <controls:TextBoxTwoText Height="30"

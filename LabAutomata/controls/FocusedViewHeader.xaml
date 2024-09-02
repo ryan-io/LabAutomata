@@ -10,10 +10,10 @@
     <mat:Card  Background="{DynamicResource MaterialDesign.Brush.Primary.Dark}"
                mat:ShadowAssist.Darken="True">
         <TextBlock Text="{Binding ElementName=Header, Path=HeaderText}"
-               FontFamily="{DynamicResource MaterialDesignFont}"
-               Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-               FontSize="26"
-               HorizontalAlignment="Left"
-               Margin="10 10 0 10" />
+                   FontFamily="{DynamicResource MaterialDesignFont}"
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   FontSize="26"
+                   HorizontalAlignment="Left"
+                   Margin="10 10 0 10" />
     </mat:Card>
 </UserControl>
